@@ -4,6 +4,10 @@ public class Dice {
 
     private int diceNumber;
 
+    /**
+     * @author Maisha
+     * @return dice number that was rolled, int
+     */
     public int rollDice(){
         Random rn = new Random();
         this.diceNumber = rn.nextInt(11)+2;
