@@ -39,4 +39,15 @@ public class Property implements Box{
     public int getRentWithColourSet() {
         return rentWithColourSet;
     }
+
+    @Override
+    public String toString() {
+        return "Property{" +
+                "price=" + price +
+                ", name='" + name + '\'' +
+                ", colourGroup='" + colourGroup + '\'' +
+                ", rent=" + rent +
+                ", rentWithColourSet=" + rentWithColourSet +
+                '}';
+    }
 }
