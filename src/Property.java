@@ -5,6 +5,7 @@ public class Property implements Box{
     private final String colourGroup;
     private final int rent;
     private final int rentWithColourSet;
+    private Player owner;
 
     /**
      * @author Thanuja
@@ -18,6 +19,22 @@ public class Property implements Box{
         this.rent = (int) ( price * 0.1); // 10%
         this.rentWithColourSet = this.rent * 2;
         this.colourGroup = colourGroup;
+        this.owner = null;
+    }
+
+    /**
+     * @author Maisha
+     * @param player    the new owner.
+     */
+    public void setOwner(Player player){
+        this.owner = player;
+    }
+
+    /**
+     * @author Maisha
+     */
+    public Player getOwner() {
+        return owner;
     }
 
     public String getName() {
@@ -50,4 +67,5 @@ public class Property implements Box{
                 ", rentWithColourSet=" + rentWithColourSet +
                 '}';
     }
+
 }
