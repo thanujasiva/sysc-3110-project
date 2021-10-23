@@ -1,3 +1,4 @@
+import javax.sound.midi.SysexMessage;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
@@ -193,9 +194,13 @@ public class Board {
                     } else {
                         System.out.println("You are bankrupt. You cannot play further.");
                         players.remove(currentPlayer);
+                        currentPlayerNumber -= 1;
+                        if (players.size() == 1){ // player won
+                            System.out.println("Player " + players.get(0).getId() + " won!");
+                            break;
+                        }
                     }
                 }
-                //give option to buy/pay rent
                 this.switchTurn();
             }
         }
@@ -207,7 +212,29 @@ public class Board {
      */
 
     public static void main(String[] args) {
+        System.out.println("Welcome to the game of Monopoly!");
+        System.out.println("How many players?");
+        Scanner sc = new Scanner(System.in);
+        int command = sc.nextInt();
+
         Board board = new Board();
+
+        while(command > 4 || command < 2) {
+
+            if (command == 3) {
+                board.addPlayer(new Player());
+            } else if (command == 4) {
+                board.addPlayer(new Player());
+                board.addPlayer(new Player());
+            } else {
+                System.out.println("Must have 2-4 players");
+                System.out.println("How many players?");
+                command = sc.nextInt();
+            }
+
+        }
+
+
         board.play();
     }
 }
