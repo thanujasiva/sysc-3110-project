@@ -2,7 +2,7 @@ public class Property implements Box{
 
     private final int price;
     private final String name;
-    private final String colourGroup;
+    private final ColourGroups colourGroup;
     private final int rent;
     private final int rentWithColourSet;
     private Player owner;
@@ -13,7 +13,7 @@ public class Property implements Box{
      * @param price         price of property
      * @param colourGroup   colour group of property
      */
-    public Property(String name, int price, String colourGroup){
+    public Property(String name, int price, ColourGroups colourGroup){
         this.name = name;
         this.price = price;
         this.rent = (int) ( price * 0.1); // 10%
@@ -45,7 +45,7 @@ public class Property implements Box{
         return price;
     }
 
-    public String getColourGroup() {
+    public ColourGroups getColourGroup() {
         return colourGroup;
     }
 

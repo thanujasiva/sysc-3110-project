@@ -1,9 +1,11 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Player {
 
     private int money;
     private ArrayList<Property> properties;
+    private HashMap<ColourGroups, Integer> colourGroupMatch;
     private int id;
     private int position;
 
@@ -11,9 +13,10 @@ public class Player {
      * @author Sabah
      */
     public Player (){
-        this.money = 200;
+        this.money = 1500;
         this.position = 0;
         this.properties = new ArrayList<>();
+        this.colourGroupMatch = new HashMap<>();
     }
 
     public void setId(int id){
@@ -49,8 +52,17 @@ public class Player {
         if (this.money >= amount){
             this.money = this.money - amount;
             properties.add(property);
+            if(colourGroupMatch.get(property.getColourGroup())==null){
+                colourGroupMatch.put(property.getColourGroup(), 1);
+            } else{
+                colourGroupMatch.put(property.getColourGroup(), colourGroupMatch.get(property.getColourGroup())+1);
+            }
             property.setOwner(this);
             System.out.println("Congratulations! You now own " + property.getName());
+            if(colourGroupMatch.get(property.getColourGroup()) == property.getColourGroup().getMax()) {
+                //int newRent = property.getRent() * 2;
+                System.out.println("You have a colour group! " + property.getColourGroup());
+            }
         } else {
             System.out.println("You don't have enough money");
         }
@@ -62,22 +74,27 @@ public class Player {
      * @return              returns true if player is able to pay rent, else false.
      */
     public boolean payRent(Property property){
-        int rent = property.getRent();
-        boolean rentPaid = false;
+        int rent = property.getOwner().colourSetOwned(property);
         if (this.money >= rent){
             System.out.println("You have to pay rent. Amount: $" + rent);
             this.money -= rent;
-            rentPaid = true;
+            return true;
         }else{
             System.out.println("You cannot pay rent");
+            return false;
         }
-        return rentPaid;
     }
 
-    public void recieveRent(Property property){
+    public void receiveRent(Property property){
         int rent = property.getRent();
         this.money += rent;
     }
 
-
+    public int colourSetOwned(Property property){
+        if(colourGroupMatch.get(property.getColourGroup()) == property.getColourGroup().getMax()){
+            return property.getRent()*2;
+        } else {
+            return property.getRent();
+        }
+    }
 }
