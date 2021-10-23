@@ -178,6 +178,23 @@ public class Board {
                 currentProperty = boxes.get(currentPlayer.getPosition() % boxes.size());
                 //print property info
                 System.out.println(currentProperty.toString());
+                //Buy or rent
+                Property p = (Property)currentProperty;
+                if (p.getOwner() == null){
+                    System.out.println("Would you like to buy this property?");
+                    String answer = sc.nextLine();
+                    if (answer.equals("yes")){
+                        currentPlayer.purchaseProperty(p);
+                    }
+                } else {
+                    boolean canPayRent = currentPlayer.payRent(p);
+                    if (canPayRent){
+                        p.getOwner().recieveRent(p);
+                    } else {
+                        System.out.println("You are bankrupt. You cannot play further.");
+                        players.remove(currentPlayer);
+                    }
+                }
                 //give option to buy/pay rent
                 this.switchTurn();
             }
@@ -186,7 +203,7 @@ public class Board {
 
     /**
      * @author Sabah
-     * @param args
+     * @param args      main method.
      */
 
     public static void main(String[] args) {
