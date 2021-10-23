@@ -32,78 +32,78 @@ public class Board {
 
     private void setProperties(){
 
-        Property GO = new Property("GO", 0, "");
+        Property GO = new Property("GO", 0, ColourGroups.WHITE);
         // player collects $200 whenever they pass this property, have to fix
 
-        Property Mediterranean = new Property("Mediterranean Avenue", 60, "brown");
-        Property Baltic = new Property("Baltic Avenue", 60, "brown");
+        Property Mediterranean = new Property("Mediterranean Avenue", 60, ColourGroups.BROWN);
+        Property Baltic = new Property("Baltic Avenue", 60, ColourGroups.BROWN);
 
-        Property IncomeTax = new Property("Income Tax", 200, "white");
+        Property IncomeTax = new Property("Income Tax", 200, ColourGroups.WHITE);
         // no rent, pays $200 everytime (have to fix)
 
-        Property ReadingRail = new Property("Reading Railroad", 200, "black");
+        Property ReadingRail = new Property("Reading Railroad", 200, ColourGroups.BLACK);
         // for each railroad added to collection, the rent is doubled, have to fix rent code separately for these 4
 
-        Property Oriental = new Property("Oriental Avenue", 100, "grey");
-        Property Vermont = new Property("Vermont Avenue", 100, "grey");
-        Property Connecticut = new Property("Connecticut Avenue", 120, "grey");
+        Property Oriental = new Property("Oriental Avenue", 100, ColourGroups.GREY);
+        Property Vermont = new Property("Vermont Avenue", 100, ColourGroups.GREY);
+        Property Connecticut = new Property("Connecticut Avenue", 120, ColourGroups.GREY);
 
-        Property VisitingJail = new Property("Visiting Jail", 0, "");
+        Property VisitingJail = new Property("Visiting Jail", 0, ColourGroups.WHITE);
 
-        Property StCharles  = new Property("St. Charles Place", 140, "pink");
+        Property StCharles  = new Property("St. Charles Place", 140, ColourGroups.PINK);
 
-        Property Electric  = new Property("Electric Company", 150, "white");
+        Property Electric  = new Property("Electric Company", 150, ColourGroups.WHITE);
         // no rent, pays $150 everytime (have to fix)
 
-        Property States  = new Property("States Avenue", 140, "pink");
-        Property Virginia  = new Property("Virginia Avenue", 160, "pink");
+        Property States  = new Property("States Avenue", 140, ColourGroups.PINK);
+        Property Virginia  = new Property("Virginia Avenue", 160, ColourGroups.PINK);
 
-        Property PennsylvaniaRail = new Property("Pennsylvania Railroad", 200, "black");
+        Property PennsylvaniaRail = new Property("Pennsylvania Railroad", 200, ColourGroups.BLACK);
         // for each railroad added to collection, the rent is doubled, have to fix rent code separately for these 4
 
-        Property StJames  = new Property("St. James Place", 180, "orange");
-        Property Tennessee  = new Property("Tennessee Avenue", 180, "orange");
-        Property NewYork  = new Property("New York Avenue", 200, "orange");
+        Property StJames  = new Property("St. James Place", 180, ColourGroups.ORANGE);
+        Property Tennessee  = new Property("Tennessee Avenue", 180, ColourGroups.ORANGE);
+        Property NewYork  = new Property("New York Avenue", 200, ColourGroups.ORANGE);
 
-        Property FreeParking = new Property("Free Parking", 0, "");
+        Property FreeParking = new Property("Free Parking", 0, ColourGroups.WHITE);
 
-        Property Kentucky  = new Property("Kentucky Avenue", 220, "red");
-        Property Indiana  = new Property("Indiana Avenue", 220, "red");
-        Property Illinois  = new Property("Illinois Avenue", 240, "red");
+        Property Kentucky  = new Property("Kentucky Avenue", 220, ColourGroups.RED);
+        Property Indiana  = new Property("Indiana Avenue", 220, ColourGroups.RED);
+        Property Illinois  = new Property("Illinois Avenue", 240, ColourGroups.RED);
 
-        Property BO = new Property("B. & O. Railroad", 200, "black");
+        Property BO = new Property("B. & O. Railroad", 200, ColourGroups.BLACK);
         // for each railroad added to collection, the rent is doubled, have to fix rent code separately for these 4
 
-        Property Atlantic  = new Property("Atlantic Avenue", 260, "yellow");
-        Property Ventnor  = new Property("Ventnor Avenue", 260, "yellow");
+        Property Atlantic  = new Property("Atlantic Avenue", 260, ColourGroups.YELLOW);
+        Property Ventnor  = new Property("Ventnor Avenue", 260, ColourGroups.YELLOW);
 
-        Property WaterWorks = new Property("WaterWorks", 150, "white");
+        Property WaterWorks = new Property("WaterWorks", 150, ColourGroups.WHITE);
         // no rent, pays 150 everytime player lands (have to fix)
 
-        Property Marvin = new Property("Marvin Gardens", 280, "yellow");
+        Property Marvin = new Property("Marvin Gardens", 280, ColourGroups.YELLOW);
 
-        Property GotoJail = new Property("Go to Jail", 0, "");
+        Property GotoJail = new Property("Go to Jail", 0, ColourGroups.WHITE);
 
-        Property Pacific  = new Property("Pacific Avenue", 300, "green");
-        Property NorthCarolina  = new Property("North Carolina Avenue", 300, "green");
-        Property Pennsylvania  = new Property("Pennsylvania Avenue", 320, "green");
+        Property Pacific  = new Property("Pacific Avenue", 300, ColourGroups.GREEN);
+        Property NorthCarolina  = new Property("North Carolina Avenue", 300,  ColourGroups.GREEN);
+        Property Pennsylvania  = new Property("Pennsylvania Avenue", 320,  ColourGroups.GREEN);
 
-        Property ShortLine = new Property("Short Line", 200, "black");
+        Property ShortLine = new Property("Short Line", 200, ColourGroups.BLACK);
         // for each railroad added to collection, the rent is doubled, have to fix rent code separately for these 4
 
-        Property ParkPlace = new Property("Park Place", 350, "blue");
+        Property ParkPlace = new Property("Park Place", 350,  ColourGroups.BLUE);
 
-        Property LuxuryTax = new Property("Luxury Tax", 100, "white");
+        Property LuxuryTax = new Property("Luxury Tax", 100, ColourGroups.WHITE);
         // no rent, pays 100 everytime player lands (have to fix)
 
-        Property Boardwalk  = new Property("Boardwalk", 400, "blue");
+        Property Boardwalk  = new Property("Boardwalk", 400, ColourGroups.BLUE);
 
         this.boxes.put(0,GO);
         this.boxes.put(1,Mediterranean);
         this.boxes.put(2,Baltic);
         this.boxes.put(3,IncomeTax);
         this.boxes.put(4,ReadingRail);
-        this.boxes.put(5,Oriental);
+        /*this.boxes.put(5,Oriental);
         this.boxes.put(6,Vermont);
         this.boxes.put(7,Connecticut);
         this.boxes.put(8,VisitingJail);
@@ -131,7 +131,7 @@ public class Board {
         this.boxes.put(30,ShortLine);
         this.boxes.put(31,ParkPlace);
         this.boxes.put(32,LuxuryTax);
-        this.boxes.put(33,Boardwalk);
+        this.boxes.put(33,Boardwalk);*/
 
     }
 
@@ -187,10 +187,12 @@ public class Board {
                     if (answer.equals("yes")){
                         currentPlayer.purchaseProperty(p);
                     }
+                } else if(p.getOwner().equals(currentPlayer)){
+                    System.out.println("This is your own property");
                 } else {
                     boolean canPayRent = currentPlayer.payRent(p);
                     if (canPayRent){
-                        p.getOwner().recieveRent(p);
+                        p.getOwner().receiveRent(p);
                     } else {
                         System.out.println("You are bankrupt. You cannot play further.");
                         players.remove(currentPlayer);
@@ -210,7 +212,6 @@ public class Board {
      * @author Sabah
      * @param args      main method.
      */
-
     public static void main(String[] args) {
         System.out.println("Welcome to the game of Monopoly!");
         System.out.println("How many players?");
