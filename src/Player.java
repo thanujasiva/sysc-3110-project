@@ -68,6 +68,8 @@ public class Player {
             System.out.println("You have to pay rent. Amount: $" + rent);
             this.money -= rent;
             rentPaid = true;
+        }else{
+            System.out.println("You cannot pay rent");
         }
         return rentPaid;
     }
