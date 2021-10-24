@@ -90,7 +90,7 @@ public class Property implements Box{
     /**
      * @author Shrimei
      * @author Thanuja
-     * @return          the property attributes
+     * @return          the string of the property's attributes
      */
     @Override
     public String toString() {
