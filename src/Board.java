@@ -144,6 +144,13 @@ public class Board {
         newPlayer.setId(length);
         players.add(newPlayer);
     }
+    private void removePlayer (Player player){
+        players.remove(player);
+        // all the property owners of the losing player set to null
+        for (Property p: player.getProperties()){
+            p.setOwner(null);
+        }
+    }
 
     /**
      * @author Shrimei
@@ -195,7 +202,7 @@ public class Board {
                         p.getOwner().receiveRent(p);
                     } else {
                         System.out.println("You are bankrupt. You cannot play further.");
-                        players.remove(currentPlayer);
+                        removePlayer(currentPlayer);
                         currentPlayerNumber -= 1;
                         if (players.size() == 1){ // player won
                             System.out.println("Player " + players.get(0).getId() + " won!");
