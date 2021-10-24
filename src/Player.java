@@ -44,6 +44,12 @@ public class Player {
         System.out.println("Player " + id);
         System.out.println("Position: " + property);
         System.out.println("Money: $" + money);
+        if (this.properties.size() > 0) {
+            System.out.println("Current properties you own: ");
+            for (Property property1 : this.properties) {
+                System.out.println(property1.toString());
+            }
+        }
     }
 
 
@@ -56,11 +62,7 @@ public class Player {
         if (this.money >= amount){
             this.money = this.money - amount;
             properties.add(property);
-            if(colourGroupMatch.get(property.getColourGroup())==null){
-                colourGroupMatch.put(property.getColourGroup(), 1);
-            } else{
-                colourGroupMatch.put(property.getColourGroup(), colourGroupMatch.get(property.getColourGroup())+1);
-            }
+            colourGroupMatch.merge(property.getColourGroup(), 1, Integer::sum);
             property.setOwner(this);
             System.out.println("Congratulations! You now own " + property.getName());
             if(colourGroupMatch.get(property.getColourGroup()) == property.getColourGroup().getMax()) {
