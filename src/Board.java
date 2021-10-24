@@ -12,7 +12,8 @@ public class Board {
     private Player playerNumber;
 
     /**
-     * @author Sabah, Shrimei
+     * @author Sabah
+     * @author Shrimei
      */
 
     public Board (){
@@ -26,7 +27,9 @@ public class Board {
     }
 
     /**
-     * @author Shrimei, Sabah
+     * @author Shrimei
+     * @author Sabah
+     * @author Thanuja
      * sets the properties with their descriptions
      */
 
@@ -137,6 +140,7 @@ public class Board {
 
     /**
      * @author Sabah
+     * @author Shrimei
      * @param newPlayer to be added
      */
     private void addPlayer (Player newPlayer) {
@@ -170,6 +174,9 @@ public class Board {
 
     /**
      * @author Shrimei
+     * @author Thanuja
+     * @author Maisha
+     * @author Sabah
      */
     private void play(){
         Scanner sc = new Scanner(System.in);
@@ -228,6 +235,7 @@ public class Board {
 
     /**
      * @author Sabah
+     * @author Thanuja
      * @param args      main method.
      */
     public static void main(String[] args) {
