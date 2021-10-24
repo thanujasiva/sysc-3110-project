@@ -110,7 +110,7 @@ public class Player {
      * @return              returns true if player is able to pay rent, else false.
      */
     public boolean payRent(Property property){
-        int rent = property.getOwner().colourSetOwned(property);
+        int rent = property.getOwner().getRentAmount(property);
         if (this.money >= rent){
             System.out.println("You have to pay rent. Amount: $" + rent);
             this.money -= rent;
@@ -123,9 +123,9 @@ public class Player {
 
     /**
      * @author Maisha
-     * @param property      the property receiving rent
+     * @param property      the property collecting rent
      */
-    public void receiveRent(Property property){
+    public void collectRent(Property property){
         int rent = property.getRent();
         this.money += rent;
     }
@@ -135,7 +135,7 @@ public class Player {
      * @param property      the property receiving rent
      * @return              the rent amount
      */
-    public int colourSetOwned(Property property){
+    public int getRentAmount(Property property){
         if(colourGroupMatch.get(property.getColourGroup()) == property.getColourGroup().getMax()){
             return property.getRentWithColourSet();
         } else {

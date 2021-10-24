@@ -1,4 +1,3 @@
-import javax.sound.midi.SysexMessage;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
@@ -216,7 +215,7 @@ public class Board {
                     } else {
                         boolean canPayRent = currentPlayer.payRent(currentProperty);
                         if (canPayRent) {
-                            currentProperty.getOwner().receiveRent(currentProperty);
+                            currentProperty.getOwner().collectRent(currentProperty);
                         } else {
                             System.out.println("You are bankrupt. You cannot play further.");
                             removePlayer(currentPlayer);
