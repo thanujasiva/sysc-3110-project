@@ -37,40 +37,68 @@ public class Property implements Box{
         return owner;
     }
 
+    /**
+     * @author Thanuja
+     * @return          the name of property
+     */
     @Override
     public String getName() {
         return name;
     }
 
+    /**
+     * @author Thanuja
+     * @return          the type of box which is 'property'
+     */
     @Override
     public String getType() {
         return "Property";
     }
 
+    /**
+     * @author Thanuja
+     * @return          the price of property
+     */
     public int getPrice() {
         return price;
     }
 
+    /**
+     * @author Thanuja
+     * @return          the colour group of the property
+     */
     public ColourGroups getColourGroup() {
         return colourGroup;
     }
 
+    /**
+     * @author Thanuja
+     * @return          the rent rate of the property
+     */
     public int getRent() {
         return rent;
     }
 
+    /**
+     * @author Thanuja
+     * @return          the rent rate with a colour set
+     */
     public int getRentWithColourSet() {
         return rentWithColourSet;
     }
 
+    /**
+     * @author Shrimei
+     * @author Thanuja
+     * @return          the property attributes
+     */
     @Override
     public String toString() {
         return "Property: " +
                 "price=" + price +
                 ", name='" + name + '\'' +
-                ", colourGroup='" + colourGroup + '\'' +
+                ", colourGroup='" + colourGroup.getColour() + '\'' +
                 ", rent=" + rent +
                 ", rentWithColourSet=" + rentWithColourSet;
     }
-
 }
