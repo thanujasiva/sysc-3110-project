@@ -37,8 +37,14 @@ public class Property implements Box{
         return owner;
     }
 
+    @Override
     public String getName() {
         return name;
+    }
+
+    @Override
+    public String getType() {
+        return "Property";
     }
 
     public int getPrice() {
@@ -59,13 +65,12 @@ public class Property implements Box{
 
     @Override
     public String toString() {
-        return "Property{" +
+        return "Property: " +
                 "price=" + price +
                 ", name='" + name + '\'' +
                 ", colourGroup='" + colourGroup + '\'' +
                 ", rent=" + rent +
-                ", rentWithColourSet=" + rentWithColourSet +
-                '}';
+                ", rentWithColourSet=" + rentWithColourSet;
     }
 
 }
