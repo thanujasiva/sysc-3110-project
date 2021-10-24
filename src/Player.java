@@ -32,6 +32,10 @@ public class Player {
         return position;
     }
 
+    public ArrayList<Property> getProperties() {
+        return properties;
+    }
+
     public int getPosition() {
         return position;
     }
