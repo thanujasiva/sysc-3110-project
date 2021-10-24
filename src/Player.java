@@ -87,9 +87,9 @@ public class Player {
      * @param property      the property being purchased.
      */
     public void purchaseProperty(Property property){
-        int amount = property.getPrice();
-        if (this.money >= amount){
-            this.money = this.money - amount;
+        int cost = property.getPrice();
+        if (this.money >= cost){
+            this.money = this.money - cost;
             properties.add(property);
             colourGroupMatch.merge(property.getColourGroup(), 1, Integer::sum);
             property.setOwner(this);
