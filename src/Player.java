@@ -13,6 +13,7 @@ public class Player {
      * @author Sabah
      * @author Shrimei
      * @author Maisha
+     * Each player begins with $1500 and starts on GO
      */
     public Player (){
         this.money = 1500;
@@ -23,7 +24,8 @@ public class Player {
 
     /**
      * @author Sabah
-     * @param id       the player id
+     * @param id       the player's id
+     * An ID is given to each new player when they join the game
      */
     public void setId(int id){
         this.id = id;
@@ -31,7 +33,7 @@ public class Player {
 
     /**
      * @author Shrimei
-     * @return         the player id.
+     * @return         the player's id
      */
     public int getId() {
         return id;
@@ -39,8 +41,9 @@ public class Player {
 
     /**
      * @author Shrimei
-     * @param roll      the dice roll amount
-     * @return          the new position
+     * @param roll      the dice roll number
+     * @return          the new position of the player
+     * Moves the player a certain number of boxes based on the roll
      */
     public int changePosition(int roll){
         this.position += roll;
@@ -49,7 +52,7 @@ public class Player {
 
     /**
      * @author Sabah
-     * @return          the list of properties owned
+     * @return          the list of properties owned by the player
      */
     public ArrayList<Property> getProperties() {
         return properties;
@@ -57,7 +60,7 @@ public class Player {
 
     /**
      * @author Shrimei
-     * @return          the current position
+     * @return          the current position of the player
      */
     public int getPosition() {
         return position;
@@ -66,16 +69,17 @@ public class Player {
     /**
      * @author Shrimei
      * @author Thanuja
-     * @param property  the current property
+     * @param box  the box the player is currently on
+     * Outputs the player's position, money and properties
      */
-    public void printCurrentState(String property){
+    public void printCurrentState(String box){
         System.out.println("Player " + id);
-        System.out.println("Position: " + property);
+        System.out.println("Position: " + box);
         System.out.println("Money: $" + money);
         if (this.properties.size() > 0) {
             System.out.println("Current properties you own: ");
-            for (Property property1 : this.properties) {
-                System.out.println(property1.toString());
+            for (Property property : this.properties) {
+                System.out.println(property.toString());
             }
         }
     }
@@ -84,7 +88,7 @@ public class Player {
     /**
      * @author Maisha
      * @author Shrimei
-     * @param property      the property being purchased.
+     * @param property      the property being purchased
      */
     public void purchaseProperty(Property property){
         int cost = property.getPrice();
@@ -106,8 +110,10 @@ public class Player {
      * @author Maisha
      * @author Shrimei
      * @author Thanuja
-     * @param property      the property to pay rent for.
+     * @param property      the property to pay rent for. Property must have an owner
      * @return              returns true if player is able to pay rent, else false.
+     * If the user has enough money to pay rent, it is deducted from their account.
+     * Otherwise, the player is bankrupt
      */
     public boolean payRent(Property property){
         int rent = property.getOwner().getRentAmount(property);
@@ -124,6 +130,7 @@ public class Player {
     /**
      * @author Maisha
      * @param property      the property collecting rent
+     * Adds collected rent to the owner's account
      */
     public void collectRent(Property property){
         int rent = property.getRent();
@@ -134,6 +141,7 @@ public class Player {
      * @author Shrimei
      * @param property      the property receiving rent
      * @return              the rent amount
+     * Decides the appropriate rent amount to pay based on if the colour set is owned
      */
     public int getRentAmount(Property property){
         if(colourGroupMatch.get(property.getColourGroup()) == property.getColourGroup().getMax()){
