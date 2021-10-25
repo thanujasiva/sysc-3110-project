@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class Board {
 
     private Dice dice;
-    private HashMap<Integer, Box> boxes; //th integer represents the place of the box on the board
+    private HashMap<Integer, Box> boxes; //integer represents the place of the box on the board
     private ArrayList<Player> players;
     private int currentPlayerNumber;
 

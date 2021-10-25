@@ -13,7 +13,7 @@ How many players?
 Player 0
 Position: GO
 Money: $1500
-Enter a command (roll, q)
+Enter a command (roll, quit)
 roll
 Amount rolled is 6
 You landed on Property: price=100, name='Vermont Avenue', colourGroup='grey', rent=10, rentWithColourSet=20
@@ -25,7 +25,7 @@ Congratulations! You now own Vermont Avenue
 Player 1
 Position: GO
 Money: $1500
-Enter a command (roll, q)
+Enter a command (roll, quit)
 roll
 Amount rolled is 8
 You landed on BlankBox: name='Visiting Jail'
@@ -36,7 +36,7 @@ Position: Vermont Avenue
 Money: $1400
 Current properties you own: 
 Property: price=100, name='Vermont Avenue', colourGroup='grey', rent=10, rentWithColourSet=20
-Enter a command (roll, q)
+Enter a command (roll, quit)
 roll
 Amount rolled is 9
 You landed on Property: price=180, name='Tennessee Avenue', colourGroup='orange', rent=18, rentWithColourSet=36
