@@ -7,7 +7,6 @@ public class Dice {
     /**
      * @author Maisha
      * @return dice number that was rolled, int
-     * Outputs an integer between 2 and 12
      */
     public int rollDice(){
         Random rn = new Random();

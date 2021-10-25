@@ -12,14 +12,12 @@ public class Property implements Box{
      * @param name          name of property
      * @param price         price of property
      * @param colourGroup   colour group of property
-     * Sets the property's information. Standard rent is 10% of the property
-     * price and the rent with colour set is 20%
      */
     public Property(String name, int price, ColourGroups colourGroup){
         this.name = name;
         this.price = price;
-        this.rent = (int) ( price * 0.1); // 10% of property price
-        this.rentWithColourSet = this.rent * 2; //20% of property price
+        this.rent = (int) ( price * 0.1); // 10%
+        this.rentWithColourSet = this.rent * 2;
         this.colourGroup = colourGroup;
         this.owner = null;
     }
@@ -27,7 +25,6 @@ public class Property implements Box{
     /**
      * @author Maisha
      * @param player    the new owner.
-     * Sets the owner of the property once it is bought
      */
     public void setOwner(Player player){
         this.owner = player;
@@ -68,7 +65,7 @@ public class Property implements Box{
 
     /**
      * @author Thanuja
-     * @return          the colour group that the property belongs to
+     * @return          the colour group of the property
      */
     public ColourGroups getColourGroup() {
         return colourGroup;
@@ -76,7 +73,7 @@ public class Property implements Box{
 
     /**
      * @author Thanuja
-     * @return          the standard rent rate of the property
+     * @return          the rent rate of the property
      */
     public int getRent() {
         return rent;
@@ -94,7 +91,6 @@ public class Property implements Box{
      * @author Shrimei
      * @author Thanuja
      * @return          the string of the property's attributes
-     * Prints out a string of the property's attributes
      */
     @Override
     public String toString() {
