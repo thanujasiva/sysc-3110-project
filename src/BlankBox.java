@@ -31,6 +31,7 @@ public class BlankBox implements Box{
     /**
      * @author Thanuja
      * @return A string of the property's attributes
+     * Outputs the name of the box
      */
     @Override
     public String toString() {
