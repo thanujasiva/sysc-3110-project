@@ -55,11 +55,11 @@ Can play with 2-4 players.
 
 Players can either roll the dice or quit the game.
 
-Players can purchase unowned properties, and will have to pay rent when 
-they land on other player's properties. If a player owns all properties of a colour group, 
-those properties will have an increased rent amount.
+Players can purchase unowned properties, and will have to pay a rent of 10% on the property's price 
+when they land on other player's properties. If a player owns all the properties of a colour group, 
+the rents of those properties double.
 
-A player goes bankrupt when they are no longer have enough money to pay rent. 
+A player goes bankrupt when they no longer have enough money to pay the rent. 
 The bankrupt player is removed from the game.
 
 The game ends when there is only one player remaining in the game.
