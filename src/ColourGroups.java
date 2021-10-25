@@ -20,6 +20,7 @@ public enum ColourGroups {
     /**
      * @author Shrimei
      * @return              the colour group
+     * Returns a String representation of the colour
      */
     public String getColour() {
         return colour;
@@ -29,6 +30,7 @@ public enum ColourGroups {
     /**
      * @author Shrimei
      * @return              the maximum cards of the set
+     * Returns the number of properties of that colour required to get a complete colour set
      */
     public int getMax() {
         return max;
