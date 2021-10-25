@@ -60,7 +60,7 @@ when they land on other player's properties. If a player owns all the properties
 the rents of those properties double.
 
 A player goes bankrupt when they no longer have enough money to pay the rent. 
-The bankrupt player is removed from the game.
+The bankrupt player loses all their properties and is removed from the game.
 
 The game ends when there is only one player remaining in the game.
 The remaining player is the winner.
