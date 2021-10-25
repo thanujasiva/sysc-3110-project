@@ -69,13 +69,24 @@ The remaining player is the winner.
 
 When first starting the game, an integer must be entered for the number of players.
 
-## Remaining Deliverables/Roadmap Ahead:
+## Remaining Deliverables:
 
 Milestone 2: GUI-based version and unit tests.
 
 Milestone 3: Additional features (jail, "Go", railroad, utility) and "AI" players. 
 
 Milestone 4: Save/load features and customizable games.
+
+## Roadmap Ahead:
+
+Improvements for future Milestones:
+* Exception handling for `roll`, `quit`, and number of players
+* Separate method for getting the number of players in Board.java
+* Separate method for when a player goes bankrupt in Board.java
+* printCurrentState should return String, so it's easier for GUI
+* Add a command to switch turn instead of doing it automatically
+    * Future milestones, players may also want to buy houses/hotels before their turn is over
+
 
 ## Contributors:
 * Thanuja Sivaananthan
