@@ -14,5 +14,4 @@ public class Dice {
         this.diceNumber = rn.nextInt(11)+2;
         return this.diceNumber;
     }
-
 }
