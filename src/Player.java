@@ -40,6 +40,14 @@ public class Player {
     }
 
     /**
+     * @author Thanuja
+     * @return          amount of money player has
+     */
+    public int getMoney() {
+        return money;
+    }
+
+    /**
      * @author Shrimei
      * @param roll      the dice roll number
      * @return          the new position of the player
