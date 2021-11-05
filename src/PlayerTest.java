@@ -38,7 +38,7 @@ public class PlayerTest {
      * @author Thanuja
      */
     @Test
-    public void getStatusAfterFirstMove() {
+    public void getPositionAfterFirstMove() {
         player.changePosition(8);
         assertEquals(8,player.getPosition());
     }
@@ -48,14 +48,14 @@ public class PlayerTest {
      * @author Thanuja
      */
     @Test
-    public void getStatusAfterMultipleMoves() {
+    public void getPositionAfterMultipleMoves() {
         player.changePosition(3);
         player.changePosition(8);
         player.changePosition(11);
         assertEquals(22,player.getPosition());
     }
 
-    // Other methods to add:
+    // Other test methods to add:
     // purchase property
     // collect rent
     // pay rent
