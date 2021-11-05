@@ -7,7 +7,7 @@ public class PropertyTest {
     private Property property;
 
     /**
-     * Set up a test property.
+     * Set up a test property
      * @author Thanuja
      */
     @Before
@@ -15,13 +15,17 @@ public class PropertyTest {
         property = new Property("Test Property", 200, ColourGroups.GREEN);
     }
 
+    /**
+     * Test that initial owner is null
+     * @author Thanuja
+     */
     @Test
     public void initialOwner(){
-        assertEquals(null, property.getOwner());
+        assertNull(property.getOwner());
     }
 
     /**
-     * Test that the type is a property type
+     * Test that type is a property type
      * @author Thanuja
      */
     @Test
@@ -30,7 +34,7 @@ public class PropertyTest {
     }
 
     /**
-     * Test that the rent is 10%.
+     * Test that rent is 10% of price
      * @author Thanuja
      */
     @Test
@@ -39,7 +43,7 @@ public class PropertyTest {
     }
 
     /**
-     * Test that the rent with colour set is 20%.
+     * Test that rent with colour set is 20% of price
      * @author Thanuja
      */
     @Test
