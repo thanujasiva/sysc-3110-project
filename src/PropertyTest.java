@@ -20,7 +20,7 @@ public class PropertyTest {
      * @author Thanuja
      */
     @Test
-    public void initialOwner(){
+    public void getInitialOwner(){
         assertNull(property.getOwner());
     }
 
