@@ -1,4 +1,6 @@
 import javax.swing.*;
+import javax.swing.border.Border;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -21,24 +23,24 @@ public class PlayerStateView {
         JPanel playerStatePanel = new JPanel();
         playerStatePanel.setLayout(new BoxLayout (playerStatePanel, BoxLayout.Y_AXIS));
 
+        Border fieldBorder = new EmptyBorder(6,3,3,3);
+
         JLabel playerMoneyLabel = new JLabel("Money: $" + player.getMoney());
-        JLabel blankLabel = new JLabel("  ");
+        playerMoneyLabel.setBorder(fieldBorder);
         JLabel propertiesListHeader = new JLabel("Current properties you own:");
+        propertiesListHeader.setBorder(fieldBorder);
         playerStatePanel.add(playerMoneyLabel);
-        playerStatePanel.add(blankLabel);
         playerStatePanel.add(propertiesListHeader);
+
 
         // create list with the property names of the properties the player owns
         DefaultListModel<String> propertiesModel = new DefaultListModel<>();
         for (Property property : player.getProperties()){
-            String propertyString = String.format("%-20s %-10s", property.getName()+",", property.getColourGroup().getColour()); // - for left alignment
-            propertiesModel.addElement(propertyString);
+            propertiesModel.addElement(property.getName());
         }
 
         // add property name list to the JPanel
         JList<String> propertiesList = new JList<>(propertiesModel);
-        Font font = new Font("Monospaced", Font.PLAIN, 12);
-        propertiesList.setFont(font); // set font as Monospaced so String.format works
         propertiesList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         playerStatePanel.add(new JScrollPane(propertiesList));
 

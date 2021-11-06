@@ -21,7 +21,6 @@ public class CardView extends JFrame {
         super(property.getName());
         this.setLayout(new BorderLayout());
         this.setSize(200, 250);
-        this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 
         if(property.getOwner() == null){ //no owner, can buy
             this.addWindowListener(new WindowAdapter() {  //defining a class inside another class
