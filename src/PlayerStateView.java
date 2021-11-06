@@ -58,7 +58,7 @@ public class PlayerStateView {
 
     /**
      * @author Thanuja
-     * @return player state panel
+     * @return player state frame
      */
     public JFrame getPlayerStateFrame() {
         return playerStateFrame;
