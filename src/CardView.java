@@ -27,12 +27,9 @@ public class CardView extends JFrame {
         }
 
         this.displayPropertyInfo(property);
-
-
         //TicTacToeModel model = new TicTacToeModel();
         //model.addTicTacToeView(this); //add ourselves to the model
         //TicTacToeController tttc = new TicTacToeController(model);
-
         this.setVisible(true);
     }
 
