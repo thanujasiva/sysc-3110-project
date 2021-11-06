@@ -46,7 +46,7 @@ public class PlayersView {
         JFrame testFrame = new JFrame("Test frame for Players View: ");
         testFrame.add(playersView.getPlayersPanel());
 
-        testFrame.setSize(300,400); // FIXME - have proper size in the frame
+        testFrame.setSize(200,200); // FIXME - have proper size in the frame
         testFrame.setVisible(true);
         testFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
