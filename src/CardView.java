@@ -116,9 +116,31 @@ public class CardView extends JFrame {
         player.purchaseProperty(Atlantic);
 
         Property Oriental = new Property("Oriental Avenue", 100, ColourGroups.GREY);
+        player.purchaseProperty(Oriental);
+
+        Property Baltic = new Property("Baltic Avenue", 60, ColourGroups.BROWN);
+        player.purchaseProperty(Baltic);
+
+        Property StCharles  = new Property("St. Charles Place", 140, ColourGroups.PINK);
+        player.purchaseProperty(StCharles);
+
+        Property StJames  = new Property("St. James Place", 180, ColourGroups.ORANGE);
+        player.purchaseProperty(StJames);
+
+        Property Kentucky  = new Property("Kentucky Avenue", 220, ColourGroups.RED);
+        player.purchaseProperty(Kentucky);
+
+        Property Pacific  = new Property("Pacific Avenue", 300, ColourGroups.GREEN);
+        Property ParkPlace = new Property("Park Place", 350,  ColourGroups.BLUE);
 
         CardView card = new CardView(Atlantic);
         CardView card2 = new CardView(Oriental);
+        CardView card3 = new CardView(Baltic);
+        CardView card4 = new CardView(StCharles);
+        CardView card5 = new CardView(StJames);
+        CardView card6 = new CardView(Kentucky);
+        CardView card7 = new CardView(Pacific);
+        CardView card8 = new CardView(ParkPlace);
     }
 
 }
