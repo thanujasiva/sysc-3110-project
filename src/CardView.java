@@ -27,20 +27,24 @@ public class CardView extends JFrame {
         }
 
         this.displayPropertyInfo(property);
+
         //TicTacToeModel model = new TicTacToeModel();
         //model.addTicTacToeView(this); //add ourselves to the model
         //TicTacToeController tttc = new TicTacToeController(model);
+
         this.setVisible(true);
     }
 
     private void displayPropertyInfo(Property property) {
         //add name, price, colour labels
+        //PRICE ON BOARD< NOT CARD
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel,BoxLayout.Y_AXIS));
-        panel.setBorder(new EmptyBorder(new Insets(150, 200, 150, 200)));
-        panel.add(new JLabel("Property Name" + property.getName()));
-        panel.add(new JLabel(String.valueOf(property.getPrice())));
-        panel.add(new JLabel(String.valueOf(property.getPrice())));
+        panel.add(new JLabel("Property Name: " + property.getName()));
+        panel.add(new JLabel("Colour group: " + property.getColourGroup()));
+        panel.add(new JLabel("Price: $" + property.getPrice()));
+        panel.add(new JLabel("Rent: $" + property.getRent()));
+        panel.add(new JLabel("Rent with colour set: $" + property.getRentWithColourSet()));
         this.add(panel);
     }
 
