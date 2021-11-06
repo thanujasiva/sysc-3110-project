@@ -1,7 +1,9 @@
 import javax.swing.*;
 
 public class PlayersView {
-    private JPanel playersPanel;
+
+    private final JPanel playersPanel;
+
     /**
      * @author Sabah
      * @param board
@@ -18,17 +20,18 @@ public class PlayersView {
         playersPanel.add(playerNamesLabel);
 
         // adds to the actual list by looping
-        DefaultListModel playersListModel  = new DefaultListModel();
+        DefaultListModel<String> playersListModel  = new DefaultListModel<>();
         for (Player player : board.getPlayers()){
             playersListModel.addElement("Player: "+ player.getId());
         }
 
         // shows the list of players
-        JList playerList = new JList<>(playersListModel);
+        JList <String> playerList = new JList<>(playersListModel);
         playerList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         playersPanel.add(new JScrollPane(playerList));
         playersPanel.add(currentPlayerLabel);
     }
+
     /**
      * @author Sabah
      * @return  playersPanel
