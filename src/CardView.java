@@ -46,10 +46,10 @@ public class CardView extends JFrame {
         fieldPanel.setLayout(new BoxLayout(fieldPanel,BoxLayout.Y_AXIS));
         valuePanel.setLayout(new BoxLayout(valuePanel,BoxLayout.Y_AXIS));
 
-        Color colour = Color.yellow; //IN ENUM ADD Color VALUE OF THE COLOUR SET
+        Color colour = property.getColourGroup().getColour(); //IN ENUM ADD Color VALUE OF THE COLOUR SET
 
         Border fieldBorder = new EmptyBorder(6,3,3,3);
-        Border valueBorder = new EmptyBorder(6,3,3,3); //HOW TO ALIGN RIGHT?
+        Border valueBorder = new EmptyBorder(6,3,3,3);
 
         JLabel price = new JLabel("Price: ");
         price.setBorder(fieldBorder);
@@ -109,7 +109,7 @@ public class CardView extends JFrame {
         Property Oriental = new Property("Oriental Avenue", 100, ColourGroups.GREY);
 
         CardView card = new CardView(Atlantic);
-        //ardView card2 = new CardView(Oriental);
+        CardView card2 = new CardView(Oriental);
     }
 
 }
