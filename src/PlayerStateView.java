@@ -1,4 +1,6 @@
+import javax.lang.model.element.Element;
 import javax.swing.*;
+import java.awt.*;
 import java.util.Scanner;
 
 /**
@@ -26,13 +28,16 @@ public class PlayerStateView {
         playerStatePanel.add(propertiesListHeader);
 
         // create list with the property names of the properties the player owns
-        DefaultListModel<String> propertiesNameModel = new DefaultListModel<>();
+        DefaultListModel<String> propertieModel = new DefaultListModel<>();
         for (Property property : player.getProperties()){
-            propertiesNameModel.addElement(property.getName());
+            String propertyString = String.format("%-20s %-10s", property.getName()+",", property.getColourGroup().getColour()); // - for left alignment
+            propertieModel.addElement(propertyString);
         }
 
         // add property name list to the JPanel
-        JList<String> propertiesList = new JList<>(propertiesNameModel);
+        JList<String> propertiesList = new JList<>(propertieModel);
+        Font font = new Font("Monospaced", Font.PLAIN, 12);
+        propertiesList.setFont(font); // set font as Monospaced so String.format works
         propertiesList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         playerStatePanel.add(new JScrollPane(propertiesList));
 
