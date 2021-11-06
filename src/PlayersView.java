@@ -1,17 +1,13 @@
 import javax.swing.*;
 
 public class PlayersView {
-
     private JPanel playersPanel;
-
     /**
      * @author Sabah
      * @param board
-     * Shoes the list of players on the top label
+     * Shows the list of players on the top label
      * and the current player on the bottom label
-     *
      */
-
     public PlayersView(Board board) {
         playersPanel = new JPanel();
         playersPanel.setLayout(new BoxLayout(playersPanel, BoxLayout.Y_AXIS));
@@ -38,9 +34,7 @@ public class PlayersView {
      * @return  playersPanel
      * getter for playersPanel
      */
-    public JPanel getPlayersPanel() {
-        return playersPanel;
-    }
+    public JPanel getPlayersPanel() {return playersPanel;}
 
     // test method
     // can be removed later
@@ -57,5 +51,4 @@ public class PlayersView {
         testFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
     }
-
 }

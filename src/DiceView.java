@@ -5,13 +5,11 @@ public class DiceView {
     private JPanel dicePanel;
     private JLabel diceLabel;
     private Dice dice;
-
     /**
      * @author Sabah
      * DiceView Constructor
      * @param dice
      */
-
     public DiceView(Dice dice) {
         this.dice = dice;
         dicePanel = new JPanel();
@@ -19,9 +17,7 @@ public class DiceView {
         diceLabel = new JLabel();
         dicePanel.add(diceLabel);
         diceLabel.setText(String.valueOf(dice.getDiceNumber()));
-
     }
-
     /**
      * @author Sabah
      * Updates the dice label when the controller calls
@@ -30,7 +26,6 @@ public class DiceView {
     public void updateDiceLabel(){
         diceLabel.setText(String.valueOf(dice.getDiceNumber()));
     }
-
     /**
      * @author Sabah
      * @return  dicePanel
@@ -64,7 +59,5 @@ public class DiceView {
             diceView.updateDiceLabel();
             System.out.println(roll);
         }
-
     }
-
 }
