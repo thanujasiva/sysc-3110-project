@@ -2,11 +2,12 @@ import java.awt.*;
 
 public enum ColourGroups {
 
-    BROWN ("brown", 2), GREY("grey", 3), PINK("pink", 3),
-    ORANGE("orange", 3), RED("red", 3), YELLOW("yellow", 3),
-    GREEN("green", 3), BLUE("blue", 2);
+    //FIX BROWN
+    BROWN (Color.BLACK, 2), GREY(Color.GRAY, 3), PINK(Color.MAGENTA, 3),
+    ORANGE(Color.orange, 3), RED(Color.RED, 3), YELLOW(Color.YELLOW, 3),
+    GREEN(Color.GREEN, 3), BLUE(Color.BLUE, 2);
 
-    private final String colour;
+    private final Color colour;
     private final int max;
 
     /**
@@ -14,7 +15,7 @@ public enum ColourGroups {
      * @param colour        the colour group
      * @param max           the max amount of the colour set
      */
-    ColourGroups (String colour, int max){
+    ColourGroups (Color colour, int max){
         this.colour = colour;
         this.max = max;
     }
@@ -24,7 +25,7 @@ public enum ColourGroups {
      * @return              the colour group
      * Returns a String representation of the colour
      */
-    public String getColour() {
+    public Color getColour() {
         return colour;
     }
 

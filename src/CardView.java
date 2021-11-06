@@ -5,23 +5,25 @@ import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.Color;
-import java.awt.event.WindowListener;
 
+/**
+ * CardView Class
+ * Creates frame to display a property card
+ * @author Shrimei
+ */
 public class CardView extends JFrame {
-    //new frame pops up with info about the property
-    //take property name as parameter
-    //Name, price, colour
-    //property info inside a JPane that has buy option
 
+    /**
+     * @author Shrimei
+     * @param property that is being displayed
+     */
     public CardView(Property property){
         super(property.getName());
         this.setLayout(new BorderLayout());
-        this.setSize(300, 300);
+        this.setSize(200, 250);
+        this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 
-        if(property.getOwner() != null){
-            this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //if player already owns the property, don't give option to buy
-        } else {
-            this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        if(property.getOwner() == null){ //no owner, can buy
             this.addWindowListener(new WindowAdapter() {  //defining a class inside another class
                 public void windowClosing(WindowEvent e) {
                     handleClose();
@@ -38,24 +40,27 @@ public class CardView extends JFrame {
         this.setVisible(true);
     }
 
+    /**
+     * Display the property info (price, name, colour, rent) on the frame
+     * @param property that is being displayed
+     */
     private void displayPropertyInfo(Property property) {
         //PRICE ON BOARD, NOT CARD
-        JPanel container = new JPanel();
         JPanel fieldPanel = new JPanel();
         JPanel valuePanel = new JPanel();
 
         fieldPanel.setLayout(new BoxLayout(fieldPanel,BoxLayout.Y_AXIS));
         valuePanel.setLayout(new BoxLayout(valuePanel,BoxLayout.Y_AXIS));
-        container.setLayout(new GridLayout(1,2));
-
-        Color colour = Color.yellow; //IN ENUM ADD Color VALUE OF THE COLOUR SET
-        //container.setBorder(BorderFactory.createMatteBorder(4,4,4,4,colour));
 
         Border fieldBorder = new EmptyBorder(6,3,3,3);
-        Border valueBorder = new EmptyBorder(6,3,6,3); //HOW TO ALIGN RIGHT?
+        Border valueBorder = new EmptyBorder(6,3,3,3);
 
-        //JLabel group= new JLabel("Colour group: ");
-        //group.setBorder(fieldBorder);
+        Color colour = property.getColourGroup().getColour();
+
+        JLabel name = new JLabel(property.getName(), SwingConstants.CENTER);
+        name.setBorder(valueBorder);
+        name.setOpaque(true);
+        name.setBackground(colour);
 
         JLabel price = new JLabel("Price: ");
         price.setBorder(fieldBorder);
@@ -66,39 +71,32 @@ public class CardView extends JFrame {
         JLabel rentWithSet = new JLabel("Rent with colour set: ");
         rentWithSet.setBorder(fieldBorder);
 
-        //fieldPanel.add(group);
         fieldPanel.add(price);
         fieldPanel.add(rent);
         fieldPanel.add(rentWithSet);
 
-        JLabel name = new JLabel(property.getName(), SwingConstants.CENTER);
-        name.setBorder(valueBorder);
-        name.setOpaque(true);
-        name.setBackground(colour);
+        JLabel priceVal = new JLabel("$" + property.getPrice());
+        priceVal.setBorder(valueBorder);
 
-        //JLabel colourV = new JLabel("" + property.getColourGroup());
-        //colourV.setBorder(valueBorder);
+        JLabel rentVal = new JLabel("$" +property.getRent());
+        rentVal.setBorder(valueBorder);
 
-        JLabel priceV = new JLabel("$" + property.getPrice());
-        priceV.setBorder(valueBorder);
+        JLabel rentWithSetVal = new JLabel("$" +property.getRentWithColourSet());
+        rentWithSetVal.setBorder(valueBorder);
 
-        JLabel rentV = new JLabel("$" +property.getRent());
-        rentV.setBorder(valueBorder);
-
-        JLabel rentWithSetV = new JLabel("$" +property.getRentWithColourSet());
-        rentWithSetV.setBorder(valueBorder);
-
-        //valuePanel.add(colourV);
-        valuePanel.add(priceV);
-        valuePanel.add(rentV);
-        valuePanel.add(rentWithSetV);
+        valuePanel.add(priceVal);
+        valuePanel.add(rentVal);
+        valuePanel.add(rentWithSetVal);
 
         this.add(name, BorderLayout.NORTH);
-        container.add(fieldPanel);
-        container.add(valuePanel);
-        this.add(container);
+        this.add(fieldPanel, BorderLayout.WEST);
+        this.add(valuePanel, BorderLayout.EAST);
     }
 
+    /**
+     * When property with no owner is landed on, give player option to purchase
+     * @author Shrimei
+     */
     public void handleClose(){
         int result = JOptionPane.showConfirmDialog(null, "Would you like to purchase this property?","Purchase property",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
 
@@ -121,7 +119,7 @@ public class CardView extends JFrame {
         Property Oriental = new Property("Oriental Avenue", 100, ColourGroups.GREY);
 
         CardView card = new CardView(Atlantic);
-        //CardView card2 = new CardView(Oriental);
+        CardView card2 = new CardView(Oriental);
     }
 
 }
