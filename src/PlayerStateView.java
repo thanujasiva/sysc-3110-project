@@ -1,31 +1,43 @@
+import javax.lang.model.element.Element;
 import javax.swing.*;
+import java.awt.*;
+import java.util.Scanner;
 
+/**
+ * PlayerStateView class
+ * Creates a frame for an individual player's state
+ * @author Thanuja
+ */
 public class PlayerStateView {
 
-    private final JPanel playerStatePanel;
+    private final JFrame playerStateFrame;
 
     /**
      * @author Thanuja
      * @param player to view the current state
      */
     public PlayerStateView(Player player){
-        playerStatePanel = new JPanel();
+        JPanel playerStatePanel = new JPanel();
         playerStatePanel.setLayout(new BoxLayout (playerStatePanel, BoxLayout.Y_AXIS));
 
-        JLabel playerNameLabel = new JLabel("Player " + player.getId());
         JLabel playerMoneyLabel = new JLabel("Money: $" + player.getMoney());
+        JLabel blankLabel = new JLabel("  ");
         JLabel propertiesListHeader = new JLabel("Current properties you own:");
-        playerStatePanel.add(playerNameLabel);
         playerStatePanel.add(playerMoneyLabel);
+        playerStatePanel.add(blankLabel);
         playerStatePanel.add(propertiesListHeader);
 
-        // create list with property names
-        DefaultListModel propertiesNameModel = new DefaultListModel();
+        // create list with the property names of the properties the player owns
+        DefaultListModel<String> propertieModel = new DefaultListModel<>();
         for (Property property : player.getProperties()){
-            propertiesNameModel.addElement(property.getName());
+            String propertyString = String.format("%-20s %-10s", property.getName()+",", property.getColourGroup().getColour()); // - for left alignment
+            propertieModel.addElement(propertyString);
         }
 
-        JList propertiesList = new JList<>(propertiesNameModel);
+        // add property name list to the JPanel
+        JList<String> propertiesList = new JList<>(propertieModel);
+        Font font = new Font("Monospaced", Font.PLAIN, 12);
+        propertiesList.setFont(font); // set font as Monospaced so String.format works
         propertiesList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         playerStatePanel.add(new JScrollPane(propertiesList));
 
@@ -42,41 +54,57 @@ public class PlayerStateView {
             }
         });
 
+        playerStateFrame = new JFrame("Player " + player.getId());
+        playerStateFrame.setSize(250, 350); // gives a good size to the frame
+        playerStateFrame.add(playerStatePanel);
+        playerStateFrame.setVisible(true);
 
     }
 
     /**
      * @author Thanuja
-     * @return player state panel
+     * @return player state frame
      */
-    public JPanel getCurrentPlayerPanel() {
-        return playerStatePanel;
+    public JFrame getPlayerStateFrame() {
+        return playerStateFrame;
     }
 
-
-    // test method to view how the panel would look
+    // test method to view how PlayerStateView would look for a player
     // remove this afterwards
     public static void main(String[] args) {
-        Player player = new Player();
-        player.setId(0);
+        PlayerStateView playerStateView;
 
         Property Baltic = new Property("Baltic Avenue", 60, ColourGroups.BROWN);
         Property Oriental = new Property("Oriental Avenue", 100, ColourGroups.GREY);
         Property Illinois  = new Property("Illinois Avenue", 240, ColourGroups.RED);
         Property Atlantic  = new Property("Atlantic Avenue", 260, ColourGroups.YELLOW);
 
-        player.purchaseProperty(Baltic);
-        player.purchaseProperty(Illinois);
-        player.purchaseProperty(Atlantic);
-        player.purchaseProperty(Oriental);
+        // testing with putting the first player
+        Player player1 = new Player();
+        player1.setId(0);
+        player1.purchaseProperty(Baltic);
+        player1.purchaseProperty(Illinois);
+        player1.purchaseProperty(Atlantic);
 
-        PlayerStateView playerStateView = new PlayerStateView(player);
+        playerStateView = new PlayerStateView(player1);
 
-        JFrame testFrame = new JFrame("Test frame for Player State");
-        testFrame.add(playerStateView.getCurrentPlayerPanel());
+        // testing a change in who the current player is
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Type anything to change the player");
+        sc.nextLine();
 
-        testFrame.setSize(300,400); // FIXME - have proper size in the frame
-        testFrame.setVisible(true);
-        testFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        // can call setVisible(false) when the current player's turn is over
+        playerStateView.getPlayerStateFrame().setVisible(false);
+
+        // testing with putting a second player
+        Player player2 = new Player();
+        player2.setId(1);
+        player2.purchaseProperty(Oriental);
+
+        // when it's the next players turn, then call
+        playerStateView = new PlayerStateView(player2); // on the new current player
+
+        // only have EXIT_ON_CLOSE in this test method, should not close the actual game
+        playerStateView.playerStateFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
 }
