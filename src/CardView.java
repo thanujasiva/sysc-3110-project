@@ -39,27 +39,23 @@ public class CardView extends JFrame {
     }
 
     private void displayPropertyInfo(Property property) {
-        //add name, price, colour labels
         //PRICE ON BOARD, NOT CARD
         JPanel container = new JPanel();
-        JPanel titlePanel = new JPanel();
+        JPanel fieldPanel = new JPanel();
         JPanel valuePanel = new JPanel();
 
-        titlePanel.setLayout(new BoxLayout(titlePanel,BoxLayout.Y_AXIS));
+        fieldPanel.setLayout(new BoxLayout(fieldPanel,BoxLayout.Y_AXIS));
         valuePanel.setLayout(new BoxLayout(valuePanel,BoxLayout.Y_AXIS));
         container.setLayout(new GridLayout(1,2));
 
         Color colour = Color.yellow; //IN ENUM ADD Color VALUE OF THE COLOUR SET
-        container.setBorder(BorderFactory.createMatteBorder(4,4,4,4,colour));
+        //container.setBorder(BorderFactory.createMatteBorder(4,4,4,4,colour));
 
         Border fieldBorder = new EmptyBorder(6,3,3,3);
-        Border valueBorder = new EmptyBorder(6,10,3,3);
+        Border valueBorder = new EmptyBorder(6,3,6,3); //HOW TO ALIGN RIGHT?
 
-        JLabel name = new JLabel("Property Name:");
-        name.setBorder(fieldBorder);
-
-        JLabel group= new JLabel("Colour group: ");
-        group.setBorder(fieldBorder);
+        //JLabel group= new JLabel("Colour group: ");
+        //group.setBorder(fieldBorder);
 
         JLabel price = new JLabel("Price: ");
         price.setBorder(fieldBorder);
@@ -70,17 +66,18 @@ public class CardView extends JFrame {
         JLabel rentWithSet = new JLabel("Rent with colour set: ");
         rentWithSet.setBorder(fieldBorder);
 
-        titlePanel.add(name);
-        titlePanel.add(group);
-        titlePanel.add(price);
-        titlePanel.add(rent);
-        titlePanel.add(rentWithSet);
+        //fieldPanel.add(group);
+        fieldPanel.add(price);
+        fieldPanel.add(rent);
+        fieldPanel.add(rentWithSet);
 
-        JLabel nameV = new JLabel(property.getName());
-        nameV.setBorder(valueBorder);
+        JLabel name = new JLabel(property.getName(), SwingConstants.CENTER);
+        name.setBorder(valueBorder);
+        name.setOpaque(true);
+        name.setBackground(colour);
 
-        JLabel colourV = new JLabel("" + property.getColourGroup());
-        colourV.setBorder(valueBorder);
+        //JLabel colourV = new JLabel("" + property.getColourGroup());
+        //colourV.setBorder(valueBorder);
 
         JLabel priceV = new JLabel("$" + property.getPrice());
         priceV.setBorder(valueBorder);
@@ -91,13 +88,13 @@ public class CardView extends JFrame {
         JLabel rentWithSetV = new JLabel("$" +property.getRentWithColourSet());
         rentWithSetV.setBorder(valueBorder);
 
-        valuePanel.add(nameV);
-        valuePanel.add(colourV); //actually colour this
+        //valuePanel.add(colourV);
         valuePanel.add(priceV);
         valuePanel.add(rentV);
         valuePanel.add(rentWithSetV);
 
-        container.add(titlePanel);
+        this.add(name, BorderLayout.NORTH);
+        container.add(fieldPanel);
         container.add(valuePanel);
         this.add(container);
     }
@@ -124,7 +121,7 @@ public class CardView extends JFrame {
         Property Oriental = new Property("Oriental Avenue", 100, ColourGroups.GREY);
 
         CardView card = new CardView(Atlantic);
-        CardView card2 = new CardView(Oriental);
+        //CardView card2 = new CardView(Oriental);
     }
 
 }
