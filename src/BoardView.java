@@ -15,6 +15,9 @@ public class BoardView {
     private int boardHeight = 590;
     private int boxHeight = 50;
     private int boxWidth = 50;
+    private DiceView diceView;
+    private Dice dice1;
+    private Dice dice2;
 
     /**
      * @author Maisha
@@ -22,6 +25,10 @@ public class BoardView {
     public BoardView(){
         frame.setPreferredSize(new Dimension(boardWidth, boardHeight));
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        dice1 = new Dice();
+        dice2 = new Dice();
+        diceView = new DiceView(dice1, dice2);
+
         JPanel topBorder = new JPanel();
 
         Color panelColour = new Color(153,0,0);
@@ -98,6 +105,10 @@ public class BoardView {
         mainPanel.add(rightBorder, BorderLayout.EAST);
         mainPanel.add(leftBorder, BorderLayout.WEST);
         mainPanel.add(bottomBorder, BorderLayout.SOUTH);
+
+        JButton diceButton = new JButton();
+        diceButton.add(diceView.getDicePanel());
+        mainPanel.add(diceButton, BorderLayout.CENTER);
 
         frame.add(mainPanel);
         frame.pack();
