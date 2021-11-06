@@ -93,6 +93,10 @@ public class CardView extends JFrame {
         this.add(valuePanel, BorderLayout.EAST);
     }
 
+    /**
+     * When property with no owner is landed on, give player option to purchase
+     * @author Shrimei
+     */
     public void handleClose(){
         int result = JOptionPane.showConfirmDialog(null, "Would you like to purchase this property?","Purchase property",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
 
