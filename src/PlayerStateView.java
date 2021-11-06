@@ -26,13 +26,13 @@ public class PlayerStateView {
         playerStatePanel.add(propertiesListHeader);
 
         // create list with the property names of the properties the player owns
-        DefaultListModel propertiesNameModel = new DefaultListModel();
+        DefaultListModel<String> propertiesNameModel = new DefaultListModel<>();
         for (Property property : player.getProperties()){
             propertiesNameModel.addElement(property.getName());
         }
 
         // add property name list to the JPanel
-        JList propertiesList = new JList<>(propertiesNameModel);
+        JList<String> propertiesList = new JList<>(propertiesNameModel);
         propertiesList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         playerStatePanel.add(new JScrollPane(propertiesList));
 
