@@ -3,7 +3,7 @@ import java.awt.*;
 public enum ColourGroups {
 
     //FIX BROWN
-    BROWN (Color.BLACK, 2), GREY(Color.GRAY, 3), PINK(Color.MAGENTA, 3),
+    BROWN (new Color(153, 102, 0), 2), GREY(Color.GRAY, 3), PINK(Color.MAGENTA, 3),
     ORANGE(Color.orange, 3), RED(Color.RED, 3), YELLOW(Color.YELLOW, 3),
     GREEN(Color.GREEN, 3), BLUE(Color.BLUE, 2);
 
