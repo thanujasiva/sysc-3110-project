@@ -5,23 +5,25 @@ import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.Color;
-import java.awt.event.WindowListener;
 
+/**
+ * CardView Class
+ * Creates frame to display a property card
+ * @author Shrimei
+ */
 public class CardView extends JFrame {
-    //new frame pops up with info about the property
-    //take property name as parameter
-    //Name, price, colour
-    //property info inside a JPane that has buy option
 
+    /**
+     * @author Shrimei
+     * @param property that is being displayed
+     */
     public CardView(Property property){
         super(property.getName());
         this.setLayout(new BorderLayout());
         this.setSize(200, 250);
+        this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 
-        if(property.getOwner() != null){
-            this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //if player already owns the property, don't give option to buy
-        } else {
-            this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        if(property.getOwner() == null){ //no owner, can buy
             this.addWindowListener(new WindowAdapter() {  //defining a class inside another class
                 public void windowClosing(WindowEvent e) {
                     handleClose();
@@ -38,6 +40,10 @@ public class CardView extends JFrame {
         this.setVisible(true);
     }
 
+    /**
+     * Display the property info (price, name, colour, rent) on the frame
+     * @param property that is being displayed
+     */
     private void displayPropertyInfo(Property property) {
         //PRICE ON BOARD, NOT CARD
         JPanel fieldPanel = new JPanel();
@@ -46,10 +52,15 @@ public class CardView extends JFrame {
         fieldPanel.setLayout(new BoxLayout(fieldPanel,BoxLayout.Y_AXIS));
         valuePanel.setLayout(new BoxLayout(valuePanel,BoxLayout.Y_AXIS));
 
-        Color colour = property.getColourGroup().getColour(); //IN ENUM ADD Color VALUE OF THE COLOUR SET
-
         Border fieldBorder = new EmptyBorder(6,3,3,3);
         Border valueBorder = new EmptyBorder(6,3,3,3);
+
+        Color colour = property.getColourGroup().getColour();
+
+        JLabel name = new JLabel(property.getName(), SwingConstants.CENTER);
+        name.setBorder(valueBorder);
+        name.setOpaque(true);
+        name.setBackground(colour);
 
         JLabel price = new JLabel("Price: ");
         price.setBorder(fieldBorder);
@@ -64,23 +75,18 @@ public class CardView extends JFrame {
         fieldPanel.add(rent);
         fieldPanel.add(rentWithSet);
 
-        JLabel name = new JLabel(property.getName(), SwingConstants.CENTER);
-        name.setBorder(valueBorder);
-        name.setOpaque(true);
-        name.setBackground(colour);
+        JLabel priceVal = new JLabel("$" + property.getPrice());
+        priceVal.setBorder(valueBorder);
 
-        JLabel priceV = new JLabel("$" + property.getPrice());
-        priceV.setBorder(valueBorder);
+        JLabel rentVal = new JLabel("$" +property.getRent());
+        rentVal.setBorder(valueBorder);
 
-        JLabel rentV = new JLabel("$" +property.getRent());
-        rentV.setBorder(valueBorder);
+        JLabel rentWithSetVal = new JLabel("$" +property.getRentWithColourSet());
+        rentWithSetVal.setBorder(valueBorder);
 
-        JLabel rentWithSetV = new JLabel("$" +property.getRentWithColourSet());
-        rentWithSetV.setBorder(valueBorder);
-
-        valuePanel.add(priceV);
-        valuePanel.add(rentV);
-        valuePanel.add(rentWithSetV);
+        valuePanel.add(priceVal);
+        valuePanel.add(rentVal);
+        valuePanel.add(rentWithSetVal);
 
         this.add(name, BorderLayout.NORTH);
         this.add(fieldPanel, BorderLayout.WEST);
