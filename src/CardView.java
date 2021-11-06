@@ -3,6 +3,7 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.awt.Color;
 import java.awt.event.WindowListener;
 
 public class CardView extends JFrame {
@@ -13,6 +14,7 @@ public class CardView extends JFrame {
 
     public CardView(Property property){
         super(property.getName());
+        this.setLayout(new BorderLayout());
         this.setSize(300, 300);
 
         if(property.getOwner() != null){
@@ -26,7 +28,7 @@ public class CardView extends JFrame {
             });
         }
 
-        this.displayPropertyInfo(property);
+        displayPropertyInfo(property);
 
         //TicTacToeModel model = new TicTacToeModel();
         //model.addTicTacToeView(this); //add ourselves to the model
@@ -37,15 +39,33 @@ public class CardView extends JFrame {
 
     private void displayPropertyInfo(Property property) {
         //add name, price, colour labels
-        //PRICE ON BOARD< NOT CARD
-        JPanel panel = new JPanel();
-        panel.setLayout(new BoxLayout(panel,BoxLayout.Y_AXIS));
-        panel.add(new JLabel("Property Name: " + property.getName()));
-        panel.add(new JLabel("Colour group: " + property.getColourGroup()));
-        panel.add(new JLabel("Price: $" + property.getPrice()));
-        panel.add(new JLabel("Rent: $" + property.getRent()));
-        panel.add(new JLabel("Rent with colour set: $" + property.getRentWithColourSet()));
-        this.add(panel);
+        //PRICE ON BOARD, NOT CARD
+        JPanel container = new JPanel();
+        JPanel titlePanel = new JPanel();
+        JPanel valuePanel = new JPanel();
+
+        titlePanel.setLayout(new BoxLayout(titlePanel,BoxLayout.Y_AXIS));
+        valuePanel.setLayout(new BoxLayout(valuePanel,BoxLayout.Y_AXIS));
+        container.setLayout(new GridLayout(1,2));
+
+        Color colour = Color.yellow;
+        container.setBorder(BorderFactory.createMatteBorder(2,2,2,2,colour));
+
+        titlePanel.add(new JLabel("Property Name:"));
+        titlePanel.add(new JLabel("Colour group: "));
+        titlePanel.add(new JLabel("Price: "));
+        titlePanel.add(new JLabel("Rent: "));
+        titlePanel.add(new JLabel("Rent with colour set: "));
+
+        valuePanel.add(new JLabel(property.getName(), SwingConstants.RIGHT));
+        valuePanel.add(new JLabel("" + property.getColourGroup(), SwingConstants.RIGHT)); //actually colour this
+        valuePanel.add(new JLabel("$" +property.getPrice(), SwingConstants.RIGHT));
+        valuePanel.add(new JLabel("$" +property.getRent(), SwingConstants.RIGHT));
+        valuePanel.add(new JLabel("$" +property.getRentWithColourSet(), SwingConstants.CENTER));
+
+        container.add(titlePanel);
+        container.add(valuePanel);
+        this.add(container);
     }
 
     public void handleClose(){
@@ -63,9 +83,9 @@ public class CardView extends JFrame {
     public static void main(String[] args) {
         Player player = new Player();
         player.setId(0);
-        Property Baltic = new Property("Baltic Avenue", 60, ColourGroups.BROWN);
-        player.purchaseProperty(Baltic);
-        CardView card = new CardView(Baltic);
+        Property Atlantic  = new Property("Atlantic Avenue", 260, ColourGroups.YELLOW);
+        player.purchaseProperty(Atlantic);
+        CardView card = new CardView(Atlantic);
     }
 
 }

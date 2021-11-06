@@ -1,3 +1,5 @@
+import java.awt.*;
+
 public enum ColourGroups {
 
     BROWN ("brown", 2), GREY("grey", 3), PINK("pink", 3),
