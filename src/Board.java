@@ -4,10 +4,13 @@ import java.util.Scanner;
 
 public class Board {
 
-    private Dice dice;
+    private Dice dice1;
+    private Dice dice2;
     private HashMap<Integer, Box> boxes; //integer represents the place of the box on the board
     private ArrayList<Player> players;
     private int currentPlayerNumber;
+
+    private ArrayList<MonopolyInterface> views;
 
     /**
      * @author Sabah
@@ -15,13 +18,32 @@ public class Board {
      * Creates a Monopoly board and adds 2 players (minimum)
      */
     public Board (){
-        this.dice= new Dice();
+        this.dice1= new Dice();
+        this.dice2= new Dice();
         this.boxes = new HashMap<>();
         this.players = new ArrayList<>();
         this.setProperties();
         this.addPlayer(new Player());
         this.addPlayer(new Player());
         this.currentPlayerNumber = players.get(0).getId();
+
+        this.views = new ArrayList<>();
+    }
+
+    /**
+     * @author Thanuja
+     * @param view to add
+     */
+    public void addView(MonopolyInterface view){
+        views.add(view);
+    }
+
+    /**
+     * @author Thanuja
+     * @param view to remove
+     */
+    public void removeView(MonopolyInterface view){
+        views.remove(view);
     }
 
     /**
@@ -164,64 +186,95 @@ public class Board {
     }
 
     /**
+     * @author Thanuja
+     * @return dice 1
+     */
+    public Dice getDice1() {
+        return dice1;
+    }
+
+    /**
+     * @author Thanuja
+     * @return dice 2
+     */
+    public Dice getDice2() {
+        return dice2;
+    }
+
+    /**
+     * @author Thanuja
+     * @return box hashmap
+     */
+    public HashMap<Integer, Box> getBoxes() {
+        return boxes;
+    }
+
+    /**
      * @author Shrimei
      * @author Thanuja
      * @author Maisha
      * @author Sabah
      * Allows players to play the game and gives them options to roll, quit, buy properties and pay rent.
      * Ends the game if the player chooses 'quit' or there is only 1 player remaining
+     *
+     * returns 0 if continue, 1 to quit
      */
-    private void play(){
+    public int play(){ // FIXME - make this run once per player, and update each view
         Scanner sc = new Scanner(System.in);
 
-        while(true){
-            System.out.println("\n===============================================");
-            Player currentPlayer = players.get(currentPlayerNumber);
-            Box currentBox =  boxes.get(currentPlayer.getPosition() % boxes.size());
-            currentPlayer.printCurrentState(currentBox.getName());
+        System.out.println("\n===============================================");
+        Player currentPlayer = players.get(currentPlayerNumber);
+        Box currentBox =  boxes.get(currentPlayer.getPosition() % boxes.size());
+        currentPlayer.printCurrentState(currentBox.getName());
 
-            System.out.println("Enter a command (roll, quit)");
-            String command = sc.nextLine();
+        System.out.println("Enter a command (roll, quit)");
+        String command = sc.nextLine();
 
-            if(command.equals("quit")){
-                System.out.println("You have exited the game"); //end program
-                break;
-            } else if (command.equals("roll")){
-                int roll = dice.rollDice()+ dice.rollDice(); // changed to 2 dice rolls
-                System.out.println("Amount rolled is " + roll);
-                currentPlayer.changePosition(roll); //move the player
-                currentBox = boxes.get(currentPlayer.getPosition() % boxes.size()); //new position of the player
-                System.out.println("You landed on " + currentBox.toString()); //print current box info
+        if(command.equals("quit")){
+            System.out.println("You have exited the game"); //end program
+            return 1;
+        } else if (command.equals("roll")){
+            int roll = dice1.rollDice()+ dice2.rollDice(); // changed to 2 dice rolls
 
-                if(currentBox.getType().equals("Property")) { //landed on a property
-                    Property currentProperty = (Property) currentBox;
+            for (MonopolyInterface view : this.views){
+                view.handleBoardUpdate();
+            }
 
-                    if (currentProperty.getOwner() == null) { //no owner, give option to buy
-                        System.out.println("Would you like to buy this property? (yes or no)");
-                        String answer = sc.nextLine();
-                        if (answer.equals("yes")) {
-                            currentPlayer.purchaseProperty(currentProperty); //buy property
-                        }
-                    } else if (currentProperty.getOwner().equals(currentPlayer)) { //player already owns this property
-                        System.out.println("This is your own property.");
-                    } else { //another player owns this property, must pay rent
-                        boolean canPayRent = currentPlayer.payRent(currentProperty);
-                        if (canPayRent) { //pay rent if enough money
-                            currentProperty.getOwner().collectRent(currentProperty);
-                        } else { //player ran out of money, they are bankrupt
-                            System.out.println("You are bankrupt. You cannot play further.");
-                            removePlayer(currentPlayer); //remove player from game
-                            currentPlayerNumber -= 1;
-                            if (players.size() == 1) { //1 player left
-                                System.out.println("Player " + players.get(0).getId() + " won!"); //display winner and exit game
-                                break;
-                            }
+            System.out.println("Amount rolled is " + roll);
+            currentPlayer.changePosition(roll); //move the player
+            currentBox = boxes.get(currentPlayer.getPosition() % boxes.size()); //new position of the player
+            System.out.println("You landed on " + currentBox.toString()); //print current box info
+
+            if(currentBox.getType().equals("Property")) { //landed on a property
+                Property currentProperty = (Property) currentBox;
+
+                if (currentProperty.getOwner() == null) { //no owner, give option to buy
+                    System.out.println("Would you like to buy this property? (yes or no)");
+                    String answer = sc.nextLine();
+                    if (answer.equals("yes")) {
+                        currentPlayer.purchaseProperty(currentProperty); //buy property
+                    }
+                } else if (currentProperty.getOwner().equals(currentPlayer)) { //player already owns this property
+                    System.out.println("This is your own property.");
+                } else { //another player owns this property, must pay rent
+                    boolean canPayRent = currentPlayer.payRent(currentProperty);
+                    if (canPayRent) { //pay rent if enough money
+                        currentProperty.getOwner().collectRent(currentProperty);
+                    } else { //player ran out of money, they are bankrupt
+                        System.out.println("You are bankrupt. You cannot play further.");
+                        removePlayer(currentPlayer); //remove player from game
+                        currentPlayerNumber -= 1;
+                        if (players.size() == 1) { //1 player left
+                            System.out.println("Player " + players.get(0).getId() + " won!"); //display winner and exit game
+                            return 1;
                         }
                     }
                 }
-                this.switchTurn(); //move to next player
             }
+            this.switchTurn(); //move to next player
         }
+
+        return 0;
     }
 
     /**
@@ -251,7 +304,13 @@ public class Board {
                 System.out.println("Must have 2-4 players"); //allow user to re-enter number of player if not within limits
             }
         }
-        board.play(); //start the game
+
+        while(true) {
+            int x = board.play(); //start the game
+            if (x == 1){
+                break;
+            }
+        }
     }
 
     /**
