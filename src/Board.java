@@ -187,7 +187,7 @@ public class Board {
                 System.out.println("You have exited the game"); //end program
                 break;
             } else if (command.equals("roll")){
-                int roll = dice.rollDice()+ dice.rollDice();
+                int roll = dice.rollDice()+ dice.rollDice(); // changed to 2 dice rolls
                 System.out.println("Amount rolled is " + roll);
                 currentPlayer.changePosition(roll); //move the player
                 currentBox = boxes.get(currentPlayer.getPosition() % boxes.size()); //new position of the player
