@@ -11,12 +11,12 @@ public class GameView {
     /**
      * @author Maisha
      */
-    public GameView(){
+    public GameView(Board board){
         JFrame frame = new JFrame();
         frame.setPreferredSize(new Dimension(600, 790));
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        boardView = new BoardView();
-        board = new Board();
+        boardView = new BoardView(board);
+        //board = new Board();
         playersView = new PlayersView(board);
         JPanel top = new JPanel();
         top.setSize(new Dimension(600, 590));
@@ -35,6 +35,7 @@ public class GameView {
     }
 
     public static void main(String[] args) {
-        GameView gameView = new GameView();
+        Board board = new Board();
+        GameView gameView = new GameView(board);
     }
 }
