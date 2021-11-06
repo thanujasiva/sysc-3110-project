@@ -2,7 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.Scanner;
 
-public class DiceView {
+public class DiceView implements MonopolyInterface{
     private JPanel dicePanel;
     private JLabel diceLabel;
     private JLabel diceLabel2;
@@ -39,7 +39,9 @@ public class DiceView {
     // Controller calls (refer to MVC)
     public void updateDiceLabel(){
         diceLabel.setText(String.valueOf(dice.getDiceNumber()));
+        diceLabel2.setText(String.valueOf(dice2.getDiceNumber()));
     }
+
     /**
      * @author Sabah
      * @return  dicePanel
@@ -47,6 +49,11 @@ public class DiceView {
      */
     public JPanel getDicePanel() {
         return dicePanel;
+    }
+
+    @Override
+    public void handleBoardUpdate() {
+        this.updateDiceLabel();
     }
 
     // test method
