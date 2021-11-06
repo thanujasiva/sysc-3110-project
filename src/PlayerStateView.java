@@ -1,6 +1,7 @@
-import javax.lang.model.element.Element;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.Scanner;
 
 /**
@@ -28,14 +29,14 @@ public class PlayerStateView {
         playerStatePanel.add(propertiesListHeader);
 
         // create list with the property names of the properties the player owns
-        DefaultListModel<String> propertieModel = new DefaultListModel<>();
+        DefaultListModel<String> propertiesModel = new DefaultListModel<>();
         for (Property property : player.getProperties()){
             String propertyString = String.format("%-20s %-10s", property.getName()+",", property.getColourGroup().getColour()); // - for left alignment
-            propertieModel.addElement(propertyString);
+            propertiesModel.addElement(propertyString);
         }
 
         // add property name list to the JPanel
-        JList<String> propertiesList = new JList<>(propertieModel);
+        JList<String> propertiesList = new JList<>(propertiesModel);
         Font font = new Font("Monospaced", Font.PLAIN, 12);
         propertiesList.setFont(font); // set font as Monospaced so String.format works
         propertiesList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -45,12 +46,8 @@ public class PlayerStateView {
         propertiesList.addListSelectionListener(e -> {
             if(!e.getValueIsAdjusting()) {
                 Property selectedProperty = player.getProperties().get(propertiesList.getSelectedIndex());
-
-                JPanel sampleCardViewPanel = new JPanel(); // FIXME - replace with CardView cardView = new CardView(selectedProperty); and cardView.getPanel();
-                JLabel propertyInfo = new JLabel(selectedProperty.toString());
-                sampleCardViewPanel.add(propertyInfo);
-
-                JOptionPane.showMessageDialog(null, sampleCardViewPanel,selectedProperty.getName(),JOptionPane.INFORMATION_MESSAGE); // will adjust size for cardPanel
+                new CardView(selectedProperty);
+                // user can open many cards (and duplicates of those cards)
             }
         });
 
@@ -58,6 +55,12 @@ public class PlayerStateView {
         playerStateFrame.setSize(250, 350); // gives a good size to the frame
         playerStateFrame.add(playerStatePanel);
         playerStateFrame.setVisible(true);
+
+        playerStateFrame.addWindowListener(new WindowAdapter() {  //defining a class inside another class
+            public void windowClosing(WindowEvent e) {
+                playerStateFrame.dispose();
+            }
+        });
 
     }
 
@@ -87,6 +90,8 @@ public class PlayerStateView {
         player1.purchaseProperty(Atlantic);
 
         playerStateView = new PlayerStateView(player1);
+        // only have EXIT_ON_CLOSE in this test method, should not close the actual game
+        playerStateView.playerStateFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         // testing a change in who the current player is
         Scanner sc = new Scanner(System.in);
