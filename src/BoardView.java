@@ -1,4 +1,5 @@
 import javax.swing.*;
+import javax.swing.Box;
 import java.awt.*;
 import java.util.ArrayList;
 
@@ -6,7 +7,7 @@ public class BoardView {
 
 
     private JFrame frame = new JFrame();
-    private JPanel mainPanel = new JPanel();
+    private JPanel mainPanel;
     private ArrayList<JPanel> topBoxes = new ArrayList<>();
     private ArrayList<JPanel> bottomBoxes = new ArrayList<>();
     private ArrayList<JPanel> leftBoxes = new ArrayList<>();
@@ -27,10 +28,12 @@ public class BoardView {
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         dice1 = new Dice();
         dice2 = new Dice();
+        mainPanel = new JPanel();
         diceView = new DiceView(dice1, dice2);
 
         JPanel topBorder = new JPanel();
 
+        mainPanel.setSize(new Dimension(boardWidth, boardHeight));
         Color panelColour = new Color(153,0,0);
         Color boxColour = new Color(128,128,128);
 
@@ -110,13 +113,29 @@ public class BoardView {
         diceButton.add(diceView.getDicePanel());
         mainPanel.add(diceButton, BorderLayout.CENTER);
 
-        frame.add(mainPanel);
-        frame.pack();
-        frame.setVisible(true);
-
+        //frame.add(mainPanel);
+        //frame.pack();
+        //frame.setVisible(true)
     }
 
+    public JPanel getMainPanel(){
+        return mainPanel;
+    }
     public static void main(String[] args) {
+
+        JFrame frame = new JFrame();
+        JPanel panel = new JPanel();
+        panel.setLayout(new BorderLayout());
+        panel.setPreferredSize(new Dimension(600, 590));
+        frame.setPreferredSize(new Dimension(600, 590));
         BoardView boardView = new BoardView();
+        panel.add(boardView.getMainPanel());
+
+        frame.add(panel);
+
+        frame.pack();
+        frame.setLocationRelativeTo(null);
+        frame.setResizable(false);
+        frame.setVisible(true);
     }
 }
