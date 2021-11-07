@@ -48,7 +48,6 @@ public class PlayersPanel {
         // shows the list of players
         JList <String> playerList = new JList<>(this.playersListModel);
         playerList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        playersPanel.add(new JScrollPane(playerList));
     }
 
     /**
