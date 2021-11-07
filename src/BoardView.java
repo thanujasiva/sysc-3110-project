@@ -9,10 +9,11 @@ public class BoardView implements MonopolyInterface{
 
     private JFrame frame = new JFrame();
     private JPanel mainPanel;
-    private ArrayList<JPanel> topBoxes = new ArrayList<>();
-    private ArrayList<JPanel> bottomBoxes = new ArrayList<>();
-    private ArrayList<JPanel> leftBoxes = new ArrayList<>();
-    private ArrayList<JPanel> rightBoxes = new ArrayList<>();
+    private ArrayList<JPanel> allBoxes;
+    private ArrayList<JPanel> topBoxes;
+    private ArrayList<JPanel> bottomBoxes;
+    private ArrayList<JPanel> leftBoxes;
+    private ArrayList<JPanel> rightBoxes;
     private int boardWidth = 600;
     private int boardHeight = 590;
     private int boxHeight = 50;
@@ -26,6 +27,13 @@ public class BoardView implements MonopolyInterface{
         frame.setPreferredSize(new Dimension(boardWidth, boardHeight));
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
+        allBoxes = new ArrayList<>(34);
+        topBoxes = new ArrayList<>();
+        bottomBoxes = new ArrayList<>();
+        leftBoxes = new ArrayList<>();
+        rightBoxes = new ArrayList<>();
+
+
         Dice dice1 = board.getDice1();
         Dice dice2 = board.getDice2();
         mainPanel = new JPanel();
@@ -37,8 +45,8 @@ public class BoardView implements MonopolyInterface{
         JPanel topBorder = new JPanel();
 
         mainPanel.setSize(new Dimension(boardWidth, boardHeight));
-        Color panelColour = new Color(153,0,0);
-        Color boxColour = new Color(128,128,128);
+        Color panelColour = Color.DARK_GRAY; //new Color(220,250,200);
+        Color boxColour = Color.LIGHT_GRAY; //new Color(128,128,128);
 
         topBorder.setBackground(panelColour);
         JPanel bottomBorder = new JPanel();
@@ -57,54 +65,85 @@ public class BoardView implements MonopolyInterface{
         rightBorder.setPreferredSize(leftRight);
         leftBorder.setPreferredSize(leftRight);
 
-        //HashMap<Integer, Box> boxes = board.getBoxes(); need to change Box interface name
+        HashMap<Integer, Square> squares = board.getSquares();
 
         //bottom boxes
-        for (int i = 0; i < 10; i++){
-            JPanel bottomBox = new JPanel();
-            bottomBoxes.add(bottomBox);
-        }
+        for (int i = 0; i < 9; i++){
+            JPanel box = new JPanel();
+            Square square = squares.get(8-i);
+            JLabel label = new JLabel(square.getName());
 
-        for (JPanel box : bottomBoxes){
+            /*JTextArea label = new JTextArea(boxWidth, boxHeight);
+            label.setText(squares.get(8-i).getName());
+            label.setWrapStyleWord(true);
+            label.setLineWrap(true);
+            */
+            box.add(label);
+            bottomBoxes.add(box);
+            allBoxes.add(box);
             box.setPreferredSize(new Dimension(boxWidth, boxHeight));
             box.setBackground(boxColour);
             bottomBorder.add(box);
+
+            if (square.getType().equals("Property")) {
+                box.setBackground(((Property) square).getColourGroup().getColour());
+                box.setOpaque(true);
+            }
+        }
+
+
+        //left boxes
+        for (int i = 0; i < 8; i++){
+            JPanel box = new JPanel();
+            Square square = squares.get(16-i);
+            JLabel label = new JLabel(square.getName());
+            box.add(label);
+            leftBoxes.add(box);
+            //allBoxes.add(box);
+            box.setPreferredSize(new Dimension(boxWidth, boxHeight));
+            box.setBackground(boxColour);
+            leftBorder.add(box);
+
+            if (square.getType().equals("Property")) {
+                box.setBackground(((Property) square).getColourGroup().getColour());
+                box.setOpaque(true);
+            }
         }
 
         //add topBorder boxes
-        for (int i = 0; i < 10; i++){
-            JPanel topBox = new JPanel();
-            topBoxes.add(topBox);
-        }
-
-        for (JPanel box : topBoxes){
+        for (int i = 0; i < 9; i++){
+            JPanel box = new JPanel();
+            Square square = squares.get(17+i);
+            JLabel label = new JLabel(square.getName());
+            box.add(label);
+            topBoxes.add(box);
+            //allBoxes.add(box);
             box.setPreferredSize(new Dimension(boxWidth, boxHeight));
             box.setBackground(boxColour);
             topBorder.add(box);
+
+            if (square.getType().equals("Property")) {
+                box.setBackground(((Property) square).getColourGroup().getColour());
+                box.setOpaque(true);
+            }
         }
 
         //right side
         for (int i = 0; i < 8; i++){
-            JPanel rightBox = new JPanel();
-            rightBoxes.add(rightBox);
-        }
-
-        for (JPanel box : rightBoxes){
+            JPanel box = new JPanel();
+            Square square = squares.get(26+i);
+            JLabel label = new JLabel(square.getName());
+            box.add(label);
+            rightBoxes.add(box);
+            //allBoxes.add(box);
             box.setPreferredSize(new Dimension(boxWidth, boxHeight));
             box.setBackground(boxColour);
             rightBorder.add(box);
-        }
 
-        //left boxes
-        for (int i = 0; i < 8; i++){
-            JPanel leftBox = new JPanel();
-            leftBoxes.add(leftBox);
-        }
-
-        for (JPanel box : leftBoxes){
-            box.setPreferredSize(new Dimension(boxWidth, boxHeight));
-            box.setBackground(boxColour);
-            leftBorder.add(box);
+            if (square.getType().equals("Property")) {
+                box.setBackground(((Property) square).getColourGroup().getColour());
+                box.setOpaque(true);
+            }
         }
 
         mainPanel.setLayout(new BorderLayout());
@@ -119,6 +158,7 @@ public class BoardView implements MonopolyInterface{
         diceButton.addActionListener(gameController);
         diceButton.add(diceView.getDicePanel());
         mainPanel.add(diceButton, BorderLayout.CENTER);
+
 
         //frame.add(mainPanel);
         //frame.pack();

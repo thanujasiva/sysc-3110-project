@@ -1,4 +1,4 @@
-public class Property implements Box{
+public class Property implements Square {
 
     private final int price;
     private final String name;
