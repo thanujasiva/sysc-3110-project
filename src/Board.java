@@ -9,6 +9,7 @@ public class Board {
     private HashMap<Integer, Square> squares; //integer represents the place of the box on the board
     private ArrayList<Player> players;
     private int currentPlayerNumber;
+    private int doubles;
 
     private ArrayList<MonopolyInterface> views;
 
@@ -26,6 +27,7 @@ public class Board {
         this.addPlayer(new Player());
         this.addPlayer(new Player());
         this.currentPlayerNumber = players.get(0).getId();
+        this.doubles = 0;
 
         this.views = new ArrayList<>();
     }
@@ -224,17 +226,27 @@ public class Board {
 
         System.out.println("\n===============================================");
         Player currentPlayer = players.get(currentPlayerNumber);
+        if (currentPlayer.isSkipTurn()){
+            currentPlayer.setSkipTurn(false);
+            this.switchTurn();
+        }
         Square currentSquare =  squares.get(currentPlayer.getPosition() % squares.size());
         currentPlayer.printCurrentState(currentSquare.getName());
 
         System.out.println("Enter a command (roll, quit)");
         String command = sc.nextLine();
 
+        int roll1 = 0;
+        int roll2 = 0;
+
         if(command.equals("quit")){
             System.out.println("You have exited the game"); //end program
             return 1;
         } else if (command.equals("roll")){
-            int roll = dice1.rollDice()+ dice2.rollDice(); // changed to 2 dice rolls
+             // changed to 2 dice rolls
+            roll1 = dice1.rollDice();
+            roll2 = dice2.rollDice();
+            int roll = roll1+ roll2;
 
             // update views based on dice roll
             // move the players
@@ -277,7 +289,17 @@ public class Board {
                     }
                 }
             }
-            this.switchTurn(); //move to next player
+            if (roll1!=roll2){ // no double rolls
+                this.switchTurn();// switches turn
+                doubles = 0;
+            }
+            else { // when player rolls doubles more than 3 times
+                doubles += 1;
+                if (doubles >= 3){
+                    currentPlayer.setSkipTurn(true);
+                    this.switchTurn(); // switches the turn (in milestone 3 change it to go to jail)
+                }
+            }
         }
 
         return 0;
