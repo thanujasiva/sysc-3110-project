@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 public class BoardView implements MonopolyInterface{
 
@@ -9,11 +10,13 @@ public class BoardView implements MonopolyInterface{
 
     private JFrame frame = new JFrame();
     private JPanel mainPanel;
-    private ArrayList<JPanel> allBoxes;
-    private ArrayList<JPanel> topBoxes;
-    private ArrayList<JPanel> bottomBoxes;
-    private ArrayList<JPanel> leftBoxes;
-    private ArrayList<JPanel> rightBoxes;
+
+    private LinkedHashMap<JPanel, Square> allSquares ;
+
+    private ArrayList<JPanel> topSquares;
+    private ArrayList<JPanel> bottomSquares;
+    private ArrayList<JPanel> leftSquares;
+    private ArrayList<JPanel> rightSquares;
     private int boardWidth = 600;
     private int boardHeight = 590;
     private int boxHeight = 50;
@@ -28,11 +31,11 @@ public class BoardView implements MonopolyInterface{
         frame.setPreferredSize(new Dimension(boardWidth, boardHeight));
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
-        allBoxes = new ArrayList<>();
-        topBoxes = new ArrayList<>();
-        bottomBoxes = new ArrayList<>();
-        leftBoxes = new ArrayList<>();
-        rightBoxes = new ArrayList<>();
+        allSquares = new LinkedHashMap<>();
+        topSquares = new ArrayList<>();
+        bottomSquares = new ArrayList<>();
+        leftSquares = new ArrayList<>();
+        rightSquares = new ArrayList<>();
 
 
         Dice dice1 = board.getDice1();
@@ -68,7 +71,7 @@ public class BoardView implements MonopolyInterface{
 
         HashMap<Integer, Square> squares = board.getSquares();
 
-        // add all panels to one ArrayList
+        // add all panels to one HashMap
         for (int i=0; i<squares.size(); i++){
             JPanel box = new JPanel(new BorderLayout());
             Square square = squares.get(i);
@@ -76,7 +79,7 @@ public class BoardView implements MonopolyInterface{
             box.setPreferredSize(new Dimension(boxWidth, boxHeight));
 
             JTextArea label = new JTextArea(boxWidth, boxHeight); //wrap the text somehow
-            label.setText(square.getName()); //
+            label.setText(square.getName());
             label.setLineWrap(true);
             label.setWrapStyleWord(true);
             label.setEditable(false);
@@ -91,36 +94,36 @@ public class BoardView implements MonopolyInterface{
                 label.setBackground(boxColour);
             }
 
-            allBoxes.add(box);
+            allSquares.put(box, square);
         }
 
         // add box panels to the corresponding border panel
 
         //bottom boxes
         for (int i = 0; i < 9; i++){
-            JPanel box = allBoxes.get(8-i);
-            bottomBoxes.add(box);
+            JPanel box =  (JPanel) allSquares.keySet().toArray()[8-i];
+            bottomSquares.add(box);
             bottomBorder.add(box);
         }
 
         //left boxes
         for (int i = 0; i < 8; i++){
-            JPanel box = allBoxes.get(16-i);
-            leftBoxes.add(box);
+            JPanel box =  (JPanel) allSquares.keySet().toArray()[16-i];
+            leftSquares.add(box);
             leftBorder.add(box);
         }
 
         //add topBorder boxes
         for (int i = 0; i < 9; i++){
-            JPanel box = allBoxes.get(17+i);
-            topBoxes.add(box);
+            JPanel box =  (JPanel) allSquares.keySet().toArray()[17+i];
+            topSquares.add(box);
             topBorder.add(box);
         }
 
         //right side
         for (int i = 0; i < 8; i++){
-            JPanel box = allBoxes.get(26+i);
-            rightBoxes.add(box);
+            JPanel box =  (JPanel) allSquares.keySet().toArray()[26+i];
+            rightSquares.add(box);
             rightBorder.add(box);
         }
 
