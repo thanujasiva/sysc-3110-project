@@ -4,7 +4,7 @@ public class PlayersPanel {
 
     private Game game;
     private final JPanel playersPanel;
-    DefaultListModel<String> playersListModel;
+    private DefaultListModel<String> playersListModel;
 
     /**
      * @author Sabah
