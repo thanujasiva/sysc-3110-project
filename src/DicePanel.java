@@ -4,7 +4,7 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.util.Scanner;
 
-public class DiceView implements MonopolyInterface{
+public class DicePanel {
 
     private JPanel dicePanel;
     private JLabel diceLabel;
@@ -19,7 +19,7 @@ public class DiceView implements MonopolyInterface{
      * @param dice1     first dice
      * @param dice2     second dice
      */
-    public DiceView(Dice dice1, Dice dice2) {
+    public DicePanel(Dice dice1, Dice dice2) {
         this.dice = dice1;
         this.dice2 = dice2;
         diceLabel2 = new JLabel();
@@ -71,20 +71,15 @@ public class DiceView implements MonopolyInterface{
         return dicePanel;
     }
 
-    @Override
-    public void handleBoardUpdate() {
-        this.updateDiceLabel();
-    }
-
     // test method
     // needs to be removed later
     public static void main(String[] args) {
 
         Dice dice = new Dice();
 
-        DiceView diceView = new DiceView(dice, dice);
+        DicePanel dicePanel = new DicePanel(dice, dice);
         JFrame testFrame = new JFrame("Test frame for Dice View: ");
-        testFrame.add(diceView.getDicePanel());
+        testFrame.add(dicePanel.getDicePanel());
 
         testFrame.setSize(300,400); // FIXME - have proper size in the frame
         testFrame.setVisible(true);
@@ -97,7 +92,7 @@ public class DiceView implements MonopolyInterface{
             System.out.println("Type anything to roll! ");
             command = sc.nextLine();
             int roll = dice.rollDice();
-            diceView.updateDiceLabel();
+            dicePanel.updateDiceLabel();
             System.out.println(roll);
         }
     }

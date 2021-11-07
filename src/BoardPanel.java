@@ -1,16 +1,12 @@
 import javax.swing.*;
-import javax.swing.border.Border;
-import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 
-public class BoardView implements MonopolyInterface{
+public class BoardPanel {
 
     //add ourselves as a view to the model (given
-
-    private JFrame frame = new JFrame();
     private JPanel mainPanel;
 
     private LinkedHashMap<JPanel, Square> allSquares ;
@@ -23,15 +19,13 @@ public class BoardView implements MonopolyInterface{
     private int boardHeight = 590;
     private int boxHeight = 50;
     private int boxWidth = 50;
-    private DiceView diceView;
+    private DicePanel dicePanel;
 
     /**
      * @author Maisha
      * @author Thanuja
      */
-    public BoardView(Board board){
-        frame.setPreferredSize(new Dimension(boardWidth, boardHeight));
-        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+    public BoardPanel(Game game){
 
         allSquares = new LinkedHashMap<>();
         topSquares = new ArrayList<>();
@@ -40,13 +34,11 @@ public class BoardView implements MonopolyInterface{
         rightSquares = new ArrayList<>();
 
 
-        Dice dice1 = board.getDice1();
-        Dice dice2 = board.getDice2();
+        Dice dice1 = game.getDice1();
+        Dice dice2 = game.getDice2();
         mainPanel = new JPanel();
-        diceView = new DiceView(dice1, dice2);
+        dicePanel = new DicePanel(dice1, dice2);
 
-        board.addView(this);
-        board.addView(diceView);
 
         JPanel topBorder = new JPanel();
 
@@ -71,7 +63,7 @@ public class BoardView implements MonopolyInterface{
         rightBorder.setPreferredSize(leftRight);
         leftBorder.setPreferredSize(leftRight);
 
-        HashMap<Integer, Square> squares = board.getSquares();
+        HashMap<Integer, Square> squares = game.getBoard().getSquares();
 
         // add all panels to one HashMap
         for (int i=0; i<squares.size(); i++){
@@ -137,10 +129,10 @@ public class BoardView implements MonopolyInterface{
         mainPanel.add(bottomBorder, BorderLayout.SOUTH);
 
         JButton diceButton = new JButton();
-        GameController gameController = new GameController(board);
+        GameController gameController = new GameController(game);
         diceButton.addActionListener(gameController);
 
-        JPanel dicePanel = diceView.getDicePanel();
+        JPanel dicePanel = this.dicePanel.getDicePanel();
         diceButton.add(dicePanel);
         diceButton.setBorderPainted(true);
 
@@ -152,40 +144,12 @@ public class BoardView implements MonopolyInterface{
 
         mainPanel.add(diceButton, BorderLayout.CENTER);
 
-
-        //frame.add(mainPanel);
-        //frame.pack();
-        //frame.setVisible(true)
     }
 
     public JPanel getMainPanel(){
         return mainPanel;
     }
 
-    @Override
-    public void handleBoardUpdate() {
-        // trigger play method:
-        // player moves on the board
-        // joptionpane for the card they land on
-    }
-
-    public static void main(String[] args) {
-
-        JFrame frame = new JFrame();
-        JPanel panel = new JPanel();
-        panel.setLayout(new BorderLayout());
-        panel.setPreferredSize(new Dimension(600, 590));
-        frame.setPreferredSize(new Dimension(600, 590));
-        BoardView boardView = new BoardView(new Board());
-        panel.add(boardView.getMainPanel());
-
-        frame.add(panel);
-
-        frame.pack();
-        frame.setLocationRelativeTo(null);
-        frame.setResizable(false);
-        frame.setVisible(true);
-    }
 
 
 }

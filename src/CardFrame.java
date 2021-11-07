@@ -11,13 +11,13 @@ import java.awt.Color;
  * Creates frame to display a property card
  * @author Shrimei
  */
-public class CardView extends JFrame {
+public class CardFrame extends JFrame {
 
     /**
      * @author Shrimei
      * @param property that is being displayed
      */
-    public CardView(Property property){
+    public CardFrame(Property property){
         super(property.getName());
         this.setLayout(new BorderLayout());
         this.setSize(200, 250);
@@ -133,14 +133,14 @@ public class CardView extends JFrame {
         Property Pacific  = new Property("Pacific Avenue", 300, ColourGroups.GREEN);
         Property ParkPlace = new Property("Park Place", 350,  ColourGroups.BLUE);
 
-        CardView card = new CardView(Atlantic);
-        CardView card2 = new CardView(Oriental);
-        CardView card3 = new CardView(Baltic);
-        CardView card4 = new CardView(StCharles);
-        CardView card5 = new CardView(StJames);
-        CardView card6 = new CardView(Kentucky);
-        CardView card7 = new CardView(Pacific);
-        CardView card8 = new CardView(ParkPlace);
+        CardFrame card = new CardFrame(Atlantic);
+        CardFrame card2 = new CardFrame(Oriental);
+        CardFrame card3 = new CardFrame(Baltic);
+        CardFrame card4 = new CardFrame(StCharles);
+        CardFrame card5 = new CardFrame(StJames);
+        CardFrame card6 = new CardFrame(Kentucky);
+        CardFrame card7 = new CardFrame(Pacific);
+        CardFrame card8 = new CardFrame(ParkPlace);
     }
 
 }
