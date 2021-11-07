@@ -150,6 +150,7 @@ public class BoardPanel {
         return mainPanel;
     }
 
-
-
+    public DicePanel getDicePanel() {
+        return dicePanel;
+    }
 }

@@ -125,6 +125,11 @@ public class Game {
      * returns 0 if continue, 1 to quit
      */
     public int play(){ // FIXME - make this run once per player, and update each view
+
+        for (MonopolyInterface view : this.views){
+            view.handlePlayerState();
+        }
+
         Scanner sc = new Scanner(System.in);
 
         System.out.println("\n===============================================");
@@ -136,72 +141,66 @@ public class Game {
         Square currentSquare =  board.getSquares().get(currentPlayer.getPosition() % board.getSquares().size());
         currentPlayer.printCurrentState(currentSquare.getName());
 
-        System.out.println("Enter a command (roll, quit)");
-        String command = sc.nextLine();
 
-        int roll1 = 0;
-        int roll2 = 0;
+        // changed to 2 dice rolls
+        int roll1 = dice1.rollDice();
+        int roll2 = dice2.rollDice();
+        int roll = roll1+ roll2;
 
-        if(command.equals("quit")){
-            System.out.println("You have exited the game"); //end program
-            return 1;
-        } else if (command.equals("roll")){
-             // changed to 2 dice rolls
-            roll1 = dice1.rollDice();
-            roll2 = dice2.rollDice();
-            int roll = roll1+ roll2;
+        System.out.println("Amount rolled is " + roll);
+        currentPlayer.changePosition(roll); //move the player
+        currentSquare = board.getSquares().get(currentPlayer.getPosition() % board.getSquares().size()); //new position of the player
+        System.out.println("You landed on " + currentSquare.toString()); //print current box info
 
-            // update views based on dice roll
-            // move the players
-            for (MonopolyInterface view : this.views){
-                view.handleBoardUpdate();
-            }
+        // show property card
+        // update views based on dice roll
+        // move the players
+        for (MonopolyInterface view : this.views){
+            view.handleRoll();
+        }
 
-            System.out.println("Amount rolled is " + roll);
-            currentPlayer.changePosition(roll); //move the player
-            currentSquare = board.getSquares().get(currentPlayer.getPosition() % board.getSquares().size()); //new position of the player
-            System.out.println("You landed on " + currentSquare.toString()); //print current box info
+        /*if(currentSquare.getType().equals("Property")) { //landed on a property
+            Property currentProperty = (Property) currentSquare;
 
-            // show property card
+            // joptionpane handler (CardView) - handle if now owner, if player is owner, or if rent
 
-            if(currentSquare.getType().equals("Property")) { //landed on a property
-                Property currentProperty = (Property) currentSquare;
-
-                // joptionpane handler (CardView) - handle if now owner, if player is owner, or if rent
-
-                if (currentProperty.getOwner() == null) { //no owner, give option to buy
-                    System.out.println("Would you like to buy this property? (yes or no)");
-                    String answer = sc.nextLine();
-                    if (answer.equals("yes")) {
-                        currentPlayer.purchaseProperty(currentProperty); //buy property
-                    }
-                } else if (currentProperty.getOwner().equals(currentPlayer)) { //player already owns this property
-                    System.out.println("This is your own property.");
-                } else { //another player owns this property, must pay rent
-                    boolean canPayRent = currentPlayer.payRent(currentProperty);
-                    if (canPayRent) { //pay rent if enough money
-                        currentProperty.getOwner().collectRent(currentProperty);
-                    } else { //player ran out of money, they are bankrupt
-                        System.out.println("You are bankrupt. You cannot play further.");
-                        removePlayer(currentPlayer); //remove player from game
-                        currentPlayerNumber -= 1;
-                        if (players.size() == 1) { //1 player left
-                            System.out.println("Player " + players.get(0).getId() + " won!"); //display winner and exit game
-                            return 1;
-                        }
+            if (currentProperty.getOwner() == null) { //no owner, give option to buy
+                System.out.println("Would you like to buy this property? (yes or no)");
+                String answer = sc.nextLine();
+                if (answer.equals("yes")) {
+                    currentPlayer.purchaseProperty(currentProperty); //buy property
+                }
+            } else if (currentProperty.getOwner().equals(currentPlayer)) { //player already owns this property
+                System.out.println("This is your own property.");
+            } else { //another player owns this property, must pay rent
+                boolean canPayRent = currentPlayer.payRent(currentProperty);
+                if (canPayRent) { //pay rent if enough money
+                    currentProperty.getOwner().collectRent(currentProperty);
+                } else { //player ran out of money, they are bankrupt
+                    System.out.println("You are bankrupt. You cannot play further.");
+                    removePlayer(currentPlayer); //remove player from game
+                    currentPlayerNumber -= 1;
+                    if (players.size() == 1) { //1 player left
+                        System.out.println("Player " + players.get(0).getId() + " won!"); //display winner and exit game
+                        return 1;
                     }
                 }
             }
-            if (roll1!=roll2){ // no double rolls
-                this.switchTurn();// switches turn
-                doubles = 0;
-            }
-            else { // when player rolls doubles more than 3 times
-                doubles += 1;
-                if (doubles >= 3){
-                    currentPlayer.setSkipTurn(true);
-                    this.switchTurn(); // switches the turn (in milestone 3 change it to go to jail)
-                }
+        }*/
+
+        for (MonopolyInterface view : this.views){
+            view.handlePlayerState();
+        }
+
+        if (roll1!=roll2){ // no double rolls
+            this.switchTurn();// switches turn
+            doubles = 0;
+        }
+        else { // when player rolls doubles more than 3 times
+            doubles += 1;
+            if (doubles >= 3){
+                currentPlayer.setSkipTurn(true);
+                this.switchTurn(); // switches the turn (in milestone 3 change it to go to jail)
             }
         }
 
