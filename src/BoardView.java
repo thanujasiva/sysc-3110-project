@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 public class BoardView implements MonopolyInterface{
 
+    //add ourselves as a view to the model (given
 
     private JFrame frame = new JFrame();
     private JPanel mainPanel;
@@ -69,23 +70,25 @@ public class BoardView implements MonopolyInterface{
 
         // add all panels to one ArrayList
         for (int i=0; i<squares.size(); i++){
-            JPanel box = new JPanel();
+            JPanel box = new JPanel(new BorderLayout());
             Square square = squares.get(i);
-            JLabel label = new JLabel(square.getName());
-
-            /*JTextArea label = new JTextArea(boxWidth, boxHeight); // wrap the text somehow
-            label.setText(squares.get(8-i).getName());
-            label.setWrapStyleWord(true);
-            label.setLineWrap(true);*/
-
-            box.add(label);
+            //JLabel label = new JLabel(square.getName());
             box.setPreferredSize(new Dimension(boxWidth, boxHeight));
 
+            JTextArea label = new JTextArea(boxWidth, boxHeight); //wrap the text somehow
+            label.setText(square.getName()); //
+            label.setLineWrap(true);
+            label.setWrapStyleWord(true);
+            label.setEditable(false);
+
+            box.add(label, BorderLayout.CENTER);
+
+
             if (square.getType().equals("Property")) {
-                box.setBackground(((Property) square).getColourGroup().getColour());
-                box.setOpaque(true);
+                label.setBackground(((Property) square).getColourGroup().getColour());
+                label.setOpaque(true);
             } else{
-                box.setBackground(boxColour);
+                label.setBackground(boxColour);
             }
 
             allBoxes.add(box);
