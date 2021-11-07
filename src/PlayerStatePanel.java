@@ -8,13 +8,13 @@ import java.util.Scanner;
  * Creates a frame for an individual player's state
  * @author Thanuja
  */
-public class PlayerStateView extends JPanel{
+public class PlayerStatePanel extends JPanel{
 
     /**
      * @author Thanuja
      * @param player to view the current state
      */
-    public PlayerStateView(Player player){
+    public PlayerStatePanel(Player player){
         super();
 
         this.setLayout(new BoxLayout (this, BoxLayout.Y_AXIS));
@@ -46,7 +46,7 @@ public class PlayerStateView extends JPanel{
         propertiesList.addListSelectionListener(e -> {
             if(!e.getValueIsAdjusting()) {
                 Property selectedProperty = player.getProperties().get(propertiesList.getSelectedIndex());
-                new CardView(selectedProperty);
+                new CardFrame(selectedProperty);
                 // user can open many cards (and duplicates of those cards)
             }
         });
@@ -72,10 +72,10 @@ public class PlayerStateView extends JPanel{
         player1.purchaseProperty(Illinois);
         player1.purchaseProperty(Atlantic);
 
-        PlayerStateView playerStateView1 = new PlayerStateView(player1);
+        PlayerStatePanel playerStatePanel1 = new PlayerStatePanel(player1);
 
         playerStateFrame.setSize(250, 350); // gives a good size to the frame
-        playerStateFrame.add(playerStateView1);
+        playerStateFrame.add(playerStatePanel1);
         playerStateFrame.setVisible(true);
 
         // testing a change in who the current player is
@@ -90,9 +90,9 @@ public class PlayerStateView extends JPanel{
         player2.purchaseProperty(Oriental);
 
         // when it's the next players turn, then call
-        PlayerStateView playerStateView2 = new PlayerStateView(player2); // on the new current player
-        playerStateFrame.remove(playerStateView1);
-        playerStateFrame.add(playerStateView2);
+        PlayerStatePanel playerStatePanel2 = new PlayerStatePanel(player2); // on the new current player
+        playerStateFrame.remove(playerStatePanel1);
+        playerStateFrame.add(playerStatePanel2);
         playerStateFrame.setVisible(true);
 
         playerStateFrame.invalidate();

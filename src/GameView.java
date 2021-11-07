@@ -1,35 +1,58 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
-public class GameView {
-    private BoardView boardView;
-    private CardView cardView;
-    private PlayersView playersView;
-    private PlayerStateView playerStateView;
-    private Board board;
+public class GameView implements MonopolyInterface{
+    private BoardPanel boardPanel;
+    private CardFrame cardFrame;
+    private PlayersPanel playersPanel;
+    private PlayerStatePanel playerStatePanel;
+    private Game game;
+
+    /**
+     * @author Maisha
+     * @return Integer
+     */
+    public Integer handleNumberOfPlayers(){
+        Integer[] options = {2,3,4};
+        Integer input = (Integer) JOptionPane.showInputDialog(null,"How many players do you wish to have?","PLAYERS",
+                JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+        return input;
+    }
 
     /**
      * @author Maisha
      */
-    public GameView(Board board){
+    public GameView(){
         JFrame frame = new JFrame();
+        this.game = new Game();
+
+        this.game.addView(this);
+
         frame.setPreferredSize(new Dimension(950, 590));
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+
+        frame.addWindowListener(new WindowAdapter() {  //defining a class inside another class
+            public void windowOpened(WindowEvent e) {
+                handleBoardUpdate();
+            }
+        });
 
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new BorderLayout());
 
-        boardView = new BoardView(board);
-        JPanel boardPanel = boardView.getMainPanel();
+        boardPanel = new BoardPanel(game);
+        JPanel boardPanel = this.boardPanel.getMainPanel();
 
         JPanel playerPanel = new JPanel();
         playerPanel.setLayout(new BoxLayout(playerPanel, BoxLayout.Y_AXIS));
 
-        playersView = new PlayersView(board);
-        playerStateView = new PlayerStateView(board.getPlayers().get(board.getCurrentPlayerNumber()));
+        playersPanel = new PlayersPanel(game);
+        playerStatePanel = new PlayerStatePanel(game.getPlayers().get(game.getCurrentPlayerNumber()));
 
-        JPanel playerPanel1 = playersView.getPlayersPanel();
-        JPanel playerPanel2 = playerStateView;
+        JPanel playerPanel1 = playersPanel.getPlayersPanel();
+        JPanel playerPanel2 = playerStatePanel;
 
         playerPanel.add(playerPanel1);
         playerPanel.add(playerPanel2);
@@ -37,46 +60,26 @@ public class GameView {
         mainPanel.add(boardPanel, BorderLayout.WEST);
         mainPanel.add(playerPanel, BorderLayout.EAST);
 
-
-
-        /*
-        mainPanel.setLayout(new GridBagLayout());
-        GridBagConstraints c = new GridBagConstraints();
-
-
-        JPanel boardPanel = new JPanel();
-        boardPanel.setSize(700, 700);
-        boardView = new BoardView(board);
-        boardPanel.add(boardView.getMainPanel());
-        c.fill = GridBagConstraints.BOTH;
-        c.gridx = 0;
-        c.gridy = 0;
-        c.ipady = 50;
-        //c.ipadx = 50;
-        //c.anchor = GridBagConstraints.FIRST_LINE_START;
-
-
-        mainPanel.add(boardPanel, c);
-
-        //board = new Board()
-        JPanel playerPanel = new JPanel();
-        playersView = new PlayersView(board);
-        playerPanel.add(playersView.getPlayersPanel());
-        c.fill = GridBagConstraints.BOTH;
-        c.gridx = 1;
-        c.gridy = 0;
-
-        mainPanel.add(playerPanel, c);
-
-         */
-
         frame.add(mainPanel);
         frame.pack();
         frame.setVisible(true);
     }
 
-    public static void main(String[] args) {
-        Board board = new Board();
-        GameView gameView = new GameView(board);
+    @Override
+    public void handleBoardUpdate() {
+
     }
+
+    public static void main(String[] args) {
+        GameView gameView = new GameView();
+        int num = gameView.handleNumberOfPlayers();
+        System.out.println(num);
+        for (int i = 0; i < num - 2; i++) {
+            gameView.game.addPlayer(new Player());
+        }
+        System.out.println(gameView.game.getPlayers().size());
+        gameView.playersPanel.updatePlayers();
+
+    }
+
 }
