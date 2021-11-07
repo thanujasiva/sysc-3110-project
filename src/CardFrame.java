@@ -20,12 +20,12 @@ public class CardFrame extends JFrame {
      * @author Shrimei
      * @param property that is being displayed
      */
-    public CardFrame(Property property){
+    public CardFrame(Property property, Player player){
         super(property.getName());
         this.setLayout(new BorderLayout());
         this.setSize(200, 250);
 
-        cardController = new CardController(property);
+        cardController = new CardController(property, player);
 
         if(property.getOwner() == null){ //no owner, can buy
             this.addWindowListener(new WindowAdapter() {  //defining a class inside another class
@@ -117,6 +117,7 @@ public class CardFrame extends JFrame {
         if(result == JOptionPane.YES_OPTION){ //player says yes
             //call purchase property on the player or return the property? controller would handle purchasing
             //FIXME
+            cardController.purchaseCard();
             this.dispose();
             return true;
         }else{ //player says no, do nothing
@@ -150,14 +151,14 @@ public class CardFrame extends JFrame {
         Property Pacific  = new Property("Pacific Avenue", 300, ColourGroups.GREEN);
         Property ParkPlace = new Property("Park Place", 350,  ColourGroups.BLUE);
 
-        CardFrame card = new CardFrame(Atlantic);
+        /*CardFrame card = new CardFrame(Atlantic);
         CardFrame card2 = new CardFrame(Oriental);
         CardFrame card3 = new CardFrame(Baltic);
         CardFrame card4 = new CardFrame(StCharles);
         CardFrame card5 = new CardFrame(StJames);
         CardFrame card6 = new CardFrame(Kentucky);
         CardFrame card7 = new CardFrame(Pacific);
-        CardFrame card8 = new CardFrame(ParkPlace);
+        CardFrame card8 = new CardFrame(ParkPlace);*/
     }
 
 }

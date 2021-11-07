@@ -13,6 +13,7 @@ public class PlayerStatePanel extends JPanel{
     private JLabel playerNameLabel;
     private JLabel playerMoneyLabel;
     private DefaultListModel<String> propertiesModel;
+    private JList<String> propertiesList;
 
 
     /**
@@ -43,16 +44,18 @@ public class PlayerStatePanel extends JPanel{
         }
 
         // add property name list to the JPanel
-        JList<String> propertiesList = new JList<>(propertiesModel);
+        propertiesList = new JList<>(propertiesModel);
         propertiesList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         this.add(new JScrollPane(propertiesList));
 
         // display cardView for the selected property in the JList
         propertiesList.addListSelectionListener(e -> {
-            if(!e.getValueIsAdjusting()) {
-                Property selectedProperty = player.getProperties().get(propertiesList.getSelectedIndex());
-                new CardFrame(selectedProperty);
-                // user can open many cards (and duplicates of those cards)
+            if (propertiesList.getSelectedIndex() >= 0) {
+                if (!e.getValueIsAdjusting()) {
+                    Property selectedProperty = player.getProperties().get(propertiesList.getSelectedIndex());
+                    new CardFrame(selectedProperty, player);
+                    // user can open many cards (and duplicates of those cards)
+                }
             }
         });
 
@@ -70,6 +73,8 @@ public class PlayerStatePanel extends JPanel{
         for (Property property : player.getProperties()){
             propertiesModel.addElement(property.getName());
         }
+
+        propertiesList.clearSelection();
     }
 
     // test method to view how PlayerStateView would look for a player

@@ -84,7 +84,7 @@ public class GameView implements MonopolyInterface{
         Square currentSquare = game.getBoard().getSquares().get(currentPlayer.getPosition() % game.getBoard().getSquares().size());
 
         if(currentSquare.getType().equals("Property")) {
-            CardFrame card = new CardFrame((Property) currentSquare);
+            CardFrame card = new CardFrame((Property) currentSquare, currentPlayer);
 
             System.out.println(card.isBuyProperty());
         }
