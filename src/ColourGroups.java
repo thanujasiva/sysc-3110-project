@@ -3,9 +3,9 @@ import java.awt.*;
 public enum ColourGroups {
 
     //FIX BROWN
-    BROWN (new Color(153, 102, 0), 2), GREY(new Color(204, 229, 255), 3), PINK(Color.MAGENTA, 3),
-    ORANGE(Color.orange, 3), RED(Color.RED, 3), YELLOW(Color.YELLOW, 3),
-    GREEN(new Color(0,153,76), 3), BLUE(Color.BLUE, 2);
+    BROWN (new Color(153, 102, 0), 2), GREY(new Color(204, 229, 255), 3), PINK(new Color(247,121,247), 3),
+    ORANGE(new Color(255, 153, 51), 3), RED(Color.RED, 3), YELLOW(Color.YELLOW, 3),
+    GREEN(new Color(0,153,76), 3), BLUE(new Color(0,102,204), 2);
 
     private final Color colour;
     private final int max;
