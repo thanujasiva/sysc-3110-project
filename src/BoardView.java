@@ -1,5 +1,4 @@
 import javax.swing.*;
-import javax.swing.Box;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -22,12 +21,13 @@ public class BoardView implements MonopolyInterface{
 
     /**
      * @author Maisha
+     * @author Thanuja
      */
     public BoardView(Board board){
         frame.setPreferredSize(new Dimension(boardWidth, boardHeight));
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
-        allBoxes = new ArrayList<>(34);
+        allBoxes = new ArrayList<>();
         topBoxes = new ArrayList<>();
         bottomBoxes = new ArrayList<>();
         leftBoxes = new ArrayList<>();
@@ -67,83 +67,58 @@ public class BoardView implements MonopolyInterface{
 
         HashMap<Integer, Square> squares = board.getSquares();
 
-        //bottom boxes
-        for (int i = 0; i < 9; i++){
+        // add all panels to one ArrayList
+        for (int i=0; i<squares.size(); i++){
             JPanel box = new JPanel();
-            Square square = squares.get(8-i);
+            Square square = squares.get(i);
             JLabel label = new JLabel(square.getName());
 
-            /*JTextArea label = new JTextArea(boxWidth, boxHeight);
+            /*JTextArea label = new JTextArea(boxWidth, boxHeight); // wrap the text somehow
             label.setText(squares.get(8-i).getName());
             label.setWrapStyleWord(true);
-            label.setLineWrap(true);
-            */
+            label.setLineWrap(true);*/
+
             box.add(label);
-            bottomBoxes.add(box);
-            allBoxes.add(box);
             box.setPreferredSize(new Dimension(boxWidth, boxHeight));
-            box.setBackground(boxColour);
-            bottomBorder.add(box);
 
             if (square.getType().equals("Property")) {
                 box.setBackground(((Property) square).getColourGroup().getColour());
                 box.setOpaque(true);
+            } else{
+                box.setBackground(boxColour);
             }
+
+            allBoxes.add(box);
         }
 
+        // add box panels to the corresponding border panel
+
+        //bottom boxes
+        for (int i = 0; i < 9; i++){
+            JPanel box = allBoxes.get(8-i);
+            bottomBoxes.add(box);
+            bottomBorder.add(box);
+        }
 
         //left boxes
         for (int i = 0; i < 8; i++){
-            JPanel box = new JPanel();
-            Square square = squares.get(16-i);
-            JLabel label = new JLabel(square.getName());
-            box.add(label);
+            JPanel box = allBoxes.get(16-i);
             leftBoxes.add(box);
-            //allBoxes.add(box);
-            box.setPreferredSize(new Dimension(boxWidth, boxHeight));
-            box.setBackground(boxColour);
             leftBorder.add(box);
-
-            if (square.getType().equals("Property")) {
-                box.setBackground(((Property) square).getColourGroup().getColour());
-                box.setOpaque(true);
-            }
         }
 
         //add topBorder boxes
         for (int i = 0; i < 9; i++){
-            JPanel box = new JPanel();
-            Square square = squares.get(17+i);
-            JLabel label = new JLabel(square.getName());
-            box.add(label);
+            JPanel box = allBoxes.get(17+i);
             topBoxes.add(box);
-            //allBoxes.add(box);
-            box.setPreferredSize(new Dimension(boxWidth, boxHeight));
-            box.setBackground(boxColour);
             topBorder.add(box);
-
-            if (square.getType().equals("Property")) {
-                box.setBackground(((Property) square).getColourGroup().getColour());
-                box.setOpaque(true);
-            }
         }
 
         //right side
         for (int i = 0; i < 8; i++){
-            JPanel box = new JPanel();
-            Square square = squares.get(26+i);
-            JLabel label = new JLabel(square.getName());
-            box.add(label);
+            JPanel box = allBoxes.get(26+i);
             rightBoxes.add(box);
-            //allBoxes.add(box);
-            box.setPreferredSize(new Dimension(boxWidth, boxHeight));
-            box.setBackground(boxColour);
             rightBorder.add(box);
-
-            if (square.getType().equals("Property")) {
-                box.setBackground(((Property) square).getColourGroup().getColour());
-                box.setOpaque(true);
-            }
         }
 
         mainPanel.setLayout(new BorderLayout());
