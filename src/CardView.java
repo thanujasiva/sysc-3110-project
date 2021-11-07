@@ -101,7 +101,7 @@ public class CardView extends JFrame {
 
         if(result == JOptionPane.YES_OPTION){ //player says yes
             //call purchase property on the player or return the property? controller would handle purchasing
-            //FIX
+            //FIXME
             this.dispose();
         }else{ //player says no, do nothing
             this.dispose();
