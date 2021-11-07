@@ -10,6 +10,11 @@ import java.util.Scanner;
  */
 public class PlayerStatePanel extends JPanel{
 
+    private JLabel playerNameLabel;
+    private JLabel playerMoneyLabel;
+    private DefaultListModel<String> propertiesModel;
+
+
     /**
      * @author Thanuja
      * @param player to view the current state
@@ -21,8 +26,8 @@ public class PlayerStatePanel extends JPanel{
 
         Border fieldBorder = new EmptyBorder(6,3,3,3);
 
-        JLabel playerNameLabel = new JLabel("Current Player: " + player.getId());
-        JLabel playerMoneyLabel = new JLabel("Money: $" + player.getMoney());
+        playerNameLabel = new JLabel("Current Player: " + player.getId());
+        playerMoneyLabel = new JLabel("Money: $" + player.getMoney());
         JLabel propertiesListHeader = new JLabel("Current properties you own:");
         playerNameLabel.setBorder(fieldBorder);
         playerMoneyLabel.setBorder(fieldBorder);
@@ -32,7 +37,7 @@ public class PlayerStatePanel extends JPanel{
         this.add(propertiesListHeader);
 
         // create list with the property names of the properties the player owns
-        DefaultListModel<String> propertiesModel = new DefaultListModel<>();
+        propertiesModel = new DefaultListModel<>();
         for (Property property : player.getProperties()){
             propertiesModel.addElement(property.getName());
         }
@@ -51,6 +56,20 @@ public class PlayerStatePanel extends JPanel{
             }
         });
 
+    }
+
+    /**
+     * @author Thanuja
+     * @param player    player to change to
+     */
+    public void updatePlayer(Player player){
+        this.playerNameLabel.setText("Current Player: " + player.getId());
+        this.playerMoneyLabel.setText("Money: $" + player.getMoney());
+
+        this.propertiesModel.clear();
+        for (Property property : player.getProperties()){
+            propertiesModel.addElement(property.getName());
+        }
     }
 
     // test method to view how PlayerStateView would look for a player

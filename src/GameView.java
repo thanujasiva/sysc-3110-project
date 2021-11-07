@@ -67,19 +67,39 @@ public class GameView implements MonopolyInterface{
 
     @Override
     public void handleBoardUpdate() {
+        int num = this.handleNumberOfPlayers();
+        System.out.println(num);
+        for (int i = 0; i < num - 2; i++) {
+            this.game.addPlayer(new Player());
+        }
+        this.playersPanel.updatePlayers();
+    }
 
+    @Override
+    public void handleRoll() {
+        this.boardPanel.getDicePanel().updateDiceLabel();
+
+        // FIXME should package as an event
+        Player currentPlayer = game.getPlayers().get(game.getCurrentPlayerNumber());
+        Square currentSquare = game.getBoard().getSquares().get(currentPlayer.getPosition() % game.getBoard().getSquares().size());
+
+        if(currentSquare.getType().equals("Property")) {
+            CardFrame card = new CardFrame((Property) currentSquare);
+
+            System.out.println(card.isBuyProperty());
+        }
+
+
+    }
+
+    @Override
+    public void handlePlayerState() {
+        Player currentPlayer = game.getPlayers().get(game.getCurrentPlayerNumber());
+        this.playerStatePanel.updatePlayer(currentPlayer);
     }
 
     public static void main(String[] args) {
         GameView gameView = new GameView();
-        int num = gameView.handleNumberOfPlayers();
-        System.out.println(num);
-        for (int i = 0; i < num - 2; i++) {
-            gameView.game.addPlayer(new Player());
-        }
-        System.out.println(gameView.game.getPlayers().size());
-        gameView.playersPanel.updatePlayers();
-
     }
 
 }
