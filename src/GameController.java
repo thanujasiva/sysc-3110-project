@@ -3,15 +3,18 @@ import java.awt.event.ActionListener;
 
 public class GameController implements ActionListener {
 
-    private Board board; // model
+    private Game game; // model
 
-    public GameController(Board board){
-        this.board = board;
+
+    public GameController(Game game){
+        this.game = game;
     }
 
     @Override
     public void actionPerformed(ActionEvent e) { // roll is pressed
         //call play method
-        board.play();
+        game.play();
     }
+
+
 }
