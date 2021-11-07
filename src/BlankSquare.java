@@ -1,4 +1,4 @@
-public class BlankBox implements Box{
+public class BlankSquare implements Square {
 
     private String name;
 
@@ -6,7 +6,7 @@ public class BlankBox implements Box{
      * @author Thanuja
      * @param name the name of the box
      */
-    public BlankBox(String name){
+    public BlankSquare(String name){
         this.name = name;
     }
 
@@ -21,11 +21,11 @@ public class BlankBox implements Box{
 
     /**
      * @author Thanuja
-     * @return the type of box which is 'BlankBox'
+     * @return the type of box which is 'BlankSquare'
      */
     @Override
     public String getType() {
-        return "BlankBox";
+        return "BlankSquare";
     }
 
     /**
@@ -35,7 +35,7 @@ public class BlankBox implements Box{
      */
     @Override
     public String toString() {
-        return "BlankBox: " +
+        return "BlankSquare: " +
                 "name='" + name + '\'';
     }
 }
