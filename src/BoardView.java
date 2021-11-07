@@ -1,5 +1,4 @@
 import javax.swing.*;
-import javax.swing.Box;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -9,10 +8,11 @@ public class BoardView implements MonopolyInterface{
 
     private JFrame frame = new JFrame();
     private JPanel mainPanel;
-    private ArrayList<JPanel> topBoxes = new ArrayList<>();
-    private ArrayList<JPanel> bottomBoxes = new ArrayList<>();
-    private ArrayList<JPanel> leftBoxes = new ArrayList<>();
-    private ArrayList<JPanel> rightBoxes = new ArrayList<>();
+    private ArrayList<JPanel> allBoxes;
+    private ArrayList<JPanel> topBoxes;
+    private ArrayList<JPanel> bottomBoxes;
+    private ArrayList<JPanel> leftBoxes;
+    private ArrayList<JPanel> rightBoxes;
     private int boardWidth = 600;
     private int boardHeight = 590;
     private int boxHeight = 50;
@@ -21,10 +21,18 @@ public class BoardView implements MonopolyInterface{
 
     /**
      * @author Maisha
+     * @author Thanuja
      */
     public BoardView(Board board){
         frame.setPreferredSize(new Dimension(boardWidth, boardHeight));
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+
+        allBoxes = new ArrayList<>();
+        topBoxes = new ArrayList<>();
+        bottomBoxes = new ArrayList<>();
+        leftBoxes = new ArrayList<>();
+        rightBoxes = new ArrayList<>();
+
 
         Dice dice1 = board.getDice1();
         Dice dice2 = board.getDice2();
@@ -37,8 +45,8 @@ public class BoardView implements MonopolyInterface{
         JPanel topBorder = new JPanel();
 
         mainPanel.setSize(new Dimension(boardWidth, boardHeight));
-        Color panelColour = new Color(153,0,0);
-        Color boxColour = new Color(128,128,128);
+        Color panelColour = Color.DARK_GRAY; //new Color(220,250,200);
+        Color boxColour = Color.LIGHT_GRAY; //new Color(128,128,128);
 
         topBorder.setBackground(panelColour);
         JPanel bottomBorder = new JPanel();
@@ -57,54 +65,60 @@ public class BoardView implements MonopolyInterface{
         rightBorder.setPreferredSize(leftRight);
         leftBorder.setPreferredSize(leftRight);
 
-        //HashMap<Integer, Box> boxes = board.getBoxes(); need to change Box interface name
+        HashMap<Integer, Square> squares = board.getSquares();
 
-        //bottom boxes
-        for (int i = 0; i < 10; i++){
-            JPanel bottomBox = new JPanel();
-            bottomBoxes.add(bottomBox);
+        // add all panels to one ArrayList
+        for (int i=0; i<squares.size(); i++){
+            JPanel box = new JPanel();
+            Square square = squares.get(i);
+            JLabel label = new JLabel(square.getName());
+
+            /*JTextArea label = new JTextArea(boxWidth, boxHeight); // wrap the text somehow
+            label.setText(squares.get(8-i).getName());
+            label.setWrapStyleWord(true);
+            label.setLineWrap(true);*/
+
+            box.add(label);
+            box.setPreferredSize(new Dimension(boxWidth, boxHeight));
+
+            if (square.getType().equals("Property")) {
+                box.setBackground(((Property) square).getColourGroup().getColour());
+                box.setOpaque(true);
+            } else{
+                box.setBackground(boxColour);
+            }
+
+            allBoxes.add(box);
         }
 
-        for (JPanel box : bottomBoxes){
-            box.setPreferredSize(new Dimension(boxWidth, boxHeight));
-            box.setBackground(boxColour);
+        // add box panels to the corresponding border panel
+
+        //bottom boxes
+        for (int i = 0; i < 9; i++){
+            JPanel box = allBoxes.get(8-i);
+            bottomBoxes.add(box);
             bottomBorder.add(box);
         }
 
-        //add topBorder boxes
-        for (int i = 0; i < 10; i++){
-            JPanel topBox = new JPanel();
-            topBoxes.add(topBox);
+        //left boxes
+        for (int i = 0; i < 8; i++){
+            JPanel box = allBoxes.get(16-i);
+            leftBoxes.add(box);
+            leftBorder.add(box);
         }
 
-        for (JPanel box : topBoxes){
-            box.setPreferredSize(new Dimension(boxWidth, boxHeight));
-            box.setBackground(boxColour);
+        //add topBorder boxes
+        for (int i = 0; i < 9; i++){
+            JPanel box = allBoxes.get(17+i);
+            topBoxes.add(box);
             topBorder.add(box);
         }
 
         //right side
         for (int i = 0; i < 8; i++){
-            JPanel rightBox = new JPanel();
-            rightBoxes.add(rightBox);
-        }
-
-        for (JPanel box : rightBoxes){
-            box.setPreferredSize(new Dimension(boxWidth, boxHeight));
-            box.setBackground(boxColour);
+            JPanel box = allBoxes.get(26+i);
+            rightBoxes.add(box);
             rightBorder.add(box);
-        }
-
-        //left boxes
-        for (int i = 0; i < 8; i++){
-            JPanel leftBox = new JPanel();
-            leftBoxes.add(leftBox);
-        }
-
-        for (JPanel box : leftBoxes){
-            box.setPreferredSize(new Dimension(boxWidth, boxHeight));
-            box.setBackground(boxColour);
-            leftBorder.add(box);
         }
 
         mainPanel.setLayout(new BorderLayout());
@@ -119,6 +133,7 @@ public class BoardView implements MonopolyInterface{
         diceButton.addActionListener(gameController);
         diceButton.add(diceView.getDicePanel());
         mainPanel.add(diceButton, BorderLayout.CENTER);
+
 
         //frame.add(mainPanel);
         //frame.pack();
