@@ -21,7 +21,7 @@ public class PlayerStateView extends JPanel{
 
         Border fieldBorder = new EmptyBorder(6,3,3,3);
 
-        JLabel playerNameLabel = new JLabel("Player " + player.getId());
+        JLabel playerNameLabel = new JLabel("Current Player: " + player.getId());
         JLabel playerMoneyLabel = new JLabel("Money: $" + player.getMoney());
         JLabel propertiesListHeader = new JLabel("Current properties you own:");
         playerNameLabel.setBorder(fieldBorder);

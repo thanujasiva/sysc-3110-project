@@ -8,6 +8,7 @@ public class Player {
     private HashMap<ColourGroups, Integer> colourGroupMatch;
     private int id;
     private int position;
+    private boolean skipTurn;
 
     /**
      * @author Sabah
@@ -20,6 +21,15 @@ public class Player {
         this.position = 0;
         this.properties = new ArrayList<>();
         this.colourGroupMatch = new HashMap<>();
+        this.skipTurn = false;
+    }
+
+    public boolean isSkipTurn() {
+        return skipTurn;
+    }
+
+    public void setSkipTurn(boolean skipTurn) {
+        this.skipTurn = skipTurn;
     }
 
     /**
