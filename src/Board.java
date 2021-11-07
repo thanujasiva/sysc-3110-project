@@ -93,7 +93,7 @@ public class Board {
         Property Atlantic  = new Property("Atlantic Avenue", 260, ColourGroups.YELLOW);
         Property Ventnor  = new Property("Ventnor Avenue", 260, ColourGroups.YELLOW);
 
-        BlankSquare WaterWorks = new BlankSquare("WaterWorks");
+        BlankSquare WaterWorks = new BlankSquare("Water Works");
 
         Property Marvin = new Property("Marvin Gardens", 280, ColourGroups.YELLOW);
 

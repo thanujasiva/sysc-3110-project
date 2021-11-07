@@ -11,9 +11,7 @@ public class GameController implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) { // roll is pressed
-        //board.getDice1().rollDice();
-        //board.getDice2().rollDice();
-        // call play method
+        //call play method
         board.play();
     }
 }
