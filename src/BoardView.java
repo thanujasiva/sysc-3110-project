@@ -1,41 +1,53 @@
 import javax.swing.*;
-import javax.swing.Box;
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 
-public class BoardView {
+public class BoardView implements MonopolyInterface{
 
+    //add ourselves as a view to the model (given
 
     private JFrame frame = new JFrame();
     private JPanel mainPanel;
-    private ArrayList<JPanel> topBoxes = new ArrayList<>();
-    private ArrayList<JPanel> bottomBoxes = new ArrayList<>();
-    private ArrayList<JPanel> leftBoxes = new ArrayList<>();
-    private ArrayList<JPanel> rightBoxes = new ArrayList<>();
+    private ArrayList<JPanel> allBoxes;
+    private ArrayList<JPanel> topBoxes;
+    private ArrayList<JPanel> bottomBoxes;
+    private ArrayList<JPanel> leftBoxes;
+    private ArrayList<JPanel> rightBoxes;
     private int boardWidth = 600;
     private int boardHeight = 590;
     private int boxHeight = 50;
     private int boxWidth = 50;
     private DiceView diceView;
-    private Dice dice1;
-    private Dice dice2;
 
     /**
      * @author Maisha
+     * @author Thanuja
      */
-    public BoardView(){
+    public BoardView(Board board){
         frame.setPreferredSize(new Dimension(boardWidth, boardHeight));
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        dice1 = new Dice();
-        dice2 = new Dice();
+
+        allBoxes = new ArrayList<>();
+        topBoxes = new ArrayList<>();
+        bottomBoxes = new ArrayList<>();
+        leftBoxes = new ArrayList<>();
+        rightBoxes = new ArrayList<>();
+
+
+        Dice dice1 = board.getDice1();
+        Dice dice2 = board.getDice2();
         mainPanel = new JPanel();
         diceView = new DiceView(dice1, dice2);
+
+        board.addView(this);
+        board.addView(diceView);
 
         JPanel topBorder = new JPanel();
 
         mainPanel.setSize(new Dimension(boardWidth, boardHeight));
-        Color panelColour = new Color(153,0,0);
-        Color boxColour = new Color(128,128,128);
+        Color panelColour = Color.DARK_GRAY; //new Color(220,250,200);
+        Color boxColour = Color.LIGHT_GRAY; //new Color(128,128,128);
 
         topBorder.setBackground(panelColour);
         JPanel bottomBorder = new JPanel();
@@ -54,52 +66,62 @@ public class BoardView {
         rightBorder.setPreferredSize(leftRight);
         leftBorder.setPreferredSize(leftRight);
 
-        //bottom boxes
-        for (int i = 0; i < 10; i++){
-            JPanel bottomBox = new JPanel();
-            bottomBoxes.add(bottomBox);
+        HashMap<Integer, Square> squares = board.getSquares();
+
+        // add all panels to one ArrayList
+        for (int i=0; i<squares.size(); i++){
+            JPanel box = new JPanel(new BorderLayout());
+            Square square = squares.get(i);
+            //JLabel label = new JLabel(square.getName());
+            box.setPreferredSize(new Dimension(boxWidth, boxHeight));
+
+            JTextArea label = new JTextArea(boxWidth, boxHeight); //wrap the text somehow
+            label.setText(square.getName()); //
+            label.setLineWrap(true);
+            label.setWrapStyleWord(true);
+            label.setEditable(false);
+
+            box.add(label, BorderLayout.CENTER);
+
+
+            if (square.getType().equals("Property")) {
+                label.setBackground(((Property) square).getColourGroup().getColour());
+                label.setOpaque(true);
+            } else{
+                label.setBackground(boxColour);
+            }
+
+            allBoxes.add(box);
         }
 
-        for (JPanel box : bottomBoxes){
-            box.setPreferredSize(new Dimension(boxWidth, boxHeight));
-            box.setBackground(boxColour);
+        // add box panels to the corresponding border panel
+
+        //bottom boxes
+        for (int i = 0; i < 9; i++){
+            JPanel box = allBoxes.get(8-i);
+            bottomBoxes.add(box);
             bottomBorder.add(box);
         }
 
-        //add topBorder boxes
-        for (int i = 0; i < 10; i++){
-            JPanel topBox = new JPanel();
-            topBoxes.add(topBox);
+        //left boxes
+        for (int i = 0; i < 8; i++){
+            JPanel box = allBoxes.get(16-i);
+            leftBoxes.add(box);
+            leftBorder.add(box);
         }
 
-        for (JPanel box : topBoxes){
-            box.setPreferredSize(new Dimension(boxWidth, boxHeight));
-            box.setBackground(boxColour);
+        //add topBorder boxes
+        for (int i = 0; i < 9; i++){
+            JPanel box = allBoxes.get(17+i);
+            topBoxes.add(box);
             topBorder.add(box);
         }
 
         //right side
         for (int i = 0; i < 8; i++){
-            JPanel rightBox = new JPanel();
-            rightBoxes.add(rightBox);
-        }
-
-        for (JPanel box : rightBoxes){
-            box.setPreferredSize(new Dimension(boxWidth, boxHeight));
-            box.setBackground(boxColour);
+            JPanel box = allBoxes.get(26+i);
+            rightBoxes.add(box);
             rightBorder.add(box);
-        }
-
-        //left boxes
-        for (int i = 0; i < 8; i++){
-            JPanel leftBox = new JPanel();
-            leftBoxes.add(leftBox);
-        }
-
-        for (JPanel box : leftBoxes){
-            box.setPreferredSize(new Dimension(boxWidth, boxHeight));
-            box.setBackground(boxColour);
-            leftBorder.add(box);
         }
 
         mainPanel.setLayout(new BorderLayout());
@@ -110,8 +132,11 @@ public class BoardView {
         mainPanel.add(bottomBorder, BorderLayout.SOUTH);
 
         JButton diceButton = new JButton();
+        GameController gameController = new GameController(board);
+        diceButton.addActionListener(gameController);
         diceButton.add(diceView.getDicePanel());
         mainPanel.add(diceButton, BorderLayout.CENTER);
+
 
         //frame.add(mainPanel);
         //frame.pack();
@@ -121,6 +146,14 @@ public class BoardView {
     public JPanel getMainPanel(){
         return mainPanel;
     }
+
+    @Override
+    public void handleBoardUpdate() {
+        // trigger play method:
+        // player moves on the board
+        // joptionpane for the card they land on
+    }
+
     public static void main(String[] args) {
 
         JFrame frame = new JFrame();
@@ -128,7 +161,7 @@ public class BoardView {
         panel.setLayout(new BorderLayout());
         panel.setPreferredSize(new Dimension(600, 590));
         frame.setPreferredSize(new Dimension(600, 590));
-        BoardView boardView = new BoardView();
+        BoardView boardView = new BoardView(new Board());
         panel.add(boardView.getMainPanel());
 
         frame.add(panel);
@@ -138,4 +171,6 @@ public class BoardView {
         frame.setResizable(false);
         frame.setVisible(true);
     }
+
+
 }
