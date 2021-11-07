@@ -1,13 +1,17 @@
 import javax.swing.*;
+import javax.swing.border.Border;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.util.Scanner;
 
 public class DiceView implements MonopolyInterface{
+
     private JPanel dicePanel;
     private JLabel diceLabel;
     private JLabel diceLabel2;
     private Dice dice;
     private Dice dice2;
+
     /**
      * @author Sabah
      * @author Maisha
@@ -27,8 +31,24 @@ public class DiceView implements MonopolyInterface{
         diceLabel2.setHorizontalAlignment(JLabel.CENTER);
         diceLabel.setVerticalAlignment(JLabel.CENTER);
         diceLabel2.setVerticalAlignment(JLabel.CENTER);
+
+        Border border = new EmptyBorder(50,50, 50,50);
+
+        diceLabel.setBorder(border);
+        //diceLabel.setBackground(Color.LIGHT_GRAY);
+        //diceLabel.setOpaque(true);
+
+        diceLabel2.setBorder(border);
+        //diceLabel2.setBackground(Color.LIGHT_GRAY);
+        //diceLabel2.setOpaque(true);
+
+        Font diceFont = new Font(Font.SANS_SERIF, Font.PLAIN, 30);
+        diceLabel.setFont(diceFont);
+        diceLabel2.setFont(diceFont);
+
         dicePanel.add(diceLabel);
         dicePanel.add(diceLabel2);
+        dicePanel.setBackground(Color.LIGHT_GRAY);
         diceLabel.setText(String.valueOf(dice.getDiceNumber()));
         diceLabel2.setText(String.valueOf(dice2.getDiceNumber()));
     }
