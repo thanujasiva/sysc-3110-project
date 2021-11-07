@@ -1,10 +1,8 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.Graphics2D;
-import java.util.LinkedHashMap;
 
 // create a panel that you can draw on.
-class MyPanel extends JPanel {
+class PieceComponent extends JPanel {
     public void paint(Graphics g) {
         g.setColor(Color.red);
         g.fillRect(10,10,50,50);
@@ -12,7 +10,7 @@ class MyPanel extends JPanel {
 
     public static void main(String[] arguments) {
 
-        MyPanel piece = new MyPanel();
+        PieceComponent piece = new PieceComponent();
 
         JFrame frame = new JFrame("JFrame Color Example");
         frame.setSize(300,200);
