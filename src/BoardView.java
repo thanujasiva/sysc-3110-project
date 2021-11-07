@@ -1,4 +1,6 @@
 import javax.swing.*;
+import javax.swing.border.Border;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -137,7 +139,17 @@ public class BoardView implements MonopolyInterface{
         JButton diceButton = new JButton();
         GameController gameController = new GameController(board);
         diceButton.addActionListener(gameController);
-        diceButton.add(diceView.getDicePanel());
+
+        JPanel dicePanel = diceView.getDicePanel();
+        diceButton.add(dicePanel);
+        diceButton.setBorderPainted(true);
+
+        //diceButton.setBackground(Color.LIGHT_GRAY);
+
+        diceButton.setBorder(BorderFactory.createCompoundBorder(
+                BorderFactory.createLineBorder(Color.GRAY, 10),
+                BorderFactory.createLineBorder(Color.DARK_GRAY, 100)));
+
         mainPanel.add(diceButton, BorderLayout.CENTER);
 
 
