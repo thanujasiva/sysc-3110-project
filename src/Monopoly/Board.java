@@ -78,7 +78,7 @@ public class Board {
 
         Property Boardwalk  = new Property("Boardwalk", 400, ColourGroups.BLUE);
 
-        this.squares.put(0,GO); //
+        this.squares.put(0,GO);
         this.squares.put(1,Mediterranean);
         this.squares.put(2,Baltic);
         this.squares.put(3,IncomeTax);
@@ -86,7 +86,7 @@ public class Board {
         this.squares.put(5,Oriental);
         this.squares.put(6,Vermont);
         this.squares.put(7,Connecticut);
-        this.squares.put(8,VisitingJail); //
+        this.squares.put(8,VisitingJail);
         this.squares.put(9,StCharles);
         this.squares.put(10,Electric);
         this.squares.put(11,States);
@@ -95,7 +95,7 @@ public class Board {
         this.squares.put(14,StJames);
         this.squares.put(15,Tennessee);
         this.squares.put(16,NewYork);
-        this.squares.put(17,FreeParking); //
+        this.squares.put(17,FreeParking);
         this.squares.put(18,Kentucky);
         this.squares.put(19,Indiana);
         this.squares.put(20,Illinois);
@@ -104,7 +104,7 @@ public class Board {
         this.squares.put(23,Ventnor);
         this.squares.put(24,WaterWorks);
         this.squares.put(25,Marvin);
-        this.squares.put(26,GotoJail); //
+        this.squares.put(26,GotoJail);
         this.squares.put(27,Pacific);
         this.squares.put(28,NorthCarolina);
         this.squares.put(29,Pennsylvania);
@@ -115,6 +115,7 @@ public class Board {
     }
 
     /**
+     * Return the list of squares on the board
      * @author Thanuja
      * @return box hashmap
      */
