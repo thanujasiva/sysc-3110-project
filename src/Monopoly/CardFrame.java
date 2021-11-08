@@ -24,12 +24,28 @@ public class CardFrame extends JFrame {
      * @author Shrimei
      * @param property that is being displayed
      */
-    public CardFrame(Property property, Player player, Game game){
+    public CardFrame(Property property){
         super(property.getName());
         this.setLayout(new BorderLayout());
         this.setSize(200, 250);
 
         this.property = property; //model
+
+        displayPropertyInfo(property);
+
+        this.setVisible(true);
+    }
+
+    /**
+     * @author Shrimei
+     * @author Thanuja
+     * @param property  that is being displayed
+     * @param player    the current player
+     * @param game      the game model
+     */
+    public CardFrame(Property property, Player player, Game game){
+        this(property);
+
         this.cardController = new CardController(game); //controller
 
         if(property.getOwner() == null) { //no owner, can buy
@@ -52,14 +68,12 @@ public class CardFrame extends JFrame {
             });
         }
 
-        displayPropertyInfo(property);
-
-        this.setVisible(true);
     }
 
 
     /**
      * Display the property info (price, name, colour, rent) on the frame
+     * @author Shrimei
      * @param property that is being displayed
      */
     private void displayPropertyInfo(Property property) {
@@ -114,13 +128,13 @@ public class CardFrame extends JFrame {
     /**
      * When property with no owner is landed on, give player option to purchase
      * @author Shrimei
+     * @author Thanuja
      */
     private void handleBuyOption(){
         int result = JOptionPane.showConfirmDialog(null, "Would you like to purchase this property?","Purchase property",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
 
         if(result == JOptionPane.YES_OPTION){ //player says yes
             //call purchase property on the player or return the property? controller would handle purchasing
-            //FIXME
             boolean canPurchase = cardController.purchaseCard();
             if (!canPurchase){ // handle if player does not have enough money
                 JOptionPane.showMessageDialog(null, "You do not have enough money to purchase the property");
@@ -131,6 +145,11 @@ public class CardFrame extends JFrame {
         this.dispose();
     }
 
+    /**
+     * Handle of rent must be paid
+     * @author Thanuja
+     * @author Maisha
+     */
     private void handlePayRent(){
         JOptionPane.showMessageDialog(null, "You have to pay rent of $"+ property.getOwner().getRentAmount(property));
         boolean canPayRent = cardController.payCardRent();
@@ -147,6 +166,10 @@ public class CardFrame extends JFrame {
         this.dispose();
     }
 
+    /**
+     * Handle if owner
+     * @author Thanuja
+     */
     private void handleIsOwner(){
         JOptionPane.showMessageDialog(null, "You own this property");
         cardController.handleSwitchTurn();

@@ -6,7 +6,7 @@ import javax.swing.event.ListSelectionListener;
 
 public class PlayerStatePanelController implements ListSelectionListener{
 
-    JList propertiesList;
+    JList <String> propertiesList;
     Player player;
 
     /**
@@ -15,7 +15,7 @@ public class PlayerStatePanelController implements ListSelectionListener{
      * @param propertiesList        JList
      * @param player                the corresponding player
      */
-    public PlayerStatePanelController(JList propertiesList, Player player){
+    public PlayerStatePanelController(JList<String> propertiesList, Player player){
         this.propertiesList = propertiesList;
         this.player = player;
     }
@@ -30,8 +30,7 @@ public class PlayerStatePanelController implements ListSelectionListener{
         if (propertiesList.getSelectedIndex() >= 0) {
             if (!e.getValueIsAdjusting()) {
                 Property selectedProperty = player.getProperties().get(propertiesList.getSelectedIndex());
-                System.out.print("FIX THIS " + selectedProperty.getName()); //FIXME
-                //new Monopoly.CardFrame(selectedProperty, player);
+                new CardFrame(selectedProperty);
                 // user can open many cards (and duplicates of those cards)
             }
         }
