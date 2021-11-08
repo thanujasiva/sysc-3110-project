@@ -32,7 +32,7 @@ public class GameView implements MonopolyInterfaceView {
      * @author Maisha
      */
     public GameView(){
-        JFrame frame = new JFrame();
+        JFrame frame = new JFrame("Monopoly Game");
         this.game = new Game();
 
         this.game.addView(this);
