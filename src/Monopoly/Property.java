@@ -1,8 +1,5 @@
 package Monopoly;
 
-import Monopoly.ColourGroups;
-import Monopoly.Player;
-
 public class Property implements Square {
 
     private final int price;

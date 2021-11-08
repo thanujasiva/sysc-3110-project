@@ -1,7 +1,5 @@
 package Monopoly;
 
-import Monopoly.BlankSquare;
-
 import java.util.HashMap;
 
 public class Board {
