@@ -1,3 +1,5 @@
+package Monopoly;
+
 import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
@@ -79,7 +81,7 @@ public class DicePanel {
         Dice dice = new Dice();
 
         DicePanel dicePanel = new DicePanel(dice, dice);
-        JFrame testFrame = new JFrame("Test frame for Dice View: ");
+        JFrame testFrame = new JFrame("Test frame for Monopoly.Dice View: ");
         testFrame.add(dicePanel.getDicePanel());
 
         testFrame.setSize(300,400); // FIXME - have proper size in the frame

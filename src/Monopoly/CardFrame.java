@@ -1,3 +1,7 @@
+package Monopoly;
+
+import Monopoly.CardController;
+
 import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
@@ -172,14 +176,14 @@ public class CardFrame extends JFrame {
         Property Pacific  = new Property("Pacific Avenue", 300, ColourGroups.GREEN);
         Property ParkPlace = new Property("Park Place", 350,  ColourGroups.BLUE);
 
-        /*CardFrame card = new CardFrame(Atlantic);
-        CardFrame card2 = new CardFrame(Oriental);
-        CardFrame card3 = new CardFrame(Baltic);
-        CardFrame card4 = new CardFrame(StCharles);
-        CardFrame card5 = new CardFrame(StJames);
-        CardFrame card6 = new CardFrame(Kentucky);
-        CardFrame card7 = new CardFrame(Pacific);
-        CardFrame card8 = new CardFrame(ParkPlace);*/
+        /*Monopoly.CardFrame card = new Monopoly.CardFrame(Atlantic);
+        Monopoly.CardFrame card2 = new Monopoly.CardFrame(Oriental);
+        Monopoly.CardFrame card3 = new Monopoly.CardFrame(Baltic);
+        Monopoly.CardFrame card4 = new Monopoly.CardFrame(StCharles);
+        Monopoly.CardFrame card5 = new Monopoly.CardFrame(StJames);
+        Monopoly.CardFrame card6 = new Monopoly.CardFrame(Kentucky);
+        Monopoly.CardFrame card7 = new Monopoly.CardFrame(Pacific);
+        Monopoly.CardFrame card8 = new Monopoly.CardFrame(ParkPlace);*/
     }
 
 }

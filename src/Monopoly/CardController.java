@@ -1,6 +1,8 @@
+package Monopoly;
+
 public class CardController {
 
-    //private final Property property;
+    //private final Monopoly.Property property;
     private final Game game;
 
     /**

@@ -1,8 +1,13 @@
+package MonopolyTest;
+
 import static org.junit.Assert.*;
+
+import Monopoly.ColourGroups;
+import Monopoly.Player;
+import Monopoly.Property;
+
 import org.junit.Test;
 import org.junit.Before;
-
-import java.security.PublicKey;
 
 public class PlayerTest {
 

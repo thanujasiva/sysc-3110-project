@@ -1,3 +1,5 @@
+package Monopoly;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -5,7 +7,7 @@ public class Game {
 
     private Dice dice1;
     private Dice dice2;
-    //private HashMap<Integer, Square> squares; //integer represents the place of the box on the board
+    //private HashMap<Integer, Monopoly.Square> squares; //integer represents the place of the box on the board
     private ArrayList<Player> players;
     private int currentPlayerNumber;
     private int doubles;
@@ -35,7 +37,7 @@ public class Game {
 
     /**
      * @author Maisha
-     * @return Board
+     * @return Monopoly.Board
      */
     public Board getBoard() {
         return board;
@@ -123,7 +125,7 @@ public class Game {
         boolean canPurchase = false;
         Player currentPlayer = players.get(currentPlayerNumber);
         Square currentSquare =  board.getSquares().get(currentPlayer.getPosition() % board.getSquares().size());
-        if(currentSquare.getType().equals("Property")) {
+        if(currentSquare.getType().equals("Monopoly.Property")) {
             Property currentProperty = (Property) currentSquare;
             canPurchase = currentPlayer.purchaseProperty(currentProperty);
 
@@ -145,7 +147,7 @@ public class Game {
         Player currentPlayer = players.get(currentPlayerNumber);
         Square currentSquare =  board.getSquares().get(currentPlayer.getPosition() % board.getSquares().size());
 
-        if (currentSquare.getType().equals("Property")) {
+        if (currentSquare.getType().equals("Monopoly.Property")) {
             Property currentProperty = (Property) currentSquare;
 
             canPayRent = currentPlayer.payRent(currentProperty);
@@ -156,7 +158,7 @@ public class Game {
                 removePlayer(currentPlayer); //remove player from game
                 currentPlayerNumber -= 1;
                 if (players.size() == 1) { //1 player left // move
-                    System.out.println("Player " + players.get(0).getId() + " won!"); //display winner and exit game
+                    System.out.println("Monopoly.Player " + players.get(0).getId() + " won!"); //display winner and exit game
                     //return false;
                 }
             }
@@ -252,8 +254,8 @@ public class Game {
             view.handleRoll();
         }
 
-        /*if(currentSquare.getType().equals("Property")) { //landed on a property
-            Property currentProperty = (Property) currentSquare;
+        /*if(currentSquare.getType().equals("Monopoly.Property")) { //landed on a property
+            Monopoly.Property currentProperty = (Monopoly.Property) currentSquare;
 
             // joptionpane handler (CardView) - handle if now owner, if player is owner, or if rent
 
@@ -274,7 +276,7 @@ public class Game {
                     removePlayer(currentPlayer); //remove player from game
                     currentPlayerNumber -= 1;
                     if (players.size() == 1) { //1 player left
-                        System.out.println("Player " + players.get(0).getId() + " won!"); //display winner and exit game
+                        System.out.println("Monopoly.Player " + players.get(0).getId() + " won!"); //display winner and exit game
                         return 1;
                     }
                 }

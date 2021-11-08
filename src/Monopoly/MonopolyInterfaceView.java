@@ -1,3 +1,5 @@
+package Monopoly;
+
 public interface MonopolyInterfaceView {
 
     void handleBoardPlayersUpdate();
