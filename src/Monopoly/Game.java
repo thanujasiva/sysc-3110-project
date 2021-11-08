@@ -114,6 +114,9 @@ public class Game {
     }
 
 
+    public Player getCurrentPlayer(){
+        return players.get(currentPlayerNumber);
+    }
     /**
      * Handle purchase transaction
      * @author Maisha
@@ -286,6 +289,10 @@ public class Game {
      */
     public int getCurrentPlayerNumber() { // returns int, do we need to change?
         return currentPlayerNumber;
+    }
+
+    public Square getCurrentSquare() {
+        return getBoard().getSquares().get(getCurrentPlayer().getPosition() % getBoard().getSquares().size());
     }
 
 
