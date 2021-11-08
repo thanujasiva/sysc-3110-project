@@ -18,7 +18,7 @@ class PieceComponent extends JLabel {
         this.setText("Player " + player.getId());
         this.setOpaque(true);
         this.setBackground(Color.PINK);
-        this.currentBox = startBox; //set start box to 'GO'
+        this.currentBox = startBox; //set start box to GO
         startBox.add(this);
         this.game = game;
     }
