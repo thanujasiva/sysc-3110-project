@@ -3,6 +3,10 @@ public class CardController {
     //private final Property property;
     private final Game game;
 
+    /**
+     * Create card controller
+     * @param game  the game model
+     */
     public CardController(Game game){
         //this.property = property;
         this.game = game;
@@ -17,10 +21,18 @@ public class CardController {
         return game.purchaseTransaction();
     }
 
+    /**
+     * Control rent payment
+     * @author Thanuja
+     */
     public void payRent(){
         game.rentTransaction();
     }
 
+    /**
+     * Control switch turn
+     * @author Thanuja
+     */
     public void handleSwitchTurn(){
         game.handleSwitchTurn();
     }
