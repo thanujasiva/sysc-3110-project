@@ -4,7 +4,6 @@ import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
-import java.util.Scanner;
 
 public class DicePanel {
 
@@ -15,10 +14,10 @@ public class DicePanel {
     private Dice dice2;
 
     /**
+     * Crate 2 dice views and display on a panel
      * @author Sabah
      * @author Maisha
      * @author Thanuja
-     * DiceView Constructor
      * @param dice1     first dice
      * @param dice2     second dice
      */
@@ -27,7 +26,6 @@ public class DicePanel {
         this.dice2 = dice2;
 
         dicePanel = new JPanel();
-        //dicePanel.setLayout(new BoxLayout(dicePanel, BoxLayout.Y_AXIS));
         dicePanel.setLayout(new BoxLayout(dicePanel,BoxLayout.X_AXIS));
         diceLabel1 = new JLabel();
         diceLabel2 = new JLabel();
@@ -39,12 +37,7 @@ public class DicePanel {
         Border border = new EmptyBorder(50,50, 50,50);
 
         diceLabel1.setBorder(border);
-        //diceLabel1.setBackground(Color.LIGHT_GRAY);
-        //diceLabel1.setOpaque(true);
-
         diceLabel2.setBorder(border);
-        //diceLabel2.setBackground(Color.LIGHT_GRAY);
-        //diceLabel2.setOpaque(true);
 
         Font diceFont = new Font(Font.SANS_SERIF, Font.PLAIN, 30);
         diceLabel1.setFont(diceFont);
@@ -58,7 +51,7 @@ public class DicePanel {
     }
     /**
      * @author Sabah
-     * Updates the dice1 label when the controller calls
+     * Updates the dice labels on the board according to the roll
      */
     public void updateDiceLabel(){ // Controller calls (refer to MVC)
         diceLabel1.setText(String.valueOf(dice1.getDiceNumber()));
@@ -68,7 +61,7 @@ public class DicePanel {
     /**
      * @author Sabah
      * @return  dicePanel
-     * getter for dicePanel
+     * Getter for dicePanel
      */
     public JPanel getDicePanel() {
         return dicePanel;
@@ -83,7 +76,7 @@ public class DicePanel {
         JFrame testFrame = new JFrame("Test frame for Monopoly.Dice View: ");
         testFrame.add(dicePanel.getDicePanel());
 
-        testFrame.setSize(300,400); // FIXME - have proper size in the frame
+        testFrame.setSize(300,400);
         testFrame.setVisible(true);
         testFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 

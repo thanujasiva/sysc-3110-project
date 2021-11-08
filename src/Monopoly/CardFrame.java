@@ -16,9 +16,10 @@ import java.awt.Color;
 public class CardFrame extends JFrame {
 
     private Property property;
-    private CardController cardController; // FIXME - not sure if needed
+    private CardController cardController;
 
     /**
+     * Called from playerStatePanel, only display property card
      * @author Shrimei
      * @param property that is being displayed
      */
@@ -27,7 +28,7 @@ public class CardFrame extends JFrame {
         this.setLayout(new BorderLayout());
         this.setSize(200, 250);
 
-        this.property = property; //model
+        this.property = property;
 
         displayPropertyInfo(property);
 
@@ -35,6 +36,7 @@ public class CardFrame extends JFrame {
     }
 
     /**
+     * Called when player lands on property, show buy/rent options
      * @author Shrimei
      * @author Thanuja
      * @param property  that is being displayed
@@ -44,7 +46,7 @@ public class CardFrame extends JFrame {
     public CardFrame(Property property, Player player, Game game){
         this(property);
 
-        this.cardController = new CardController(game); //controller
+        this.cardController = new CardController(game);
 
         if(property.getOwner() == null) { //no owner, can buy
             this.addWindowListener(new WindowAdapter() {  //defining a class inside another class
@@ -52,7 +54,7 @@ public class CardFrame extends JFrame {
                     handleBuyOption();
                 }
             });
-        }else if(property.getOwner().equals(player)){
+        }else if(property.getOwner().equals(player)){ //player is owner
             this.addWindowListener(new WindowAdapter() {  //defining a class inside another class
                 public void windowClosing(WindowEvent e) {
                     handleIsOwner();
@@ -65,7 +67,6 @@ public class CardFrame extends JFrame {
                 }
             });
         }
-
     }
 
 
@@ -75,7 +76,6 @@ public class CardFrame extends JFrame {
      * @param property that is being displayed
      */
     private void displayPropertyInfo(Property property) {
-        //PRICE ON BOARD, NOT CARD
         JPanel fieldPanel = new JPanel();
         JPanel valuePanel = new JPanel();
 
@@ -131,10 +131,10 @@ public class CardFrame extends JFrame {
     private void handleBuyOption(){
         int result = JOptionPane.showConfirmDialog(null, "Would you like to purchase this property?","Purchase property",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
 
-        if(result == JOptionPane.YES_OPTION){ //player says yes
-            //call purchase property on the player or return the property? controller would handle purchasing
+        if(result == JOptionPane.YES_OPTION){
+            //controller would handle purchasing
             boolean canPurchase = cardController.purchaseCard();
-            if (!canPurchase){ // handle if player does not have enough money
+            if (!canPurchase){ //if player does not have enough money
                 JOptionPane.showMessageDialog(null, "You do not have enough money to purchase the property");
             } // else, they successfully purchased
         }//else, player says no, do nothing
@@ -144,14 +144,14 @@ public class CardFrame extends JFrame {
     }
 
     /**
-     * Handle of rent must be paid
+     * If player lands on property owned by someone else, pay rent
      * @author Thanuja
      * @author Maisha
      */
     private void handlePayRent(){
         JOptionPane.showMessageDialog(null, "You have to pay rent of $"+ property.getOwner().getRentAmount(property));
         boolean canPayRent = cardController.payCardRent();
-        if (!canPayRent){ // handle if player does not have enough money
+        if (!canPayRent){ //if player does not have enough money
             JOptionPane.showMessageDialog(null, "You are bankrupt. You cannot play further.");
             if (cardController.handlePotentialWinner()){
                 JOptionPane.showMessageDialog(null, "Congratulations! Player: " + cardController.getGame().getPlayers().get(0).getId() +
@@ -165,7 +165,7 @@ public class CardFrame extends JFrame {
     }
 
     /**
-     * Handle if owner
+     * If player is owner, display message
      * @author Thanuja
      */
     private void handleIsOwner(){
@@ -208,10 +208,7 @@ public class CardFrame extends JFrame {
         Monopoly.CardFrame card6 = new Monopoly.CardFrame(Kentucky);
         Monopoly.CardFrame card7 = new Monopoly.CardFrame(Pacific);
         Monopoly.CardFrame card8 = new Monopoly.CardFrame(ParkPlace);
-
-
     }
-
      */
 
 }
