@@ -1,7 +1,4 @@
-import org.junit.FixMethodOrder;
-
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Scanner;
 
 public class Game {
@@ -14,7 +11,7 @@ public class Game {
     private int doubles;
     private Board board;
 
-    private ArrayList<MonopolyInterface> views;
+    private ArrayList<MonopolyInterfaceView> views;
 
     /**
      * @author Sabah
@@ -48,7 +45,7 @@ public class Game {
      * @author Thanuja
      * @param view to add
      */
-    public void addView(MonopolyInterface view){
+    public void addView(MonopolyInterfaceView view){
         views.add(view);
     }
 
@@ -56,7 +53,7 @@ public class Game {
      * @author Thanuja
      * @param view to remove
      */
-    public void removeView(MonopolyInterface view){
+    public void removeView(MonopolyInterfaceView view){
         views.remove(view);
     }
 
@@ -67,7 +64,7 @@ public class Game {
      * @param newPlayer to be added
      * Adds a player and gives them an ID
      */
-    public void addPlayer (Player newPlayer) {
+    public void addPlayer(Player newPlayer) {
         int length = players.size();
         newPlayer.setId(length);
         players.add(newPlayer);
@@ -79,7 +76,7 @@ public class Game {
      * Removes the player and their ownership of their properties so that
      * it is available for other players to buy
      */
-    public void removePlayer (Player player){
+    public void removePlayer(Player player){
         players.remove(player);
         for (Property p: player.getProperties()){
             p.setOwner(null);
@@ -116,6 +113,9 @@ public class Game {
 
 
     /**
+     * Handle purchase transaction
+     * @author Maisha
+     * @author Shrimei
      * @author Thanuja
      * @return true if player is able to purchase property, else false.
      */
@@ -127,7 +127,7 @@ public class Game {
             Property currentProperty = (Property) currentSquare;
             canPurchase = currentPlayer.purchaseProperty(currentProperty);
 
-            for (MonopolyInterface view : this.views) {
+            for (MonopolyInterfaceView view : this.views) {
                 view.handlePlayerState();
             }
         }
@@ -137,6 +137,10 @@ public class Game {
     }
 
     /**
+     * Handle rent transaction
+     * @author Maisha
+     * @author Shrimei
+     * @author Sabah
      * @author Thanuja
      */
     public void rentTransaction(){
@@ -150,7 +154,7 @@ public class Game {
             if (canPayRent) { //pay rent if enough money
                 currentProperty.getOwner().collectRent(currentProperty);
             } else { //player ran out of money, they are bankrupt
-                System.out.println("You are bankrupt. You cannot play further."); // move
+                System.out.println("You are bankrupt. You cannot handleMove further."); // move
                 removePlayer(currentPlayer); //remove player from game
                 currentPlayerNumber -= 1;
                 if (players.size() == 1) { //1 player left // move
@@ -163,12 +167,17 @@ public class Game {
 
         this.handleSwitchTurn();
 
-        for (MonopolyInterface view : this.views){
+        for (MonopolyInterfaceView view : this.views){
             view.handlePlayerState();
         }
 
     }
 
+    /**
+     * Handle switch turn
+     * @author Sabah
+     * @author Shrimei
+     */
     public void handleSwitchTurn(){
         if (currentPlayerNumber<0){ // in case current player went bankrupt
             this.switchTurn(); // if 2 or more players remaining
@@ -188,22 +197,24 @@ public class Game {
     }
 
     /**
+     * Rolls the dice and moves the player
      * @author Shrimei
      * @author Thanuja
      * @author Maisha
      * @author Sabah
-     * Allows players to play the game and gives them options to roll, quit, buy properties and pay rent.
-     * Ends the game if the player chooses 'quit' or there is only 1 player remaining
-     *
-     * returns 0 if continue, 1 to quit
      */
-    public int play(){ // FIXME - make this run once per player, and update each view
+    public int handleMove(){
 
-        for (MonopolyInterface view : this.views){
+        // old docstring from play() method
+        /*Allows players to play the game and gives them options to roll, quit, buy properties and pay rent.
+        Ends the game if the player chooses 'quit' or there is only 1 player remaining
+        returns 0 if continue, 1 to quit*/
+
+        for (MonopolyInterfaceView view : this.views){
             view.handlePlayerState();
         }
 
-        Scanner sc = new Scanner(System.in);
+        //Scanner sc = new Scanner(System.in);
 
         System.out.println("\n===============================================");
         Player currentPlayer = players.get(currentPlayerNumber);
@@ -220,7 +231,7 @@ public class Game {
         int roll2 = dice2.rollDice();
         int roll = roll1+ roll2;
 
-        System.out.println("Amount rolled is " + roll);
+        System.out.println("Amount rolled is " + roll1 + ", " + roll2);
         currentPlayer.changePosition(roll); //move the player
         currentSquare = board.getSquares().get(currentPlayer.getPosition() % board.getSquares().size()); //new position of the player
         System.out.println("You landed on " + currentSquare.toString()); //print current box info
@@ -228,7 +239,7 @@ public class Game {
         // show property card
         // update views based on dice roll
         // move the players
-        for (MonopolyInterface view : this.views){
+        for (MonopolyInterfaceView view : this.views){
             view.handleRoll();
         }
 
@@ -261,7 +272,7 @@ public class Game {
             }
         }*/
 
-        for (MonopolyInterface view : this.views){
+        for (MonopolyInterfaceView view : this.views){
             view.handlePlayerState();
         }
 
@@ -297,7 +308,7 @@ public class Game {
         }
 
         while(true) {
-            int x = game.play(); //start the game
+            int x = game.handleMove(); //start the game
             if (x == 1){
                 break;
             }
@@ -318,9 +329,7 @@ public class Game {
      * @return players
      * getter for the current player number
      */
-
-    // returns int, do we need to change?
-    public int getCurrentPlayerNumber() {
+    public int getCurrentPlayerNumber() { // returns int, do we need to change?
         return currentPlayerNumber;
     }
 

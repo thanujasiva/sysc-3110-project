@@ -3,7 +3,7 @@ import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
-public class GameView implements MonopolyInterface{
+public class GameView implements MonopolyInterfaceView {
     private BoardPanel boardPanel;
     private CardFrame cardFrame;
     private PlayersPanel playersPanel;
@@ -12,8 +12,9 @@ public class GameView implements MonopolyInterface{
     private GameController gameController;
 
     /**
+     * Gets the initial number of players
      * @author Maisha
-     * @return Integer
+     * @return Integer  number of players
      */
     public Integer handleNumberOfPlayers(){
         Integer[] options = {2,3,4};
@@ -36,7 +37,7 @@ public class GameView implements MonopolyInterface{
 
         frame.addWindowListener(new WindowAdapter() {  //defining a class inside another class
             public void windowOpened(WindowEvent e) {
-                handleBoardUpdate();
+                handleBoardPlayersUpdate();
             }
         });
 
@@ -68,8 +69,13 @@ public class GameView implements MonopolyInterface{
         gameController = new GameController(game);
     }
 
+    /**
+     * Handles player update
+     * @author Maisha
+     * @author Thanuja
+     */
     @Override
-    public void handleBoardUpdate() {
+    public void handleBoardPlayersUpdate() {
         int num = this.handleNumberOfPlayers();
         System.out.println(num);
         for (int i = 0; i < num - 2; i++) {
@@ -78,6 +84,10 @@ public class GameView implements MonopolyInterface{
         this.playersPanel.updatePlayers();
     }
 
+    /**
+     * Handles dice roll
+     * @author Thanuja
+     */
     @Override
     public void handleRoll() {
         this.boardPanel.getDicePanel().updateDiceLabel();
@@ -95,12 +105,21 @@ public class GameView implements MonopolyInterface{
 
     }
 
+    /**
+     * Handles change in player state
+     * @author Thanuja
+     */
     @Override
     public void handlePlayerState() {
         Player currentPlayer = game.getPlayers().get(game.getCurrentPlayerNumber());
         this.playerStatePanel.updatePlayer(currentPlayer);
     }
 
+    /**
+     * Main method to call
+     * @author Maisha
+     * @param args      arguments
+     */
     public static void main(String[] args) {
         GameView gameView = new GameView();
     }
