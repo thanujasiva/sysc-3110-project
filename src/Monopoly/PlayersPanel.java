@@ -27,7 +27,8 @@ public class PlayersPanel {
         // adds to the actual list by looping
         this.playersListModel  = new DefaultListModel<>();
         for (Player player : game.getPlayers()){
-            playersListModel.addElement("Player: "+ player.getId() + " Position: " + game.getBoard().getSquares().get(player.getPosition()).getName());
+            Square currentSquare = game.getBoard().getSquares().get(player.getPosition() % game.getBoard().getSquares().size());
+            playersListModel.addElement("Player: "+ player.getId() + " Position: " + currentSquare.getName());
         }
 
         // shows the list of players
@@ -44,7 +45,8 @@ public class PlayersPanel {
     public void updatePlayers(){
         this.playersListModel.clear();
         for (Player player : game.getPlayers()){
-            this.playersListModel.addElement("Player: "+ player.getId() + " Position: " + game.getBoard().getSquares().get(player.getPosition()).getName());
+            Square currentSquare = game.getBoard().getSquares().get(player.getPosition() % game.getBoard().getSquares().size());
+            this.playersListModel.addElement("Player: "+ player.getId() + " Position: " + currentSquare.getName());
         }
 
         // shows the list of players
