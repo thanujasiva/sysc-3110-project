@@ -107,8 +107,9 @@ public class Player {
      * @author Maisha
      * @author Shrimei
      * @param property      the property being purchased
+     * @return              returns true if player is able to purchase property, else false.
      */
-    public void purchaseProperty(Property property){
+    public boolean purchaseProperty(Property property){
         int cost = property.getPrice();
         if (this.money >= cost){
             this.money = this.money - cost;
@@ -119,8 +120,10 @@ public class Player {
             if(colourGroupMatch.get(property.getColourGroup()) == property.getColourGroup().getMax()) {
                 System.out.println("You have a colour group! " + property.getColourGroup());
             }
+            return true;
         } else {
             System.out.println("You don't have enough money");
+            return false;
         }
     }
 
