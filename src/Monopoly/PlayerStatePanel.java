@@ -80,8 +80,7 @@ public class PlayerStatePanel extends JPanel{
         propertiesList.clearSelection();
     }
 
-    // test method to view how PlayerStateView would look for a player
-    // remove this afterwards
+    /*
     public static void main(String[] args) {
         JFrame playerStateFrame = new JFrame("Test Frame");
         // only have EXIT_ON_CLOSE in this test method, should not close the actual game
@@ -127,4 +126,6 @@ public class PlayerStatePanel extends JPanel{
         playerStateFrame.repaint();
 
     }
+
+     */
 }

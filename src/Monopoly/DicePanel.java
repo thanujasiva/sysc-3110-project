@@ -74,8 +74,7 @@ public class DicePanel {
         return dicePanel;
     }
 
-    // test method
-    // needs to be removed later
+    /*
     public static void main(String[] args) {
 
         Dice dice = new Dice();
@@ -98,4 +97,6 @@ public class DicePanel {
             System.out.println(roll);
         }
     }
+
+     */
 }

@@ -29,8 +29,8 @@ public class CardFrame extends JFrame {
         this.setLayout(new BorderLayout());
         this.setSize(200, 250);
 
-        this.property = property;
-        this.cardController = new CardController(game);
+        this.property = property; //model
+        this.cardController = new CardController(game); //controller
 
         if(property.getOwner() == null) { //no owner, can buy
             this.addWindowListener(new WindowAdapter() {  //defining a class inside another class
@@ -53,10 +53,6 @@ public class CardFrame extends JFrame {
         }
 
         displayPropertyInfo(property);
-
-        //TicTacToeModel model = new TicTacToeModel();
-        //model.addTicTacToeView(this); //add ourselves to the model
-        //TicTacToeController tttc = new TicTacToeController(model);
 
         this.setVisible(true);
     }
@@ -140,6 +136,12 @@ public class CardFrame extends JFrame {
         boolean canPayRent = cardController.payCardRent();
         if (!canPayRent){ // handle if player does not have enough money
             JOptionPane.showMessageDialog(null, "You are bankrupt. You cannot play further.");
+            if (cardController.handlePotentialWinner()){
+                JOptionPane.showMessageDialog(null, "Congratulations! Player: " + cardController.getGame().getPlayers().get(0).getId() +
+                        " has won!");
+                this.dispose();
+                System.exit(0);
+            }
         } // else, they successfully paid
         cardController.handleSwitchTurn();
         this.dispose();
@@ -151,6 +153,7 @@ public class CardFrame extends JFrame {
         this.dispose();
     }
 
+    /*
     public static void main(String[] args) {
         Player player = new Player();
         player.setId(0);
@@ -176,14 +179,18 @@ public class CardFrame extends JFrame {
         Property Pacific  = new Property("Pacific Avenue", 300, ColourGroups.GREEN);
         Property ParkPlace = new Property("Park Place", 350,  ColourGroups.BLUE);
 
-        /*Monopoly.CardFrame card = new Monopoly.CardFrame(Atlantic);
+        Monopoly.CardFrame card = new Monopoly.CardFrame(Atlantic);
         Monopoly.CardFrame card2 = new Monopoly.CardFrame(Oriental);
         Monopoly.CardFrame card3 = new Monopoly.CardFrame(Baltic);
         Monopoly.CardFrame card4 = new Monopoly.CardFrame(StCharles);
         Monopoly.CardFrame card5 = new Monopoly.CardFrame(StJames);
         Monopoly.CardFrame card6 = new Monopoly.CardFrame(Kentucky);
         Monopoly.CardFrame card7 = new Monopoly.CardFrame(Pacific);
-        Monopoly.CardFrame card8 = new Monopoly.CardFrame(ParkPlace);*/
+        Monopoly.CardFrame card8 = new Monopoly.CardFrame(ParkPlace);
+
+
     }
+
+     */
 
 }
