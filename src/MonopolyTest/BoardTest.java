@@ -19,6 +19,7 @@ public class BoardTest {
     }
 
     /**
+     * Test that the hashmap of properties is set correctly when board is initialized
      * @author Shrimei
      */
     @Test
