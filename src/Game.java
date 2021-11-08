@@ -129,7 +129,10 @@ public class Game {
 
         }
 
-        this.handleSwitchTurn();
+        for (MonopolyInterfaceView view : this.views){
+            view.handlePlayerState();
+        }
+
         return canPurchase;
     }
 
@@ -164,7 +167,9 @@ public class Game {
             //return true;
         }
 
-        this.handleSwitchTurn();
+        for (MonopolyInterfaceView view : this.views){
+            view.handlePlayerState();
+        }
 
         return canPayRent;
 

@@ -125,11 +125,10 @@ public class CardFrame extends JFrame {
             if (!canPurchase){ // handle if player does not have enough money
                 JOptionPane.showMessageDialog(null, "You do not have enough money to purchase the property");
             } // else, they successfully purchased
-            this.dispose();
-        }else{ //player says no, do nothing
-            cardController.handleSwitchTurn();
-            this.dispose();
-        }
+        }//else, player says no, do nothing
+
+        cardController.handleSwitchTurn();
+        this.dispose();
     }
 
     private void handlePayRent(){
@@ -138,11 +137,14 @@ public class CardFrame extends JFrame {
         if (!canPayRent){ // handle if player does not have enough money
             JOptionPane.showMessageDialog(null, "You are bankrupt. You cannot play further.");
         } // else, they successfully paid
+        cardController.handleSwitchTurn();
+        this.dispose();
     }
 
     private void handleIsOwner(){
         JOptionPane.showMessageDialog(null, "You own this property");
         cardController.handleSwitchTurn();
+        this.dispose();
     }
 
     public static void main(String[] args) {
