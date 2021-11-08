@@ -157,16 +157,25 @@ public class Game {
                 System.out.println("You are bankrupt. You cannot play further."); // move
                 removePlayer(currentPlayer); //remove player from game
                 currentPlayerNumber -= 1;
-                if (players.size() == 1) { //1 player left // move
+                /*if (players.size() == 1) { //1 player left // move
                     System.out.println("Monopoly.Player " + players.get(0).getId() + " won!"); //display winner and exit game
                     //return false;
                 }
+                 */
             }
             //return true;
         }
 
         return canPayRent;
 
+    }
+
+    public boolean isWinner(){
+        if (players.size() == 1) { //1 player left // move
+            System.out.println("Monopoly.Player " + players.get(0).getId() + " won!"); //display winner and exit game
+            return true;
+        }
+        return false;
     }
 
     /**
