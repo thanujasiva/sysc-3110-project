@@ -2,17 +2,19 @@ package MonopolyTest;
 
 import static org.junit.Assert.*;
 
-import Monopoly.ColourGroups;
-import Monopoly.Player;
-import Monopoly.Property;
-
 import org.junit.Test;
 import org.junit.Before;
+import Monopoly.Property;
+import Monopoly.Player;
+import Monopoly.ColourGroups;
+
 
 public class PlayerTest {
 
     private Player player;
     private Property property;
+    private Player owner;
+    private Property rentedProperty;
 
     /**
      * Set up a test player
@@ -21,7 +23,9 @@ public class PlayerTest {
     @Before
     public void setUp(){
         player = new Player();
+        owner = new Player();
         property = new Property("Vermont Avenue", 100, ColourGroups.GREY);
+        rentedProperty = new Property("St. Charles Place", 140, ColourGroups.PINK);
     }
 
     /**
@@ -73,7 +77,18 @@ public class PlayerTest {
     @Test
     public void purchaseProperty(){
         assertTrue(player.purchaseProperty(property));
+    }
 
+    /**
+     * Test the process of purchasing property with insufficient funds
+     * @author Maisha
+     */
+    @Test
+    public void noMoneyToPurchaseProperty(){
+        for (int i = 0; i < 15; i++){
+            player.purchaseProperty(property);
+        }
+        assertFalse(player.purchaseProperty(property));
     }
 
     /**
@@ -86,16 +101,28 @@ public class PlayerTest {
         assertEquals(1510,player.getMoney()); //10% of 100$ (price of property) plus players money
     }
 
-    /*
     /**
      * Test the process of paying rent
      * @author Maisha
      */
-    //@Test
-    /*
+    @Test
     public void payRent(){
-        assertEquals(true, player.payRent(property));
+        owner.purchaseProperty(property);
+        assertTrue(player.payRent(property));
     }
+
+    /**
+     * Test the process of paying rent with insufficient funds
+     * @author Maisha
      */
+    @Test
+    public void noMoneyToPayRent(){
+        for (int i = 0; i < 15; i++){
+            player.purchaseProperty(property);
+        }
+        owner.purchaseProperty(rentedProperty);
+        assertFalse(player.payRent(rentedProperty));
+    }
+
 
 }
