@@ -134,7 +134,10 @@ public class CardFrame extends JFrame {
 
     private void handlePayRent(){
         JOptionPane.showMessageDialog(null, "You have to pay rent of $"+ property.getOwner().getRentAmount(property));
-        cardController.payRent();
+        boolean canPayRent = cardController.payCardRent();
+        if (!canPayRent){ // handle if player does not have enough money
+            JOptionPane.showMessageDialog(null, "You are bankrupt. You cannot play further.");
+        } // else, they successfully paid
     }
 
     private void handleIsOwner(){
