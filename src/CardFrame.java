@@ -121,8 +121,10 @@ public class CardFrame extends JFrame {
         if(result == JOptionPane.YES_OPTION){ //player says yes
             //call purchase property on the player or return the property? controller would handle purchasing
             //FIXME
-            cardController.purchaseCard();
-            // handle if player does not have enough money
+            boolean canPurchase = cardController.purchaseCard();
+            if (!canPurchase){ // handle if player does not have enough money
+                JOptionPane.showMessageDialog(null, "You do not have enough money to purchase the property");
+            } // else, they successfully purchased
             this.dispose();
         }else{ //player says no, do nothing
             cardController.handleSwitchTurn();

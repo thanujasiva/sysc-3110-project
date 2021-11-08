@@ -117,13 +117,15 @@ public class Game {
 
     /**
      * @author Thanuja
+     * @return true if player is able to purchase property, else false.
      */
-    public void purchaseTransaction(){
+    public boolean purchaseTransaction(){
+        boolean canPurchase = false;
         Player currentPlayer = players.get(currentPlayerNumber);
         Square currentSquare =  board.getSquares().get(currentPlayer.getPosition() % board.getSquares().size());
         if(currentSquare.getType().equals("Property")) {
             Property currentProperty = (Property) currentSquare;
-            currentPlayer.purchaseProperty(currentProperty);
+            canPurchase = currentPlayer.purchaseProperty(currentProperty);
 
             for (MonopolyInterface view : this.views) {
                 view.handlePlayerState();
@@ -131,6 +133,7 @@ public class Game {
         }
 
         this.handleSwitchTurn();
+        return canPurchase;
     }
 
     /**

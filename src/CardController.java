@@ -8,9 +8,13 @@ public class CardController {
         this.game = game;
     }
 
-    // actionPerformed
-    public void purchaseCard(){
-        game.purchaseTransaction();
+    /**
+     * Control purchase card
+     * @author Thanuja
+     * @return true if player is able to purchase property, else false.
+     */
+    public boolean purchaseCard(){
+        return game.purchaseTransaction();
     }
 
     public void payRent(){
