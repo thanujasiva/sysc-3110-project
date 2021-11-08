@@ -129,10 +129,6 @@ public class Game {
 
         }
 
-        for (MonopolyInterfaceView view : this.views){
-            view.handlePlayerState();
-        }
-
         return canPurchase;
     }
 
@@ -165,10 +161,6 @@ public class Game {
                 }
             }
             //return true;
-        }
-
-        for (MonopolyInterfaceView view : this.views){
-            view.handlePlayerState();
         }
 
         return canPayRent;

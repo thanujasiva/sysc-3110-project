@@ -114,6 +114,7 @@ public class GameView implements MonopolyInterfaceView {
     public void handlePlayerState() {
         Player currentPlayer = game.getPlayers().get(game.getCurrentPlayerNumber());
         this.playerStatePanel.updatePlayer(currentPlayer);
+        this.playersPanel.updatePlayers();
     }
 
     /**
