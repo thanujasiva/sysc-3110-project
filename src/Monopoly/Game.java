@@ -228,7 +228,7 @@ public class Game {
      * @author Maisha
      * @author Sabah
      */
-    public int handleMove(){
+    public void handleMove(){
 
         // old docstring from play() method
         /*Allows players to play the game and gives them options to roll, quit, buy properties and pay rent.
@@ -269,8 +269,6 @@ public class Game {
         for (MonopolyInterfaceView view : this.views){
             view.handlePlayerState();
         }
-
-        return 0;
     }
 
     /**
