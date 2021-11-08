@@ -1,3 +1,5 @@
+package Monopoly;
+
 import javax.swing.*;
 
 public class PlayersPanel {
@@ -18,7 +20,7 @@ public class PlayersPanel {
         playersPanel.setLayout(new BoxLayout(playersPanel, BoxLayout.Y_AXIS));
 
         JLabel playerNamesLabel = new JLabel("List of Players: ");
-        //JLabel currentPlayerLabel = new JLabel("Current Player: " + board.getCurrentPlayerNumber());
+        //JLabel currentPlayerLabel = new JLabel("Current Monopoly.Player: " + board.getCurrentPlayerNumber());
 
         playersPanel.add(playerNamesLabel);
 

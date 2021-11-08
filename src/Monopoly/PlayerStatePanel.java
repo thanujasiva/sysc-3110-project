@@ -1,3 +1,5 @@
+package Monopoly;
+
 import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
@@ -54,7 +56,7 @@ public class PlayerStatePanel extends JPanel{
                 if (!e.getValueIsAdjusting()) {
                     Property selectedProperty = player.getProperties().get(propertiesList.getSelectedIndex());
                     System.out.print("FIX THIS"); //FIXME
-                    //new CardFrame(selectedProperty, player);
+                    //new Monopoly.CardFrame(selectedProperty, player);
                     // user can open many cards (and duplicates of those cards)
                 }
             }

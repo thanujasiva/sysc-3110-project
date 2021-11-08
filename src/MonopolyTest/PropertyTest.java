@@ -1,4 +1,9 @@
+package MonopolyTest;
+
 import static org.junit.Assert.*;
+
+import Monopoly.ColourGroups;
+import Monopoly.Property;
 import org.junit.Test;
 import org.junit.Before;
 
@@ -12,7 +17,7 @@ public class PropertyTest {
      */
     @Before
     public void setUp(){
-        property = new Property("Test Property", 200, ColourGroups.GREEN);
+        property = new Property("Test Monopoly.Property", 200, ColourGroups.GREEN);
     }
 
     /**
@@ -30,7 +35,7 @@ public class PropertyTest {
      */
     @Test
     public void getType() {
-        assertEquals("Property", property.getType());
+        assertEquals("Monopoly.Property", property.getType());
     }
 
     /**

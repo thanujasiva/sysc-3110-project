@@ -1,3 +1,11 @@
+package MonopolyTest;
+
+import Monopoly.ColourGroups;
+import Monopoly.Game;
+import Monopoly.Property;
+import Monopoly.Player;
+
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -8,7 +16,7 @@ public class GameTest {
     private Game game;
 
     /**
-     * Setup the Game Test
+     * Setup the Monopoly.Game Test
      * @author Thanuja
      */
     @Before
@@ -94,14 +102,14 @@ public class GameTest {
         Player testBuyer = game.getPlayers().get(0);
 
         Property testProperty = (Property) game.getBoard().getSquares().get(1);
-        testBuyer.changePosition(1); // tested in PlayerTest // have player 0 land on Mediterranean (hard coded in Board)
+        testBuyer.changePosition(1); // tested in MonopolyTest.PlayerTest // have player 0 land on Mediterranean (hard coded in Monopoly.Board)
         assertEquals(1, game.getPlayers().get(game.getCurrentPlayerNumber()).getPosition()); // verify current player is now on test property (to be able to purchase it)
 
         boolean purchased = game.purchaseTransaction();
         assertTrue(purchased);
 
-        assertEquals(1440, testBuyer.getMoney()); // 1500 - 60
-        assertEquals(testBuyer, testProperty.getOwner()); // test that current player now owns current property
+        Assert.assertEquals(1440, testBuyer.getMoney()); // 1500 - 60
+        Assert.assertEquals(testBuyer, testProperty.getOwner()); // test that current player now owns current property
     }
 
     /**
@@ -121,14 +129,14 @@ public class GameTest {
         Player testRenter = game.getPlayers().get(1);
 
         Property testProperty = (Property) game.getBoard().getSquares().get(1);
-        testRenter.changePosition(1); // tested in PlayerTest // have player 1 land on Mediterranean (hard coded in Board)
+        testRenter.changePosition(1); // tested in MonopolyTest.PlayerTest // have player 1 land on Mediterranean (hard coded in Monopoly.Board)
         assertEquals(1, game.getPlayers().get(game.getCurrentPlayerNumber()).getPosition()); // verify current player is now on test property (to pay rent)
 
         boolean canPayRent = game.rentTransaction();
         assertTrue(canPayRent);
 
-        assertEquals(1494, testRenter.getMoney()); // 1500 - 6
-        assertEquals(1446, testProperty.getOwner().getMoney()); // 1440 + 60
+        Assert.assertEquals(1494, testRenter.getMoney()); // 1500 - 6
+        Assert.assertEquals(1446, testProperty.getOwner().getMoney()); // 1440 + 60
     }
 
     /**
@@ -141,17 +149,17 @@ public class GameTest {
         Player testBuyer = game.getPlayers().get(0);
 
         // decrease testBuyer money to $50
-        Property testExpensiveProperty = new Property("Test Property", 1450, ColourGroups.GREEN);
-        testBuyer.purchaseProperty(testExpensiveProperty); // tested in PlayerTest
+        Property testExpensiveProperty = new Property("Test Monopoly.Property", 1450, ColourGroups.GREEN);
+        testBuyer.purchaseProperty(testExpensiveProperty); // tested in MonopolyTest.PlayerTest
 
         Property testProperty = (Property) game.getBoard().getSquares().get(1);
-        testBuyer.changePosition(1); // tested in PlayerTest // have player 0 land on Mediterranean (hard coded in Board)
+        testBuyer.changePosition(1); // tested in MonopolyTest.PlayerTest // have player 0 land on Mediterranean (hard coded in Monopoly.Board)
         assertEquals(1, game.getPlayers().get(game.getCurrentPlayerNumber()).getPosition()); // verify current player is now on test property (to be able to purchase it)
 
         boolean purchased = game.purchaseTransaction();
         assertFalse(purchased);
 
-        assertEquals(50, testBuyer.getMoney()); // no change for buyer
+        Assert.assertEquals(50, testBuyer.getMoney()); // no change for buyer
         assertNull(testProperty.getOwner()); // test that property does not have owner
     }
 
@@ -172,18 +180,18 @@ public class GameTest {
         Player testRenter = game.getPlayers().get(1);
 
         // decrease testRenter money to $5
-        Property testExpensiveProperty = new Property("Test Property", 1495, ColourGroups.GREEN);
-        testRenter.purchaseProperty(testExpensiveProperty); // tested in PlayerTest
+        Property testExpensiveProperty = new Property("Test Monopoly.Property", 1495, ColourGroups.GREEN);
+        testRenter.purchaseProperty(testExpensiveProperty); // tested in MonopolyTest.PlayerTest
 
         Property testProperty = (Property) game.getBoard().getSquares().get(1);
-        testRenter.changePosition(1); // tested in PlayerTest // have player 1 land on Mediterranean (hard coded in Board)
+        testRenter.changePosition(1); // tested in MonopolyTest.PlayerTest // have player 1 land on Mediterranean (hard coded in Monopoly.Board)
         assertEquals(1, game.getPlayers().get(game.getCurrentPlayerNumber()).getPosition()); // verify current player is now on test property (to pay rent)
 
         boolean canPayRent = game.rentTransaction();
         assertFalse(canPayRent);
 
-        assertEquals(5, testRenter.getMoney()); // no change for renter
-        assertEquals(1440, testProperty.getOwner().getMoney()); // no change for owner
+        Assert.assertEquals(5, testRenter.getMoney()); // no change for renter
+        Assert.assertEquals(1440, testProperty.getOwner().getMoney()); // no change for owner
 
         assertEquals(1, game.getPlayers().size()); // verify player was removed from players list
         assertEquals(0, game.getPlayers().get(0).getId()); // verify only player 0 remains

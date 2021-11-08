@@ -1,3 +1,5 @@
+package Monopoly;
+
 import java.util.Random;
 
 public class Dice {
@@ -6,7 +8,7 @@ public class Dice {
 
     /**
      * @author Sabah
-     * Dice Constructor
+     * Monopoly.Dice Constructor
      */
     public Dice (){
         this.diceNumber=0;
