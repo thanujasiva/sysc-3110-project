@@ -27,7 +27,7 @@ public class PlayersPanel {
         // adds to the actual list by looping
         this.playersListModel  = new DefaultListModel<>();
         for (Player player : game.getPlayers()){
-            playersListModel.addElement("Player: "+ player.getId());
+            playersListModel.addElement("Player: "+ player.getId() + " Position: " + game.getBoard().getSquares().get(player.getPosition()).getName());
         }
 
         // shows the list of players
@@ -44,7 +44,7 @@ public class PlayersPanel {
     public void updatePlayers(){
         this.playersListModel.clear();
         for (Player player : game.getPlayers()){
-            this.playersListModel.addElement("Player: "+ player.getId());
+            this.playersListModel.addElement("Player: "+ player.getId() + " Position: " + game.getBoard().getSquares().get(player.getPosition()).getName());
         }
 
         // shows the list of players
@@ -59,8 +59,7 @@ public class PlayersPanel {
      */
     public JPanel getPlayersPanel() {return playersPanel;}
 
-    // test method
-    // can be removed later
+    /*
     public static void main(String[] args) {
 
         Game game = new Game();
@@ -74,4 +73,6 @@ public class PlayersPanel {
         testFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
     }
+
+     */
 }

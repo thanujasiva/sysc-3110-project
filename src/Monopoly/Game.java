@@ -263,35 +263,6 @@ public class Game {
             view.handleRoll();
         }
 
-        /*if(currentSquare.getType().equals("Monopoly.Property")) { //landed on a property
-            Monopoly.Property currentProperty = (Monopoly.Property) currentSquare;
-
-            // joptionpane handler (CardView) - handle if now owner, if player is owner, or if rent
-
-            if (currentProperty.getOwner() == null) { //no owner, give option to buy
-                System.out.println("Would you like to buy this property? (yes or no)");
-                String answer = sc.nextLine();
-                if (answer.equals("yes")) {
-                    currentPlayer.purchaseProperty(currentProperty); //buy property
-                }
-            } else if (currentProperty.getOwner().equals(currentPlayer)) { //player already owns this property
-                System.out.println("This is your own property.");
-            } else { //another player owns this property, must pay rent
-                boolean canPayRent = currentPlayer.payRent(currentProperty);
-                if (canPayRent) { //pay rent if enough money
-                    currentProperty.getOwner().collectRent(currentProperty);
-                } else { //player ran out of money, they are bankrupt
-                    System.out.println("You are bankrupt. You cannot play further.");
-                    removePlayer(currentPlayer); //remove player from game
-                    currentPlayerNumber -= 1;
-                    if (players.size() == 1) { //1 player left
-                        System.out.println("Monopoly.Player " + players.get(0).getId() + " won!"); //display winner and exit game
-                        return 1;
-                    }
-                }
-            }
-        }*/
-
         for (MonopolyInterfaceView view : this.views){
             view.handlePlayerState();
         }
@@ -301,10 +272,29 @@ public class Game {
 
     /**
      * @author Sabah
+     * @return players
+     * getter for the array list of players
+     */
+    public ArrayList<Player> getPlayers() {
+        return players;
+    }
+
+    /**
+     * @author Sabah
+     * @return players
+     * getter for the current player number
+     */
+    public int getCurrentPlayerNumber() { // returns int, do we need to change?
+        return currentPlayerNumber;
+    }
+
+
+    /*
+    /**
+     * @author Sabah
      * @author Thanuja
      * @param args      main method.
      * Allows user to choose number of players and start the game
-     */
     public static void main(String[] args) {
         System.out.println("Welcome to the game of Monopoly!"); //welcome message
         Scanner sc = new Scanner(System.in);
@@ -335,23 +325,7 @@ public class Game {
         }
     }
 
-    /**
-     * @author Sabah
-     * @return players
-     * getter for the array list of players
      */
-    public ArrayList<Player> getPlayers() {
-        return players;
-    }
-
-    /**
-     * @author Sabah
-     * @return players
-     * getter for the current player number
-     */
-    public int getCurrentPlayerNumber() { // returns int, do we need to change?
-        return currentPlayerNumber;
-    }
 
 
 }

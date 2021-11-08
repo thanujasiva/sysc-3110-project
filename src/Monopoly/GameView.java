@@ -22,6 +22,9 @@ public class GameView implements MonopolyInterfaceView {
         Integer[] options = {2,3,4};
         Integer input = (Integer) JOptionPane.showInputDialog(null,"How many players do you wish to have?","PLAYERS",
                 JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+        if (input == null) {
+            System.exit(0);
+        }
         return input;
     }
 
