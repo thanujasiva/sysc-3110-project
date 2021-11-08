@@ -82,7 +82,7 @@ public class GameView implements MonopolyInterfaceView {
     @Override
     public void handleBoardPlayersUpdate() {
         int num = this.handleNumberOfPlayers();
-        System.out.println(num);
+        //System.out.println(num);
         for (int i = 0; i < num - 2; i++) {
             this.game.addPlayer(new Player());
         }
