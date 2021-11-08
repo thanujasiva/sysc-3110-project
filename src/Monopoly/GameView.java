@@ -98,8 +98,8 @@ public class GameView implements MonopolyInterfaceView {
         this.boardPanel.getDicePanel().updateDiceLabel();
 
         // FIXME should package as an event
-        Player currentPlayer = game.getPlayers().get(game.getCurrentPlayerNumber());
-        Square currentSquare = game.getBoard().getSquares().get(currentPlayer.getPosition() % game.getBoard().getSquares().size());
+        Player currentPlayer = game.getCurrentPlayer();
+        Square currentSquare = game.getCurrentSquare();
 
         if(currentSquare.getType().equals("Monopoly.Property")) {
             CardFrame card = new CardFrame((Property) currentSquare, currentPlayer, game);

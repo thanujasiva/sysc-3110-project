@@ -19,7 +19,7 @@ class PieceComponent extends JLabel {
      * @param game  The frame that the board is being displayed on
      */
     public PieceComponent(Player player, JPanel startBox, JFrame game){
-        this.setText("Player " + player.getId());
+        super("Player " + player.getId());
         this.setOpaque(true);
         this.setBackground(Color.PINK);
         this.currentBox = startBox;
