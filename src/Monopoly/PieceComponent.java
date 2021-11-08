@@ -3,9 +3,7 @@ package Monopoly;
 import javax.swing.*;
 import java.awt.*;
 
-// create a panel that you can draw on.
-
-/**
+/**Create a piece corresponding ot a player
  * @author Shrimei
  */
 class PieceComponent extends JLabel {
@@ -13,15 +11,27 @@ class PieceComponent extends JLabel {
     JPanel currentBox;
     JFrame game;
 
+    /**
+     * Initialize a label(piece) to represent a player. Player starts at "GO"
+     * @author Shrimei
+     * @param player Current player
+     * @param startBox  "GO" panel
+     * @param game  The frame that the board is being displayed on
+     */
     public PieceComponent(Player player, JPanel startBox, JFrame game){
-        this.setText("Monopoly.Player " + player.getId());
+        this.setText("Player " + player.getId());
         this.setOpaque(true);
         this.setBackground(Color.PINK);
-        this.currentBox = startBox; //set start box to GO
+        this.currentBox = startBox;
         startBox.add(this);
         this.game = game;
     }
 
+    /**
+     * Move the piece to the specified box
+     * @author Shrimei
+     * @param newBox box that piece is being moved to
+     */
     public void movePiece(JPanel newBox){
         currentBox.remove(this);
         newBox.add(this);
@@ -29,6 +39,10 @@ class PieceComponent extends JLabel {
         game.repaint();
     }
 
+    /**
+     * On button click, piece moves from left to right panel
+     * @author Shrimei
+     */
     public static void main(String[] arguments) {
 
         Player player = new Player();
@@ -51,7 +65,7 @@ class PieceComponent extends JLabel {
 
         JButton button = new JButton();
 
-        button.addActionListener(e -> { //would replace with condition that causes piece to move
+        button.addActionListener(e -> {
             piece.movePiece(box2);
         });
 
