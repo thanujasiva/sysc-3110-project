@@ -1,77 +1,41 @@
 # sysc-3110-project
 
 ## Usage:
-Run the main method in `Board.java`.
 
-Sample game output:
-```
-Welcome to the game of Monopoly!
-How many players?
-2
+1. Download and execute jar file onto any IDE.
+2. Run the game from GameView.main()
+3. When the game opens, first choose how many players you wish to play with from the drop down menu. 
+    * If you fail to choose - hit cancel or closes on JOptionPane, the game will terminate.
+4. After choosing the number of players, all players will be initialized on position GO, as shown on the top right corner of the GUI.
+5. Hit the dice button on the centre of the board to roll and start the game.
+6. Your position will move automatically, and the property you land on will prompt the property card frame to pop up.
+7. Player must close on the frame to prompt the JOptionPane asking whether the player wants to purchase or not.
+8. If a player chooses to purchase, the property will be added onto their property owned list on the bottom right panel.
+9. The bottom right panel displays the current player's money and properties.
+10. Player can click on their individual properties from the list to check the property information.
+11. If the current player lands on another player's property, they have to pay rent. The player is notified via a pop up message. After the pop up message is  closed, the rent transaction will occur.
+12. A player is automatically removed from the game if the player does not have enough money to pay rent.
+13. When a player goes bankrupt and is removed from the game, all their properties become available to purchase again.
+14. The game continues until the player closes out of the game, or when there is only one player left on the board.
 
-===============================================
-Player 0
-Position: GO
-Money: $1500
-Enter a command (roll, quit)
-roll
-Amount rolled is 6
-You landed on Property: price=100, name='Vermont Avenue', colourGroup='grey', rent=10, rentWithColourSet=20
-Would you like to buy this property? (yes or no)
-yes
-Congratulations! You now own Vermont Avenue
+## Milestone 2 Changes:
 
-===============================================
-Player 1
-Position: GO
-Money: $1500
-Enter a command (roll, quit)
-roll
-Amount rolled is 8
-You landed on BlankBox: name='Visiting Jail'
+GUI based version of the Monopoly game. Designed the game in an MVC format.
+Testing - Created test classes for each Model.
 
-===============================================
-Player 0
-Position: Vermont Avenue
-Money: $1400
-Current properties you own: 
-Property: price=100, name='Vermont Avenue', colourGroup='grey', rent=10, rentWithColourSet=20
-Enter a command (roll, quit)
-roll
-Amount rolled is 9
-You landed on Property: price=180, name='Tennessee Avenue', colourGroup='orange', rent=18, rentWithColourSet=36
-Would you like to buy this property? (yes or no)
-yes
-Congratulations! You now own Tennessee Avenue
-
-...
-```
-
-## Milestone 1 Changes:
-
-Created initial design of a Monopoly style game.
-
-Can play with 2-4 players. 
-
-Players can either roll the dice or quit the game.
-
-Players can purchase unowned properties, and will have to pay a rent of 10% on the property's price 
-when they land on other player's properties. If a player owns all the properties of a colour group, 
-the rents of those properties double.
-
-A player goes bankrupt when they no longer have enough money to pay the rent. 
-The bankrupt player loses all their properties and is removed from the game.
-
-The game ends when there is only one player remaining in the game.
-The remaining player is the winner.
 
 ## Known Issues:
 
-When first starting the game, an integer must be entered for the number of players.
+1. Current players can press the dice button without purchasing or not purchasing a property resulting them to roll again. Therefore, the limitation is the current player must use the CardFrame before rolling again.
+
+2. The two panels on the right side of the GUI (PlayerStatePanel and PlayersPanel) change their sizes automatically after every few roll calls. This should not occur.
+
+3. Don’t skip to the next player right away, player might want to buy houses after rolling. (Milestone 3)
+
+4. PieceComponent not yet implemented. The player pieces do not show up on the board yet. For now, PlayersPanel on the top right of the GUI displays the position of each player. 
+
 
 ## Remaining Deliverables:
-
-Milestone 2: GUI-based version and unit tests.
 
 Milestone 3: Additional features (jail, "Go", railroad, utility) and "AI" players. 
 
@@ -80,13 +44,10 @@ Milestone 4: Save/load features and customizable games.
 ## Roadmap Ahead:
 
 Improvements for future Milestones:
-* Exception handling for `roll`, `quit`, and number of players
-* Separate method for getting the number of players in Board.java
-* Separate method for when a player goes bankrupt in Board.java
-* printCurrentState should return String, so it's easier for GUI
-* Add a command to switch turn instead of doing it automatically
-    * Future milestones, players may also want to buy houses/hotels before their turn is over
 
+* ColourGroup of properties needs to be fixed so that the player does not have to manually view the properties they have, to check if they own a colour group. 
+* Need to add a Monopoly title on the centre of the Board.
+* 3 doubles will send a player to jail from milestone 3.
 
 ## Contributors:
 * Thanuja Sivaananthan
