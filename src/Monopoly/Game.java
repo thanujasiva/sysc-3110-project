@@ -147,8 +147,8 @@ public class Game {
      */
     public boolean rentTransaction(){
         boolean canPayRent = false;
-        Player currentPlayer = players.get(currentPlayerNumber);
-        Square currentSquare =  board.getSquares().get(currentPlayer.getPosition() % board.getSquares().size());
+        Player currentPlayer = getCurrentPlayer();
+        Square currentSquare =  getCurrentSquare();
 
         if (currentSquare.getType().equals("Monopoly.Property")) {
             Property currentProperty = (Property) currentSquare;
@@ -290,7 +290,7 @@ public class Game {
     }
 
     public Square getCurrentSquare() {
-        return getBoard().getSquares().get(getCurrentPlayer().getPosition() % getBoard().getSquares().size());
+        return board.getSquares().get(getCurrentPlayer().getPosition() % board.getSquares().size());
     }
 
 
