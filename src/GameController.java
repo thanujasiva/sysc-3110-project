@@ -16,5 +16,9 @@ public class GameController implements ActionListener {
         game.play();
     }
 
+    public void handleSwitchTurn(){
+        game.handleSwitchTurn();
+    }
+
 
 }

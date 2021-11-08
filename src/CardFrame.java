@@ -13,30 +13,37 @@ import java.awt.Color;
  */
 public class CardFrame extends JFrame {
 
-    private boolean buyProperty;
+    private Property property;
     private CardController cardController; // FIXME - not sure if needed
 
     /**
      * @author Shrimei
      * @param property that is being displayed
      */
-    public CardFrame(Property property, Player player){
+    public CardFrame(Property property, Player player, Game game){
         super(property.getName());
         this.setLayout(new BorderLayout());
         this.setSize(200, 250);
 
-        cardController = new CardController(property, player);
+        this.property = property;
+        this.cardController = new CardController(game);
 
-        if(property.getOwner() == null){ //no owner, can buy
+        if(property.getOwner() == null) { //no owner, can buy
             this.addWindowListener(new WindowAdapter() {  //defining a class inside another class
                 public void windowClosing(WindowEvent e) {
-                    buyProperty = handleClose();
+                    handleBuyOption();
+                }
+            });
+        }else if(property.getOwner().equals(player)){
+            this.addWindowListener(new WindowAdapter() {  //defining a class inside another class
+                public void windowClosing(WindowEvent e) {
+                    handleIsOwner();
                 }
             });
         }else{
             this.addWindowListener(new WindowAdapter() {  //defining a class inside another class
                 public void windowClosing(WindowEvent e) {
-                    buyProperty = false;
+                    handlePayRent();
                 }
             });
         }
@@ -50,9 +57,6 @@ public class CardFrame extends JFrame {
         this.setVisible(true);
     }
 
-    public boolean isBuyProperty() {
-        return buyProperty;
-    }
 
     /**
      * Display the property info (price, name, colour, rent) on the frame
@@ -111,19 +115,29 @@ public class CardFrame extends JFrame {
      * When property with no owner is landed on, give player option to purchase
      * @author Shrimei
      */
-    public boolean handleClose(){
+    private void handleBuyOption(){
         int result = JOptionPane.showConfirmDialog(null, "Would you like to purchase this property?","Purchase property",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
 
         if(result == JOptionPane.YES_OPTION){ //player says yes
             //call purchase property on the player or return the property? controller would handle purchasing
             //FIXME
             cardController.purchaseCard();
+            // handle if player does not have enough money
             this.dispose();
-            return true;
         }else{ //player says no, do nothing
+            cardController.handleSwitchTurn();
             this.dispose();
-            return false;
         }
+    }
+
+    private void handlePayRent(){
+        JOptionPane.showMessageDialog(null, "You have to pay rent of $"+ property.getOwner().getRentAmount(property));
+        cardController.payRent();
+    }
+
+    private void handleIsOwner(){
+        JOptionPane.showMessageDialog(null, "You own this property");
+        cardController.handleSwitchTurn();
     }
 
     public static void main(String[] args) {
