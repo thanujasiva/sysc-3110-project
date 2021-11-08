@@ -2,9 +2,12 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 import org.junit.Before;
 
+import java.security.PublicKey;
+
 public class PlayerTest {
 
     private Player player;
+    private Property property;
 
     /**
      * Set up a test player
@@ -13,6 +16,7 @@ public class PlayerTest {
     @Before
     public void setUp(){
         player = new Player();
+        property = new Property("Vermont Avenue", 100, ColourGroups.GREY);
     }
 
     /**
@@ -56,7 +60,37 @@ public class PlayerTest {
     }
 
     // Other test methods to add:
-    // purchase property
-    // collect rent
-    // pay rent
+
+    /**
+     * Test the process of purchasing property
+     * @author Maisha
+     */
+    @Test
+    public void purchaseProperty(){
+        assertTrue(player.purchaseProperty(property));
+
+    }
+
+    /**
+     * Test the process of collecting rent
+     * @author Maisha
+     */
+    @Test
+    public void collectRent(){
+        player.collectRent(property);
+        assertEquals(1510,player.getMoney()); //10% of 100$ (price of property) plus players money
+    }
+
+    /*
+    /**
+     * Test the process of paying rent
+     * @author Maisha
+     */
+    //@Test
+    /*
+    public void payRent(){
+        assertEquals(true, player.payRent(property));
+    }
+     */
+
 }

@@ -7,16 +7,27 @@ public class DiceTest {
 
     private Dice dice;
 
+    /**
+     * @author Maisha
+     */
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         this.dice = new Dice();
     }
 
+    /**
+     * Tests what the initial dice number is.
+     * @author Maisha
+     */
     @Test
     public void getDiceNumber() {
         assertEquals(0,dice.getDiceNumber()); //initial dice value
     }
 
+    /**
+     * Tests the number rolled is between 1 and 6.
+     * @author Maisha
+     */
     @Test
     public void rollDice() {
         int diceNum = dice.rollDice();
