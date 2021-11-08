@@ -118,13 +118,13 @@ public class Player {
             properties.add(property);
             colourGroupMatch.merge(property.getColourGroup(), 1, Integer::sum);
             property.setOwner(this);
-            System.out.println("Congratulations! You now own " + property.getName());
-            if(colourGroupMatch.get(property.getColourGroup()) == property.getColourGroup().getMax()) {
-                System.out.println("You have a colour group! " + property.getColourGroup());
-            }
+            //System.out.println("Congratulations! You now own " + property.getName());
+            //if(colourGroupMatch.get(property.getColourGroup()) == property.getColourGroup().getMax()) {
+            //    System.out.println("You have a colour group! " + property.getColourGroup());
+            //}
             return true;
         } else {
-            System.out.println("You don't have enough money");
+            //System.out.println("You don't have enough money");
             return false;
         }
     }
@@ -141,11 +141,11 @@ public class Player {
     public boolean payRent(Property property){
         int rent = property.getOwner().getRentAmount(property);
         if (this.money >= rent){
-            System.out.println("You have to pay rent. Amount: $" + rent);
+            //System.out.println("You have to pay rent. Amount: $" + rent);
             this.money -= rent;
             return true;
         }else{
-            System.out.println("You cannot pay rent");
+            //System.out.println("You cannot pay rent");
             return false;
         }
     }

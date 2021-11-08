@@ -157,14 +157,13 @@ public class Game {
             if (canPayRent) { //pay rent if enough money
                 currentProperty.getOwner().collectRent(currentProperty);
             } else { //player ran out of money, they are bankrupt
-                System.out.println("You are bankrupt. You cannot play further."); // move
+                //System.out.println("You are bankrupt. You cannot play further."); // move
                 removePlayer(currentPlayer); //remove player from game
                 currentPlayerNumber -= 1;
                 /*if (players.size() == 1) { //1 player left // move
                     System.out.println("Monopoly.Player " + players.get(0).getId() + " won!"); //display winner and exit game
                     //return false;
-                }
-                 */
+                }*/
             }
             //return true;
         }
@@ -175,7 +174,7 @@ public class Game {
 
     public boolean isWinner(){
         if (players.size() == 1) { //1 player left // move
-            System.out.println("Monopoly.Player " + players.get(0).getId() + " won!"); //display winner and exit game
+            //System.out.println("Monopoly.Player " + players.get(0).getId() + " won!"); //display winner and exit game
             return true;
         }
         return false;
@@ -243,21 +242,20 @@ public class Game {
 
         checkSkipTurn();
 
-        System.out.println("\n===============================================");
+        //System.out.println("\n===============================================");
         Player currentPlayer = players.get(currentPlayerNumber); // only get actual current player after skip turn was checked
-        Square currentSquare =  board.getSquares().get(currentPlayer.getPosition() % board.getSquares().size());
-        currentPlayer.printCurrentState(currentSquare.getName());
-
+        //Square currentSquare =  board.getSquares().get(currentPlayer.getPosition() % board.getSquares().size());
+        //currentPlayer.printCurrentState(currentSquare.getName());
 
         // changed to 2 dice rolls
         int roll1 = dice1.rollDice();
         int roll2 = dice2.rollDice();
         int roll = roll1+ roll2;
 
-        System.out.println("Amount rolled is " + roll1 + ", " + roll2);
+        //System.out.println("Amount rolled is " + roll1 + ", " + roll2);
         currentPlayer.changePosition(roll); //move the player
-        currentSquare = board.getSquares().get(currentPlayer.getPosition() % board.getSquares().size()); //new position of the player
-        System.out.println("You landed on " + currentSquare.toString()); //print current box info
+        //currentSquare = board.getSquares().get(currentPlayer.getPosition() % board.getSquares().size()); //new position of the player
+        //System.out.println("You landed on " + currentSquare.toString()); //print current box info
 
         // show property card
         // update views based on dice roll
@@ -328,9 +326,7 @@ public class Game {
                 break;
             }
         }
-    }
-
-     */
+    }*/
 
 
 }
