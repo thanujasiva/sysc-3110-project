@@ -1,3 +1,7 @@
+package Monopoly;
+
+import Monopoly.ColourGroups;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -91,7 +95,7 @@ public class Player {
      * Outputs the player's position, money and properties
      */
     public void printCurrentState(String box){
-        System.out.println("Player " + id);
+        System.out.println("Monopoly.Player " + id);
         System.out.println("Position: " + box);
         System.out.println("Money: $" + money);
         if (this.properties.size() > 0) {
@@ -131,7 +135,7 @@ public class Player {
      * @author Maisha
      * @author Shrimei
      * @author Thanuja
-     * @param property      the property to pay rent for. Property must have an owner
+     * @param property      the property to pay rent for. Monopoly.Property must have an owner
      * @return              returns true if player is able to pay rent, else false.
      * If the user has enough money to pay rent, it is deducted from their account.
      * Otherwise, the player is bankrupt

@@ -1,3 +1,6 @@
+package MonopolyTest;
+
+import Monopoly.Dice;
 import org.junit.Before;
 import org.junit.Test;
 

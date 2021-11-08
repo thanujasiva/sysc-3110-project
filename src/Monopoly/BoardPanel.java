@@ -1,3 +1,5 @@
+package Monopoly;
+
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
@@ -81,7 +83,7 @@ public class BoardPanel {
             box.add(label, BorderLayout.CENTER);
 
 
-            if (square.getType().equals("Property")) {
+            if (square.getType().equals("Monopoly.Property")) {
                 label.setBackground(((Property) square).getColourGroup().getColour());
                 label.setOpaque(true);
             } else{
