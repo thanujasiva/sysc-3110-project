@@ -52,7 +52,7 @@ class PieceComponent extends JLabel {
 
         JButton button = new JButton();
 
-        button.addActionListener(e -> {
+        button.addActionListener(e -> { //would replace with condition that causes piece to move
             piece.movePiece(box2);
         });
 
