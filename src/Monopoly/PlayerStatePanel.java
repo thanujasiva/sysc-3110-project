@@ -80,7 +80,7 @@ public class PlayerStatePanel extends JPanel{
     }
 
 
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         JFrame playerStateFrame = new JFrame("Test Frame");
         // only have EXIT_ON_CLOSE in this test method, should not close the actual game
         playerStateFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -115,17 +115,13 @@ public class PlayerStatePanel extends JPanel{
         player2.purchaseProperty(Atlantic);
 
         // when it's the next players turn, then call
-        /*PlayerStatePanel playerStatePanel2 = new PlayerStatePanel(player2); // on the new current player
-        playerStateFrame.remove(playerStatePanel1);
-        playerStateFrame.add(playerStatePanel2);
-        playerStateFrame.setVisible(true);*/
         playerStatePanel1.updatePlayer(player2);
 
         playerStateFrame.invalidate();
         playerStateFrame.validate();
         playerStateFrame.repaint();
 
-    }
+    }*/
 
 
 }
