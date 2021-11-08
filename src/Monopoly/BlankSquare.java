@@ -5,6 +5,7 @@ public class BlankSquare implements Square {
     private String name;
 
     /**
+     * Create a new blank square with a name
      * @author Thanuja
      * @param name the name of the box
      */
@@ -14,7 +15,7 @@ public class BlankSquare implements Square {
 
     /**
      * @author Thanuja
-     * @return the name of the box
+     * @return the name of the square
      */
     @Override
     public String getName() {
@@ -23,7 +24,7 @@ public class BlankSquare implements Square {
 
     /**
      * @author Thanuja
-     * @return the type of box which is 'Monopoly.BlankSquare'
+     * @return the type of square which is 'Monopoly.BlankSquare'
      */
     @Override
     public String getType() {
@@ -32,8 +33,8 @@ public class BlankSquare implements Square {
 
     /**
      * @author Thanuja
-     * @return A string of the property's attributes
-     * Outputs the name of the box
+     * @return A string of the square's attributes
+     * Returns the name of the square to display on GUI
      */
     @Override
     public String toString() {

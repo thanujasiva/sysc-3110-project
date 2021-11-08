@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 
 /**Create a piece corresponding ot a player
+ * Class is not being used
  * @author Shrimei
  */
 class PieceComponent extends JLabel {
