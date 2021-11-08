@@ -1,4 +1,8 @@
+package TestClasses;
+
 import static org.junit.Assert.*;
+
+import Monopoly.Player;
 import org.junit.Test;
 import org.junit.Before;
 

@@ -1,3 +1,5 @@
+package Monopoly;
+
 public interface Square {
     String getName();
     String getType();

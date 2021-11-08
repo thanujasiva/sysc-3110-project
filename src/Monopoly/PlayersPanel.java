@@ -1,3 +1,5 @@
+package Monopoly;
+
 import javax.swing.*;
 
 public class PlayersPanel {
@@ -18,14 +20,14 @@ public class PlayersPanel {
         playersPanel.setLayout(new BoxLayout(playersPanel, BoxLayout.Y_AXIS));
 
         JLabel playerNamesLabel = new JLabel("List of Players: ");
-        //JLabel currentPlayerLabel = new JLabel("Current Player: " + board.getCurrentPlayerNumber());
+        //JLabel currentPlayerLabel = new JLabel("Current Monopoly.Player: " + board.getCurrentPlayerNumber());
 
         playersPanel.add(playerNamesLabel);
 
         // adds to the actual list by looping
         this.playersListModel  = new DefaultListModel<>();
         for (Player player : game.getPlayers()){
-            playersListModel.addElement("Player: "+ player.getId());
+            playersListModel.addElement("Monopoly.Player: "+ player.getId());
         }
 
         // shows the list of players
@@ -42,7 +44,7 @@ public class PlayersPanel {
     public void updatePlayers(){
         this.playersListModel.clear();
         for (Player player : game.getPlayers()){
-            this.playersListModel.addElement("Player: "+ player.getId());
+            this.playersListModel.addElement("Monopoly.Player: "+ player.getId());
         }
 
         // shows the list of players

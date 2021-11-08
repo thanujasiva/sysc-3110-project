@@ -1,3 +1,5 @@
+package Monopoly;
+
 import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
@@ -27,7 +29,7 @@ public class PlayerStatePanel extends JPanel{
 
         Border fieldBorder = new EmptyBorder(6,3,3,3);
 
-        playerNameLabel = new JLabel("Current Player: " + player.getId());
+        playerNameLabel = new JLabel("Current Monopoly.Player: " + player.getId());
         playerMoneyLabel = new JLabel("Money: $" + player.getMoney());
         JLabel propertiesListHeader = new JLabel("Current properties you own:");
         playerNameLabel.setBorder(fieldBorder);
@@ -54,7 +56,7 @@ public class PlayerStatePanel extends JPanel{
                 if (!e.getValueIsAdjusting()) {
                     Property selectedProperty = player.getProperties().get(propertiesList.getSelectedIndex());
                     System.out.print("FIX THIS"); //FIXME
-                    //new CardFrame(selectedProperty, player);
+                    //new Monopoly.CardFrame(selectedProperty, player);
                     // user can open many cards (and duplicates of those cards)
                 }
             }
@@ -67,7 +69,7 @@ public class PlayerStatePanel extends JPanel{
      * @param player    player to change to
      */
     public void updatePlayer(Player player){
-        this.playerNameLabel.setText("Current Player: " + player.getId());
+        this.playerNameLabel.setText("Current Monopoly.Player: " + player.getId());
         this.playerMoneyLabel.setText("Money: $" + player.getMoney());
 
         this.propertiesModel.clear();

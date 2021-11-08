@@ -1,8 +1,7 @@
+package Monopoly;
+
 import javax.swing.*;
-import javax.swing.plaf.DimensionUIResource;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 // create a panel that you can draw on.
 
@@ -15,7 +14,7 @@ class PieceComponent extends JLabel {
     JFrame game;
 
     public PieceComponent(Player player, JPanel startBox, JFrame game){
-        this.setText("Player " + player.getId());
+        this.setText("Monopoly.Player " + player.getId());
         this.setOpaque(true);
         this.setBackground(Color.PINK);
         this.currentBox = startBox; //set start box to GO

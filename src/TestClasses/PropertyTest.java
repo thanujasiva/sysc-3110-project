@@ -1,6 +1,12 @@
+package TestClasses;
+
 import static org.junit.Assert.*;
+
+import Monopoly.ColourGroups;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.Before;
+import Monopoly.Property;
 
 public class PropertyTest {
 
@@ -12,7 +18,7 @@ public class PropertyTest {
      */
     @Before
     public void setUp(){
-        property = new Property("Test Property", 200, ColourGroups.GREEN);
+        property = new Property("Test Monopoly.Property", 200, ColourGroups.GREEN);
     }
 
     /**
@@ -30,7 +36,7 @@ public class PropertyTest {
      */
     @Test
     public void getType() {
-        assertEquals("Property", property.getType());
+        Assert.assertEquals("Monopoly.Property", property.getType());
     }
 
     /**
@@ -39,7 +45,7 @@ public class PropertyTest {
      */
     @Test
     public void getRent() {
-        assertEquals(20, property.getRent());
+        Assert.assertEquals(20, property.getRent());
     }
 
     /**
@@ -48,6 +54,6 @@ public class PropertyTest {
      */
     @Test
     public void getRentWithColourSet() {
-        assertEquals(40, property.getRentWithColourSet());
+        Assert.assertEquals(40, property.getRentWithColourSet());
     }
 }

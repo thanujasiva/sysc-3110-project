@@ -1,3 +1,5 @@
+package Monopoly;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.WindowAdapter;
@@ -96,7 +98,7 @@ public class GameView implements MonopolyInterfaceView {
         Player currentPlayer = game.getPlayers().get(game.getCurrentPlayerNumber());
         Square currentSquare = game.getBoard().getSquares().get(currentPlayer.getPosition() % game.getBoard().getSquares().size());
 
-        if(currentSquare.getType().equals("Property")) {
+        if(currentSquare.getType().equals("Monopoly.Property")) {
             CardFrame card = new CardFrame((Property) currentSquare, currentPlayer, game);
             // do not switch turn until card is handled property
         }else{
@@ -105,7 +107,6 @@ public class GameView implements MonopolyInterfaceView {
 
 
     }
-
     /**
      * Handles change in player state
      * @author Thanuja
@@ -116,7 +117,6 @@ public class GameView implements MonopolyInterfaceView {
         this.playerStatePanel.updatePlayer(currentPlayer);
         this.playersPanel.updatePlayers();
     }
-
     /**
      * Main method to call
      * @author Maisha

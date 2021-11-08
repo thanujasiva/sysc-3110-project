@@ -1,5 +1,9 @@
+package TestClasses;
+
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import Monopoly.Dice;
 
 import static org.junit.Assert.*;
 
@@ -14,7 +18,7 @@ public class DiceTest {
 
     @Test
     public void getDiceNumber() {
-        assertEquals(0,dice.getDiceNumber()); //initial dice value
+        Assert.assertEquals(0,dice.getDiceNumber()); //initial dice value
     }
 
     @Test
