@@ -24,9 +24,10 @@ public class CardController {
     /**
      * Control rent payment
      * @author Thanuja
+     * @return true if player is able to pay rent, else false.
      */
-    public void payRent(){
-        game.rentTransaction();
+    public boolean payCardRent(){
+        return game.rentTransaction();
     }
 
     /**

@@ -98,6 +98,7 @@ public class GameView implements MonopolyInterfaceView {
 
         if(currentSquare.getType().equals("Property")) {
             CardFrame card = new CardFrame((Property) currentSquare, currentPlayer, game);
+            // do not switch turn until card is handled property
         }else{
             gameController.handleSwitchTurn();
         }

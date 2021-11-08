@@ -127,12 +127,12 @@ public class Game {
             Property currentProperty = (Property) currentSquare;
             canPurchase = currentPlayer.purchaseProperty(currentProperty);
 
-            for (MonopolyInterfaceView view : this.views) {
-                view.handlePlayerState();
-            }
         }
 
-        this.handleSwitchTurn();
+        for (MonopolyInterfaceView view : this.views){
+            view.handlePlayerState();
+        }
+
         return canPurchase;
     }
 
@@ -142,19 +142,21 @@ public class Game {
      * @author Shrimei
      * @author Sabah
      * @author Thanuja
+     * @return true if player is able to pay rent, else false.
      */
-    public void rentTransaction(){
+    public boolean rentTransaction(){
+        boolean canPayRent = false;
         Player currentPlayer = players.get(currentPlayerNumber);
         Square currentSquare =  board.getSquares().get(currentPlayer.getPosition() % board.getSquares().size());
 
         if (currentSquare.getType().equals("Property")) {
             Property currentProperty = (Property) currentSquare;
 
-            boolean canPayRent = currentPlayer.payRent(currentProperty);
+            canPayRent = currentPlayer.payRent(currentProperty);
             if (canPayRent) { //pay rent if enough money
                 currentProperty.getOwner().collectRent(currentProperty);
             } else { //player ran out of money, they are bankrupt
-                System.out.println("You are bankrupt. You cannot handleMove further."); // move
+                System.out.println("You are bankrupt. You cannot play further."); // move
                 removePlayer(currentPlayer); //remove player from game
                 currentPlayerNumber -= 1;
                 if (players.size() == 1) { //1 player left // move
@@ -165,11 +167,11 @@ public class Game {
             //return true;
         }
 
-        this.handleSwitchTurn();
-
         for (MonopolyInterfaceView view : this.views){
             view.handlePlayerState();
         }
+
+        return canPayRent;
 
     }
 
@@ -194,6 +196,23 @@ public class Game {
                 }
             }
         }
+
+        for (MonopolyInterfaceView view : this.views){
+            view.handlePlayerState();
+        }
+
+    }
+
+    /**
+     * Check if current player's turn needs to be skipped
+     * @author Sabah
+     */
+    public void checkSkipTurn(){
+        Player currentPlayer = players.get(currentPlayerNumber);
+        if (currentPlayer.isSkipTurn()){
+            currentPlayer.setSkipTurn(false);
+            this.switchTurn();
+        }
     }
 
     /**
@@ -216,12 +235,10 @@ public class Game {
 
         //Scanner sc = new Scanner(System.in);
 
+        checkSkipTurn();
+
         System.out.println("\n===============================================");
-        Player currentPlayer = players.get(currentPlayerNumber);
-        if (currentPlayer.isSkipTurn()){
-            currentPlayer.setSkipTurn(false);
-            this.switchTurn();
-        }
+        Player currentPlayer = players.get(currentPlayerNumber); // only get actual current player after skip turn was checked
         Square currentSquare =  board.getSquares().get(currentPlayer.getPosition() % board.getSquares().size());
         currentPlayer.printCurrentState(currentSquare.getName());
 
