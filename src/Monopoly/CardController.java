@@ -2,15 +2,14 @@ package Monopoly;
 
 public class CardController {
 
-    //private final Monopoly.Property property;
     private final Game game;
 
     /**
      * Create card controller
+     * @author Maisha
      * @param game  the game model
      */
     public CardController(Game game){
-        //this.property = property;
         this.game = game;
     }
 
@@ -48,6 +47,10 @@ public class CardController {
         game.handleSwitchTurn();
     }
 
+    /**
+     * @author Thanuja
+     * @return true if player is winner, else false
+     */
     public boolean handlePotentialWinner(){
         return game.isWinner();
     }
