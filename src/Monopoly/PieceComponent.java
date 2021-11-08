@@ -73,6 +73,4 @@ class PieceComponent extends JLabel {
         frame.setVisible(true);
 
     }
-
-     */
 }

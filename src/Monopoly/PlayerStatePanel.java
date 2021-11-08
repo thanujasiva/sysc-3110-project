@@ -14,8 +14,8 @@ public class PlayerStatePanel extends JPanel{
 
     private JLabel playerNameLabel;
     private JLabel playerMoneyLabel;
-    private DefaultListModel<String> propertiesModel;
     private JList<String> propertiesList;
+    private PlayerStatePanelController playerStatePanelController;
 
 
     /**
@@ -40,7 +40,7 @@ public class PlayerStatePanel extends JPanel{
         this.add(propertiesListHeader);
 
         // create list with the property names of the properties the player owns
-        propertiesModel = new DefaultListModel<>();
+        DefaultListModel<String> propertiesModel = new DefaultListModel<>();
         for (Property property : player.getProperties()){
             propertiesModel.addElement(property.getName());
         }
@@ -50,17 +50,9 @@ public class PlayerStatePanel extends JPanel{
         propertiesList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         this.add(new JScrollPane(propertiesList));
 
+        playerStatePanelController = new PlayerStatePanelController(propertiesList, player);
         // display cardView for the selected property in the JList
-        propertiesList.addListSelectionListener(e -> {
-            if (propertiesList.getSelectedIndex() >= 0) {
-                if (!e.getValueIsAdjusting()) {
-                    Property selectedProperty = player.getProperties().get(propertiesList.getSelectedIndex());
-                    System.out.print("FIX THIS"); //FIXME
-                    //new Monopoly.CardFrame(selectedProperty, player);
-                    // user can open many cards (and duplicates of those cards)
-                }
-            }
-        });
+        propertiesList.addListSelectionListener(playerStatePanelController);
 
     }
 
@@ -72,15 +64,22 @@ public class PlayerStatePanel extends JPanel{
         this.playerNameLabel.setText("Current Player: " + player.getId());
         this.playerMoneyLabel.setText("Money: $" + player.getMoney());
 
-        this.propertiesModel.clear();
+        DefaultListModel<String> propertiesModel = new DefaultListModel<>();
         for (Property property : player.getProperties()){
             propertiesModel.addElement(property.getName());
         }
 
+        propertiesList.setModel(propertiesModel);
         propertiesList.clearSelection();
+
+        propertiesList.removeListSelectionListener(playerStatePanelController);
+
+        playerStatePanelController = new PlayerStatePanelController(propertiesList, player);
+        propertiesList.addListSelectionListener(playerStatePanelController);
+
     }
 
-    /*
+
     public static void main(String[] args) {
         JFrame playerStateFrame = new JFrame("Test Frame");
         // only have EXIT_ON_CLOSE in this test method, should not close the actual game
@@ -95,8 +94,6 @@ public class PlayerStatePanel extends JPanel{
         Player player1 = new Player();
         player1.setId(0);
         player1.purchaseProperty(Baltic);
-        player1.purchaseProperty(Illinois);
-        player1.purchaseProperty(Atlantic);
 
         PlayerStatePanel playerStatePanel1 = new PlayerStatePanel(player1);
 
@@ -114,12 +111,15 @@ public class PlayerStatePanel extends JPanel{
         Player player2 = new Player();
         player2.setId(1);
         player2.purchaseProperty(Oriental);
+        player2.purchaseProperty(Illinois);
+        player2.purchaseProperty(Atlantic);
 
         // when it's the next players turn, then call
-        PlayerStatePanel playerStatePanel2 = new PlayerStatePanel(player2); // on the new current player
+        /*PlayerStatePanel playerStatePanel2 = new PlayerStatePanel(player2); // on the new current player
         playerStateFrame.remove(playerStatePanel1);
         playerStateFrame.add(playerStatePanel2);
-        playerStateFrame.setVisible(true);
+        playerStateFrame.setVisible(true);*/
+        playerStatePanel1.updatePlayer(player2);
 
         playerStateFrame.invalidate();
         playerStateFrame.validate();
@@ -127,5 +127,5 @@ public class PlayerStatePanel extends JPanel{
 
     }
 
-     */
+
 }
