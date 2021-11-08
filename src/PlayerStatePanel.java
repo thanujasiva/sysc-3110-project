@@ -53,7 +53,8 @@ public class PlayerStatePanel extends JPanel{
             if (propertiesList.getSelectedIndex() >= 0) {
                 if (!e.getValueIsAdjusting()) {
                     Property selectedProperty = player.getProperties().get(propertiesList.getSelectedIndex());
-                    new CardFrame(selectedProperty, player);
+                    System.out.print("FIX THIS"); //FIXME
+                    //new CardFrame(selectedProperty, player);
                     // user can open many cards (and duplicates of those cards)
                 }
             }

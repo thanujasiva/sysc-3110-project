@@ -114,6 +114,76 @@ public class Game {
         return dice2;
     }
 
+
+    /**
+     * @author Thanuja
+     */
+    public void purchaseTransaction(){
+        Player currentPlayer = players.get(currentPlayerNumber);
+        Square currentSquare =  board.getSquares().get(currentPlayer.getPosition() % board.getSquares().size());
+        if(currentSquare.getType().equals("Property")) {
+            Property currentProperty = (Property) currentSquare;
+            currentPlayer.purchaseProperty(currentProperty);
+
+            for (MonopolyInterface view : this.views) {
+                view.handlePlayerState();
+            }
+        }
+
+        this.handleSwitchTurn();
+    }
+
+    /**
+     * @author Thanuja
+     */
+    public void rentTransaction(){
+        Player currentPlayer = players.get(currentPlayerNumber);
+        Square currentSquare =  board.getSquares().get(currentPlayer.getPosition() % board.getSquares().size());
+
+        if (currentSquare.getType().equals("Property")) {
+            Property currentProperty = (Property) currentSquare;
+
+            boolean canPayRent = currentPlayer.payRent(currentProperty);
+            if (canPayRent) { //pay rent if enough money
+                currentProperty.getOwner().collectRent(currentProperty);
+            } else { //player ran out of money, they are bankrupt
+                System.out.println("You are bankrupt. You cannot play further."); // move
+                removePlayer(currentPlayer); //remove player from game
+                currentPlayerNumber -= 1;
+                if (players.size() == 1) { //1 player left // move
+                    System.out.println("Player " + players.get(0).getId() + " won!"); //display winner and exit game
+                    //return false;
+                }
+            }
+            //return true;
+        }
+
+        this.handleSwitchTurn();
+
+        for (MonopolyInterface view : this.views){
+            view.handlePlayerState();
+        }
+
+    }
+
+    public void handleSwitchTurn(){
+        if (currentPlayerNumber<0){ // in case current player went bankrupt
+            this.switchTurn(); // if 2 or more players remaining
+        }else {
+            Player currentPlayer = players.get(currentPlayerNumber);
+            if (dice1.getDiceNumber() != dice2.getDiceNumber()) { // no double rolls
+                this.switchTurn();// switches turn
+                doubles = 0;
+            } else { // when player rolls doubles more than 3 times
+                doubles += 1;
+                if (doubles >= 3) {
+                    currentPlayer.setSkipTurn(true);
+                    this.switchTurn(); // switches the turn (in milestone 3 change it to go to jail)
+                }
+            }
+        }
+    }
+
     /**
      * @author Shrimei
      * @author Thanuja
@@ -190,18 +260,6 @@ public class Game {
 
         for (MonopolyInterface view : this.views){
             view.handlePlayerState();
-        }
-
-        if (roll1!=roll2){ // no double rolls
-            this.switchTurn();// switches turn
-            doubles = 0;
-        }
-        else { // when player rolls doubles more than 3 times
-            doubles += 1;
-            if (doubles >= 3){
-                currentPlayer.setSkipTurn(true);
-                this.switchTurn(); // switches the turn (in milestone 3 change it to go to jail)
-            }
         }
 
         return 0;
