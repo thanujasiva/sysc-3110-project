@@ -127,36 +127,42 @@ public class Game {
      * @author Maisha
      * @author Shrimei
      * @author Thanuja
-     * @return true if player is able to purchase property, else false.
+     * @return true if current player is able to purchase current property, else false.
      */
     public boolean purchaseTransaction(){
         boolean canPurchase = false;
-        Player currentPlayer = players.get(currentPlayerNumber);
+        Player currentPlayer = getCurrentPlayer();
         Square currentSquare =  board.getSquares().get(currentPlayer.getPosition() % board.getSquares().size());
         if(currentSquare.getType().equals("Monopoly.Property")) {
             Property currentProperty = (Property) currentSquare;
             canPurchase = currentPlayer.purchaseProperty(currentProperty);
+            if (canPurchase){
+                currentProperty.setOwner(currentPlayer);
+            }
         }
         return canPurchase;
     }
 
     /**
      * Handle rent transaction
+     * Remove player if they become bankrupt.
+     * Current property must have an owner
      * @author Maisha
      * @author Shrimei
      * @author Sabah
      * @author Thanuja
-     * @return true if player is able to pay rent, else false.
+     * @return true if current player is able to pay rent on current property, else false.
      */
     public boolean rentTransaction(){
         boolean canPayRent = false;
         Player currentPlayer = getCurrentPlayer();
         Square currentSquare =  getCurrentSquare();
 
-        if (currentSquare.getType().equals("Monopoly.Property")) {
+        if (currentSquare.getType().equals("Monopoly.Property") && ((Property)currentSquare).getOwner() != null) {
             Property currentProperty = (Property) currentSquare;
+            int rentAmount = currentProperty.getOwner().getRentAmount(currentProperty);
 
-            canPayRent = currentPlayer.payRent(currentProperty);
+            canPayRent = currentPlayer.payRent(rentAmount);
             if (canPayRent) { //pay rent if enough money
                 currentProperty.getOwner().collectRent(currentProperty);
             } else { //player ran out of money, they are bankrupt
@@ -169,6 +175,9 @@ public class Game {
                 }*/
             }
             //return true;
+
+        }else{
+            System.out.println("This should not have occurred."); // FIXME - handling of this
         }
 
         return canPayRent;

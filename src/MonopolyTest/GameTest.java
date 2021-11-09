@@ -118,6 +118,7 @@ public class GameTest {
         Property testProperty = (Property) game.getBoard().getSquares().get(1);
         Player testBuyer = game.getPlayers().get(1);
         testBuyer.purchaseProperty(testProperty); // tested in MonopolyTest.PlayerTest
+        testProperty.setOwner(testBuyer);
 
         Player testRenter = game.getPlayers().get(0);
 
@@ -163,6 +164,7 @@ public class GameTest {
         Property testProperty = (Property) game.getBoard().getSquares().get(1);
         Player testBuyer = game.getPlayers().get(1);
         testBuyer.purchaseProperty(testProperty); // tested in MonopolyTest.PlayerTest
+        testProperty.setOwner(testBuyer);
 
         Player testRenter = game.getPlayers().get(0);
 
