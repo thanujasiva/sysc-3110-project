@@ -24,8 +24,6 @@ public class GameTest {
         this.game = new Game();
     }
 
-    // FIXME - may want to update constructor - player creation
-
     /**
      * Test that initial number of players is 2
      * @author Thanuja
@@ -98,7 +96,6 @@ public class GameTest {
      */
     @Test
     public void testPurchaseTransactionSuccess() {
-        assertEquals(0, game.getCurrentPlayerNumber()); // assert current player is 0
         Player testBuyer = game.getPlayers().get(0);
 
         Property testProperty = (Property) game.getBoard().getSquares().get(1);
@@ -118,17 +115,12 @@ public class GameTest {
      */
     @Test
     public void testRentTransactionSuccess() {
-        // same as purchaseProperty
-        // with another move and landing on that property
-        testPurchaseTransactionSuccess();
-
-        game.getDice1().rollDice(); // roll only 1 dice, to guarantee no doubles
-        game.handleSwitchTurn();
-
-        assertEquals(1, game.getCurrentPlayerNumber()); // assert current player is 1
-        Player testRenter = game.getPlayers().get(1);
-
         Property testProperty = (Property) game.getBoard().getSquares().get(1);
+        Player testBuyer = game.getPlayers().get(1);
+        testBuyer.purchaseProperty(testProperty); // tested in MonopolyTest.PlayerTest
+
+        Player testRenter = game.getPlayers().get(0);
+
         testRenter.changePosition(1); // tested in MonopolyTest.PlayerTest // have player 1 land on Mediterranean (hard coded in Monopoly.Board)
         assertEquals(1, game.getPlayers().get(game.getCurrentPlayerNumber()).getPosition()); // verify current player is now on test property (to pay rent)
 
@@ -145,11 +137,10 @@ public class GameTest {
      */
     @Test
     public void testPurchaseTransactionFailure(){
-        assertEquals(0, game.getCurrentPlayerNumber()); // assert current player is 0
         Player testBuyer = game.getPlayers().get(0);
 
         // decrease testBuyer money to $50
-        Property testExpensiveProperty = new Property("Test Monopoly.Property", 1450, ColourGroups.GREEN);
+        Property testExpensiveProperty = new Property("Test Property", 1450, ColourGroups.GREEN);
         testBuyer.purchaseProperty(testExpensiveProperty); // tested in MonopolyTest.PlayerTest
 
         Property testProperty = (Property) game.getBoard().getSquares().get(1);
@@ -164,26 +155,21 @@ public class GameTest {
     }
 
     /**
-     * Test an unsuccessful rent payment
+     * Test an unsuccessful rent payment (and bankruptcy)
      * @author Thanuja
      */
     @Test
     public void testRentTransactionFailure() {
-        // same as purchaseProperty
-        // with another move and landing on that property?
-        testPurchaseTransactionSuccess();
+        Property testProperty = (Property) game.getBoard().getSquares().get(1);
+        Player testBuyer = game.getPlayers().get(1);
+        testBuyer.purchaseProperty(testProperty); // tested in MonopolyTest.PlayerTest
 
-        game.getDice1().rollDice(); // roll only 1 dice, to guarantee no doubles
-        game.handleSwitchTurn();
-
-        assertEquals(1, game.getCurrentPlayerNumber()); // assert current player is 1
-        Player testRenter = game.getPlayers().get(1);
+        Player testRenter = game.getPlayers().get(0);
 
         // decrease testRenter money to $5
         Property testExpensiveProperty = new Property("Test Monopoly.Property", 1495, ColourGroups.GREEN);
         testRenter.purchaseProperty(testExpensiveProperty); // tested in MonopolyTest.PlayerTest
 
-        Property testProperty = (Property) game.getBoard().getSquares().get(1);
         testRenter.changePosition(1); // tested in MonopolyTest.PlayerTest // have player 1 land on Mediterranean (hard coded in Monopoly.Board)
         assertEquals(1, game.getPlayers().get(game.getCurrentPlayerNumber()).getPosition()); // verify current player is now on test property (to pay rent)
 
@@ -194,7 +180,7 @@ public class GameTest {
         Assert.assertEquals(1440, testProperty.getOwner().getMoney()); // no change for owner
 
         assertEquals(1, game.getPlayers().size()); // verify player was removed from players list
-        assertEquals(0, game.getPlayers().get(0).getId()); // verify only player 0 remains
+        assertEquals(1, game.getPlayers().get(0).getId()); // verify only player 1 remains
     }
 
     /**
@@ -231,7 +217,7 @@ public class GameTest {
      */
     @Test
     public void testHandleSwitchTurnSkip() {
-        // do not roll dice, to mimic a double
+        // do not roll dice, to mimic a double (both dice are initialized as 0)
         game.handleSwitchTurn();
         game.checkSkipTurn();
         game.handleSwitchTurn();
@@ -263,6 +249,5 @@ public class GameTest {
         game.handleMove(); // will move piece between 1 and 12
         assertTrue(0 < currentPlayer.getPosition());
         assertTrue(12 >= currentPlayer.getPosition());
-
     }
 }
