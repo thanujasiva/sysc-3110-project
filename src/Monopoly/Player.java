@@ -156,18 +156,20 @@ public class Player {
      * Adds collected rent to the owner's account
      */
     public void collectRent(Property property){
-        int rent = property.getRent();
+        int rent = this.getRentAmount(property);
         this.money += rent;
     }
 
     /**
      * @author Shrimei
+     * @author Thanuja
      * @param property      the property receiving rent
      * @return              the rent amount
-     * Decides the appropriate rent amount to pay based on if the colour set is owned
+     * Decides the appropriate rent amount to pay based on if the player owns the colour set
      */
     public int getRentAmount(Property property){
-        if(colourGroupMatch.get(property.getColourGroup()) == property.getColourGroup().getMax()){
+        // null check in case player does not own the property
+        if((colourGroupMatch.get(property.getColourGroup()) !=null) && (colourGroupMatch.get(property.getColourGroup()) == property.getColourGroup().getMax())){
             return property.getRentWithColourSet();
         } else {
             return property.getRent();

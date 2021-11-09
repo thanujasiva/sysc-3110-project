@@ -100,6 +100,21 @@ public class PlayerTest {
     }
 
     /**
+     * Test the process of collecting rent with colour set.
+     * @author Thanuja
+     */
+    @Test
+    public void collectRentColourSet(){
+        // purchase GREY property 3 times to own the colour set
+        player.purchaseProperty(property);
+        player.purchaseProperty(property);
+        player.purchaseProperty(property);
+
+        player.collectRent(property);
+        assertEquals(1220,player.getMoney()); //20% of 100$ (price of property) plus players money (1500 - 300)
+    }
+
+    /**
      * Test the process of paying rent
      * @author Maisha
      */
