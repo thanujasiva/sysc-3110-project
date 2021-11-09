@@ -29,13 +29,10 @@ Testing - Created test classes for each Model.
 ## Known Issues:
 
 1. Current players can press the dice button without purchasing or not purchasing a property resulting them to roll again. Therefore, the limitation is the current player must use the CardFrame before rolling again.
-
 2. The two panels on the right side of the GUI (PlayerStatePanel and PlayersPanel) change their sizes automatically after every few roll calls. This should not occur.
-
 3. Don’t skip to the next player right away, player might want to buy houses after rolling. (Milestone 3)
-
 4. PieceComponent not yet implemented. The player pieces do not show up on the board yet. For now, PlayersPanel on the top right of the GUI displays the position of each player. 
-
+5. From the current player's list of properties, the player can have multiple cards open at once, even duplicates of the same card.
 
 ## Remaining Deliverables:
 
