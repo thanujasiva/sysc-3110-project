@@ -59,6 +59,7 @@ public class PlayerStatePanel extends JPanel{
     /**
      * @author Thanuja
      * @param player    player to change to
+     * Update panel to display new user's information
      */
     public void updatePlayer(Player player){
         this.playerNameLabel.setText("Current Player: " + player.getId());

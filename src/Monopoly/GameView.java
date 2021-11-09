@@ -7,28 +7,13 @@ import java.awt.event.WindowEvent;
 
 public class GameView implements MonopolyInterfaceView {
     private BoardPanel boardPanel;
-    private CardFrame cardFrame;
     private PlayersPanel playersPanel;
     private PlayerStatePanel playerStatePanel;
     private Game game;
     private GameController gameController;
 
     /**
-     * Gets the initial number of players
-     * @author Maisha
-     * @return Integer  number of players
-     */
-    public Integer handleNumberOfPlayers(){
-        Integer[] options = {2,3,4};
-        Integer input = (Integer) JOptionPane.showInputDialog(null,"How many players do you wish to have?","PLAYERS",
-                JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
-        if (input == null) {
-            System.exit(0);
-        }
-        return input;
-    }
-
-    /**
+     * Create an overall game view
      * @author Maisha
      */
     public GameView(){
@@ -75,7 +60,22 @@ public class GameView implements MonopolyInterfaceView {
     }
 
     /**
-     * Handles player update
+     * Gets the initial number of players
+     * @author Maisha
+     * @return Integer  number of players
+     */
+    public Integer handleNumberOfPlayers(){
+        Integer[] options = {2,3,4};
+        Integer input = (Integer) JOptionPane.showInputDialog(null,"How many players do you wish to have?","PLAYERS",
+                JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+        if (input == null) {
+            System.exit(0);
+        }
+        return input;
+    }
+
+    /**
+     * Called when game is started, add selected number of players and display on panel
      * @author Maisha
      * @author Thanuja
      */
@@ -90,7 +90,7 @@ public class GameView implements MonopolyInterfaceView {
     }
 
     /**
-     * Handles dice roll
+     * Handles dice roll, updates dice view, display card of property that was landed on
      * @author Thanuja
      */
     @Override
@@ -107,12 +107,10 @@ public class GameView implements MonopolyInterfaceView {
         }else{
             gameController.handleSwitchTurn();
         }
-
-
     }
 
     /**
-     * Handles change in player state
+     * Update player state (money, position, properties owned)
      * @author Thanuja
      */
     @Override
@@ -123,7 +121,7 @@ public class GameView implements MonopolyInterfaceView {
     }
 
     /**
-     * Main method to call
+     * Call main method to run the game
      * @author Maisha
      * @param args      arguments
      */

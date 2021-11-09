@@ -37,6 +37,7 @@ public class Property implements Square {
 
     /**
      * @author Maisha
+     * @return owner
      */
     public Player getOwner() {
         return owner;
