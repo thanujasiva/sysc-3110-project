@@ -46,7 +46,7 @@ public class PlayersPanel {
     public void updatePlayers(){
         this.playersListModel.clear();
         for (Player player : game.getPlayers()){
-            Square currentSquare = game.getCurrentSquare();
+            Square currentSquare = game.getBoard().getSquares().get(player.getPosition() % game.getBoard().getSquares().size());
             this.playersListModel.addElement("Player: "+ player.getId() + " Position: " + currentSquare.getName());
         }
 
