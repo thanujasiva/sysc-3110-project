@@ -117,7 +117,7 @@ public class Player {
             this.money = this.money - cost;
             properties.add(property);
             colourGroupMatch.merge(property.getColourGroup(), 1, Integer::sum);
-            property.setOwner(this);
+            //property.setOwner(this);
             //System.out.println("Congratulations! You now own " + property.getName());
             //if(colourGroupMatch.get(property.getColourGroup()) == property.getColourGroup().getMax()) {
             //    System.out.println("You have a colour group! " + property.getColourGroup());
@@ -133,13 +133,13 @@ public class Player {
      * @author Maisha
      * @author Shrimei
      * @author Thanuja
-     * @param property      the property to pay rent for. Monopoly.Property must have an owner
+     * @param rent          the rent amount to pay
      * @return              returns true if player is able to pay rent, else false.
      * If the user has enough money to pay rent, it is deducted from their account.
      * Otherwise, the player is bankrupt
      */
-    public boolean payRent(Property property){
-        int rent = property.getOwner().getRentAmount(property);
+    public boolean payRent(int rent){
+        //int rent = property.getOwner().getRentAmount(property);
         if (this.money >= rent){
             //System.out.println("You have to pay rent. Amount: $" + rent);
             this.money -= rent;
@@ -156,18 +156,20 @@ public class Player {
      * Adds collected rent to the owner's account
      */
     public void collectRent(Property property){
-        int rent = property.getRent();
+        int rent = this.getRentAmount(property);
         this.money += rent;
     }
 
     /**
      * @author Shrimei
+     * @author Thanuja
      * @param property      the property receiving rent
      * @return              the rent amount
-     * Decides the appropriate rent amount to pay based on if the colour set is owned
+     * Decides the appropriate rent amount to pay based on if the player owns the colour set
      */
     public int getRentAmount(Property property){
-        if(colourGroupMatch.get(property.getColourGroup()) == property.getColourGroup().getMax()){
+        // null check in case player does not own the property
+        if((colourGroupMatch.get(property.getColourGroup()) !=null) && (colourGroupMatch.get(property.getColourGroup()) == property.getColourGroup().getMax())){
             return property.getRentWithColourSet();
         } else {
             return property.getRent();

@@ -68,8 +68,6 @@ public class PlayerTest {
         assertEquals(22,player.getPosition());
     }
 
-    // Other test methods to add:
-
     /**
      * Test the process of purchasing property
      * @author Maisha
@@ -102,13 +100,29 @@ public class PlayerTest {
     }
 
     /**
+     * Test the process of collecting rent with colour set.
+     * @author Thanuja
+     */
+    @Test
+    public void collectRentColourSet(){
+        // purchase GREY property 3 times to own the colour set
+        player.purchaseProperty(property);
+        player.purchaseProperty(property);
+        player.purchaseProperty(property);
+
+        player.collectRent(property);
+        assertEquals(1220,player.getMoney()); //20% of 100$ (price of property) plus players money (1500 - 300)
+    }
+
+    /**
      * Test the process of paying rent
      * @author Maisha
      */
     @Test
     public void payRent(){
-        owner.purchaseProperty(property);
-        assertTrue(player.payRent(property));
+        //owner.purchaseProperty(property);
+        //assertTrue(player.payRent(owner.getRentAmount(property)));
+        assertTrue(player.payRent(50));
     }
 
     /**
@@ -120,8 +134,9 @@ public class PlayerTest {
         for (int i = 0; i < 15; i++){
             player.purchaseProperty(property);
         }
-        owner.purchaseProperty(rentedProperty);
-        assertFalse(player.payRent(rentedProperty));
+        //owner.purchaseProperty(rentedProperty);
+        //assertFalse(player.payRent(owner.getRentAmount(rentedProperty))); // no longer have to call methods on property
+        assertFalse(player.payRent(10));
     }
 
 
