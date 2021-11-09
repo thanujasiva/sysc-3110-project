@@ -22,11 +22,10 @@ public class GameController implements ActionListener {
      * Handle button pressed
      * @author Maisha
      * @author Thanuja
-     * @param e     action event
+     * @param e     action event (button pressed)
      */
     @Override
     public void actionPerformed(ActionEvent e) { // roll is pressed
-        //call handleMove method
         game.handleMove();
     }
 

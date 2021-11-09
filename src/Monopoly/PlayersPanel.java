@@ -41,11 +41,12 @@ public class PlayersPanel {
 
     /**
      * @author Maisha
+     * Update the player panel with the new player positions
      */
     public void updatePlayers(){
         this.playersListModel.clear();
         for (Player player : game.getPlayers()){
-            Square currentSquare = game.getBoard().getSquares().get(player.getPosition() % game.getBoard().getSquares().size());
+            Square currentSquare = game.getCurrentSquare();
             this.playersListModel.addElement("Player: "+ player.getId() + " Position: " + currentSquare.getName());
         }
 
@@ -70,7 +71,7 @@ public class PlayersPanel {
         JFrame testFrame = new JFrame("Test frame for Players View: ");
         testFrame.add(playersPanel.getPlayersPanel());
 
-        testFrame.setSize(200,200); // FIXME - have proper size in the frame
+        testFrame.setSize(200,200);
         testFrame.setVisible(true);
         testFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 

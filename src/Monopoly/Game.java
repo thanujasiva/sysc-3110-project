@@ -114,9 +114,14 @@ public class Game {
     }
 
 
+    /**
+     * @author Shrimei
+     * @return current player
+     */
     public Player getCurrentPlayer(){
         return players.get(currentPlayerNumber);
     }
+
     /**
      * Handle purchase transaction
      * @author Maisha
@@ -131,9 +136,7 @@ public class Game {
         if(currentSquare.getType().equals("Monopoly.Property")) {
             Property currentProperty = (Property) currentSquare;
             canPurchase = currentPlayer.purchaseProperty(currentProperty);
-
         }
-
         return canPurchase;
     }
 
@@ -172,6 +175,10 @@ public class Game {
 
     }
 
+    /**
+     * @author Maisha
+     * @return true if one player left (winner)
+     */
     public boolean isWinner(){
         if (players.size() == 1) { //1 player left // move
             //System.out.println("Monopoly.Player " + players.get(0).getId() + " won!"); //display winner and exit game
@@ -287,6 +294,10 @@ public class Game {
         return currentPlayerNumber;
     }
 
+    /**
+     * @author Shrimei
+     * @return square of the current player
+     */
     public Square getCurrentSquare() {
         return board.getSquares().get(getCurrentPlayer().getPosition() % board.getSquares().size());
     }
