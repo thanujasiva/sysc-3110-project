@@ -105,8 +105,9 @@ public class PlayerTest {
      */
     @Test
     public void payRent(){
-        owner.purchaseProperty(property);
-        assertTrue(player.payRent(property));
+        //owner.purchaseProperty(property);
+        //assertTrue(player.payRent(owner.getRentAmount(property)));
+        assertTrue(player.payRent(50));
     }
 
     /**
@@ -118,8 +119,9 @@ public class PlayerTest {
         for (int i = 0; i < 15; i++){
             player.purchaseProperty(property);
         }
-        owner.purchaseProperty(rentedProperty);
-        assertFalse(player.payRent(rentedProperty));
+        //owner.purchaseProperty(rentedProperty);
+        //assertFalse(player.payRent(owner.getRentAmount(rentedProperty))); // no longer have to call methods on property
+        assertFalse(player.payRent(10));
     }
 
 

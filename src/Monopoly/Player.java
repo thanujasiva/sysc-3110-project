@@ -117,7 +117,7 @@ public class Player {
             this.money = this.money - cost;
             properties.add(property);
             colourGroupMatch.merge(property.getColourGroup(), 1, Integer::sum);
-            property.setOwner(this);
+            //property.setOwner(this);
             //System.out.println("Congratulations! You now own " + property.getName());
             //if(colourGroupMatch.get(property.getColourGroup()) == property.getColourGroup().getMax()) {
             //    System.out.println("You have a colour group! " + property.getColourGroup());
@@ -133,13 +133,13 @@ public class Player {
      * @author Maisha
      * @author Shrimei
      * @author Thanuja
-     * @param property      the property to pay rent for. Monopoly.Property must have an owner
+     * @param rent          the rent amount to pay
      * @return              returns true if player is able to pay rent, else false.
      * If the user has enough money to pay rent, it is deducted from their account.
      * Otherwise, the player is bankrupt
      */
-    public boolean payRent(Property property){
-        int rent = property.getOwner().getRentAmount(property);
+    public boolean payRent(int rent){
+        //int rent = property.getOwner().getRentAmount(property);
         if (this.money >= rent){
             //System.out.println("You have to pay rent. Amount: $" + rent);
             this.money -= rent;
