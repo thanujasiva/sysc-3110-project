@@ -49,6 +49,7 @@ Improvements for future Milestones:
 * Add pop-up for when player gets a colour group.
 * Need to add a Monopoly title on the centre of the Board.
 * 3 doubles will send a player to jail (Milestone 3)
+* BoardPanel will take a Board object directly instead of a Game object.
 
 ## Contributors:
 * Thanuja Sivaananthan
