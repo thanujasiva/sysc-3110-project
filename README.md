@@ -1,6 +1,6 @@
 # sysc-3110-project
 
-## Usage:
+## Installation and Usage:
 
 1. Download and execute jar file onto any IDE.
 2. Run the game from GameView.main()
@@ -9,14 +9,16 @@
 4. After choosing the number of players, all players will be initialized on position GO, as shown on the top right corner of the GUI.
 5. Hit the dice button on the centre of the board to roll and start the game.
 6. Your position will move automatically, and the property you land on will prompt the property card frame to pop up.
-7. Player must close on the frame to prompt the JOptionPane asking whether the player wants to purchase or not.
-8. If a player chooses to purchase, the property will be added onto their property owned list on the bottom right panel.
-9. The bottom right panel displays the current player's money and properties.
-10. Player can click on their individual properties from the list to check the property information.
-11. If the current player lands on another player's property, they have to pay rent. The player is notified via a pop up message. After the pop up message is  closed, the rent transaction will occur.
-12. A player is automatically removed from the game if the player does not have enough money to pay rent.
-13. When a player goes bankrupt and is removed from the game, all their properties become available to purchase again.
-14. The game continues until the player closes out of the game, or when there is only one player left on the board.
+7. If the player lands on a utilility or railroad (shown as light gray on the board), nothing will happen during their turn.
+8. Player must close on the pop up that asks whether the player wants to purchase or not before the next turn occurs.
+9. If a player chooses to purchase, the property will be added onto their property owned list on the bottom right panel.
+10. The bottom right panel displays the current player's money and properties.
+11. Player can click on their individual properties from the list to check the property information.
+12. If the current player lands on another player's property, they have to pay rent. The player is notified via a pop up message. 
+      * After the pop up message is  closed, the rent transaction will occur.
+14. A player is automatically removed from the game if the player does not have enough money to pay rent.
+      * When a player goes bankrupt and is removed from the game, all their properties become available to purchase again.
+16. The game continues until the player closes out of the game, or when there is only one player left on the board.
 
 ## Milestone 2 Changes:
 
