@@ -9,7 +9,7 @@
 4. After choosing the number of players, all players will be initialized on position GO, as shown on the top right panel of the GUI.
 5. Click the dice button on the centre of the board to roll and start the game.
 6. Your position will move automatically, and the square you land on will prompt the property card frame to pop up.
-7. If the player lands on a utilility or railroad (shown as light gray on the board), nothing will happen during their turn.
+7. If the player lands on a utility or railroad (shown as light gray on the board), nothing will happen during their turn.
 8. When the player closes the property card, they will be given the option to purchase the property. The player must close the pop up to change turns.
 10. If a player chooses to purchase, the property will be added onto their list of owned properties on the bottom right panel, wich also displays their money. The price paid for the property will be subtracted from their money.
 12. Player can click on their individual properties from the bottom right panel to check the property information.
