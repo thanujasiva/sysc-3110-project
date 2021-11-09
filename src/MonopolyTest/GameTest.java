@@ -243,6 +243,10 @@ public class GameTest {
 
     }
 
+    /**
+     * Test a roll dice.
+     * @author Thanuja
+     */
     @Test
     public void handleMove() {
         Player currentPlayer = game.getPlayers().get(0);

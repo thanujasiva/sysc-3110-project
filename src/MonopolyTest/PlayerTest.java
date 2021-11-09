@@ -68,8 +68,6 @@ public class PlayerTest {
         assertEquals(22,player.getPosition());
     }
 
-    // Other test methods to add:
-
     /**
      * Test the process of purchasing property
      * @author Maisha
