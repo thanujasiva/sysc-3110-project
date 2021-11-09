@@ -5,7 +5,7 @@
 1. Download and execute jar file onto any IDE.
 2. Run the game from GameView.main()
 3. When the game opens, first choose how many players you wish to play with from the drop down menu. 
-    * If you fail to choose - hit cancel or closes on JOptionPane, the game will terminate.
+    * If you fail to choose (i.e. hit cancel or close the JOptionPane) the game will terminate.
 4. After choosing the number of players, all players will be initialized on position GO, as shown on the top right corner of the GUI.
 5. Hit the dice button on the centre of the board to roll and start the game.
 6. Your position will move automatically, and the property you land on will prompt the property card frame to pop up.
@@ -29,13 +29,10 @@ Testing - Created test classes for each Model.
 ## Known Issues:
 
 1. Current players can press the dice button without purchasing or not purchasing a property resulting them to roll again. Therefore, the limitation is the current player must use the CardFrame before rolling again.
-
 2. The two panels on the right side of the GUI (PlayerStatePanel and PlayersPanel) change their sizes automatically after every few roll calls. This should not occur.
-
 3. Don’t skip to the next player right away, player might want to buy houses after rolling. (Milestone 3)
-
 4. PieceComponent not yet implemented. The player pieces do not show up on the board yet. For now, PlayersPanel on the top right of the GUI displays the position of each player. 
-
+5. From the current player's list of properties, the player can have multiple cards open at once, even duplicates of the same card.
 
 ## Remaining Deliverables:
 
