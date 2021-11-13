@@ -1,5 +1,7 @@
 package Monopoly;
 
+import Monopoly.Squares.Square;
+
 import javax.swing.*;
 
 public class PlayersPanel {

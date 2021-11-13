@@ -1,4 +1,4 @@
-package Monopoly;
+package Monopoly.Squares;
 
 public class BlankSquare implements Square {
 
@@ -24,11 +24,11 @@ public class BlankSquare implements Square {
 
     /**
      * @author Thanuja
-     * @return the type of square which is 'Monopoly.BlankSquare'
+     * @return the type of square which is 'Monopoly.Squares.BlankSquare'
      */
     @Override
     public String getType() {
-        return "Monopoly.BlankSquare";
+        return "Monopoly.Squares.BlankSquare";
     }
 
     /**
@@ -38,7 +38,7 @@ public class BlankSquare implements Square {
      */
     @Override
     public String toString() {
-        return "Monopoly.BlankSquare: " +
+        return "Monopoly.Squares.BlankSquare: " +
                 "name='" + name + '\'';
     }
 }

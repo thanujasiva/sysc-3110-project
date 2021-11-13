@@ -1,5 +1,8 @@
 package Monopoly;
 
+import Monopoly.Squares.Property;
+import Monopoly.Squares.Square;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.WindowAdapter;
@@ -101,9 +104,12 @@ public class GameView implements MonopolyInterfaceView {
         Player currentPlayer = game.getCurrentPlayer();
         Square currentSquare = game.getCurrentSquare();
 
-        if(currentSquare.getType().equals("Monopoly.Property")) {
+        if(currentSquare.getType().equals("Monopoly.Squares.Property")) {
             CardFrame card = new CardFrame((Property) currentSquare, currentPlayer, game);
             // do not switch turn until card is handled property
+        }else if (currentSquare.getType().equals("Monopoly.Squares.Railroad")) {
+            // show railroad card
+            // buy / pay rent
         }else{
             gameController.handleSwitchTurn();
         }

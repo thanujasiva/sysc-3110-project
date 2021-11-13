@@ -1,5 +1,7 @@
 package Monopoly;
 
+import Monopoly.Squares.Property;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
