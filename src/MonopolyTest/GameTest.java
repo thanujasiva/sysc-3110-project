@@ -2,7 +2,7 @@ package MonopolyTest;
 
 import Monopoly.ColourGroups;
 import Monopoly.Game;
-import Monopoly.Property;
+import Monopoly.Squares.Property;
 import Monopoly.Player;
 
 import org.junit.Assert;
@@ -169,7 +169,7 @@ public class GameTest {
         Player testRenter = game.getPlayers().get(0);
 
         // decrease testRenter money to $5
-        Property testExpensiveProperty = new Property("Test Monopoly.Property", 1495, ColourGroups.GREEN);
+        Property testExpensiveProperty = new Property("Test Monopoly.Squares.Property", 1495, ColourGroups.GREEN);
         testRenter.purchaseProperty(testExpensiveProperty); // tested in MonopolyTest.PlayerTest
 
         testRenter.changePosition(1); // tested in MonopolyTest.PlayerTest // have player 1 land on Mediterranean (hard coded in Monopoly.Board)

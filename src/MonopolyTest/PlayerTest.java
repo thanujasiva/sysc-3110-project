@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 import org.junit.Before;
-import Monopoly.Property;
+import Monopoly.Squares.Property;
 import Monopoly.Player;
 import Monopoly.ColourGroups;
 

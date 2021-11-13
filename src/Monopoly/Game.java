@@ -1,13 +1,15 @@
 package Monopoly;
 
+import Monopoly.Squares.Property;
+import Monopoly.Squares.Square;
+
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Game {
 
     private Dice dice1;
     private Dice dice2;
-    //private HashMap<Integer, Monopoly.Square> squares; //integer represents the place of the box on the board
+    //private HashMap<Integer, Monopoly.Squares.Square> squares; //integer represents the place of the box on the board
     private ArrayList<Player> players;
     private int currentPlayerNumber;
     private int doubles;
@@ -133,7 +135,7 @@ public class Game {
         boolean canPurchase = false;
         Player currentPlayer = getCurrentPlayer();
         Square currentSquare =  board.getSquares().get(currentPlayer.getPosition() % board.getSquares().size());
-        if(currentSquare.getType().equals("Monopoly.Property")) {
+        if(currentSquare.getType().equals("Monopoly.Squares.Property")) {
             Property currentProperty = (Property) currentSquare;
             canPurchase = currentPlayer.purchaseProperty(currentProperty);
             if (canPurchase){
@@ -158,7 +160,7 @@ public class Game {
         Player currentPlayer = getCurrentPlayer();
         Square currentSquare =  getCurrentSquare();
 
-        if (currentSquare.getType().equals("Monopoly.Property") && ((Property)currentSquare).getOwner() != null) {
+        if (currentSquare.getType().equals("Monopoly.Squares.Property") && ((Property)currentSquare).getOwner() != null) {
             Property currentProperty = (Property) currentSquare;
             int rentAmount = currentProperty.getOwner().getRentAmount(currentProperty);
 

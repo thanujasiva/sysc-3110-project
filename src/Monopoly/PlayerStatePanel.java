@@ -1,9 +1,10 @@
 package Monopoly;
 
+import Monopoly.Squares.Property;
+
 import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
-import java.util.Scanner;
 
 /**
  * PlayerStateView class
@@ -15,7 +16,7 @@ public class PlayerStatePanel extends JPanel{
     private JLabel playerNameLabel;
     private JLabel playerMoneyLabel;
     private JList<String> propertiesList;
-    private PlayerStatePanelController playerStatePanelController;
+    private PlayerStateController playerStateController;
 
 
     /**
@@ -50,9 +51,9 @@ public class PlayerStatePanel extends JPanel{
         propertiesList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         this.add(new JScrollPane(propertiesList));
 
-        playerStatePanelController = new PlayerStatePanelController(propertiesList, player);
+        playerStateController = new PlayerStateController(propertiesList, player);
         // display cardView for the selected property in the JList
-        propertiesList.addListSelectionListener(playerStatePanelController);
+        propertiesList.addListSelectionListener(playerStateController);
 
     }
 
@@ -73,10 +74,10 @@ public class PlayerStatePanel extends JPanel{
         propertiesList.setModel(propertiesModel);
         propertiesList.clearSelection();
 
-        propertiesList.removeListSelectionListener(playerStatePanelController);
+        propertiesList.removeListSelectionListener(playerStateController);
 
-        playerStatePanelController = new PlayerStatePanelController(propertiesList, player);
-        propertiesList.addListSelectionListener(playerStatePanelController);
+        playerStateController = new PlayerStateController(propertiesList, player);
+        propertiesList.addListSelectionListener(playerStateController);
 
     }
 
