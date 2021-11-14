@@ -2,16 +2,16 @@ package Monopoly.Squares;
 
 import Monopoly.Player;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Jail implements Square {
 
     private String name;
-    private ArrayList<Player> peopleInJail; // keep track of how long they have been in jail
+    private HashMap<Player, Integer> peopleInJail;
 
     public Jail(String name){
         this.name = name;
-        peopleInJail = new ArrayList<>();
+        this.peopleInJail = new HashMap<>();
     }
 
     @Override
@@ -30,11 +30,30 @@ public class Jail implements Square {
      * @param player        player to add
      */
     public void addToJail(Player player){
-        peopleInJail.add(player);
+        peopleInJail.put(player, 0);
     }
 
     /**
-     * Remove player to jail list
+     * Increase a player's time in jail
+     * @author Thanuja
+     * @param player        player to increase time for
+     */
+    public void incrementJailTime(Player player){
+        peopleInJail.put(player, peopleInJail.get(player)+1);
+    }
+
+    /**
+     * Return how long a specific player has been in jail
+     * @author Thanuja
+     * @param player        player to check time for
+     * @return              int, time in jail
+     */
+    public int getJailTime(Player player){
+        return peopleInJail.get(player);
+    }
+
+    /**
+     * Remove player from jail list
      * @author Thanuja
      * @param player        player to remove
      */
