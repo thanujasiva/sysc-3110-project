@@ -85,6 +85,7 @@ public class Game {
         for (Property p: player.getProperties()){
             p.setOwner(null);
         }
+        doubles = 0;
     }
 
     /**
@@ -216,6 +217,7 @@ public class Game {
                 if (doubles >= 3) {
                     currentPlayer.setSkipTurn(true);
                     this.switchTurn(); // switches the turn (in milestone 3 change it to go to jail)
+                    doubles = 0;
                 }
             }
         }
