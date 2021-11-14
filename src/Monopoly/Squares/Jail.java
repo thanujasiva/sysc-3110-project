@@ -30,16 +30,17 @@ public class Jail implements Square {
      * @param player        player to add
      */
     public void addToJail(Player player){
-        peopleInJail.put(player, 0);
+        peopleInJail.put(player, 1);
     }
 
     /**
-     * Increase a player's time in jail
+     * Increase a player's time in jail if they are already in jail
      * @author Thanuja
      * @param player        player to increase time for
      */
     public void incrementJailTime(Player player){
-        peopleInJail.put(player, peopleInJail.get(player)+1);
+        int previousTime = peopleInJail.getOrDefault(player, 0);
+        peopleInJail.replace(player, previousTime + 1); // replace key's entry only if currently mapped to some value
     }
 
     /**
@@ -49,7 +50,7 @@ public class Jail implements Square {
      * @return              int, time in jail
      */
     public int getJailTime(Player player){
-        return peopleInJail.get(player);
+        return peopleInJail.getOrDefault(player, 0);
     }
 
     /**
