@@ -73,6 +73,15 @@ public class Player {
     }
 
     /**
+     * Set a players position
+     * @author Thanuja
+     * @param position      position number to set
+     */
+    public void setPosition(int position) {
+        this.position = position;
+    }
+
+    /**
      * @author Sabah
      * @return          the list of properties owned by the player
      */

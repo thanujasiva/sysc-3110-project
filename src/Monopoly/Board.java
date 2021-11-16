@@ -125,4 +125,32 @@ public class Board {
         return squares;
     }
 
+
+    /**
+     * Return casted version of go to jail square
+     * @author Thanuja
+     * @return          GoToJail square
+     */
+    public GoToJail getGoToJailSquare(){
+        return (GoToJail) squares.get(26);
+    }
+
+    /**
+     * Return casted version of jail square
+     * @author Thanuja
+     * @return          Jail square
+     */
+    public Jail getJailSquare(){
+        return (Jail) squares.get(8);
+    }
+
+    /**
+     * Return jail position
+     * @author Thanuja
+     * @return          int, position of jail
+     */
+    public int getJailPosition(){
+        return 8;
+    }
+
 }
