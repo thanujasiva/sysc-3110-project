@@ -165,7 +165,7 @@ public class CardFrame extends JOptionPane {
             } // else, they successfully purchased
         }//else, player says no, do nothing
 
-        cardController.handleSwitchTurn();
+        //cardController.handleSwitchTurn();
         //this.dispose();
     }
 
@@ -186,7 +186,7 @@ public class CardFrame extends JOptionPane {
                 System.exit(0);
             }
         } // else, they successfully paid
-        cardController.handleSwitchTurn();
+        //cardController.handleSwitchTurn();
         //this.dispose();
     }
 
@@ -196,9 +196,9 @@ public class CardFrame extends JOptionPane {
      */
     private void handleIsOwner(){
         JOptionPane.showMessageDialog(null, mainPanel /*"You own this property"*/);
-        if(cardController != null){
-            cardController.handleSwitchTurn();
-        }
+        //if(cardController != null){
+        //    cardController.handleSwitchTurn();
+        //}
         //this.dispose();
     }
 

@@ -35,7 +35,7 @@ public class PropertyTest {
      */
     @Test
     public void getType() {
-        assertEquals("Monopoly.Squares.Property", property.getType());
+        assertTrue(property instanceof Property);
     }
 
     /**
