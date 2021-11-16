@@ -1,6 +1,7 @@
 package Monopoly;
 
 import Monopoly.Squares.Property;
+import Monopoly.Squares.Railroad;
 import Monopoly.Squares.Square;
 
 import javax.swing.*;
@@ -104,15 +105,15 @@ public class GameView implements MonopolyInterfaceView {
         Player currentPlayer = game.getCurrentPlayer();
         Square currentSquare = game.getCurrentSquare();
 
-        if(currentSquare.getType().equals("Monopoly.Squares.Property")) {
+        // ideally don't want if statement structure here
+        if(currentSquare instanceof Property) {
             CardFrame card = new CardFrame((Property) currentSquare, currentPlayer, game);
             // do not switch turn until card is handled property
-        }else if (currentSquare.getType().equals("Monopoly.Squares.Railroad")) {
+        }else if (currentSquare instanceof Railroad) {
             // show railroad card
             // buy / pay rent
-        }else{
-            gameController.handleSwitchTurn();
         }
+        gameController.handleSwitchTurn(); // can call here now that Card is a JOptionPane
     }
 
     /**

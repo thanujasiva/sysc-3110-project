@@ -1,10 +1,13 @@
 package MonopolyTest;
 
 import Monopoly.Board;
+import Monopoly.Squares.GoToJail;
+import Monopoly.Squares.Jail;
 import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class BoardTest {
 
@@ -36,7 +39,7 @@ public class BoardTest {
     @Test
     public void testGetGoToJailSquare(){
         assertEquals("Go to Jail", board.getGoToJailSquare().getName());
-        assertEquals("Monopoly.Squares.GoToJail", board.getGoToJailSquare().getType());
+        assertTrue(board.getGoToJailSquare()  instanceof GoToJail);
     }
 
     /**
@@ -46,7 +49,7 @@ public class BoardTest {
     @Test
     public void testGetJailSquare(){
         assertEquals("Visiting Jail", board.getJailSquare().getName());
-        assertEquals("Monopoly.Squares.Jail", board.getJailSquare().getType());
+        assertTrue(board.getJailSquare() instanceof Jail);
     }
 
     /**
@@ -56,6 +59,6 @@ public class BoardTest {
     @Test
     public void testGetJailPosition(){
         assertEquals("Visiting Jail", board.getSquares().get(board.getJailPosition()).getName());
-        assertEquals("Monopoly.Squares.Jail", board.getSquares().get(board.getJailPosition()).getType());
+        assertTrue(board.getSquares().get(board.getJailPosition()) instanceof Jail);
     }
 }

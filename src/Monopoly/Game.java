@@ -135,8 +135,8 @@ public class Game {
     public boolean purchaseTransaction(){
         boolean canPurchase = false;
         Player currentPlayer = getCurrentPlayer();
-        Square currentSquare =  board.getSquares().get(currentPlayer.getPosition() % board.getSquares().size());
-        if(currentSquare.getType().equals("Monopoly.Squares.Property")) {
+        Square currentSquare =  getCurrentSquare();
+        if(currentSquare instanceof Property) {
             Property currentProperty = (Property) currentSquare;
             canPurchase = currentPlayer.purchaseProperty(currentProperty);
             if (canPurchase){
@@ -161,7 +161,7 @@ public class Game {
         Player currentPlayer = getCurrentPlayer();
         Square currentSquare =  getCurrentSquare();
 
-        if (currentSquare.getType().equals("Monopoly.Squares.Property") && ((Property)currentSquare).getOwner() != null) {
+        if ((currentSquare instanceof Property) && ((Property)currentSquare).getOwner() != null) {
             Property currentProperty = (Property) currentSquare;
             int rentAmount = currentProperty.getOwner().getRentAmount(currentProperty);
 
@@ -208,7 +208,7 @@ public class Game {
         if (currentPlayerNumber<0){ // in case current player went bankrupt
             this.switchTurn(); // if 2 or more players remaining
         }else {
-            Player currentPlayer = players.get(currentPlayerNumber);
+            Player currentPlayer = getCurrentPlayer();
             if (dice1.getDiceNumber() != dice2.getDiceNumber()) { // no double rolls
                 this.switchTurn();// switches turn
                 doubles = 0;
@@ -233,7 +233,7 @@ public class Game {
      * @author Sabah
      */
     public void checkSkipTurn(){
-        Player currentPlayer = players.get(currentPlayerNumber);
+        Player currentPlayer = getCurrentPlayer();
         if (currentPlayer.isSkipTurn()){
             currentPlayer.setSkipTurn(false);
             this.switchTurn();
@@ -263,14 +263,12 @@ public class Game {
         checkSkipTurn();
 
         //System.out.println("\n===============================================");
-        Player currentPlayer = players.get(currentPlayerNumber); // only get actual current player after skip turn was checked
+        Player currentPlayer = getCurrentPlayer(); // only get actual current player after skip turn was checked
         //Square currentSquare =  board.getSquares().get(currentPlayer.getPosition() % board.getSquares().size());
         //currentPlayer.printCurrentState(currentSquare.getName());
 
         // changed to 2 dice rolls
-        int roll1 = dice1.rollDice();
-        int roll2 = dice2.rollDice();
-        int roll = roll1+ roll2;
+        int roll = dice1.rollDice() + dice2.rollDice();
 
         //System.out.println("Amount rolled is " + roll1 + ", " + roll2);
         currentPlayer.changePosition(roll); //move the player

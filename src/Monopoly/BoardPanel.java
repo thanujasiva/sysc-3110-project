@@ -84,7 +84,7 @@ public class BoardPanel {
             box.add(label, BorderLayout.CENTER);
 
             //if square is a property, show colour group
-            if (square.getType().equals("Monopoly.Squares.Property")) {
+            if (square instanceof Property) {
                 label.setBackground(((Property) square).getColourGroup().getColour());
                 label.setOpaque(true);
             } else{
