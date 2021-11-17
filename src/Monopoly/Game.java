@@ -210,6 +210,8 @@ public class Game {
         currentPlayer.setSkipTurn(true);
         currentPlayer.setPosition(board.getJailPosition());
         jail.addToJail(currentPlayer);
+
+        this.doubles = -1; // in case player rolled doubles when landing on go to jail
     }
 
     /**
@@ -225,6 +227,19 @@ public class Game {
         this.doubles = -1; // even if player rolled doubles to exit, they cannot roll again (handled in handleSwitchTurn)
     }
 
+
+    /**
+     * Encapsulate the checking if a player can roll again
+     * @author Thanuja
+     * @return boolean      true if they can reroll, false otherwise
+     */
+    private boolean cannotReRoll(){
+        // currentPlayerNumber<0 - if current player went bankrupt in a way that currentPlayerNumber is now out of range
+        // dice1.getDiceNumber() != dice2.getDiceNumber() - did not roll doubles
+        // doubles < 0 - if player just went bankrupt or if player just entered/exited jail
+        return ((currentPlayerNumber<0) || (dice1.getDiceNumber() != dice2.getDiceNumber()) || (doubles < 0));
+    }
+
     /**
      * Handle switch turn
      * @author Sabah
@@ -232,27 +247,23 @@ public class Game {
      * @author Thanuja
      */
     public void handleSwitchTurn(){
-        if (currentPlayerNumber<0){ // in case current player went bankrupt
+        if (cannotReRoll()){
+            //System.out.println("reset to 0");
             this.switchTurn(); // if 2 or more players remaining
+            doubles = 0;
         }else {
-            if ((dice1.getDiceNumber() != dice2.getDiceNumber()) || (doubles < 0)) { // no double rolls or if player just left jail / went bankrupt
-                this.switchTurn();// switches turn
-                //System.out.println("reset to 0");
-                doubles = 0;
-            } else { // when player rolls doubles
-                doubles += 1;
-                //System.out.println("Increment doubles for " + getCurrentPlayer().getId());
-                if (doubles >= 3) {  // when player rolls doubles more than 3 times
-                    //System.out.println("Rolled 3 doubles - Jail " + getCurrentPlayer().getId());
-                    this.addCurrentPlayerToJail();
+            doubles += 1;
+            //System.out.println("Increment doubles for " + getCurrentPlayer().getId());
+            if (doubles >= 3) {  // when player rolls doubles more than 3 times
+                //System.out.println("Rolled 3 doubles - Jail " + getCurrentPlayer().getId());
+                this.addCurrentPlayerToJail();
 
-                    for (MonopolyInterfaceView view : this.views){
-                        view.handleJailEntered("Rolled 3 doubles");
-                    }
-
-                    this.switchTurn(); // switches the turn (in milestone 3 change it to go to jail)
-                    doubles = 0;
+                for (MonopolyInterfaceView view : this.views){
+                    view.handleJailEntered("Rolled 3 doubles");
                 }
+
+                this.switchTurn(); // switches the turn (in milestone 3 change it to go to jail)
+                doubles = 0;
             }
         }
 
