@@ -26,7 +26,7 @@ public class GameController implements ActionListener {
      */
     @Override
     public void actionPerformed(ActionEvent e) { // roll is pressed
-        game.handleMove();
+        game.handleRoll();
     }
 
     /**
