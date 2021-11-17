@@ -9,4 +9,10 @@ public interface MonopolyInterfaceView {
     void handlePlayerState();
 
     void handleEndOfTurn();
+
+    void handleJailEntered(String message);
+
+    void handleJailExited(String message);
+
+    void handleBankruptcy();
 }

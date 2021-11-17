@@ -137,6 +137,37 @@ public class GameView implements MonopolyInterfaceView {
     }
 
     /**
+     * Handle when current player enters jail
+     * @author Thanuja
+     * @param message   reason for entering
+     */
+    @Override
+    public void handleJailEntered(String message) {
+        String title = "Player " + game.getCurrentPlayer().getId() + " Go To Jail";
+        JOptionPane.showMessageDialog(null,message,title,JOptionPane.INFORMATION_MESSAGE);
+    }
+
+    /**
+     * Handle when current player exits jail
+     * @author Thanuja
+     * @param message reason for exiting
+     */
+    @Override
+    public void handleJailExited(String message) {
+        String title = "Player " + game.getCurrentPlayer().getId() + " Exit Jail";
+        JOptionPane.showMessageDialog(null,message,title,JOptionPane.INFORMATION_MESSAGE);
+    }
+
+    /**
+     * Handle a bankruptcy
+     * @author Thanuja
+     */
+    @Override
+    public void handleBankruptcy() {
+        JOptionPane.showMessageDialog(null, "You are bankrupt. You cannot play further.");
+    }
+
+    /**
      * Call main method to run the game
      * @author Maisha
      * @param args      arguments

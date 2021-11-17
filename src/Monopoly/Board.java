@@ -36,7 +36,7 @@ public class Board {
         Property Vermont = new Property("Vermont Avenue", 100, ColourGroups.GREY);
         Property Connecticut = new Property("Connecticut Avenue", 120, ColourGroups.GREY);
 
-        Jail VisitingJail = new Jail("Visiting Jail"); // also has a Jail
+        Jail VisitingJail = new Jail("Visiting Jail", "In Jail"); // also has a Jail
 
         Property StCharles  = new Property("St. Charles Place", 140, ColourGroups.PINK);
 
