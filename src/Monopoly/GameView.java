@@ -113,7 +113,6 @@ public class GameView implements MonopolyInterfaceView {
             // show railroad card
             // buy / pay rent
         }
-        gameController.handleSwitchTurn(); // can call here now that Card is a JOptionPane
     }
 
     /**
@@ -125,6 +124,16 @@ public class GameView implements MonopolyInterfaceView {
         Player currentPlayer = game.getPlayers().get(game.getCurrentPlayerNumber());
         this.playerStatePanel.updatePlayer(currentPlayer);
         this.playersPanel.updatePlayers();
+    }
+
+    /**
+     * Handles the end of a player's turn
+     * @author Thanuja
+     */
+    @Override
+    public void handleEndOfTurn() {
+        // ask if player wants to purchase houses/hotels before switching turn (if they didn't roll doubles)
+        gameController.handleSwitchTurn(); // can call here now that Card is a JOptionPane
     }
 
     /**
