@@ -19,7 +19,7 @@ public class JailTest {
      */
     @Before
     public void setUp() {
-        this.jail = new Jail("Visiting Jail");
+        this.jail = new Jail("Visiting Jail", "In Jail");
         this.player = new Player();
         this.playerAlreadyInJail = new Player();
         jail.addToJail(playerAlreadyInJail);

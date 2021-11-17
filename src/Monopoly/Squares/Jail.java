@@ -7,16 +7,22 @@ import java.util.HashMap;
 public class Jail implements Square {
 
     private String name;
+    private String otherName;
     private HashMap<Player, Integer> peopleInJail;
 
-    public Jail(String name){
+    public Jail(String name, String otherName){
         this.name = name;
+        this.otherName = otherName;
         this.peopleInJail = new HashMap<>();
     }
 
     @Override
     public String getName() {
         return name;
+    }
+
+    public String getOtherName() {
+        return otherName;
     }
 
     @Override

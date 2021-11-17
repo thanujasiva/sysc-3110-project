@@ -1,5 +1,6 @@
 package Monopoly;
 
+import Monopoly.Squares.Jail;
 import Monopoly.Squares.Square;
 
 import javax.swing.*;
@@ -49,7 +50,11 @@ public class PlayersPanel {
         this.playersListModel.clear();
         for (Player player : game.getPlayers()){
             Square currentSquare = game.getBoard().getSquares().get(player.getPosition() % game.getBoard().getSquares().size());
-            this.playersListModel.addElement("Player: "+ player.getId() + " Position: " + currentSquare.getName());
+            String positionName = currentSquare.getName();
+            if (player.isSkipTurn() && (currentSquare instanceof Jail)){
+                positionName = ((Jail)currentSquare).getOtherName();
+            }
+            this.playersListModel.addElement("Player: "+ player.getId() + " Position: " + positionName);
         }
 
         // shows the list of players
