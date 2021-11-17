@@ -179,8 +179,6 @@ public class Game {
             }
             //return true;
 
-        }else{
-            System.out.println("This should not have occurred."); // FIXME - handling of this
         }
 
         return canPayRent;
@@ -284,6 +282,10 @@ public class Game {
 
         for (MonopolyInterfaceView view : this.views){
             view.handlePlayerState();
+        }
+
+        for (MonopolyInterfaceView view : this.views){
+            view.handleEndOfTurn();
         }
     }
 

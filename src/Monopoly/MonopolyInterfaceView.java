@@ -7,4 +7,6 @@ public interface MonopolyInterfaceView {
     void handleRoll();
 
     void handlePlayerState();
+
+    void handleEndOfTurn();
 }
