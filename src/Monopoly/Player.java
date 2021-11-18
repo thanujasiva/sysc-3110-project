@@ -21,6 +21,7 @@ public class Player {
     private int id;
     private int position;
     private boolean skipTurn;
+    private int oldPosition;
 
     /**
      * @author Sabah
@@ -37,6 +38,7 @@ public class Player {
         this.ownableSquares = new ArrayList<>();
         this.colourGroupMatch = new HashMap<>();
         this.skipTurn = false;
+        this.oldPosition = 0;
     }
 
     public int getRailroadNumber() {
@@ -262,4 +264,14 @@ public class Player {
         return 0; //FIXME
         //return ownableSquare.getRent();
     }
+
+    /**
+     * @author Sabah
+     * @return $200 added to the current player, when passing or landing on go.
+     */
+
+    public void collect200() {
+        this.money += 200;
+    }
+
 }

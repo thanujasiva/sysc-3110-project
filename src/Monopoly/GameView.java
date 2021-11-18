@@ -165,6 +165,11 @@ public class GameView implements MonopolyInterfaceView {
         JOptionPane.showMessageDialog(null, "You are bankrupt. You cannot play further.");
     }
 
+    @Override
+    public void handlePassedGo() {
+        JOptionPane.showMessageDialog(null, "You passed GO! Collect $200.");
+    }
+
     /**
      * Call main method to run the game
      * @author Maisha
