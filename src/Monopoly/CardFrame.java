@@ -87,6 +87,39 @@ public class CardFrame extends JOptionPane {
 
         JLabel name = new JLabel(utility.getName(), SwingConstants.CENTER);
         name.setBorder(valueBorder);
+        name.setOpaque(true);
+        name.setForeground(Color.WHITE);
+        name.setBackground(Color.DARK_GRAY);
+
+        JLabel price = new JLabel("Price: ");
+        price.setBorder(fieldBorder);
+
+        JLabel rentOne = new JLabel("1 Utility Owned");
+        rentOne.setBorder(fieldBorder);
+
+        JLabel rentTwo = new JLabel("2 Utilities Owned");
+        rentTwo.setBorder(fieldBorder);
+
+        fieldPanel.add(price);
+        fieldPanel.add(rentOne);
+        fieldPanel.add(rentTwo);
+
+        JLabel priceVal = new JLabel("$" + utility.getPrice());
+        priceVal.setBorder(valueBorder);
+
+        JLabel rentOneVal = new JLabel("4 X roll");
+        rentOneVal.setBorder(valueBorder);
+
+        JLabel rentTwoVal = new JLabel("10 X roll");
+        rentTwoVal.setBorder(valueBorder);
+
+        valuePanel.add(priceVal);
+        valuePanel.add(rentOneVal);
+        valuePanel.add(rentTwoVal);
+
+        mainPanel.add(name, BorderLayout.NORTH);
+        mainPanel.add(fieldPanel, BorderLayout.WEST);
+        mainPanel.add(valuePanel, BorderLayout.EAST);
     }
 
     private void displayRailroadInfo(Railroad railroad) {
@@ -280,11 +313,13 @@ public class CardFrame extends JOptionPane {
 
         Railroad BO = new Railroad("B. & O. Railroad");
 
+        Utility WaterWorks = new Utility("Water Works");
+
         //player.setPosition(22);
         //player.setPosition(5);
 
-        Monopoly.CardFrame card = new Monopoly.CardFrame(BO, player, game);
-
+        Monopoly.CardFrame card = new Monopoly.CardFrame(WaterWorks, player, game);
+        //Monopoly.CardFrame card = new Monopoly.CardFrame(BO, player, game);
         //Monopoly.CardFrame card = new Monopoly.CardFrame(Atlantic, player, game);
         //Monopoly.CardFrame card2 = new Monopoly.CardFrame(Oriental, player, game);
     }

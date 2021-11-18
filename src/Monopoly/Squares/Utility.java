@@ -11,6 +11,7 @@ public class Utility implements OwnableSquare {
 
     public Utility(String name){
         this.name = name;
+        this.price = 150;
     }
 
     @Override
@@ -30,7 +31,7 @@ public class Utility implements OwnableSquare {
 
     /**
      * @author Shrimei
-     * @return
+     * @return owner of utility
      */
     @Override
     public Player getOwner() {
@@ -44,7 +45,7 @@ public class Utility implements OwnableSquare {
 
     /**
      * @author Shrimei
-     * @return
+     * @return price to buy utility
      */
     @Override
     public int getPrice() {
