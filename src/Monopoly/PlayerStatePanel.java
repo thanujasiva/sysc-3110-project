@@ -20,66 +20,55 @@ public class PlayerStatePanel extends JPanel{
 
 
     /**
+     * Create an empty player state panel
      * @author Thanuja
      */
     public PlayerStatePanel(){
         super();
 
-        Player player = new Player(); //FIXME
-
         this.setLayout(new BoxLayout (this, BoxLayout.Y_AXIS));
 
-        Border fieldBorder = new EmptyBorder(6,3,3,3);
+        // create empty labels
+        playerNameLabel = new JLabel("Current Player: " );
+        playerMoneyLabel = new JLabel("Money: " );
+        JLabel propertiesListHeader = new JLabel("Current cards you own:");
 
-        playerNameLabel = new JLabel("Current Player: " + player.getId());
-        playerMoneyLabel = new JLabel("Money: $" + player.getMoney());
-        JLabel propertiesListHeader = new JLabel("Current properties you own:");
+        Border fieldBorder = new EmptyBorder(6,3,3,3);
         playerNameLabel.setBorder(fieldBorder);
         playerMoneyLabel.setBorder(fieldBorder);
         propertiesListHeader.setBorder(fieldBorder);
+
         this.add(playerNameLabel);
         this.add(playerMoneyLabel);
         this.add(propertiesListHeader);
 
-        // create list with the property names of the properties the player owns
-        DefaultListModel<String> ownedSquaresModel = new DefaultListModel<>();
-        for (OwnableSquare ownedSquare : player.getOwnableSquares()){
-            ownedSquaresModel.addElement(ownedSquare.getName());
-        }
-
-        // add property name list to the JPanel
-        ownedSquaresList = new JList<>(ownedSquaresModel);
+        // create empty JList and add to PlayerStatePanel
+        ownedSquaresList = new JList<>();
         ownedSquaresList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         this.add(new JScrollPane(ownedSquaresList));
-
-        playerStateController = new PlayerStateController(ownedSquaresList, player);
-        // display cardView for the selected property in the JList
-        ownedSquaresList.addListSelectionListener(playerStateController);
 
     }
 
     /**
      * @author Thanuja
-     * @param player    player to change to
-     * Update panel to display new user's information
+     * @param player    player to update to
+     * Update panel to display new player's information
      */
     public void updatePlayer(Player player){
         this.playerNameLabel.setText("Current Player: " + player.getId());
         this.playerMoneyLabel.setText("Money: $" + player.getMoney());
 
-        DefaultListModel<String> propertiesModel = new DefaultListModel<>();
-        for (OwnableSquare property : player.getOwnableSquares()){
-            propertiesModel.addElement(property.getName());
+        // (re)create list with the names of the ownableSquares the player owns
+        DefaultListModel<String> ownedSquaresModel = new DefaultListModel<>();
+        for (OwnableSquare ownableSquare : player.getOwnableSquares()){
+            ownedSquaresModel.addElement(ownableSquare.getName());
         }
+        ownedSquaresList.setModel(ownedSquaresModel);
 
-        ownedSquaresList.setModel(propertiesModel);
-        ownedSquaresList.clearSelection();
-
+        // create an updated controller for the updated list
         ownedSquaresList.removeListSelectionListener(playerStateController);
-
         playerStateController = new PlayerStateController(ownedSquaresList, player);
         ownedSquaresList.addListSelectionListener(playerStateController);
-
     }
 
 
