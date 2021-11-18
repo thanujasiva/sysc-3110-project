@@ -12,7 +12,7 @@ import java.util.LinkedHashMap;
 public class BoardPanel {
     private JPanel mainPanel;
 
-    private LinkedHashMap<JPanel, Square> allSquares ;
+    private LinkedHashMap<JPanel, Square> allSquares;
 
     private ArrayList<JPanel> topSquares;
     private ArrayList<JPanel> bottomSquares;
@@ -68,10 +68,12 @@ public class BoardPanel {
 
         HashMap<Integer, Square> squares = game.getBoard().getSquares();
 
+
         // create new panel for each square and add to one HashMap
         for (int i=0; i<squares.size(); i++){
             JPanel box = new JPanel(new BorderLayout());
             box.setPreferredSize(new Dimension(boxWidth, boxHeight));
+            box.setLayout(new BoxLayout(box,BoxLayout.X_AXIS));
 
             Square square = squares.get(i);
 
@@ -147,6 +149,15 @@ public class BoardPanel {
 
     }
 
+    public LinkedHashMap<JPanel, Square> getAllSquares() {
+        return allSquares;
+    }
+
+    public JPanel getPanel(int position){
+        JPanel box =  (JPanel) allSquares.keySet().toArray()[position];
+        return box;
+    }
+
     public JPanel getMainPanel(){
         return mainPanel;
     }
@@ -154,4 +165,5 @@ public class BoardPanel {
     public DicePanel getDicePanel() {
         return dicePanel;
     }
+
 }

@@ -65,15 +65,20 @@ class PieceComponent extends JLabel {
         PieceComponent piece = new PieceComponent(player, box1, frame);
 
 
-        JButton button = new JButton();
+        JButton button1 = new JButton();
+        JButton button2 = new JButton();
 
-        button.addActionListener(e -> {
-            piece.movePiece(box2);
-        });
+        button1.addActionListener(e -> piece.movePiece(box2));
 
+        button2.addActionListener(e-> piece.movePiece(box1));
+
+        JLabel label = new JLabel("sdasd");
+
+        box1.add(label);
         frame.add(box1);
         frame.add(box2);
-        frame.add(button);
+        frame.add(button1);
+        frame.add(button2);
 
         frame.setVisible(true);
 

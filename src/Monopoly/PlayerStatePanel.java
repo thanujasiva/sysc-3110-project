@@ -21,10 +21,11 @@ public class PlayerStatePanel extends JPanel{
 
     /**
      * @author Thanuja
-     * @param player to view the current state
      */
-    public PlayerStatePanel(Player player){
+    public PlayerStatePanel(){
         super();
+
+        Player player = new Player(); //FIXME
 
         this.setLayout(new BoxLayout (this, BoxLayout.Y_AXIS));
 

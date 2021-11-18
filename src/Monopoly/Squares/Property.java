@@ -10,6 +10,10 @@ public class Property implements OwnableSquare {
     private final ColourGroups colourGroup;
     private final int rent;
     private final int rentWithColourSet;
+    private final int rentOneHouse;
+    private final int rentTwoHouses;
+    private final int rentThreeHouses;
+    private final int rentFourHouses;
     private Player owner;
 
     /**
@@ -25,6 +29,10 @@ public class Property implements OwnableSquare {
         this.price = price;
         this.rent = (int) ( price * 0.1); // 10% of property price
         this.rentWithColourSet = this.rent * 2; //20% of property price
+        this.rentOneHouse = 5; //FIXME
+        this.rentTwoHouses = 5; //FIXME
+        this.rentThreeHouses = 5; //FIXME
+        this.rentFourHouses = 5; //FIXME
         this.colourGroup = colourGroup;
         this.owner = null;
     }
