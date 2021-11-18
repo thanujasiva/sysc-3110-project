@@ -119,7 +119,7 @@ public class Player {
 
     /**
      * @param box the box the player is currently on
-     *            Outputs the player's position, money and properties
+     *            Outputs the player's position, money and ownableSquares
      * @author Shrimei
      * @author Thanuja
      */
@@ -127,9 +127,9 @@ public class Player {
         System.out.println("Monopoly.Player " + id);
         System.out.println("Position: " + box);
         System.out.println("Money: $" + money);
-        if (this.properties.size() > 0) {
-            System.out.println("Current properties you own: ");
-            for (Property property : this.properties) {
+        if (this.ownableSquares.size() > 0) {
+            System.out.println("Current ownable squares you own: ");
+            for (OwnableSquare property : this.ownableSquares) {
                 System.out.println(property.toString());
             }
         }
@@ -250,6 +250,8 @@ public class Player {
             Property property = (Property) ownableSquare;
             if ((colourGroupMatch.get(property.getColourGroup()) != null) && (colourGroupMatch.get(property.getColourGroup()) == property.getColourGroup().getMax())) {
                 return property.getRentWithColourSet();
+            }else{
+                return property.getRent(0); //FIXME // without colour set
             }
         } else if (ownableSquare instanceof Utility){
             Utility utility = (Utility) ownableSquare;

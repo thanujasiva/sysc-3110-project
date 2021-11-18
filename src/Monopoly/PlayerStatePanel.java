@@ -42,7 +42,7 @@ public class PlayerStatePanel extends JPanel{
 
         // create list with the property names of the properties the player owns
         DefaultListModel<String> ownedSquaresModel = new DefaultListModel<>();
-        for (OwnableSquare ownedSquare : player.getProperties()){
+        for (OwnableSquare ownedSquare : player.getOwnableSquares()){
             ownedSquaresModel.addElement(ownedSquare.getName());
         }
 
@@ -67,7 +67,7 @@ public class PlayerStatePanel extends JPanel{
         this.playerMoneyLabel.setText("Money: $" + player.getMoney());
 
         DefaultListModel<String> propertiesModel = new DefaultListModel<>();
-        for (OwnableSquare property : player.getProperties()){
+        for (OwnableSquare property : player.getOwnableSquares()){
             propertiesModel.addElement(property.getName());
         }
 
