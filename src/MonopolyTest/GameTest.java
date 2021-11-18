@@ -117,7 +117,7 @@ public class GameTest {
     public void testRentTransactionSuccess() {
         Property testProperty = (Property) game.getBoard().getSquares().get(1);
         Player testBuyer = game.getPlayers().get(1);
-        testBuyer.purchaseProperty(testProperty); // tested in MonopolyTest.PlayerTest
+        testBuyer.purchaseSquare(testProperty); // tested in MonopolyTest.PlayerTest
         testProperty.setOwner(testBuyer);
 
         Player testRenter = game.getPlayers().get(0);
@@ -142,7 +142,7 @@ public class GameTest {
 
         // decrease testBuyer money to $50
         Property testExpensiveProperty = new Property("Test Property", 1450, ColourGroups.GREEN);
-        testBuyer.purchaseProperty(testExpensiveProperty); // tested in MonopolyTest.PlayerTest
+        testBuyer.purchaseSquare(testExpensiveProperty); // tested in MonopolyTest.PlayerTest
 
         Property testProperty = (Property) game.getBoard().getSquares().get(1);
         testBuyer.changePosition(1); // tested in MonopolyTest.PlayerTest // have player 0 land on Mediterranean (hard coded in Monopoly.Board)
@@ -163,14 +163,14 @@ public class GameTest {
     public void testRentTransactionFailure() {
         Property testProperty = (Property) game.getBoard().getSquares().get(1);
         Player testBuyer = game.getPlayers().get(1);
-        testBuyer.purchaseProperty(testProperty); // tested in MonopolyTest.PlayerTest
+        testBuyer.purchaseSquare(testProperty); // tested in MonopolyTest.PlayerTest
         testProperty.setOwner(testBuyer);
 
         Player testRenter = game.getPlayers().get(0);
 
         // decrease testRenter money to $5
         Property testExpensiveProperty = new Property("Test Monopoly.Squares.Property", 1495, ColourGroups.GREEN);
-        testRenter.purchaseProperty(testExpensiveProperty); // tested in MonopolyTest.PlayerTest
+        testRenter.purchaseSquare(testExpensiveProperty); // tested in MonopolyTest.PlayerTest
 
         testRenter.changePosition(1); // tested in MonopolyTest.PlayerTest // have player 1 land on Mediterranean (hard coded in Monopoly.Board)
         assertEquals(1, game.getPlayers().get(game.getCurrentPlayerNumber()).getPosition()); // verify current player is now on test property (to pay rent)

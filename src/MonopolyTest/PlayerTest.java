@@ -73,8 +73,8 @@ public class PlayerTest {
      * @author Maisha
      */
     @Test
-    public void purchaseProperty(){
-        assertTrue(player.purchaseProperty(property));
+    public void testPurchaseSquare(){
+        assertTrue(player.purchaseSquare(property));
     }
 
     /**
@@ -84,9 +84,9 @@ public class PlayerTest {
     @Test
     public void noMoneyToPurchaseProperty(){
         for (int i = 0; i < 15; i++){
-            player.purchaseProperty(property);
+            player.purchaseSquare(property);
         }
-        assertFalse(player.purchaseProperty(property));
+        assertFalse(player.purchaseSquare(property));
     }
 
     /**
@@ -106,9 +106,9 @@ public class PlayerTest {
     @Test
     public void collectRentColourSet(){
         // purchase GREY property 3 times to own the colour set
-        player.purchaseProperty(property);
-        player.purchaseProperty(property);
-        player.purchaseProperty(property);
+        player.purchaseSquare(property);
+        player.purchaseSquare(property);
+        player.purchaseSquare(property);
 
         player.collectRent(property);
         assertEquals(1220,player.getMoney()); //20% of 100$ (price of property) plus players money (1500 - 300)
@@ -120,8 +120,6 @@ public class PlayerTest {
      */
     @Test
     public void payRent(){
-        //owner.purchaseProperty(property);
-        //assertTrue(player.payRent(owner.getRentAmount(property)));
         assertTrue(player.payRent(50));
     }
 
@@ -132,9 +130,9 @@ public class PlayerTest {
     @Test
     public void noMoneyToPayRent(){
         for (int i = 0; i < 15; i++){
-            player.purchaseProperty(property);
+            player.purchaseSquare(property);
         }
-        //owner.purchaseProperty(rentedProperty);
+        //owner.purchaseSquare(rentedProperty);
         //assertFalse(player.payRent(owner.getRentAmount(rentedProperty))); // no longer have to call methods on property
         assertFalse(player.payRent(10));
     }

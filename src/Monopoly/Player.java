@@ -139,43 +139,11 @@ public class Player {
 
 
     /**
-     * @param property the property being purchased
-     * @return returns true if player is able to purchase property, else false.
+     * @param ownableSquare the ownableSquare being purchased
+     * @return returns true if player is able to purchase, else false.
      * @author Maisha
      * @author Shrimei
      */
-    public boolean purchaseProperty(Property property) {
-        int cost = property.getPrice();
-        if (this.money >= cost) {
-            this.money = this.money - cost;
-            properties.add(property);
-            colourGroupMatch.merge(property.getColourGroup(), 1, Integer::sum);
-            //property.setOwner(this);
-            //System.out.println("Congratulations! You now own " + property.getName());
-            //if(colourGroupMatch.get(property.getColourGroup()) == property.getColourGroup().getMax()) {
-            //    System.out.println("You have a colour group! " + property.getColourGroup());
-            //}
-            return true;
-        } else {
-            //System.out.println("You don't have enough money");
-            return false;
-        }
-    }
-
-    public boolean purchaseRailroad(Railroad railroad) {
-        int cost = railroad.getPrice();
-        if (this.money >= cost) {
-            this.money = this.money - cost;
-            //railroads.add(railroad);
-            //colourGroupMatch.merge(property.getColourGroup(), 1, Integer::sum);
-            railroad.setOwner(this);
-            return true;
-        } else {
-            //System.out.println("You don't have enough money");
-            return false;
-        }
-    }
-
     public boolean purchaseSquare(OwnableSquare ownableSquare) {
         int cost = ownableSquare.getPrice();
         if (this.money >= cost) {
@@ -188,8 +156,6 @@ public class Player {
             } else if (ownableSquare instanceof Utility) {
                 utilityNumber += 1;
             }
-
-            ownableSquare.setOwner(this);
             return true;
         } else {
             return false;
@@ -208,11 +174,9 @@ public class Player {
     public boolean payRent(int rent) {
         //int rent = property.getOwner().getRentAmount(property);
         if (this.money >= rent) {
-            //System.out.println("You have to pay rent. Amount: $" + rent);
             this.money -= rent;
             return true;
         } else {
-            //System.out.println("You cannot pay rent");
             return false;
         }
     }
