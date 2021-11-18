@@ -172,7 +172,7 @@ public class CardFrame extends JOptionPane {
         JLabel priceVal = new JLabel("$" + railroad.getPrice());
         priceVal.setBorder(valueBorder);
 
-        JLabel rentOneVal = new JLabel("$" + railroad.getRent());
+        JLabel rentOneVal = new JLabel("$" + railroad.getRentOne());
         rentOneVal.setBorder(valueBorder);
 
         JLabel rentTwoVal = new JLabel("$" + railroad.getRentTwo());
@@ -261,7 +261,7 @@ public class CardFrame extends JOptionPane {
         JLabel priceVal = new JLabel("$" + property.getPrice());
         priceVal.setBorder(valueBorder);
 
-        JLabel rentVal = new JLabel("$" +property.getRent());
+        JLabel rentVal = new JLabel("$" +property.getRent(1));
         rentVal.setBorder(valueBorder);
 
         JLabel rentWithSetVal = new JLabel("$" +property.getRentWithColourSet());

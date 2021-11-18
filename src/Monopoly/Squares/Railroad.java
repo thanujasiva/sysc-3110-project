@@ -25,6 +25,7 @@ public class Railroad implements OwnableSquare {
         this.rentTwo = 50;
         this.rentThree = 100;
         this.rentFour = 200;
+        this.owner = null;
     }
 
     @Override
@@ -52,10 +53,6 @@ public class Railroad implements OwnableSquare {
         return owner;
     }
 
-    @Override
-    public int getRent() {
-        return rentOne;  //FIXME
-    }
 
     /**
      * get price of railroad
@@ -67,6 +64,17 @@ public class Railroad implements OwnableSquare {
         return price;
     }
 
+    public int getRent(int numberOfRailroads){
+        if (numberOfRailroads == 1){
+            return rentOne;
+        } else if (numberOfRailroads == 2){
+            return rentTwo;
+        } else if (numberOfRailroads == 3){
+            return rentThree;
+        } else {
+            return rentFour;
+        }
+    }
 
     //FIXME
     public int getRentTwo() {
@@ -79,5 +87,9 @@ public class Railroad implements OwnableSquare {
 
     public int getRentFour() {
         return rentFour;
+    }
+
+    public int getRentOne() {
+        return rentOne;  //FIXME
     }
 }
