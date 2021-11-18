@@ -1,6 +1,8 @@
 package Monopoly;
 
 import Monopoly.Squares.Property;
+import Monopoly.Squares.Railroad;
+import Monopoly.Squares.Square;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -15,25 +17,25 @@ import java.awt.Color;
  */
 public class CardFrame extends JOptionPane {
 
-    private Property property;
+    private Square square;
     private CardController cardController;
     private JPanel mainPanel;
 
     /**
      * Called from playerStatePanel, only display property card
      * @author Shrimei
-     * @param property that is being displayed
+     * @param square that is being displayed
      */
-    public CardFrame(Property property){
-        super(property.getName());
+    public CardFrame(Property square){
+        super(square.getName());
         this.setLayout(new BorderLayout());
         this.setSize(200, 250);
 
-        this.property = property;
+        this.square = square;
 
         mainPanel = new JPanel(new BorderLayout());
 
-        displayPropertyInfo(property);
+        displayPropertyInfo(square);
 
         handleIsOwner();
     }
@@ -44,33 +46,35 @@ public class CardFrame extends JOptionPane {
      * Called when player lands on property, show buy/rent options
      * @author Shrimei
      * @author Thanuja
-     * @param property  that is being displayed
+     * @param square  that is being displayed
      * @param player    the current player
      * @param game      the game model
      */
-    public CardFrame(Property property, Player player, Game game){
-        super(property.getName());
+    public CardFrame(Square square, Player player, Game game){
+        super(square.getName());
         this.setLayout(new BorderLayout());
         this.setSize(200, 250);
 
-        this.property = property;
+        this.square = square;
 
         mainPanel = new JPanel(new BorderLayout());
 
-        displayPropertyInfo(property);
-
-        //this.setVisible(true);
+        if(square instanceof Property){
+            displayPropertyInfo((Property)square);
+        } else if(square instanceof Railroad){
+            displayRailroadInfo((Railroad)square);
+        }
 
         this.cardController = new CardController(game);
 
-        if(property.getOwner() == null) { //no owner, can buy
+        if(((Property)square).getOwner() == null) { //no owner, can buy //FIXME add getOwner method in railroad and utility
             /*this.addWindowListener(new WindowAdapter() {  //defining a class inside another class
                 public void windowClosing(WindowEvent e) {
                     handleBuyOption();
                 }
             });*/
             handleBuyOption();
-        }else if(property.getOwner().equals(player)){ //player is owner
+        }else if(((Property)square).getOwner().equals(player)){ //player is owner
             /*this.addWindowListener(new WindowAdapter() {  //defining a class inside another class
                 public void windowClosing(WindowEvent e) {
                     handleIsOwner();
@@ -85,6 +89,20 @@ public class CardFrame extends JOptionPane {
             });*/
             handlePayRent();
         }
+    }
+
+    private void displayRailroadInfo(Railroad railroad) {
+        JPanel fieldPanel = new JPanel();
+        JPanel valuePanel = new JPanel();
+
+        fieldPanel.setLayout(new BoxLayout(fieldPanel,BoxLayout.Y_AXIS));
+        valuePanel.setLayout(new BoxLayout(valuePanel,BoxLayout.Y_AXIS));
+
+        Border fieldBorder = new EmptyBorder(6,3,3,3);
+        Border valueBorder = new EmptyBorder(6,3,3,3);
+
+        JLabel name = new JLabel(railroad.getName(), SwingConstants.CENTER);
+        name.setBorder(valueBorder);
     }
 
     /**
@@ -213,10 +231,12 @@ public class CardFrame extends JOptionPane {
         Property Oriental = new Property("Oriental Avenue", 100, ColourGroups.GREY);
         //player.purchaseProperty(Oriental);
 
+        Railroad BO = new Railroad("B. & O. Railroad");
+
         player.setPosition(22);
         player.setPosition(5);
 
-        Monopoly.CardFrame card = new Monopoly.CardFrame(Atlantic, player, game);
-        Monopoly.CardFrame card2 = new Monopoly.CardFrame(Oriental, player, game);
+        //Monopoly.CardFrame card = new Monopoly.CardFrame(Atlantic, player, game);
+        //Monopoly.CardFrame card2 = new Monopoly.CardFrame(Oriental, player, game);
     }
 }
