@@ -35,7 +35,6 @@ public class CardFrame extends JOptionPane {
 
         displayPropertyInfo(property);
 
-        //this.setVisible(true);
         handleIsOwner();
     }
 
@@ -155,7 +154,7 @@ public class CardFrame extends JOptionPane {
      * @author Thanuja
      */
     private void handleBuyOption(){
-        int result = JOptionPane.showConfirmDialog(null, mainPanel /*"Would you like to purchase this property?"*/,"Purchase property",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
+        int result = JOptionPane.showConfirmDialog(null, mainPanel,"Would you like to purchase this property?",JOptionPane.YES_NO_OPTION,JOptionPane.PLAIN_MESSAGE);
 
         if(result == JOptionPane.YES_OPTION){
             //controller would handle purchasing
@@ -166,7 +165,6 @@ public class CardFrame extends JOptionPane {
         }//else, player says no, do nothing
 
         //cardController.handleSwitchTurn();
-        //this.dispose();
     }
 
     /**
@@ -182,12 +180,10 @@ public class CardFrame extends JOptionPane {
             if (cardController.handlePotentialWinner()){
                 JOptionPane.showMessageDialog(null, "Congratulations! Player: " + cardController.getGame().getPlayers().get(0).getId() +
                         " has won!");
-                //this.dispose();
                 System.exit(0);
             }
         } // else, they successfully paid
         //cardController.handleSwitchTurn();
-        //this.dispose();
     }
 
     /**
@@ -195,11 +191,10 @@ public class CardFrame extends JOptionPane {
      * @author Thanuja
      */
     private void handleIsOwner(){
-        JOptionPane.showMessageDialog(null, mainPanel /*"You own this property"*/);
+        JOptionPane.showMessageDialog(null, mainPanel /*"You own this property"*/,  "You own this property", JOptionPane.INFORMATION_MESSAGE);
         //if(cardController != null){
         //    cardController.handleSwitchTurn();
         //}
-        //this.dispose();
     }
 
 
@@ -207,42 +202,21 @@ public class CardFrame extends JOptionPane {
         Game game = new Game();
         Player player = new Player();
         player.setId(0);
+        System.out.println(player.getMoney());
 
-        JFrame frame = new JFrame();
+        JFrame frame = new JFrame("Card display");
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         Property Atlantic  = new Property("Atlantic Avenue", 260, ColourGroups.YELLOW);
         //player.purchaseProperty(Atlantic);
 
         Property Oriental = new Property("Oriental Avenue", 100, ColourGroups.GREY);
-        player.purchaseProperty(Oriental);
+        //player.purchaseProperty(Oriental);
 
-        Property Baltic = new Property("Baltic Avenue", 60, ColourGroups.BROWN);
-        player.purchaseProperty(Baltic);
-
-        Property StCharles  = new Property("St. Charles Place", 140, ColourGroups.PINK);
-        player.purchaseProperty(StCharles);
-
-        Property StJames  = new Property("St. James Place", 180, ColourGroups.ORANGE);
-        player.purchaseProperty(StJames);
-
-        Property Kentucky  = new Property("Kentucky Avenue", 220, ColourGroups.RED);
-        player.purchaseProperty(Kentucky);
-
-        Property Pacific  = new Property("Pacific Avenue", 300, ColourGroups.GREEN);
-        Property ParkPlace = new Property("Park Place", 350,  ColourGroups.BLUE);
-
+        player.setPosition(22);
+        player.setPosition(5);
 
         Monopoly.CardFrame card = new Monopoly.CardFrame(Atlantic, player, game);
-        frame.add(card.getMainPanel());
-        frame.setVisible(true);
-        Monopoly.CardFrame card2 = new Monopoly.CardFrame(Oriental);
-        Monopoly.CardFrame card3 = new Monopoly.CardFrame(Baltic);
-        Monopoly.CardFrame card4 = new Monopoly.CardFrame(StCharles);
-        Monopoly.CardFrame card5 = new Monopoly.CardFrame(StJames);
-        Monopoly.CardFrame card6 = new Monopoly.CardFrame(Kentucky);
-        Monopoly.CardFrame card7 = new Monopoly.CardFrame(Pacific);
-        Monopoly.CardFrame card8 = new Monopoly.CardFrame(ParkPlace);
+        Monopoly.CardFrame card2 = new Monopoly.CardFrame(Oriental, player, game);
     }
-
-
 }
