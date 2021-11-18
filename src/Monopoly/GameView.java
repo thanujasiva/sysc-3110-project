@@ -1,5 +1,6 @@
 package Monopoly;
 
+import Monopoly.Squares.OwnableSquare;
 import Monopoly.Squares.Property;
 import Monopoly.Squares.Railroad;
 import Monopoly.Squares.Square;
@@ -106,12 +107,9 @@ public class GameView implements MonopolyInterfaceView {
         Square currentSquare = game.getCurrentSquare();
 
         // ideally don't want if statement structure here
-        if(currentSquare instanceof Property) {
-            CardFrame card = new CardFrame((Property) currentSquare, currentPlayer, game);
+        if(currentSquare instanceof OwnableSquare) {
+            CardFrame card = new CardFrame((OwnableSquare) currentSquare, currentPlayer, game);
             // do not switch turn until card is handled property
-        }else if (currentSquare instanceof Railroad) {
-            // show railroad card
-            // buy / pay rent
         }
     }
 

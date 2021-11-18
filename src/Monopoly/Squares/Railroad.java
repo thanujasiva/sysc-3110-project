@@ -64,4 +64,18 @@ public class Railroad implements OwnableSquare {
     public int getPrice() {
         return price;
     }
+
+
+    //FIXME
+    public int getRentTwo() {
+        return rentTwo;
+    }
+
+    public int getRentThree() {
+        return rentThree;
+    }
+
+    public int getRentFour() {
+        return rentFour;
+    }
 }
