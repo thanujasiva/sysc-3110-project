@@ -238,6 +238,15 @@ public class CardFrame extends JOptionPane {
         JLabel rentFourHouses = new JLabel("Rent with 4 houses: ");
         rentFourHouses.setBorder(fieldBorder);
 
+        JLabel rentHotel= new JLabel("Rent with hotel: ");
+        rentHotel.setBorder(fieldBorder);
+
+        JLabel houseCost= new JLabel("House cost: ");
+        houseCost.setBorder(fieldBorder);
+
+        JLabel hotelCost= new JLabel("Hotel cost: ");
+        hotelCost.setBorder(fieldBorder);
+
         fieldPanel.add(price);
         fieldPanel.add(rent);
         fieldPanel.add(rentWithSet);
@@ -245,6 +254,9 @@ public class CardFrame extends JOptionPane {
         fieldPanel.add(rentTwoHouses);
         fieldPanel.add(rentThreeHouses);
         fieldPanel.add(rentFourHouses);
+        fieldPanel.add(rentHotel);
+        fieldPanel.add(houseCost);
+        fieldPanel.add(hotelCost);
 
         JLabel priceVal = new JLabel("$" + property.getPrice());
         priceVal.setBorder(valueBorder);
@@ -255,9 +267,13 @@ public class CardFrame extends JOptionPane {
         JLabel rentWithSetVal = new JLabel("$" +property.getRentWithColourSet());
         rentWithSetVal.setBorder(valueBorder);
 
+        JLabel rentOneHouseVal = new JLabel("$ sda");
+        rentOneHouseVal.setBorder(valueBorder);
+
         valuePanel.add(priceVal);
         valuePanel.add(rentVal);
         valuePanel.add(rentWithSetVal);
+        valuePanel.add(rentOneHouseVal);
 
         mainPanel.add(name, BorderLayout.NORTH);
         mainPanel.add(fieldPanel, BorderLayout.WEST);
@@ -336,9 +352,9 @@ public class CardFrame extends JOptionPane {
         //player.setPosition(22);
         //player.setPosition(5);
 
-        Monopoly.CardFrame card = new Monopoly.CardFrame(WaterWorks, player, game);
+        //Monopoly.CardFrame card = new Monopoly.CardFrame(WaterWorks, player, game);
         //Monopoly.CardFrame card = new Monopoly.CardFrame(BO, player, game);
-        //Monopoly.CardFrame card = new Monopoly.CardFrame(Atlantic, player, game);
+        Monopoly.CardFrame card = new Monopoly.CardFrame(Atlantic, player, game);
         //Monopoly.CardFrame card2 = new Monopoly.CardFrame(Oriental, player, game);
     }
 }
