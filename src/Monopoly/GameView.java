@@ -1,15 +1,12 @@
 package Monopoly;
 
 import Monopoly.Squares.OwnableSquare;
-import Monopoly.Squares.Property;
-import Monopoly.Squares.Railroad;
 import Monopoly.Squares.Square;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class GameView implements MonopolyInterfaceView {
@@ -52,14 +49,10 @@ public class GameView implements MonopolyInterfaceView {
         playerPanel.setLayout(new BoxLayout(playerPanel, BoxLayout.Y_AXIS));
 
         playersPanel = new PlayersPanel(game);
-
         playerStatePanel = new PlayerStatePanel();
 
-        JPanel playerPanel1 = playersPanel.getPlayersPanel();
-        JPanel playerPanel2 = playerStatePanel;
-
-        playerPanel.add(playerPanel1);
-        playerPanel.add(playerPanel2);
+        playerPanel.add(playersPanel.getPlayersPanel());
+        playerPanel.add(playerStatePanel);
 
         mainPanel.add(boardPanel, BorderLayout.WEST);
         mainPanel.add(playerPanel, BorderLayout.EAST);
@@ -101,6 +94,7 @@ public class GameView implements MonopolyInterfaceView {
         }
 
         this.playersPanel.updatePlayers();
+        this.playerStatePanel.updatePlayer(game.getCurrentPlayer());
     }
 
     /**
@@ -122,7 +116,7 @@ public class GameView implements MonopolyInterfaceView {
         }
 
         //returns current panel
-        pieces.get(currentPlayer).movePiece(boardPanel.getPanel(currentPlayer.getPosition()));
+        pieces.get(currentPlayer).movePiece(boardPanel.getPanel(currentPlayer.getPosition() % game.getBoard().getSquares().size()));
     }
 
     /**
