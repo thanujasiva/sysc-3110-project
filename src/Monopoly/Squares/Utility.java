@@ -1,8 +1,13 @@
 package Monopoly.Squares;
 
-public class Utility implements Square {
+import Monopoly.Player;
+
+public class Utility implements OwnableSquare {
 
     private String name;
+    private Player owner;
+    private int price;
+    private int rent;
 
     public Utility(String name){
         this.name = name;
@@ -16,5 +21,33 @@ public class Utility implements Square {
     @Override
     public String getType() {
         return "Monopoly.Squares.Utility";
+    }
+
+    @Override
+    public void setOwner(Player player) {
+        this.owner = player;
+    }
+
+    /**
+     * @author Shrimei
+     * @return
+     */
+    @Override
+    public Player getOwner() {
+        return owner;
+    }
+
+    @Override
+    public int getRent() {
+        return rent;
+    }
+
+    /**
+     * @author Shrimei
+     * @return
+     */
+    @Override
+    public int getPrice() {
+        return price;
     }
 }
