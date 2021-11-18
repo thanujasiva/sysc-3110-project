@@ -9,6 +9,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class GameView implements MonopolyInterfaceView {
     private BoardPanel boardPanel;
@@ -16,13 +18,15 @@ public class GameView implements MonopolyInterfaceView {
     private PlayerStatePanel playerStatePanel;
     private Game game;
     private GameController gameController;
+    private JFrame frame;
+    private HashMap<Player, PieceComponent> pieces; //FIXME remove piece from board when player is bankrupt
 
     /**
      * Create an overall game view
      * @author Maisha
      */
     public GameView(){
-        JFrame frame = new JFrame("Monopoly Game");
+        frame = new JFrame("Monopoly Game");
         this.game = new Game();
 
         this.game.addView(this);
@@ -36,6 +40,8 @@ public class GameView implements MonopolyInterfaceView {
             }
         });
 
+        this.pieces = new HashMap<>();
+
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new BorderLayout());
 
@@ -46,7 +52,8 @@ public class GameView implements MonopolyInterfaceView {
         playerPanel.setLayout(new BoxLayout(playerPanel, BoxLayout.Y_AXIS));
 
         playersPanel = new PlayersPanel(game);
-        playerStatePanel = new PlayerStatePanel(game.getPlayers().get(game.getCurrentPlayerNumber()));
+
+        playerStatePanel = new PlayerStatePanel();
 
         JPanel playerPanel1 = playersPanel.getPlayersPanel();
         JPanel playerPanel2 = playerStatePanel;
@@ -87,10 +94,12 @@ public class GameView implements MonopolyInterfaceView {
     @Override
     public void handleBoardPlayersUpdate() {
         int num = this.handleNumberOfPlayers();
-        //System.out.println(num);
-        for (int i = 0; i < num - 2; i++) {
-            this.game.addPlayer(new Player());
+        for (int i = 0; i < num; i++) {
+            Player player = new Player();
+            this.game.addPlayer(player);
+            pieces.put(player, new PieceComponent(player, boardPanel.getPanel(0),frame));
         }
+
         this.playersPanel.updatePlayers();
     }
 
@@ -111,6 +120,9 @@ public class GameView implements MonopolyInterfaceView {
             CardFrame card = new CardFrame((OwnableSquare) currentSquare, currentPlayer, game);
             // do not switch turn until card is handled property
         }
+
+        //returns current panel
+        pieces.get(currentPlayer).movePiece(boardPanel.getPanel(currentPlayer.getPosition()));
     }
 
     /**
