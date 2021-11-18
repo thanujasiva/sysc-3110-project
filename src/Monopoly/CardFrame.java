@@ -39,7 +39,6 @@ public class CardFrame extends JOptionPane {
     }
 
 
-
     /**
      * Called when player lands on property, show buy/rent options
      * @author Shrimei
@@ -88,6 +87,39 @@ public class CardFrame extends JOptionPane {
 
         JLabel name = new JLabel(utility.getName(), SwingConstants.CENTER);
         name.setBorder(valueBorder);
+        name.setOpaque(true);
+        name.setForeground(Color.WHITE);
+        name.setBackground(Color.DARK_GRAY);
+
+        JLabel price = new JLabel("Price: ");
+        price.setBorder(fieldBorder);
+
+        JLabel rentOne = new JLabel("1 Utility Owned");
+        rentOne.setBorder(fieldBorder);
+
+        JLabel rentTwo = new JLabel("2 Utilities Owned");
+        rentTwo.setBorder(fieldBorder);
+
+        fieldPanel.add(price);
+        fieldPanel.add(rentOne);
+        fieldPanel.add(rentTwo);
+
+        JLabel priceVal = new JLabel("$" + utility.getPrice());
+        priceVal.setBorder(valueBorder);
+
+        JLabel rentOneVal = new JLabel("4 X roll");
+        rentOneVal.setBorder(valueBorder);
+
+        JLabel rentTwoVal = new JLabel("10 X roll");
+        rentTwoVal.setBorder(valueBorder);
+
+        valuePanel.add(priceVal);
+        valuePanel.add(rentOneVal);
+        valuePanel.add(rentTwoVal);
+
+        mainPanel.add(name, BorderLayout.NORTH);
+        mainPanel.add(fieldPanel, BorderLayout.WEST);
+        mainPanel.add(valuePanel, BorderLayout.EAST);
     }
 
     private void displayRailroadInfo(Railroad railroad) {
@@ -101,7 +133,56 @@ public class CardFrame extends JOptionPane {
         Border valueBorder = new EmptyBorder(6,3,3,3);
 
         JLabel name = new JLabel(railroad.getName(), SwingConstants.CENTER);
+        name.setForeground(Color.WHITE);
         name.setBorder(valueBorder);
+        name.setOpaque(true);
+        name.setBackground(Color.black);
+
+        JLabel price = new JLabel("Price: ");
+        price.setBorder(fieldBorder);
+
+        JLabel rentOne = new JLabel("RENT: ");
+        rentOne.setBorder(fieldBorder);
+
+        JLabel rentTwo = new JLabel("2 Railroads Owned: ");
+        rentTwo.setBorder(fieldBorder);
+
+        JLabel rentThree = new JLabel("3 Railroads Owned: ");
+        rentThree.setBorder(fieldBorder);
+
+        JLabel rentFour = new JLabel("4 Railroads Owned: ");
+        rentFour.setBorder(fieldBorder);
+
+        fieldPanel.add(price);
+        fieldPanel.add(rentOne);
+        fieldPanel.add(rentTwo);
+        fieldPanel.add(rentThree);
+        fieldPanel.add(rentFour);
+
+        JLabel priceVal = new JLabel("$" + railroad.getPrice());
+        priceVal.setBorder(valueBorder);
+
+        JLabel rentOneVal = new JLabel("$" + railroad.getRent());
+        rentOneVal.setBorder(valueBorder);
+
+        JLabel rentTwoVal = new JLabel("$" + railroad.getRentTwo());
+        rentTwoVal.setBorder(valueBorder);
+
+        JLabel rentThreeVal = new JLabel("$" + railroad.getRentThree());
+        rentThreeVal.setBorder(valueBorder);
+
+        JLabel rentFourVal = new JLabel("$" + railroad.getRentFour());
+        rentFourVal.setBorder(valueBorder);
+
+        valuePanel.add(priceVal);
+        valuePanel.add(rentOneVal);
+        valuePanel.add(rentTwoVal);
+        valuePanel.add(rentThreeVal);
+        valuePanel.add(rentFourVal);
+
+        mainPanel.add(name, BorderLayout.NORTH);
+        mainPanel.add(fieldPanel, BorderLayout.WEST);
+        mainPanel.add(valuePanel, BorderLayout.EAST);
     }
 
     /**
@@ -171,7 +252,7 @@ public class CardFrame extends JOptionPane {
      * @author Thanuja
      */
     private void handleBuyOption(){
-        int result = JOptionPane.showConfirmDialog(null, mainPanel,"Would you like to purchase this property?",JOptionPane.YES_NO_OPTION,JOptionPane.PLAIN_MESSAGE);
+        int result = JOptionPane.showConfirmDialog(null, mainPanel,"Purchase property?",JOptionPane.YES_NO_OPTION,JOptionPane.PLAIN_MESSAGE);
 
         if(result == JOptionPane.YES_OPTION){
             //controller would handle purchasing
@@ -190,7 +271,7 @@ public class CardFrame extends JOptionPane {
      * @author Maisha
      */
     private void handlePayRent(){
-        JOptionPane.showMessageDialog(null, mainPanel /*"You have to pay rent of $"+ property.getOwner().getRentAmount(property)*/);
+        JOptionPane.showMessageDialog(null, mainPanel /*"You have to pay rent of $"+ property.getOwner().getRentAmount(property)*/, "Pay Rent", JOptionPane.PLAIN_MESSAGE);
         boolean canPayRent = cardController.payCardRent();
         if (!canPayRent){ //if player does not have enough money
             JOptionPane.showMessageDialog(null, "You are bankrupt. You cannot play further.");
@@ -232,9 +313,13 @@ public class CardFrame extends JOptionPane {
 
         Railroad BO = new Railroad("B. & O. Railroad");
 
-        player.setPosition(22);
-        player.setPosition(5);
+        Utility WaterWorks = new Utility("Water Works");
 
+        //player.setPosition(22);
+        //player.setPosition(5);
+
+        Monopoly.CardFrame card = new Monopoly.CardFrame(WaterWorks, player, game);
+        //Monopoly.CardFrame card = new Monopoly.CardFrame(BO, player, game);
         //Monopoly.CardFrame card = new Monopoly.CardFrame(Atlantic, player, game);
         //Monopoly.CardFrame card2 = new Monopoly.CardFrame(Oriental, player, game);
     }
