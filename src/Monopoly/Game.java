@@ -2,6 +2,7 @@ package Monopoly;
 
 import Monopoly.Squares.*;
 
+import javax.swing.*;
 import java.util.ArrayList;
 
 public class Game {
@@ -27,10 +28,7 @@ public class Game {
         this.dice2= new Dice();
         //this.squares = new HashMap<>();
         this.players = new ArrayList<>();
-        //this.setProperties();
-        this.addPlayer(new Player());
-        this.addPlayer(new Player());
-        this.currentPlayerNumber = players.get(0).getId();
+        this.currentPlayerNumber = 0;
         this.doubles = 0;
         this.board = new Board();
         this.firstRound = true;

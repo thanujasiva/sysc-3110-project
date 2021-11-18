@@ -329,7 +329,7 @@ public class CardFrame extends JOptionPane {
             if (!canPurchase){ //if player does not have enough money
                 JOptionPane.showMessageDialog(null, "You do not have enough money to purchase the property");
             } // else, they successfully purchased
-        }
+        }//else, player says no, do nothing
     }
 
     /**
