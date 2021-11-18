@@ -88,7 +88,8 @@ public class Property implements OwnableSquare {
      * @return          the standard rent rate of the property
      */
     @Override
-    public int getRent() {
+    public int getRent(int numberOfHouses) { //FIXME
+
         return rent;
     }
 

@@ -7,11 +7,14 @@ public class Utility implements OwnableSquare {
     private String name;
     private Player owner;
     private int price;
-    private int rent;
+    private int rent1;
+    private int rent2;
 
     public Utility(String name){
         this.name = name;
         this.price = 150;
+        this.rent1 = 4;
+        this.rent2 = 10;
     }
 
     @Override
@@ -40,8 +43,12 @@ public class Utility implements OwnableSquare {
     }
 
     @Override
-    public int getRent() {
-        return rent;
+    public int getRent(int numberOfUtilities) {
+        if (numberOfUtilities == 1){
+            return rent1;
+        } else {
+            return rent2;
+        }
     }
 
     /**

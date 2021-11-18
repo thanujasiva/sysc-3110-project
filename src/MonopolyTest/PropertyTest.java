@@ -44,7 +44,7 @@ public class PropertyTest {
      */
     @Test
     public void getRent() {
-        assertEquals(20, property.getRent());
+        assertEquals(20, property.getRent(1)); //FIXME
     }
 
     /**
