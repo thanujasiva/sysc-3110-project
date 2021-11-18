@@ -43,8 +43,9 @@ public class Railroad implements OwnableSquare {
     }
 
     /**
+     * Get owner of railroad
      * @author Shrimei
-     * @return
+     * @return owner
      */
     @Override
     public Player getOwner() {
@@ -57,8 +58,9 @@ public class Railroad implements OwnableSquare {
     }
 
     /**
+     * get price of railroad
      * @author Shrimei
-     * @return
+     * @return price to buy
      */
     @Override
     public int getPrice() {
