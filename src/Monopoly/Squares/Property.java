@@ -3,7 +3,7 @@ package Monopoly.Squares;
 import Monopoly.ColourGroups;
 import Monopoly.Player;
 
-public class Property implements Square {
+public class Property implements OwnableSquare {
 
     private final int price;
     private final String name;
@@ -34,6 +34,7 @@ public class Property implements Square {
      * @param player    the new owner.
      * Sets the owner of the property once it is bought
      */
+    @Override
     public void setOwner(Player player){
         this.owner = player;
     }
@@ -42,6 +43,7 @@ public class Property implements Square {
      * @author Maisha
      * @return owner
      */
+    @Override
     public Player getOwner() {
         return owner;
     }
@@ -68,6 +70,7 @@ public class Property implements Square {
      * @author Thanuja
      * @return          the price of property
      */
+    @Override
     public int getPrice() {
         return price;
     }
@@ -84,6 +87,7 @@ public class Property implements Square {
      * @author Thanuja
      * @return          the standard rent rate of the property
      */
+    @Override
     public int getRent() {
         return rent;
     }
