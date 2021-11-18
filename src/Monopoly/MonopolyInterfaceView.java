@@ -15,4 +15,6 @@ public interface MonopolyInterfaceView {
     void handleJailExited(String message);
 
     void handleBankruptcy();
+
+    void handlePassedGo();
 }
