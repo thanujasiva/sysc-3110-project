@@ -1,4 +1,7 @@
-package Monopoly;
+package Monopoly.Squares;
+
+import Monopoly.ColourGroups;
+import Monopoly.Player;
 
 public class Property implements Square {
 
@@ -58,7 +61,7 @@ public class Property implements Square {
      */
     @Override
     public String getType() {
-        return "Monopoly.Property";
+        return "Monopoly.Squares.Property";
     }
 
     /**
@@ -101,7 +104,7 @@ public class Property implements Square {
      */
     @Override
     public String toString() {
-        return "Monopoly.Property: " +
+        return "Monopoly.Squares.Property: " +
                 "price=" + price +
                 ", name='" + name + '\'' +
                 ", colourGroup='" + colourGroup.getColour() + '\'' +

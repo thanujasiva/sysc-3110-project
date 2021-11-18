@@ -2,7 +2,7 @@ package MonopolyTest;
 
 import Monopoly.ColourGroups;
 import Monopoly.Game;
-import Monopoly.Property;
+import Monopoly.Squares.Property;
 import Monopoly.Player;
 
 import org.junit.Assert;
@@ -169,7 +169,7 @@ public class GameTest {
         Player testRenter = game.getPlayers().get(0);
 
         // decrease testRenter money to $5
-        Property testExpensiveProperty = new Property("Test Monopoly.Property", 1495, ColourGroups.GREEN);
+        Property testExpensiveProperty = new Property("Test Monopoly.Squares.Property", 1495, ColourGroups.GREEN);
         testRenter.purchaseProperty(testExpensiveProperty); // tested in MonopolyTest.PlayerTest
 
         testRenter.changePosition(1); // tested in MonopolyTest.PlayerTest // have player 1 land on Mediterranean (hard coded in Monopoly.Board)
@@ -193,7 +193,7 @@ public class GameTest {
     public void testHandleSwitchTurnNormal() {
         game.getDice1().rollDice(); // roll only 1 dice, to guarantee no doubles
         game.handleSwitchTurn();
-        game.checkSkipTurn();
+        game.handleSkipTurn();
         assertEquals(1, game.getCurrentPlayerNumber()); // new current player is 1
     }
 
@@ -205,11 +205,11 @@ public class GameTest {
     public void testHandleSwitchTurnDouble() {
         // do not roll dice, to mimic a double
         game.handleSwitchTurn();
-        game.checkSkipTurn();
+        game.handleSkipTurn();
         assertEquals(0, game.getCurrentPlayerNumber()); // new current player still 0 (first double)
 
         game.handleSwitchTurn();
-        game.checkSkipTurn();
+        game.handleSkipTurn();
         assertEquals(0, game.getCurrentPlayerNumber()); // new current player still 0 (second double)
     }
 
@@ -221,27 +221,29 @@ public class GameTest {
     public void testHandleSwitchTurnSkip() {
         // do not roll dice, to mimic a double (both dice are initialized as 0)
         game.handleSwitchTurn();
-        game.checkSkipTurn();
+        game.handleSkipTurn();
         game.handleSwitchTurn();
-        game.checkSkipTurn();
+        game.handleSkipTurn();
         assertEquals(0, game.getCurrentPlayerNumber()); // new current player still 0 after two doubles
 
         game.handleSwitchTurn(); // third double
-        game.checkSkipTurn();
+        game.handleSkipTurn();
         assertEquals(1, game.getCurrentPlayerNumber()); // new current player is 1
 
         assertTrue(game.getPlayers().get(0).isSkipTurn());
 
-        //part of skip turn logic is handled at the beginning of handleMove - created public checkSkipTurn() to test
+        //part of skip turn logic is handled at the beginning of handleMove - created public handleSkipTurn() to test
 
         game.getDice1().rollDice(); // roll only 1 dice, to guarantee no doubles
         game.handleSwitchTurn();
-        game.checkSkipTurn();
-        assertEquals(1, game.getCurrentPlayerNumber()); // skips player 0, new current player is still 1 (only 2 players)
+        //game.handleSkipTurn(); // player 0 could exit jail here
+        assertEquals(0, game.getCurrentPlayerNumber()); // becomes player 0 again, who is in jail
+        assertTrue(game.getCurrentPlayer().isSkipTurn());
 
-        game.handleSwitchTurn();
-        game.checkSkipTurn();
-        assertEquals(0, game.getCurrentPlayerNumber()); // player 0 can now go again
+        // is different with Jail handling
+        //game.handleSwitchTurn();
+        //game.handleSkipTurn();
+        ///assertEquals(0, game.getCurrentPlayerNumber()); // player 0 can now go again
 
     }
 

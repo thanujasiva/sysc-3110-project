@@ -36,8 +36,8 @@ public class DiceTest {
         int diceNum = dice.rollDice();
         int min = 1;
         int max = 6;
-        assertTrue(diceNum < max);
-        assertTrue(diceNum > min);
+        assertTrue(diceNum <= max);
+        assertTrue(diceNum >= min);
     }
 
 }

@@ -1,13 +1,17 @@
 package Monopoly;
 
+import Monopoly.Squares.GoToJail;
+import Monopoly.Squares.Jail;
+import Monopoly.Squares.Property;
+import Monopoly.Squares.Square;
+
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Game {
 
     private Dice dice1;
     private Dice dice2;
-    //private HashMap<Integer, Monopoly.Square> squares; //integer represents the place of the box on the board
+    //private HashMap<Integer, Monopoly.Squares.Square> squares; //integer represents the place of the box on the board
     private ArrayList<Player> players;
     private int currentPlayerNumber;
     private int doubles;
@@ -83,6 +87,7 @@ public class Game {
         for (Property p: player.getProperties()){
             p.setOwner(null);
         }
+        doubles = -1; // in case the player removed just rolled doubles
     }
 
     /**
@@ -132,8 +137,8 @@ public class Game {
     public boolean purchaseTransaction(){
         boolean canPurchase = false;
         Player currentPlayer = getCurrentPlayer();
-        Square currentSquare =  board.getSquares().get(currentPlayer.getPosition() % board.getSquares().size());
-        if(currentSquare.getType().equals("Monopoly.Property")) {
+        Square currentSquare =  getCurrentSquare();
+        if(currentSquare instanceof Property) {
             Property currentProperty = (Property) currentSquare;
             canPurchase = currentPlayer.purchaseProperty(currentProperty);
             if (canPurchase){
@@ -158,7 +163,7 @@ public class Game {
         Player currentPlayer = getCurrentPlayer();
         Square currentSquare =  getCurrentSquare();
 
-        if (currentSquare.getType().equals("Monopoly.Property") && ((Property)currentSquare).getOwner() != null) {
+        if ((currentSquare instanceof Property) && ((Property)currentSquare).getOwner() != null) {
             Property currentProperty = (Property) currentSquare;
             int rentAmount = currentProperty.getOwner().getRentAmount(currentProperty);
 
@@ -176,8 +181,6 @@ public class Game {
             }
             //return true;
 
-        }else{
-            System.out.println("This should not have occurred."); // FIXME - handling of this
         }
 
         return canPayRent;
@@ -197,24 +200,70 @@ public class Game {
     }
 
     /**
+     * Add current player to jail
+     * @author Thanuja
+     */
+    private void addCurrentPlayerToJail() {
+        // TODO handle if Go amount was just received
+        Jail jail = board.getJailSquare();
+        Player currentPlayer = getCurrentPlayer();
+        currentPlayer.setSkipTurn(true);
+        currentPlayer.setPosition(board.getJailPosition());
+        jail.addToJail(currentPlayer);
+
+        this.doubles = -1; // in case player rolled doubles when landing on go to jail
+    }
+
+    /**
+     * Remove current player from jail
+     * @author Thanuja
+     */
+    private void removeCurrentPlayerFromJail() {
+        Jail jail = board.getJailSquare();
+        Player currentPlayer = getCurrentPlayer();
+        jail.removeFromJail(currentPlayer);
+        currentPlayer.setSkipTurn(false);
+
+        this.doubles = -1; // even if player rolled doubles to exit, they cannot roll again (handled in handleSwitchTurn)
+    }
+
+
+    /**
+     * Encapsulate the checking if a player can roll again
+     * @author Thanuja
+     * @return boolean      true if they can reroll, false otherwise
+     */
+    private boolean cannotReRoll(){
+        // currentPlayerNumber<0 - if current player went bankrupt in a way that currentPlayerNumber is now out of range
+        // dice1.getDiceNumber() != dice2.getDiceNumber() - did not roll doubles
+        // doubles < 0 - if player just went bankrupt or if player just entered/exited jail
+        return ((currentPlayerNumber<0) || (dice1.getDiceNumber() != dice2.getDiceNumber()) || (doubles < 0));
+    }
+
+    /**
      * Handle switch turn
      * @author Sabah
      * @author Shrimei
+     * @author Thanuja
      */
     public void handleSwitchTurn(){
-        if (currentPlayerNumber<0){ // in case current player went bankrupt
+        if (cannotReRoll()){
+            //System.out.println("reset to 0");
             this.switchTurn(); // if 2 or more players remaining
+            doubles = 0;
         }else {
-            Player currentPlayer = players.get(currentPlayerNumber);
-            if (dice1.getDiceNumber() != dice2.getDiceNumber()) { // no double rolls
-                this.switchTurn();// switches turn
-                doubles = 0;
-            } else { // when player rolls doubles more than 3 times
-                doubles += 1;
-                if (doubles >= 3) {
-                    currentPlayer.setSkipTurn(true);
-                    this.switchTurn(); // switches the turn (in milestone 3 change it to go to jail)
+            doubles += 1;
+            //System.out.println("Increment doubles for " + getCurrentPlayer().getId());
+            if (doubles >= 3) {  // when player rolls doubles more than 3 times
+                //System.out.println("Rolled 3 doubles - Jail " + getCurrentPlayer().getId());
+                this.addCurrentPlayerToJail();
+
+                for (MonopolyInterfaceView view : this.views){
+                    view.handleJailEntered("Rolled 3 doubles");
                 }
+
+                this.switchTurn(); // switches the turn (in milestone 3 change it to go to jail)
+                doubles = 0;
             }
         }
 
@@ -225,15 +274,90 @@ public class Game {
     }
 
     /**
-     * Check if current player's turn needs to be skipped
-     * @author Sabah
+     * Handle roll based on type of box player is on
+     * @author Thanuja
      */
-    public void checkSkipTurn(){
-        Player currentPlayer = players.get(currentPlayerNumber);
-        if (currentPlayer.isSkipTurn()){
-            currentPlayer.setSkipTurn(false);
-            this.switchTurn();
+    public void handleRoll() {
+        if (getCurrentPlayer().isSkipTurn()){
+            handleSkipTurn();  // handle when a player is in jail
+        }else{
+            handleMove(); // handle a normal roll
         }
+    }
+
+    /**
+     * Handle if current player's turn needs to be skipped
+     * @author Sabah
+     * @author Thanuja
+     */
+    public void handleSkipTurn(){
+        Player currentPlayer = getCurrentPlayer();
+        if (currentPlayer.isSkipTurn()){
+
+            Jail jail = board.getJailSquare();
+
+            // TODO Paying a $50 fine to the Bank BEFORE throwing the dice for either the first turn or the second turn in Jail.
+            //if (jail.getJailTime(currentPlayer) < 2){
+                // ask if they want to exit (JOptionPane in the View class?)
+                // if yes, currentPlayer.payRent(50); this.removeCurrentPlayerFromJail(); roll dice and move
+            //}
+
+            int roll = dice1.rollDice() + dice2.rollDice();
+            // only move player if they can exit jail
+            for (MonopolyInterfaceView view : this.views){ // update with jail roll
+                view.handleRoll();
+            }
+
+            if (dice1.getDiceNumber() == dice2.getDiceNumber()) {
+                //System.out.println("Rolled doubles - exit jail " + currentPlayer.getId());
+                this.removeCurrentPlayerFromJail();
+                currentPlayer.changePosition(roll);
+                for (MonopolyInterfaceView view : this.views){
+                    view.handleJailExited("rolled doubles");
+                }
+            } else {
+                // increment time in jail
+                jail.incrementJailTime(currentPlayer);
+                //System.out.println("increment jail time to " + jail.getJailTime(currentPlayer) + " for player " + currentPlayer.getId());
+            }
+
+            if (jail.getJailTime(currentPlayer) > 3) { // end of third round in jail and still in jail
+                //System.out.println("Can leave jail after paying $50 " + getCurrentPlayer().getId()); // Message Dialog?
+                boolean canPayExitFee = currentPlayer.payRent(50);
+                if (canPayExitFee) {
+                    this.removeCurrentPlayerFromJail();
+                    currentPlayer.changePosition(roll);
+                    for (MonopolyInterfaceView view : this.views) {
+                        view.handleJailExited("paid $50 fine");
+                    }
+                }else{
+                    removePlayer(currentPlayer); //remove player from game
+                    currentPlayerNumber -= 1;
+                    //System.out.println("You are bankrupt. You cannot play further.");
+                    for (MonopolyInterfaceView view : this.views){
+                        view.handleBankruptcy(); // show the card they landed on, handle purchase/rent, etc
+                    }
+                }
+
+            }
+
+            if (!currentPlayer.isSkipTurn()){ // if they exited jail
+                for (MonopolyInterfaceView view : this.views){
+                    view.handleRoll(); // show the card they landed on, handle purchase/rent, etc
+                }
+            }
+
+            for (MonopolyInterfaceView view : this.views){
+                view.handleEndOfTurn();
+            }
+
+            for (MonopolyInterfaceView view : this.views){ // update with player change after switch turn
+                view.handlePlayerState();
+            }
+
+        }
+
+
     }
 
     /**
@@ -242,6 +366,7 @@ public class Game {
      * @author Thanuja
      * @author Maisha
      * @author Sabah
+     * @author Thanuja
      */
     public void handleMove(){
 
@@ -256,17 +381,16 @@ public class Game {
 
         //Scanner sc = new Scanner(System.in);
 
-        checkSkipTurn();
+        //handleSkipTurn();
+        //don't want rest to occur if player was in jail
 
         //System.out.println("\n===============================================");
-        Player currentPlayer = players.get(currentPlayerNumber); // only get actual current player after skip turn was checked
+        Player currentPlayer = getCurrentPlayer(); // only get actual current player after skip turn was checked
         //Square currentSquare =  board.getSquares().get(currentPlayer.getPosition() % board.getSquares().size());
         //currentPlayer.printCurrentState(currentSquare.getName());
 
         // changed to 2 dice rolls
-        int roll1 = dice1.rollDice();
-        int roll2 = dice2.rollDice();
-        int roll = roll1+ roll2;
+        int roll = dice1.rollDice() + dice2.rollDice();
 
         //System.out.println("Amount rolled is " + roll1 + ", " + roll2);
         currentPlayer.changePosition(roll); //move the player
@@ -282,6 +406,18 @@ public class Game {
 
         for (MonopolyInterfaceView view : this.views){
             view.handlePlayerState();
+        }
+
+        if(getCurrentSquare() instanceof GoToJail){
+            //System.out.println("Landed on Go To Jail " + getCurrentPlayer().getId());
+            this.addCurrentPlayerToJail();
+            for (MonopolyInterfaceView view : this.views){
+                view.handleJailEntered("landed on Go to Jail");
+            }
+        }
+
+        for (MonopolyInterfaceView view : this.views){
+            view.handleEndOfTurn();
         }
     }
 

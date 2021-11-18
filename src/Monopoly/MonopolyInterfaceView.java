@@ -7,4 +7,12 @@ public interface MonopolyInterfaceView {
     void handleRoll();
 
     void handlePlayerState();
+
+    void handleEndOfTurn();
+
+    void handleJailEntered(String message);
+
+    void handleJailExited(String message);
+
+    void handleBankruptcy();
 }

@@ -1,5 +1,7 @@
 package Monopoly;
 
+import Monopoly.Squares.Property;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -68,6 +70,15 @@ public class Player {
     public int changePosition(int roll){
         this.position += roll;
         return position;
+    }
+
+    /**
+     * Set a players position
+     * @author Thanuja
+     * @param position      position number to set
+     */
+    public void setPosition(int position) {
+        this.position = position;
     }
 
     /**

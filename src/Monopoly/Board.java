@@ -1,5 +1,7 @@
 package Monopoly;
 
+import Monopoly.Squares.*;
+
 import java.util.HashMap;
 
 public class Board {
@@ -21,29 +23,29 @@ public class Board {
      */
     private void setProperties(){
 
-        BlankSquare GO = new BlankSquare("GO");
+        Go GO = new Go("GO");
 
         Property Mediterranean = new Property("Mediterranean Avenue", 60, ColourGroups.BROWN);
         Property Baltic = new Property("Baltic Avenue", 60, ColourGroups.BROWN);
 
-        BlankSquare IncomeTax = new BlankSquare("Income Tax");
+        Tax IncomeTax = new Tax("Income Tax");
 
-        BlankSquare ReadingRail = new BlankSquare("Reading Railroad");
+        Railroad ReadingRail = new Railroad("Reading Railroad");
 
         Property Oriental = new Property("Oriental Avenue", 100, ColourGroups.GREY);
         Property Vermont = new Property("Vermont Avenue", 100, ColourGroups.GREY);
         Property Connecticut = new Property("Connecticut Avenue", 120, ColourGroups.GREY);
 
-        BlankSquare VisitingJail = new BlankSquare("Visiting Jail");
+        Jail VisitingJail = new Jail("Visiting Jail", "In Jail"); // also has a Jail
 
         Property StCharles  = new Property("St. Charles Place", 140, ColourGroups.PINK);
 
-        BlankSquare Electric  = new BlankSquare("Electric Company");
+        Utility Electric  = new Utility("Electric Company");
 
         Property States  = new Property("States Avenue", 140, ColourGroups.PINK);
         Property Virginia  = new Property("Virginia Avenue", 160, ColourGroups.PINK);
 
-        BlankSquare PennsylvaniaRail = new BlankSquare("Pennsylvania Railroad");
+        Railroad PennsylvaniaRail = new Railroad("Pennsylvania Railroad");
 
         Property StJames  = new Property("St. James Place", 180, ColourGroups.ORANGE);
         Property Tennessee  = new Property("Tennessee Avenue", 180, ColourGroups.ORANGE);
@@ -55,26 +57,26 @@ public class Board {
         Property Indiana  = new Property("Indiana Avenue", 220, ColourGroups.RED);
         Property Illinois  = new Property("Illinois Avenue", 240, ColourGroups.RED);
 
-        BlankSquare BO = new BlankSquare("B. & O. Railroad");
+        Railroad BO = new Railroad("B. & O. Railroad");
 
         Property Atlantic  = new Property("Atlantic Avenue", 260, ColourGroups.YELLOW);
         Property Ventnor  = new Property("Ventnor Avenue", 260, ColourGroups.YELLOW);
 
-        BlankSquare WaterWorks = new BlankSquare("Water Works");
+        Utility WaterWorks = new Utility("Water Works");
 
         Property Marvin = new Property("Marvin Gardens", 280, ColourGroups.YELLOW);
 
-        BlankSquare GotoJail = new BlankSquare("Go to Jail");
+        GoToJail GotoJail = new GoToJail("Go to Jail");
 
         Property Pacific  = new Property("Pacific Avenue", 300, ColourGroups.GREEN);
         Property NorthCarolina  = new Property("North Carolina Avenue", 300,  ColourGroups.GREEN);
         Property Pennsylvania  = new Property("Pennsylvania Avenue", 320,  ColourGroups.GREEN);
 
-        BlankSquare ShortLine = new BlankSquare("Short Line Railroad");
+        Railroad ShortLine = new Railroad("Short Line Railroad");
 
         Property ParkPlace = new Property("Park Place", 350,  ColourGroups.BLUE);
 
-        BlankSquare LuxuryTax = new BlankSquare("Luxury Tax");
+        Tax LuxuryTax = new Tax("Luxury Tax");
 
         Property Boardwalk  = new Property("Boardwalk", 400, ColourGroups.BLUE);
 
@@ -121,6 +123,34 @@ public class Board {
      */
     public HashMap<Integer, Square> getSquares() {
         return squares;
+    }
+
+
+    /**
+     * Return casted version of go to jail square
+     * @author Thanuja
+     * @return          GoToJail square
+     */
+    public GoToJail getGoToJailSquare(){
+        return (GoToJail) squares.get(26);
+    }
+
+    /**
+     * Return casted version of jail square
+     * @author Thanuja
+     * @return          Jail square
+     */
+    public Jail getJailSquare(){
+        return (Jail) squares.get(8);
+    }
+
+    /**
+     * Return jail position
+     * @author Thanuja
+     * @return          int, position of jail
+     */
+    public int getJailPosition(){
+        return 8;
     }
 
 }

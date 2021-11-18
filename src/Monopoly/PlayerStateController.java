@@ -1,10 +1,12 @@
 package Monopoly;
 
+import Monopoly.Squares.Property;
+
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
-public class PlayerStatePanelController implements ListSelectionListener{
+public class PlayerStateController implements ListSelectionListener{
 
     JList <String> propertiesList;
     Player player;
@@ -15,7 +17,7 @@ public class PlayerStatePanelController implements ListSelectionListener{
      * @param propertiesList        JList
      * @param player                the corresponding player
      */
-    public PlayerStatePanelController(JList<String> propertiesList, Player player){
+    public PlayerStateController(JList<String> propertiesList, Player player){
         this.propertiesList = propertiesList;
         this.player = player;
     }

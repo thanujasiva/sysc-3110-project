@@ -1,5 +1,9 @@
 package Monopoly;
 
+import Monopoly.Squares.Property;
+import Monopoly.Squares.Railroad;
+import Monopoly.Squares.Square;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.WindowAdapter;
@@ -101,11 +105,13 @@ public class GameView implements MonopolyInterfaceView {
         Player currentPlayer = game.getCurrentPlayer();
         Square currentSquare = game.getCurrentSquare();
 
-        if(currentSquare.getType().equals("Monopoly.Property")) {
+        // ideally don't want if statement structure here
+        if(currentSquare instanceof Property) {
             CardFrame card = new CardFrame((Property) currentSquare, currentPlayer, game);
             // do not switch turn until card is handled property
-        }else{
-            gameController.handleSwitchTurn();
+        }else if (currentSquare instanceof Railroad) {
+            // show railroad card
+            // buy / pay rent
         }
     }
 
@@ -118,6 +124,47 @@ public class GameView implements MonopolyInterfaceView {
         Player currentPlayer = game.getPlayers().get(game.getCurrentPlayerNumber());
         this.playerStatePanel.updatePlayer(currentPlayer);
         this.playersPanel.updatePlayers();
+    }
+
+    /**
+     * Handles the end of a player's turn
+     * @author Thanuja
+     */
+    @Override
+    public void handleEndOfTurn() {
+        // ask if player wants to purchase houses/hotels before switching turn (if they didn't roll doubles)
+        gameController.handleSwitchTurn(); // can call here now that Card is a JOptionPane
+    }
+
+    /**
+     * Handle when current player enters jail
+     * @author Thanuja
+     * @param message   reason for entering
+     */
+    @Override
+    public void handleJailEntered(String message) {
+        String title = "Player " + game.getCurrentPlayer().getId() + " Go To Jail";
+        JOptionPane.showMessageDialog(null,message,title,JOptionPane.INFORMATION_MESSAGE);
+    }
+
+    /**
+     * Handle when current player exits jail
+     * @author Thanuja
+     * @param message reason for exiting
+     */
+    @Override
+    public void handleJailExited(String message) {
+        String title = "Player " + game.getCurrentPlayer().getId() + " Exit Jail";
+        JOptionPane.showMessageDialog(null,message,title,JOptionPane.INFORMATION_MESSAGE);
+    }
+
+    /**
+     * Handle a bankruptcy
+     * @author Thanuja
+     */
+    @Override
+    public void handleBankruptcy() {
+        JOptionPane.showMessageDialog(null, "You are bankrupt. You cannot play further.");
     }
 
     /**
