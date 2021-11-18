@@ -285,7 +285,7 @@ public class CardFrame extends JOptionPane {
         JLabel houseCostVal= new JLabel("$ sad");
         houseCostVal.setBorder(fieldBorder);
 
-        JLabel hotelCostVal= new JLabel("$ghf");
+        JLabel hotelCostVal= new JLabel("$ ghf");
         hotelCostVal.setBorder(fieldBorder);
 
         valuePanel.add(priceVal);
@@ -318,9 +318,7 @@ public class CardFrame extends JOptionPane {
             if (!canPurchase){ //if player does not have enough money
                 JOptionPane.showMessageDialog(null, "You do not have enough money to purchase the property");
             } // else, they successfully purchased
-        }//else, player says no, do nothing
-
-        //cardController.handleSwitchTurn();
+        }
     }
 
     /**
@@ -339,7 +337,6 @@ public class CardFrame extends JOptionPane {
                 System.exit(0);
             }
         } // else, they successfully paid
-        //cardController.handleSwitchTurn();
     }
 
     /**
@@ -348,9 +345,6 @@ public class CardFrame extends JOptionPane {
      */
     private void handleIsOwner(){
         JOptionPane.showMessageDialog(null, mainPanel /*"You own this property"*/,  "You own this square", JOptionPane.PLAIN_MESSAGE);
-        //if(cardController != null){
-        //    cardController.handleSwitchTurn();
-        //}
     }
 
 
