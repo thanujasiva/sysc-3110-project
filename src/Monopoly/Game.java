@@ -1,9 +1,6 @@
 package Monopoly;
 
-import Monopoly.Squares.GoToJail;
-import Monopoly.Squares.Jail;
-import Monopoly.Squares.Property;
-import Monopoly.Squares.Square;
+import Monopoly.Squares.*;
 
 import java.util.ArrayList;
 
@@ -138,11 +135,27 @@ public class Game {
         boolean canPurchase = false;
         Player currentPlayer = getCurrentPlayer();
         Square currentSquare =  getCurrentSquare();
+        /*
         if(currentSquare instanceof Property) {
             Property currentProperty = (Property) currentSquare;
             canPurchase = currentPlayer.purchaseProperty(currentProperty);
             if (canPurchase){
                 currentProperty.setOwner(currentPlayer);
+            }
+        }
+        if(currentSquare instanceof Railroad) {
+            Railroad currentRailroad = (Railroad) currentSquare;
+            canPurchase = currentPlayer.purchaseRailroad(currentRailroad);
+            if (canPurchase){
+                currentRailroad.setOwner(currentPlayer);
+            }
+        }
+        */
+        if (currentSquare instanceof OwnableSquare){
+            OwnableSquare ownableSquare = (OwnableSquare) currentSquare;
+            canPurchase = currentPlayer.purchaseSquare(ownableSquare);
+            if (canPurchase){
+                ownableSquare.setOwner(currentPlayer);
             }
         }
         return canPurchase;
@@ -163,6 +176,7 @@ public class Game {
         Player currentPlayer = getCurrentPlayer();
         Square currentSquare =  getCurrentSquare();
 
+        /*
         if ((currentSquare instanceof Property) && ((Property)currentSquare).getOwner() != null) {
             Property currentProperty = (Property) currentSquare;
             int rentAmount = currentProperty.getOwner().getRentAmount(currentProperty);
@@ -177,11 +191,32 @@ public class Game {
                 /*if (players.size() == 1) { //1 player left // move
                     System.out.println("Monopoly.Player " + players.get(0).getId() + " won!"); //display winner and exit game
                     //return false;
+                }
+            }
+            //return true;
+
+        } */
+
+        if ((currentSquare instanceof OwnableSquare) && ((OwnableSquare)currentSquare).getOwner() != null) {
+            OwnableSquare currentOwnableSquare = (OwnableSquare) currentSquare;
+            int rentAmount = currentOwnableSquare.getOwner().getRentAmount(currentOwnableSquare);
+
+            canPayRent = currentPlayer.payRent(rentAmount);
+            if (canPayRent) { //pay rent if enough money
+                currentOwnableSquare.getOwner().collectRent(currentOwnableSquare);
+            } else { //player ran out of money, they are bankrupt
+                //System.out.println("You are bankrupt. You cannot play further."); // move
+                removePlayer(currentPlayer); //remove player from game
+                currentPlayerNumber -= 1;
+                /*if (players.size() == 1) { //1 player left // move
+                    System.out.println("Monopoly.Player " + players.get(0).getId() + " won!"); //display winner and exit game
+                    //return false;
                 }*/
             }
             //return true;
 
         }
+
 
         return canPayRent;
 
