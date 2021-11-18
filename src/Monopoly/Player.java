@@ -43,6 +43,10 @@ public class Player {
         return railroadNumber;
     }
 
+    public ArrayList<OwnableSquare> getOwnableSquares() {
+        return ownableSquares;
+    }
+
     public boolean isSkipTurn() {
         return skipTurn;
     }
@@ -240,7 +244,7 @@ public class Player {
     public int getRentAmount(OwnableSquare ownableSquare) {
         // null check in case player does not own the property
         if (ownableSquare instanceof Railroad) {
-            int rent = ((Railroad) ownableSquare).getRent(railroadNumber);
+            int rent = ownableSquare.getRent(railroadNumber);
             return rent;
         } else if (ownableSquare instanceof Property) {
             Property property = (Property) ownableSquare;
