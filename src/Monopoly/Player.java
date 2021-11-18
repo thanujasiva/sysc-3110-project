@@ -197,7 +197,7 @@ public class Player {
         int rent = railroad.getRent(railroads.size());
         this.money += rent;
     }
-*/
+    */
 
 
     /**
@@ -231,9 +231,8 @@ public class Player {
 
     /**
      * @author Sabah
-     * @return $200 added to the current player, when passing or landing on go.
+     * Add $200 to the current player, when passing or landing on go.
      */
-
     public void collect200() {
         this.money += 200;
     }
