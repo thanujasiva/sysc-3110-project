@@ -5,6 +5,7 @@ import Monopoly.Squares.*;
 import java.util.HashMap;
 
 public class Board {
+    public Object getGoPosition;
     private HashMap<Integer, Square> squares;
 
     /**
@@ -151,6 +152,10 @@ public class Board {
      */
     public int getJailPosition(){
         return 8;
+    }
+    
+    public int getGoPosition() {
+        return 0;
     }
 
 }

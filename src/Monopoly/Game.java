@@ -13,6 +13,7 @@ public class Game {
     private int currentPlayerNumber;
     private int doubles;
     private Board board;
+    private boolean firstRound;
 
     private ArrayList<MonopolyInterfaceView> views;
 
@@ -32,6 +33,7 @@ public class Game {
         this.currentPlayerNumber = players.get(0).getId();
         this.doubles = 0;
         this.board = new Board();
+        this.firstRound = true;
 
         this.views = new ArrayList<>();
     }
@@ -93,11 +95,14 @@ public class Game {
      */
     private void switchTurn(){
         if(currentPlayerNumber+1 == players.size()){
+            firstRound = false;
             this.currentPlayerNumber = 0;
         } else {
             this.currentPlayerNumber += 1;
         }
     }
+
+
 
     /**
      * @author Thanuja
@@ -426,11 +431,19 @@ public class Game {
 
         // changed to 2 dice rolls
         int roll = dice1.rollDice() + dice2.rollDice();
-
         //System.out.println("Amount rolled is " + roll1 + ", " + roll2);
         currentPlayer.changePosition(roll); //move the player
         //currentSquare = board.getSquares().get(currentPlayer.getPosition() % board.getSquares().size()); //new position of the player
         //System.out.println("You landed on " + currentSquare.toString()); //print current box info
+
+        int newPosition = currentPlayer.getPosition() % board.getSquares().size();
+
+        if (((newPosition - roll) <= 0) && (!firstRound)) {
+            currentPlayer.collect200();
+            for (MonopolyInterfaceView view : this.views){
+                view.handlePassedGo();
+            }
+        }
 
         // show property card
         // update views based on dice roll
@@ -481,6 +494,8 @@ public class Game {
     public Square getCurrentSquare() {
         return board.getSquares().get(getCurrentPlayer().getPosition() % board.getSquares().size());
     }
+
+
 
 
     /*
