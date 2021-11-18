@@ -43,7 +43,7 @@ public class Utility implements OwnableSquare {
     }
 
     @Override
-    public int getRent(int numberOfUtilities) {
+    public int getRent(int numberOfUtilities) { // FIXME dice roll
         if (numberOfUtilities == 1){
             return rent1;
         } else {
