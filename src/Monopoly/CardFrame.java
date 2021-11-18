@@ -75,6 +75,11 @@ public class CardFrame extends JOptionPane {
         }
     }
 
+    /**
+     * Display Utility info (name, price, rent) on card
+     * @author Shrimei
+     * @param utility to be displayed
+     */
     private void displayUtilityInfo(Utility utility) {
         JPanel fieldPanel = new JPanel();
         JPanel valuePanel = new JPanel();
@@ -122,6 +127,11 @@ public class CardFrame extends JOptionPane {
         mainPanel.add(valuePanel, BorderLayout.EAST);
     }
 
+    /**
+     * Display railroad info (name, price, rent) on card
+     * @author Shrimei
+     * @param railroad to be displayed
+     */
     private void displayRailroadInfo(Railroad railroad) {
         JPanel fieldPanel = new JPanel();
         JPanel valuePanel = new JPanel();
@@ -186,15 +196,7 @@ public class CardFrame extends JOptionPane {
     }
 
     /**
-     * @author Shrimei
-     * @return mainPanel
-     */
-    public JPanel getMainPanel() {
-        return mainPanel;
-    }
-
-    /**
-     * Display the property info (price, name, colour, rent) on the frame
+     * Display the property info (price, name, colour, rent, houses) on the frame
      * @author Shrimei
      * @param property that is being displayed
      */
@@ -224,9 +226,37 @@ public class CardFrame extends JOptionPane {
         JLabel rentWithSet = new JLabel("Rent with colour set: ");
         rentWithSet.setBorder(fieldBorder);
 
+        JLabel rentOneHouse = new JLabel("Rent with 1 house: ");
+        rentOneHouse.setBorder(fieldBorder);
+
+        JLabel rentTwoHouses = new JLabel("Rent with 2 houses: ");
+        rentTwoHouses.setBorder(fieldBorder);
+
+        JLabel rentThreeHouses = new JLabel("Rent with 3 houses: ");
+        rentThreeHouses.setBorder(fieldBorder);
+
+        JLabel rentFourHouses = new JLabel("Rent with 4 houses: ");
+        rentFourHouses.setBorder(fieldBorder);
+
+        JLabel rentHotel= new JLabel("Rent with hotel: ");
+        rentHotel.setBorder(fieldBorder);
+
+        JLabel houseCost= new JLabel("House cost: ");
+        houseCost.setBorder(fieldBorder);
+
+        JLabel hotelCost= new JLabel("Hotel cost: ");
+        hotelCost.setBorder(fieldBorder);
+
         fieldPanel.add(price);
         fieldPanel.add(rent);
         fieldPanel.add(rentWithSet);
+        fieldPanel.add(rentOneHouse);
+        fieldPanel.add(rentTwoHouses);
+        fieldPanel.add(rentThreeHouses);
+        fieldPanel.add(rentFourHouses);
+        fieldPanel.add(rentHotel);
+        fieldPanel.add(houseCost);
+        fieldPanel.add(hotelCost);
 
         JLabel priceVal = new JLabel("$" + property.getPrice());
         priceVal.setBorder(valueBorder);
@@ -237,9 +267,37 @@ public class CardFrame extends JOptionPane {
         JLabel rentWithSetVal = new JLabel("$" +property.getRentWithColourSet());
         rentWithSetVal.setBorder(valueBorder);
 
+        JLabel rentOneHouseVal = new JLabel("$ sda");
+        rentOneHouseVal.setBorder(valueBorder);
+
+        JLabel rentTwoHousesVal = new JLabel("$ das");
+        rentTwoHousesVal.setBorder(valueBorder);
+
+        JLabel rentThreeHousesVal = new JLabel("$ blb");
+        rentThreeHousesVal.setBorder(valueBorder);
+
+        JLabel rentFourHousesVal = new JLabel("$ vut");
+        rentFourHousesVal.setBorder(valueBorder);
+
+        JLabel rentHotelVal = new JLabel("$ sda");
+        rentHotelVal.setBorder(valueBorder);
+
+        JLabel houseCostVal= new JLabel("$ sad");
+        houseCostVal.setBorder(fieldBorder);
+
+        JLabel hotelCostVal= new JLabel("$ghf");
+        hotelCostVal.setBorder(fieldBorder);
+
         valuePanel.add(priceVal);
         valuePanel.add(rentVal);
         valuePanel.add(rentWithSetVal);
+        valuePanel.add(rentOneHouseVal);
+        valuePanel.add(rentTwoHousesVal);
+        valuePanel.add(rentThreeHousesVal);
+        valuePanel.add(rentFourHousesVal);
+        valuePanel.add(rentHotelVal);
+        valuePanel.add(houseCostVal);
+        valuePanel.add(hotelCostVal);
 
         mainPanel.add(name, BorderLayout.NORTH);
         mainPanel.add(fieldPanel, BorderLayout.WEST);
@@ -252,7 +310,7 @@ public class CardFrame extends JOptionPane {
      * @author Thanuja
      */
     private void handleBuyOption(){
-        int result = JOptionPane.showConfirmDialog(null, mainPanel,"Purchase property?",JOptionPane.YES_NO_OPTION,JOptionPane.PLAIN_MESSAGE);
+        int result = JOptionPane.showConfirmDialog(null, mainPanel,"Purchase square?",JOptionPane.YES_NO_OPTION,JOptionPane.PLAIN_MESSAGE);
 
         if(result == JOptionPane.YES_OPTION){
             //controller would handle purchasing
@@ -289,7 +347,7 @@ public class CardFrame extends JOptionPane {
      * @author Thanuja
      */
     private void handleIsOwner(){
-        JOptionPane.showMessageDialog(null, mainPanel /*"You own this property"*/,  "You own this property", JOptionPane.PLAIN_MESSAGE);
+        JOptionPane.showMessageDialog(null, mainPanel /*"You own this property"*/,  "You own this square", JOptionPane.PLAIN_MESSAGE);
         //if(cardController != null){
         //    cardController.handleSwitchTurn();
         //}
@@ -318,9 +376,9 @@ public class CardFrame extends JOptionPane {
         //player.setPosition(22);
         //player.setPosition(5);
 
-        Monopoly.CardFrame card = new Monopoly.CardFrame(WaterWorks, player, game);
+        //Monopoly.CardFrame card = new Monopoly.CardFrame(WaterWorks, player, game);
         //Monopoly.CardFrame card = new Monopoly.CardFrame(BO, player, game);
-        //Monopoly.CardFrame card = new Monopoly.CardFrame(Atlantic, player, game);
+        Monopoly.CardFrame card = new Monopoly.CardFrame(Atlantic, player, game);
         //Monopoly.CardFrame card2 = new Monopoly.CardFrame(Oriental, player, game);
     }
 }
