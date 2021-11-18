@@ -30,6 +30,7 @@ public class Utility implements OwnableSquare {
     }
 
     /**
+     * Get owner of utility
      * @author Shrimei
      * @return owner of utility
      */
@@ -44,6 +45,7 @@ public class Utility implements OwnableSquare {
     }
 
     /**
+     * Get price of utility
      * @author Shrimei
      * @return price to buy utility
      */
