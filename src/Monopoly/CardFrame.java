@@ -1,8 +1,6 @@
 package Monopoly;
 
-import Monopoly.Squares.Property;
-import Monopoly.Squares.Railroad;
-import Monopoly.Squares.Square;
+import Monopoly.Squares.*;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -50,7 +48,7 @@ public class CardFrame extends JOptionPane {
      * @param player    the current player
      * @param game      the game model
      */
-    public CardFrame(Square square, Player player, Game game){
+    public CardFrame(OwnableSquare square, Player player, Game game){
         super(square.getName());
         this.setLayout(new BorderLayout());
         this.setSize(200, 250);
@@ -63,32 +61,33 @@ public class CardFrame extends JOptionPane {
             displayPropertyInfo((Property)square);
         } else if(square instanceof Railroad){
             displayRailroadInfo((Railroad)square);
+        } else if(square instanceof Utility){
+            displayUtilityInfo((Utility)square);
         }
 
         this.cardController = new CardController(game);
 
-        if(((Property)square).getOwner() == null) { //no owner, can buy //FIXME add getOwner method in railroad and utility
-            /*this.addWindowListener(new WindowAdapter() {  //defining a class inside another class
-                public void windowClosing(WindowEvent e) {
-                    handleBuyOption();
-                }
-            });*/
+        if(square.getOwner() == null) { //no owner, can buy
             handleBuyOption();
-        }else if(((Property)square).getOwner().equals(player)){ //player is owner
-            /*this.addWindowListener(new WindowAdapter() {  //defining a class inside another class
-                public void windowClosing(WindowEvent e) {
-                    handleIsOwner();
-                }
-            });*/
+        }else if(square.getOwner().equals(player)){ //player is owner
             handleIsOwner();
         }else{
-            /*this.addWindowListener(new WindowAdapter() {  //defining a class inside another class
-                public void windowClosing(WindowEvent e) {
-                    handlePayRent();
-                }
-            });*/
             handlePayRent();
         }
+    }
+
+    private void displayUtilityInfo(Utility utility) {
+        JPanel fieldPanel = new JPanel();
+        JPanel valuePanel = new JPanel();
+
+        fieldPanel.setLayout(new BoxLayout(fieldPanel,BoxLayout.Y_AXIS));
+        valuePanel.setLayout(new BoxLayout(valuePanel,BoxLayout.Y_AXIS));
+
+        Border fieldBorder = new EmptyBorder(6,3,3,3);
+        Border valueBorder = new EmptyBorder(6,3,3,3);
+
+        JLabel name = new JLabel(utility.getName(), SwingConstants.CENTER);
+        name.setBorder(valueBorder);
     }
 
     private void displayRailroadInfo(Railroad railroad) {
@@ -209,7 +208,7 @@ public class CardFrame extends JOptionPane {
      * @author Thanuja
      */
     private void handleIsOwner(){
-        JOptionPane.showMessageDialog(null, mainPanel /*"You own this property"*/,  "You own this property", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(null, mainPanel /*"You own this property"*/,  "You own this property", JOptionPane.PLAIN_MESSAGE);
         //if(cardController != null){
         //    cardController.handleSwitchTurn();
         //}
