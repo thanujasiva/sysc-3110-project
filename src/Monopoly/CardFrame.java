@@ -19,12 +19,29 @@ public class CardFrame extends JOptionPane {
     private CardController cardController;
     private JPanel mainPanel;
 
+
+    /**
+     * Called from the CardFrame constructor
+     * Display for the corresponding OwnableSquare type
+     * @author Shrimei
+     * @author Thanuja
+     */
+    private void displayOwnableSquareInfo(){
+        if(square instanceof Property){
+            displayPropertyInfo((Property)square);
+        } else if(square instanceof Railroad){
+            displayRailroadInfo((Railroad)square);
+        } else if(square instanceof Utility){
+            displayUtilityInfo((Utility)square);
+        }
+    }
+
     /**
      * Called from playerStatePanel, only display property card
      * @author Shrimei
      * @param square that is being displayed
      */
-    public CardFrame(Property square){
+    public CardFrame(OwnableSquare square){
         super(square.getName());
         this.setLayout(new BorderLayout());
         this.setSize(200, 250);
@@ -33,7 +50,7 @@ public class CardFrame extends JOptionPane {
 
         mainPanel = new JPanel(new BorderLayout());
 
-        displayPropertyInfo(square);
+        displayOwnableSquareInfo();
 
         handleIsOwner();
     }
@@ -56,13 +73,7 @@ public class CardFrame extends JOptionPane {
 
         mainPanel = new JPanel(new BorderLayout());
 
-        if(square instanceof Property){
-            displayPropertyInfo((Property)square);
-        } else if(square instanceof Railroad){
-            displayRailroadInfo((Railroad)square);
-        } else if(square instanceof Utility){
-            displayUtilityInfo((Utility)square);
-        }
+        displayOwnableSquareInfo();
 
         this.cardController = new CardController(game);
 

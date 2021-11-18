@@ -1,6 +1,6 @@
 package Monopoly;
 
-import Monopoly.Squares.Property;
+import Monopoly.Squares.OwnableSquare;
 
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
@@ -8,17 +8,17 @@ import javax.swing.event.ListSelectionListener;
 
 public class PlayerStateController implements ListSelectionListener{
 
-    JList <String> propertiesList;
+    JList <String> ownedSquaresList;
     Player player;
 
     /**
      * Create controller
      * @author Thanuja
-     * @param propertiesList        JList
+     * @param ownedSquaresList        JList
      * @param player                the corresponding player
      */
-    public PlayerStateController(JList<String> propertiesList, Player player){
-        this.propertiesList = propertiesList;
+    public PlayerStateController(JList<String> ownedSquaresList, Player player){
+        this.ownedSquaresList = ownedSquaresList;
         this.player = player;
     }
 
@@ -29,10 +29,10 @@ public class PlayerStateController implements ListSelectionListener{
      */
     @Override
     public void valueChanged(ListSelectionEvent e) {
-        if (propertiesList.getSelectedIndex() >= 0) {
+        if (ownedSquaresList.getSelectedIndex() >= 0) {
             if (!e.getValueIsAdjusting()) {
-                Property selectedProperty = player.getProperties().get(propertiesList.getSelectedIndex());
-                new CardFrame(selectedProperty);
+                OwnableSquare selectedOwnedSquare = player.getProperties().get(ownedSquaresList.getSelectedIndex());
+                new CardFrame(selectedOwnedSquare);
                 // user can open many cards (and duplicates of those cards)
             }
         }

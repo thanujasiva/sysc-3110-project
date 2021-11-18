@@ -1,6 +1,6 @@
 package Monopoly;
 
-import Monopoly.Squares.Property;
+import Monopoly.Squares.OwnableSquare;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -8,14 +8,14 @@ import javax.swing.border.EmptyBorder;
 
 /**
  * PlayerStateView class
- * Creates a frame for an individual player's state
+ * Creates a panel for an individual player's state
  * @author Thanuja
  */
 public class PlayerStatePanel extends JPanel{
 
     private JLabel playerNameLabel;
     private JLabel playerMoneyLabel;
-    private JList<String> propertiesList;
+    private JList<String> ownedSquaresList;
     private PlayerStateController playerStateController;
 
 
@@ -41,19 +41,19 @@ public class PlayerStatePanel extends JPanel{
         this.add(propertiesListHeader);
 
         // create list with the property names of the properties the player owns
-        DefaultListModel<String> propertiesModel = new DefaultListModel<>();
-        for (Property property : player.getProperties()){
-            propertiesModel.addElement(property.getName());
+        DefaultListModel<String> ownedSquaresModel = new DefaultListModel<>();
+        for (OwnableSquare ownedSquare : player.getProperties()){
+            ownedSquaresModel.addElement(ownedSquare.getName());
         }
 
         // add property name list to the JPanel
-        propertiesList = new JList<>(propertiesModel);
-        propertiesList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        this.add(new JScrollPane(propertiesList));
+        ownedSquaresList = new JList<>(ownedSquaresModel);
+        ownedSquaresList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        this.add(new JScrollPane(ownedSquaresList));
 
-        playerStateController = new PlayerStateController(propertiesList, player);
+        playerStateController = new PlayerStateController(ownedSquaresList, player);
         // display cardView for the selected property in the JList
-        propertiesList.addListSelectionListener(playerStateController);
+        ownedSquaresList.addListSelectionListener(playerStateController);
 
     }
 
@@ -67,17 +67,17 @@ public class PlayerStatePanel extends JPanel{
         this.playerMoneyLabel.setText("Money: $" + player.getMoney());
 
         DefaultListModel<String> propertiesModel = new DefaultListModel<>();
-        for (Property property : player.getProperties()){
+        for (OwnableSquare property : player.getProperties()){
             propertiesModel.addElement(property.getName());
         }
 
-        propertiesList.setModel(propertiesModel);
-        propertiesList.clearSelection();
+        ownedSquaresList.setModel(propertiesModel);
+        ownedSquaresList.clearSelection();
 
-        propertiesList.removeListSelectionListener(playerStateController);
+        ownedSquaresList.removeListSelectionListener(playerStateController);
 
-        playerStateController = new PlayerStateController(propertiesList, player);
-        propertiesList.addListSelectionListener(playerStateController);
+        playerStateController = new PlayerStateController(ownedSquaresList, player);
+        ownedSquaresList.addListSelectionListener(playerStateController);
 
     }
 
