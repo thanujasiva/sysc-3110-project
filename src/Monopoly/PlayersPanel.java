@@ -16,6 +16,7 @@ public class PlayersPanel {
      * @param game
      * Shows the list of players on the top label
      * and the current player on the bottom label
+     * Is initially empty
      */
     public PlayersPanel(Game game) {
         this.game = game;
@@ -23,23 +24,13 @@ public class PlayersPanel {
         playersPanel.setLayout(new BoxLayout(playersPanel, BoxLayout.Y_AXIS));
 
         JLabel playerNamesLabel = new JLabel("List of Players: ");
-        //JLabel currentPlayerLabel = new JLabel("Current Monopoly.Player: " + board.getCurrentPlayerNumber());
-
         playersPanel.add(playerNamesLabel);
 
-        // adds to the actual list by looping
+        // create empty list model and add to PlayerStatePanel
         this.playersListModel  = new DefaultListModel<>();
-        for (Player player : game.getPlayers()){
-            Square currentSquare = game.getBoard().getSquares().get(player.getPosition() % game.getBoard().getSquares().size());
-            playersListModel.addElement("Player: "+ player.getId() + " Position: " + currentSquare.getName());
-        }
-
-        // shows the list of players
         JList <String> playerList = new JList<>(playersListModel);
         playerList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         playersPanel.add(new JScrollPane(playerList));
-        //playersPanel.add(currentPlayerLabel);
-
     }
 
     /**
@@ -48,6 +39,8 @@ public class PlayersPanel {
      */
     public void updatePlayers(){
         this.playersListModel.clear();
+
+        // (re)create list with the players in the game
         for (Player player : game.getPlayers()){
             Square currentSquare = game.getBoard().getSquares().get(player.getPosition() % game.getBoard().getSquares().size());
             String positionName = currentSquare.getName();
@@ -56,10 +49,6 @@ public class PlayersPanel {
             }
             this.playersListModel.addElement("Player: "+ player.getId() + " Position: " + positionName);
         }
-
-        // shows the list of players
-        JList <String> playerList = new JList<>(this.playersListModel);
-        playerList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     }
 
     /**
