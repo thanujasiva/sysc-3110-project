@@ -10,12 +10,17 @@ import java.awt.event.WindowEvent;
 import java.util.HashMap;
 
 public class GameView implements MonopolyInterfaceView {
+
     private BoardPanel boardPanel;
     private PlayersPanel playersPanel;
     private PlayerStatePanel playerStatePanel;
+
     private Game game;
     private GameController gameController;
+    private DicePanel dicePanel;
+
     private JFrame frame;
+
     private HashMap<Player, PieceComponent> pieces; //FIXME remove piece from board when player is bankrupt
 
     /**
@@ -25,6 +30,7 @@ public class GameView implements MonopolyInterfaceView {
     public GameView(){
         frame = new JFrame("Monopoly Game");
         this.game = new Game();
+        this.gameController = new GameController(game);
 
         this.game.addView(this);
 
@@ -42,8 +48,10 @@ public class GameView implements MonopolyInterfaceView {
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new BorderLayout());
 
-        boardPanel = new BoardPanel(game);
+        boardPanel = new BoardPanel(game.getBoard());
         JPanel boardPanel = this.boardPanel.getMainPanel();
+        JButton diceButton = dicePanelSetup();
+        boardPanel.add(diceButton, BorderLayout.CENTER);
 
         JPanel playerPanel = new JPanel();
         playerPanel.setLayout(new BoxLayout(playerPanel, BoxLayout.Y_AXIS));
@@ -61,7 +69,36 @@ public class GameView implements MonopolyInterfaceView {
         frame.pack();
         frame.setVisible(true);
 
-        gameController = new GameController(game);
+    }
+
+
+    /**
+     * Set up a dice panel
+     * @author Maisha
+     * @author Thanuja
+     * @return          the JButton that displays the dice panel
+     */
+    private JButton dicePanelSetup(){
+        //get dice from game
+        Dice dice1 = game.getDice1();
+        Dice dice2 = game.getDice2();
+
+        this.dicePanel = new DicePanel(dice1, dice2);
+
+        // create dice button and add game controller to it
+        JButton diceButton = new JButton();
+        diceButton.addActionListener(gameController); //on click, call game controller
+
+        //dicePanel displays roll value on button
+        JPanel dicePanel = this.dicePanel.getDicePanel();
+        diceButton.add(dicePanel);
+        diceButton.setBorderPainted(true);
+
+        diceButton.setBorder(BorderFactory.createCompoundBorder(
+                BorderFactory.createLineBorder(Color.GRAY, 10),
+                BorderFactory.createLineBorder(Color.DARK_GRAY, 100)));
+
+        return diceButton;
     }
 
     /**
@@ -103,13 +140,12 @@ public class GameView implements MonopolyInterfaceView {
      */
     @Override
     public void handleRoll() {
-        this.boardPanel.getDicePanel().updateDiceLabel();
+        this.dicePanel.updateDiceLabel();
 
         // FIXME should package as an event
         Player currentPlayer = game.getCurrentPlayer();
         Square currentSquare = game.getCurrentSquare();
 
-        // ideally don't want if statement structure here
         if(currentSquare instanceof OwnableSquare) {
             CardFrame card = new CardFrame((OwnableSquare) currentSquare, currentPlayer, game);
             // do not switch turn until card is handled property
@@ -125,7 +161,7 @@ public class GameView implements MonopolyInterfaceView {
      */
     @Override
     public void handlePlayerState() {
-        Player currentPlayer = game.getPlayers().get(game.getCurrentPlayerNumber());
+        Player currentPlayer = game.getCurrentPlayer();
         this.playerStatePanel.updatePlayer(currentPlayer);
         this.playersPanel.updatePlayers();
     }
@@ -171,6 +207,10 @@ public class GameView implements MonopolyInterfaceView {
         JOptionPane.showMessageDialog(null, "You are bankrupt. You cannot play further.");
     }
 
+    /**
+     * Handle when player passes Go
+     * @author Sabah
+     */
     @Override
     public void handlePassedGo() {
         JOptionPane.showMessageDialog(null, "You passed GO! Collect $200.");

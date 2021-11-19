@@ -14,22 +14,25 @@ public class BoardPanel {
 
     private LinkedHashMap<JPanel, Square> allSquares;
 
+    // FIXME - these may not be used / could be local variables
     private ArrayList<JPanel> topSquares;
     private ArrayList<JPanel> bottomSquares;
     private ArrayList<JPanel> leftSquares;
     private ArrayList<JPanel> rightSquares;
-    private int boardWidth = 600;
-    private int boardHeight = 590;
-    private int boxHeight = 50;
-    private int boxWidth = 50;
-    private DicePanel dicePanel;
+
+    // FIXME - these could be local variables
+    private final int boardWidth = 600;
+    private final int boardHeight = 590;
+    private final int boxHeight = 50;
+    private final int boxWidth = 50;
 
     /**
      * Create a new monopoly board with a roll button in the center to display the dice
      * @author Maisha
      * @author Thanuja
+     * @param board     the board of the BoardPanel
      */
-    public BoardPanel(Game game){
+    public BoardPanel(Board board){
 
         //squares on the outer edge of the board
         allSquares = new LinkedHashMap<>();
@@ -38,11 +41,7 @@ public class BoardPanel {
         leftSquares = new ArrayList<>();
         rightSquares = new ArrayList<>();
 
-        //get dice from game
-        Dice dice1 = game.getDice1();
-        Dice dice2 = game.getDice2();
         mainPanel = new JPanel();
-        dicePanel = new DicePanel(dice1, dice2);
 
         mainPanel.setSize(new Dimension(boardWidth, boardHeight));
         Color panelColour = Color.DARK_GRAY;
@@ -66,14 +65,13 @@ public class BoardPanel {
         rightBorder.setPreferredSize(leftRight);
         leftBorder.setPreferredSize(leftRight);
 
-        HashMap<Integer, Square> squares = game.getBoard().getSquares();
-
+        HashMap<Integer, Square> squares = board.getSquares();
 
         // create new panel for each square and add to one HashMap
         for (int i=0; i<squares.size(); i++){
             JPanel box = new JPanel(new BorderLayout());
             box.setPreferredSize(new Dimension(boxWidth, boxHeight));
-            box.setLayout(new BoxLayout(box,BoxLayout.X_AXIS));
+            //box.setLayout(new BoxLayout(box,BoxLayout.X_AXIS)); // this prevents some of the text wrapping
 
             Square square = squares.get(i);
 
@@ -132,20 +130,6 @@ public class BoardPanel {
         mainPanel.add(leftBorder, BorderLayout.WEST);
         mainPanel.add(bottomBorder, BorderLayout.SOUTH);
 
-        JButton diceButton = new JButton();
-        GameController gameController = new GameController(game);
-        diceButton.addActionListener(gameController); //on click, call game controller
-
-        //dicePanel displays roll value on button
-        JPanel dicePanel = this.dicePanel.getDicePanel();
-        diceButton.add(dicePanel);
-        diceButton.setBorderPainted(true);
-
-        diceButton.setBorder(BorderFactory.createCompoundBorder(
-                BorderFactory.createLineBorder(Color.GRAY, 10),
-                BorderFactory.createLineBorder(Color.DARK_GRAY, 100)));
-
-        mainPanel.add(diceButton, BorderLayout.CENTER);
 
     }
 
@@ -153,17 +137,24 @@ public class BoardPanel {
         return allSquares;
     }
 
+    /**
+     * Get a certain panel based on the position
+     * @author Shrimei
+     * @param position      position to get
+     * @return              corresponding JPanel
+     */
     public JPanel getPanel(int position){
         JPanel box =  (JPanel) allSquares.keySet().toArray()[position];
         return box;
     }
 
+    /**
+     * Get the main panel of BoardPanel
+     * @author Maisha
+     * @return      the main panel
+     */
     public JPanel getMainPanel(){
         return mainPanel;
-    }
-
-    public DicePanel getDicePanel() {
-        return dicePanel;
     }
 
 }
