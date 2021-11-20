@@ -57,7 +57,7 @@ public class GameView implements MonopolyInterfaceView {
         playerPanel.setLayout(new BoxLayout(playerPanel, BoxLayout.Y_AXIS));
 
         playersPanel = new PlayersPanel(game);
-        playerStatePanel = new PlayerStatePanel();
+        playerStatePanel = new PlayerStatePanel(game);
 
         playerPanel.add(playersPanel.getPlayersPanel());
         playerPanel.add(playerStatePanel);
@@ -127,8 +127,14 @@ public class GameView implements MonopolyInterfaceView {
         for (int i = 0; i < num; i++) {
             Player player = new Player();
             this.game.addPlayer(player);
-            pieces.put(player, new PieceComponent(player, boardPanel.getPanel(0),frame)); //FIXME
+            pieces.put(player, new PieceComponent(player, boardPanel.getPanel(0),frame));
         }
+
+        /*Player player = game.getCurrentPlayer();
+        player.setPosition(1);
+        game.purchaseTransaction();
+        player.setPosition(2);
+        game.purchaseTransaction();*/
 
         this.playersPanel.updatePlayers();
         this.playerStatePanel.updatePlayer(game.getCurrentPlayer());

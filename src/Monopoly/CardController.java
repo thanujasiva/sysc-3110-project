@@ -1,5 +1,7 @@
 package Monopoly;
 
+import Monopoly.Squares.Property;
+
 public class CardController {
 
     private final Game game;
@@ -28,6 +30,10 @@ public class CardController {
      */
     public boolean purchaseCard(){
         return game.purchaseTransaction();
+    }
+
+    public boolean purchaseHouse(Property property){
+       return game.canBuyHouse(property); //FIXME
     }
 
     /**
