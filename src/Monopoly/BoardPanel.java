@@ -22,7 +22,7 @@ public class BoardPanel {
 
     // FIXME - these could be local variables
     private final int boardWidth = 600;
-    private final int boardHeight = 590;
+    private final int boardHeight = 600;
     private final int boxHeight = 50;
     private final int boxWidth = 50;
 
@@ -129,8 +129,6 @@ public class BoardPanel {
         mainPanel.add(rightBorder, BorderLayout.EAST);
         mainPanel.add(leftBorder, BorderLayout.WEST);
         mainPanel.add(bottomBorder, BorderLayout.SOUTH);
-
-
     }
 
     public LinkedHashMap<JPanel, Square> getAllSquares() {
@@ -144,7 +142,7 @@ public class BoardPanel {
      * @return              corresponding JPanel
      */
     public JPanel getPanel(int position){
-        JPanel box =  (JPanel) allSquares.keySet().toArray()[position];
+        JPanel box = (JPanel) allSquares.keySet().toArray()[position];
         return box;
     }
 

@@ -10,22 +10,22 @@ import java.awt.*;
 class PieceComponent extends JLabel {
 
     JPanel currentBox;
-    JFrame game;
+    JFrame gameView;
 
     /**
      * Initialize a label(piece) to represent a player. Player starts at "GO"
      * @author Shrimei
      * @param player Current player
      * @param startBox  "GO" panel
-     * @param game  The frame that the board is being displayed on
+     * @param gameView  The frame that the board is being displayed on
      */
-    public PieceComponent(Player player, JPanel startBox, JFrame game){
+    public PieceComponent(Player player, JPanel startBox, JFrame gameView){
         super("Player " + player.getId());
         this.setOpaque(true);
         this.setBackground(Color.PINK);
         this.currentBox = startBox;
-        startBox.add(this);
-        this.game = game;
+        startBox.add(this, BorderLayout.SOUTH);
+        this.gameView = gameView;
     }
 
     /**
@@ -35,9 +35,9 @@ class PieceComponent extends JLabel {
      */
     public void movePiece(JPanel newBox){
         currentBox.remove(this);
-        newBox.add(this);
+        newBox.add(this, BorderLayout.SOUTH);
         currentBox = newBox;
-        game.repaint();
+        gameView.repaint();
     }
 
 
@@ -63,7 +63,6 @@ class PieceComponent extends JLabel {
         box2.setBackground(Color.DARK_GRAY);
 
         PieceComponent piece = new PieceComponent(player, box1, frame);
-
 
         JButton button1 = new JButton();
         JButton button2 = new JButton();
