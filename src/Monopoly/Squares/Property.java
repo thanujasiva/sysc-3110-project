@@ -14,6 +14,7 @@ public class Property implements OwnableSquare {
     private final int rentTwoHouses;
     private final int rentThreeHouses;
     private final int rentFourHouses;
+    private final int rentHotel;
     private Player owner;
 
     private int housePrice;
@@ -32,10 +33,11 @@ public class Property implements OwnableSquare {
         this.price = price;
         this.rent = (int) ( price * 0.1); // 10% of property price
         this.rentWithColourSet = this.rent * 2; //20% of property price
-        this.rentOneHouse = rent * 5; //FIXME
-        this.rentTwoHouses = rentOneHouse * 3; //FIXME
-        this.rentThreeHouses = rentTwoHouses * 3; //FIXME
-        this.rentFourHouses = (int)(rentThreeHouses * 1.5); //FIXME
+        this.rentOneHouse = rent * 5;
+        this.rentTwoHouses = rentOneHouse * 3;
+        this.rentThreeHouses = rentTwoHouses * 2;
+        this.rentFourHouses = (int)(rentThreeHouses * 1.5);
+        this.rentHotel = (int)(rentFourHouses * 1.3);
         this.colourGroup = colourGroup;
         this.owner = null;
         this.housePrice = colourGroup.getHousePrice();
@@ -142,5 +144,25 @@ public class Property implements OwnableSquare {
                 ", colourGroup='" + colourGroup.getColour() + '\'' +
                 ", rent=" + rent +
                 ", rentWithColourSet=" + rentWithColourSet;
+    }
+
+    public int getRentOneHouse() {
+        return rentOneHouse;
+    }
+
+    public int getRentTwoHouses() {
+        return rentTwoHouses;
+    }
+
+    public int getRentThreeHouses() {
+        return rentThreeHouses;
+    }
+
+    public int getRentFourHouses() {
+        return rentFourHouses;
+    }
+
+    public int getRentHotel() {
+        return rentHotel;
     }
 }
