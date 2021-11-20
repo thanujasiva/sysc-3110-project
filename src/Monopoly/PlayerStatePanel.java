@@ -1,6 +1,7 @@
 package Monopoly;
 
 import Monopoly.Squares.OwnableSquare;
+import Monopoly.Squares.Property;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -64,7 +65,12 @@ public class PlayerStatePanel extends JPanel{
         // (re)create list with the names of the ownableSquares the player owns
         DefaultListModel<String> ownedSquaresModel = new DefaultListModel<>();
         for (OwnableSquare ownableSquare : player.getOwnableSquares()){
-            ownedSquaresModel.addElement(ownableSquare.getName());
+            if(ownableSquare instanceof Property){
+                int numHouses = player.getNumberOfHouses((Property)ownableSquare);
+                ownedSquaresModel.addElement(ownableSquare.getName() + ":  " + numHouses);
+            } else{
+                ownedSquaresModel.addElement(ownableSquare.getName());
+            }
         }
         ownedSquaresList.setModel(ownedSquaresModel);
 

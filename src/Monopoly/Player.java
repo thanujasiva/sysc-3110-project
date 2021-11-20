@@ -45,13 +45,17 @@ public class Player {
         this.numberOfHouses = new HashMap<>();
     }
 
-    public void buyHouseOnProperty(Property property){
-        // colourGroupMatch.merge(((Property) ownableSquare).getColourGroup(), 1, Integer::sum);
-        numberOfHouses.merge(property, 1, Integer::sum);
+    public boolean buyHouseOnProperty(Property property){
+        if (this.money >= property.getHousePrice()) {
+            numberOfHouses.merge(property, 1, Integer::sum);
+            this.money -= property.getHousePrice();
+            return true;
+        }
+        return false;
     }
 
     public int getNumberOfHouses(Property property) {
-        return numberOfHouses.get(property);
+        return numberOfHouses.getOrDefault(property, 0);
     }
 
     public int getRailroadNumber() {

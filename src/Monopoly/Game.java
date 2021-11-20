@@ -232,18 +232,22 @@ public class Game {
     /**
      * @author maisha
      * */
-    public boolean canBuyHouse(){
+    public boolean canBuyHouse(Property property){
         Player currentPlayer = getCurrentPlayer();
-        Square currentSquare = getCurrentSquare();
-        boolean flag1 = false;
-        boolean flag2 = false;
 
-        if (currentSquare instanceof Property){
-            Property property = (Property)currentSquare;
-            flag1 = currentPlayer.hasAllColours(property); //have colour set
-            flag2 = property.canBuyHouseOnProperty(currentPlayer.getNumberOfHouses(property)); //don't already have 4 houses
+        boolean flag1, flag2;
+        boolean flag3 = false;
+
+        flag1 = currentPlayer.hasAllColours(property); //have colour set
+        flag2 = property.canBuyHouseOnProperty(currentPlayer.getNumberOfHouses(property)); //don't already have 4 houses
+
+        if (flag1 && flag2){
+            flag3 = currentPlayer.buyHouseOnProperty(property);
+            for (MonopolyInterfaceView view : this.views){ // update with jail roll
+                view.handlePlayerState();
+            }
         }
-        return (flag1 && flag2);
+        return flag3;
     }
 
     /**

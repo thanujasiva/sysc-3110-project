@@ -362,7 +362,7 @@ public class CardFrame extends JOptionPane {
 
             if(result == JOptionPane.YES_OPTION){
                 //controller would handle purchasing
-                boolean canPurchase = cardController.purchaseHouse();
+                boolean canPurchase = cardController.purchaseHouse((Property)square);
                 if (!canPurchase){ //if player does not have enough money
                     JOptionPane.showMessageDialog(null, "You are not able to purchase a house");
                 } // else, they successfully purchased
