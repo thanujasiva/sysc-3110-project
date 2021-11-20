@@ -2,6 +2,8 @@ package MonopolyTest;
 
 import static org.junit.Assert.*;
 
+import Monopoly.Squares.Railroad;
+import Monopoly.Squares.Utility;
 import org.junit.Test;
 import org.junit.Before;
 import Monopoly.Squares.Property;
@@ -95,8 +97,33 @@ public class PlayerTest {
      */
     @Test
     public void collectRent(){
-        player.collectRent(property);
-        assertEquals(1510,player.getMoney()); //10% of 100$ (price of property) plus players money
+        player.collectRent(10);
+        assertEquals(1510, player.getMoney()); //10% of 100$ (price of property) plus players money
+    }
+
+    /**
+     * @author Sabah
+     * Test for Railroad Rent Amount, tests for different types of properties
+     */
+    @Test
+    public void getRentAmountRailRoad(){
+        Railroad railroad = new Railroad("Reading Railroad");
+        assertEquals(0, player.getRentAmount(railroad, 0));
+        player.purchaseSquare(railroad);
+        assertEquals(25, player.getRentAmount(railroad, 0));
+
+    }
+    /**
+     * @author Sabah
+     * Test for Utility Rent Amount
+     */
+    @Test
+    public void getRentAmountUtility(){
+        Utility utility= new Utility("Water Works");
+        assertEquals(0, player.getRentAmount(utility, 10));
+        player.purchaseSquare(utility);
+        assertEquals(40, player.getRentAmount(utility, 10));
+
     }
 
     /**
@@ -104,14 +131,13 @@ public class PlayerTest {
      * @author Thanuja
      */
     @Test
-    public void collectRentColourSet(){
+    public void getRentColourSet(){
         // purchase GREY property 3 times to own the colour set
         player.purchaseSquare(property);
         player.purchaseSquare(property);
         player.purchaseSquare(property);
 
-        player.collectRent(property);
-        assertEquals(1220,player.getMoney()); //20% of 100$ (price of property) plus players money (1500 - 300)
+        assertEquals(20, player.getRentAmount(property, 0)); //20% of 100$ (price of property) plus players money (1500 - 300)
     }
 
     /**

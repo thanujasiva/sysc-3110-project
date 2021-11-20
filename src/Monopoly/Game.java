@@ -202,11 +202,11 @@ public class Game {
 
         if ((currentSquare instanceof OwnableSquare) && ((OwnableSquare)currentSquare).getOwner() != null) {
             OwnableSquare currentOwnableSquare = (OwnableSquare) currentSquare;
-            int rentAmount = currentOwnableSquare.getOwner().getRentAmount(currentOwnableSquare);
+            int rentAmount = currentOwnableSquare.getOwner().getRentAmount(currentOwnableSquare, dice1.getDiceNumber()+dice2.getDiceNumber());
 
             canPayRent = currentPlayer.payRent(rentAmount);
             if (canPayRent) { //pay rent if enough money
-                currentOwnableSquare.getOwner().collectRent(currentOwnableSquare);
+                currentOwnableSquare.getOwner().collectRent(rentAmount);
             } else { //player ran out of money, they are bankrupt
                 //System.out.println("You are bankrupt. You cannot play further."); // move
                 removePlayer(currentPlayer); //remove player from game
@@ -223,10 +223,7 @@ public class Game {
             //return true;
 
         }
-
-
         return canPayRent;
-
     }
 
     /**
@@ -320,7 +317,7 @@ public class Game {
                 this.addCurrentPlayerToJail();
 
                 for (MonopolyInterfaceView view : this.views){
-                    view.handleJailEntered("Rolled 3 doubles");
+                    view.handleJailEntered("You rolled 3 doubles! Go to Jail.");
                 }
 
                 this.switchTurn(); // switches the turn (in milestone 3 change it to go to jail)
@@ -374,7 +371,7 @@ public class Game {
                 this.removeCurrentPlayerFromJail();
                 currentPlayer.changePosition(roll);
                 for (MonopolyInterfaceView view : this.views){
-                    view.handleJailExited("rolled doubles");
+                    view.handleJailExited("You rolled doubles! Exit Jail.");
                 }
             } else {
                 // increment time in jail
@@ -389,7 +386,7 @@ public class Game {
                     this.removeCurrentPlayerFromJail();
                     currentPlayer.changePosition(roll);
                     for (MonopolyInterfaceView view : this.views) {
-                        view.handleJailExited("paid $50 fine");
+                        view.handleJailExited("You paid $50 fine! Exit Jail.");
                     }
                 }else{
                     removePlayer(currentPlayer); //remove player from game
@@ -481,7 +478,7 @@ public class Game {
             //System.out.println("Landed on Go To Jail " + getCurrentPlayer().getId());
             this.addCurrentPlayerToJail();
             for (MonopolyInterfaceView view : this.views){
-                view.handleJailEntered("landed on Go to Jail");
+                view.handleJailEntered("You landed on Go to Jail!");
             }
         }
 

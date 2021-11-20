@@ -17,6 +17,15 @@ public class Utility implements OwnableSquare {
         this.rent2 = 10;
     }
 
+    public int getRent(int roll, int utilityNumber) {
+        if (utilityNumber == 1) {
+            return roll * rent1;
+        } else if (utilityNumber == 2) {
+            return roll * rent2;
+        }
+        return 0;
+    }
+
     @Override
     public String getName() {
         return name;
