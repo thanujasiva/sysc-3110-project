@@ -39,17 +39,15 @@ public class UtilityTest {
     }
 
 
-    // FIXME with the utility rent method
-
     /**
      * Test rent with 1 railroad
      * @author Thanuja
      */
     @Test
     public void testGet1UtilityRent() {
-        int numUtilities = 1;
+        int utilityNumber = 1;
         int roll = 5;
-        assertEquals(20, utility.getRent(numUtilities));
+        assertEquals(20, utility.getRent(roll, utilityNumber));
     }
 
     /**
@@ -60,7 +58,7 @@ public class UtilityTest {
     public void testGet2RailroadRent() {
         int numUtilities = 2;
         int roll = 6;
-        assertEquals(60, utility.getRent(numUtilities));
+        assertEquals(60, utility.getRent(roll, numUtilities));
     }
 
 
