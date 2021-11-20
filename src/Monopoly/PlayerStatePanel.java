@@ -17,14 +17,17 @@ public class PlayerStatePanel extends JPanel{
     private JLabel playerMoneyLabel;
     private JList<String> ownedSquaresList;
     private PlayerStateController playerStateController;
+    private Game game;
 
 
     /**
      * Create an empty player state panel
      * @author Thanuja
      */
-    public PlayerStatePanel(){
+    public PlayerStatePanel(Game game){
         super();
+
+        this.game = game;
 
         this.setLayout(new BoxLayout (this, BoxLayout.Y_AXIS));
 
@@ -67,7 +70,7 @@ public class PlayerStatePanel extends JPanel{
 
         // create an updated controller for the updated list
         ownedSquaresList.removeListSelectionListener(playerStateController);
-        playerStateController = new PlayerStateController(ownedSquaresList, player);
+        playerStateController = new PlayerStateController(ownedSquaresList, player, game);
         ownedSquaresList.addListSelectionListener(playerStateController);
     }
 

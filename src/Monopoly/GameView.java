@@ -57,7 +57,7 @@ public class GameView implements MonopolyInterfaceView {
         playerPanel.setLayout(new BoxLayout(playerPanel, BoxLayout.Y_AXIS));
 
         playersPanel = new PlayersPanel(game);
-        playerStatePanel = new PlayerStatePanel();
+        playerStatePanel = new PlayerStatePanel(game);
 
         playerPanel.add(playersPanel.getPlayersPanel());
         playerPanel.add(playerStatePanel);

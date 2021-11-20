@@ -30,6 +30,10 @@ public class CardController {
         return game.purchaseTransaction();
     }
 
+    public boolean purchaseHouse(){
+       return game.canBuyHouse(); //FIXME
+    }
+
     /**
      * Control rent payment
      * @author Thanuja

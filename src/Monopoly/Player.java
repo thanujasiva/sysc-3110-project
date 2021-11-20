@@ -46,10 +46,12 @@ public class Player {
     }
 
     public void buyHouseOnProperty(Property property){
-        if (property.canBuyHouseOnProperty(numberOfHouses.get(property))){
-            // colourGroupMatch.merge(((Property) ownableSquare).getColourGroup(), 1, Integer::sum);
-            numberOfHouses.merge(property, 1, Integer::sum);
-        }
+        // colourGroupMatch.merge(((Property) ownableSquare).getColourGroup(), 1, Integer::sum);
+        numberOfHouses.merge(property, 1, Integer::sum);
+    }
+
+    public int getNumberOfHouses(Property property) {
+        return numberOfHouses.get(property);
     }
 
     public int getRailroadNumber() {
@@ -224,7 +226,7 @@ public class Player {
             return ownableSquare.getRent(railroadNumber);
         } else if (ownableSquare instanceof Property) {
             Property property = (Property) ownableSquare;
-            if ((colourGroupMatch.get(property.getColourGroup()) != null) && (colourGroupMatch.get(property.getColourGroup()) == property.getColourGroup().getMax())) {
+            if ((colourGroupMatch.get(property.getColourGroup()) != null) && (hasAllColours(property))) {
                 return property.getRentWithColourSet();
             }else{
                 return property.getRent(0); //FIXME // without colour set

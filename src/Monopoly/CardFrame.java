@@ -41,7 +41,7 @@ public class CardFrame extends JOptionPane {
      * @author Shrimei
      * @param square that is being displayed
      */
-    public CardFrame(OwnableSquare square){
+    public CardFrame(OwnableSquare square, Game game){
         super(square.getName());
         this.setLayout(new BorderLayout());
         this.setSize(200, 250);
@@ -51,6 +51,8 @@ public class CardFrame extends JOptionPane {
         mainPanel = new JPanel(new BorderLayout());
 
         displayOwnableSquareInfo();
+
+        this.cardController = new CardController(game);
 
         handleIsOwner();
     }
@@ -355,7 +357,20 @@ public class CardFrame extends JOptionPane {
      * @author Thanuja
      */
     private void handleIsOwner(){
-        JOptionPane.showMessageDialog(null, mainPanel /*"You own this property"*/,  "You own this square", JOptionPane.PLAIN_MESSAGE);
+        if(square instanceof Property){
+            int result = JOptionPane.showConfirmDialog(null, mainPanel,  "Do you want to buy a house?", JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE);
+
+            if(result == JOptionPane.YES_OPTION){
+                //controller would handle purchasing
+                boolean canPurchase = cardController.purchaseHouse();
+                if (!canPurchase){ //if player does not have enough money
+                    JOptionPane.showMessageDialog(null, "You are not able to purchase a house");
+                } // else, they successfully purchased
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, mainPanel, "You own this property", JOptionPane.PLAIN_MESSAGE);
+        }
+
     }
 
 

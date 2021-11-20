@@ -235,13 +235,15 @@ public class Game {
     public boolean canBuyHouse(){
         Player currentPlayer = getCurrentPlayer();
         Square currentSquare = getCurrentSquare();
-        boolean flag = false;
+        boolean flag1 = false;
+        boolean flag2 = false;
 
         if (currentSquare instanceof Property){
-            flag = currentPlayer.hasAllColours((Property) currentSquare);
+            Property property = (Property)currentSquare;
+            flag1 = currentPlayer.hasAllColours(property); //have colour set
+            flag2 = property.canBuyHouseOnProperty(currentPlayer.getNumberOfHouses(property)); //don't already have 4 houses
         }
-
-        return flag;
+        return (flag1 && flag2);
     }
 
     /**
