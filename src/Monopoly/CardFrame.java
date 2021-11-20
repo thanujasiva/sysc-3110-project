@@ -251,13 +251,14 @@ public class CardFrame extends JOptionPane {
         JLabel rentFourHouses = new JLabel("Rent with 4 houses: ");
         rentFourHouses.setBorder(fieldBorder);
 
-        JLabel rentHotel= new JLabel("Rent with hotel: ");
+        JLabel rentHotel = new JLabel("Rent with hotel: ");
         rentHotel.setBorder(fieldBorder);
 
-        JLabel houseCost= new JLabel("House cost: ");
+
+        JLabel houseCost = new JLabel("House cost: ");
         houseCost.setBorder(fieldBorder);
 
-        JLabel hotelCost= new JLabel("Hotel cost: ");
+        JLabel hotelCost = new JLabel("Hotel cost: ");
         hotelCost.setBorder(fieldBorder);
 
         fieldPanel.add(price);
@@ -277,28 +278,28 @@ public class CardFrame extends JOptionPane {
         JLabel rentVal = new JLabel("$" +property.getRent(1));
         rentVal.setBorder(valueBorder);
 
-        JLabel rentWithSetVal = new JLabel("$" +property.getRentWithColourSet());
+        JLabel rentWithSetVal = new JLabel("$" + property.getRentWithColourSet());
         rentWithSetVal.setBorder(valueBorder);
 
-        JLabel rentOneHouseVal = new JLabel("$ sda");
+        JLabel rentOneHouseVal = new JLabel("$" + property.getRentOneHouse());
         rentOneHouseVal.setBorder(valueBorder);
 
-        JLabel rentTwoHousesVal = new JLabel("$ das");
+        JLabel rentTwoHousesVal = new JLabel("$" + property.getRentTwoHouses());
         rentTwoHousesVal.setBorder(valueBorder);
 
-        JLabel rentThreeHousesVal = new JLabel("$ blb");
+        JLabel rentThreeHousesVal = new JLabel("$" + property.getRentThreeHouses());
         rentThreeHousesVal.setBorder(valueBorder);
 
-        JLabel rentFourHousesVal = new JLabel("$ vut");
+        JLabel rentFourHousesVal = new JLabel("$" + property.getRentFourHouses());
         rentFourHousesVal.setBorder(valueBorder);
 
-        JLabel rentHotelVal = new JLabel("$ sda");
+        JLabel rentHotelVal = new JLabel("$" + property.getRentHotel());
         rentHotelVal.setBorder(valueBorder);
 
-        JLabel houseCostVal= new JLabel("$ sad");
+        JLabel houseCostVal= new JLabel("$" + property.getHousePrice());
         houseCostVal.setBorder(fieldBorder);
 
-        JLabel hotelCostVal= new JLabel("$ ghf");
+        JLabel hotelCostVal= new JLabel("$" + property.getHousePrice());
         hotelCostVal.setBorder(fieldBorder);
 
         valuePanel.add(priceVal);
