@@ -48,6 +48,12 @@ public class Player {
         this.numberOfHotel = new HashMap<>();
     }
 
+    /**
+     * @author Maisha
+     * @author Shrimei
+     * @param property      the property the house is being bought on
+     * @return              returns if house can be bought on property
+     */
     public boolean buyHouseOnProperty(Property property){
         if (this.money >= property.getHousePrice()) {
             numberOfHouses.merge(property, 1, Integer::sum);
@@ -57,6 +63,11 @@ public class Player {
         return false;
     }
 
+    /**
+     * @author Maisha
+     * @param property  the property being checked
+     * @return          returns if hotel can be bought on property
+     */
     public boolean buyHotelOnProperty(Property property){
         if (this.money >= property.getHousePrice()) {
             numberOfHouses.put(property, 0); //empty out number of houses on property
@@ -69,26 +80,52 @@ public class Player {
         return false;
     }
 
+    /**
+     * @author Shrimei
+     * @param property      the property being checked
+     * @return              the number of properties existing on property
+     */
     public int getNumberOfHouses(Property property) {
         return numberOfHouses.getOrDefault(property, 0);
     }
 
+    /**
+     * @author Maisha
+     * @param property      the property being checked
+     * @return              the number of hotels bought on the property
+     */
     public int getNumberOfHotel(Property property) {
         return numberOfHotel.getOrDefault(property, 0);
     }
 
+    /**
+     * @author Maisha
+     * @return              the number of railroad
+     */
     public int getRailroadNumber() {
         return railroadNumber;
     }
 
+    /**
+     * @author Maisha
+     * @return          returns all the squares owned
+     */
     public ArrayList<OwnableSquare> getOwnableSquares() {
         return ownableSquares;
     }
 
+    /**
+     * @author Sabah
+     * @return              returns if turn should be skipped true or false
+     */
     public boolean isSkipTurn() {
         return skipTurn;
     }
 
+    /**
+     * @author Sabah
+     * @param skipTurn          the turn being checked
+     */
     public void setSkipTurn(boolean skipTurn) {
         this.skipTurn = skipTurn;
     }
@@ -241,6 +278,7 @@ public class Player {
      * Decides the appropriate rent amount to pay based on if the player owns the colour set
      * @author Shrimei
      * @author Thanuja
+     * @author Maisha
      */
     public int getRentAmount(OwnableSquare ownableSquare, int roll) {
         // null check in case player does not own the property
