@@ -25,12 +25,12 @@ public class GameTest {
     }
 
     /**
-     * Test that initial number of players is 2
+     * Test that initial number of players is 0
      * @author Thanuja
      */
     @Test
     public void getInitialNumberOfPlayers() {
-        assertEquals(2, game.getPlayers().size());
+        assertEquals(0, game.getPlayers().size());
     }
 
 
@@ -44,26 +44,6 @@ public class GameTest {
     }
 
     /**
-     * Test initial players' IDs
-     * @author Thanuja
-     */
-    @Test
-    public void getInitialPlayerIds() {
-        assertEquals(0, game.getPlayers().get(0).getId());
-        assertEquals(1, game.getPlayers().get(1).getId());
-    }
-
-    /**
-     * Test initial players' positions
-     * @author Thanuja
-     */
-    @Test
-    public void getInitialPlayerPositions() { // may not need
-        assertEquals(0, game.getPlayers().get(0).getPosition());
-        assertEquals(0, game.getPlayers().get(1).getPosition());
-    }
-
-    /**
      * Test that player is added to game, with the next lowest ID
      * @author Thanuja
      */
@@ -72,9 +52,9 @@ public class GameTest {
         Player testPlayer = new Player();
         game.addPlayer(testPlayer);
 
-        assertEquals(3, game.getPlayers().size()); // the size is 3 players
-        assertEquals(testPlayer, game.getPlayers().get(2)); // new player added in the last position of the array
-        assertEquals(2, game.getPlayers().get(2).getId()); // new player has ID of 2
+        assertEquals(1, game.getPlayers().size()); // the size is 1 players
+        assertEquals(testPlayer, game.getPlayers().get(0)); // new player added in the last position of the array
+        assertEquals(0, testPlayer.getId()); // new player has ID of 0
     }
 
     /**
@@ -83,8 +63,10 @@ public class GameTest {
      */
     @Test
     public void testRemovePlayer() {
-        Player testPlayer = game.getPlayers().get(0);
-        game.removePlayer(testPlayer);
+        Player testPlayer = new Player();
+        game.addPlayer(testPlayer);
+        game.addPlayer(new Player());
+        game.removePlayer(testPlayer); // remove first player
 
         assertEquals(1, game.getPlayers().size()); // the size is 1 player
         assertEquals(1, game.getPlayers().get(0).getId()); // player 1 now in position 0
@@ -96,6 +78,8 @@ public class GameTest {
      */
     @Test
     public void testPurchaseTransactionSuccess() {
+        game.addPlayer(new Player());
+
         Player testBuyer = game.getPlayers().get(0);
 
         Property testProperty = (Property) game.getBoard().getSquares().get(1);
@@ -115,9 +99,12 @@ public class GameTest {
      */
     @Test
     public void testRentTransactionSuccess() {
+        game.addPlayer(new Player());
+        game.addPlayer(new Player());
+
         Property testProperty = (Property) game.getBoard().getSquares().get(1);
         Player testBuyer = game.getPlayers().get(1);
-        testBuyer.purchaseProperty(testProperty); // tested in MonopolyTest.PlayerTest
+        testBuyer.purchaseSquare(testProperty); // tested in MonopolyTest.PlayerTest
         testProperty.setOwner(testBuyer);
 
         Player testRenter = game.getPlayers().get(0);
@@ -138,11 +125,13 @@ public class GameTest {
      */
     @Test
     public void testPurchaseTransactionFailure(){
+        game.addPlayer(new Player());
+
         Player testBuyer = game.getPlayers().get(0);
 
         // decrease testBuyer money to $50
         Property testExpensiveProperty = new Property("Test Property", 1450, ColourGroups.GREEN);
-        testBuyer.purchaseProperty(testExpensiveProperty); // tested in MonopolyTest.PlayerTest
+        testBuyer.purchaseSquare(testExpensiveProperty); // tested in MonopolyTest.PlayerTest
 
         Property testProperty = (Property) game.getBoard().getSquares().get(1);
         testBuyer.changePosition(1); // tested in MonopolyTest.PlayerTest // have player 0 land on Mediterranean (hard coded in Monopoly.Board)
@@ -161,16 +150,19 @@ public class GameTest {
      */
     @Test
     public void testRentTransactionFailure() {
+        game.addPlayer(new Player());
+        game.addPlayer(new Player());
+
         Property testProperty = (Property) game.getBoard().getSquares().get(1);
         Player testBuyer = game.getPlayers().get(1);
-        testBuyer.purchaseProperty(testProperty); // tested in MonopolyTest.PlayerTest
+        testBuyer.purchaseSquare(testProperty); // tested in MonopolyTest.PlayerTest
         testProperty.setOwner(testBuyer);
 
         Player testRenter = game.getPlayers().get(0);
 
         // decrease testRenter money to $5
         Property testExpensiveProperty = new Property("Test Monopoly.Squares.Property", 1495, ColourGroups.GREEN);
-        testRenter.purchaseProperty(testExpensiveProperty); // tested in MonopolyTest.PlayerTest
+        testRenter.purchaseSquare(testExpensiveProperty); // tested in MonopolyTest.PlayerTest
 
         testRenter.changePosition(1); // tested in MonopolyTest.PlayerTest // have player 1 land on Mediterranean (hard coded in Monopoly.Board)
         assertEquals(1, game.getPlayers().get(game.getCurrentPlayerNumber()).getPosition()); // verify current player is now on test property (to pay rent)
@@ -191,6 +183,9 @@ public class GameTest {
      */
     @Test
     public void testHandleSwitchTurnNormal() {
+        game.addPlayer(new Player());
+        game.addPlayer(new Player());
+
         game.getDice1().rollDice(); // roll only 1 dice, to guarantee no doubles
         game.handleSwitchTurn();
         game.handleSkipTurn();
@@ -203,6 +198,9 @@ public class GameTest {
      */
     @Test
     public void testHandleSwitchTurnDouble() {
+        game.addPlayer(new Player());
+        game.addPlayer(new Player());
+
         // do not roll dice, to mimic a double
         game.handleSwitchTurn();
         game.handleSkipTurn();
@@ -219,6 +217,9 @@ public class GameTest {
      */
     @Test
     public void testHandleSwitchTurnSkip() {
+        game.addPlayer(new Player());
+        game.addPlayer(new Player());
+
         // do not roll dice, to mimic a double (both dice are initialized as 0)
         game.handleSwitchTurn();
         game.handleSkipTurn();
@@ -253,6 +254,9 @@ public class GameTest {
      */
     @Test
     public void handleMove() {
+        game.addPlayer(new Player());
+        game.addPlayer(new Player());
+
         Player currentPlayer = game.getPlayers().get(0);
         game.handleMove(); // will move piece between 1 and 12
         assertTrue(0 < currentPlayer.getPosition());

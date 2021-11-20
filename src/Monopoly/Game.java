@@ -210,7 +210,11 @@ public class Game {
             } else { //player ran out of money, they are bankrupt
                 //System.out.println("You are bankrupt. You cannot play further."); // move
                 removePlayer(currentPlayer); //remove player from game
-                currentPlayerNumber -= 1;
+                if (currentPlayerNumber == 0) { // if first player went bankrupt
+                    currentPlayerNumber = players.size() - 1; // set to last player (temporary)
+                }else{
+                    currentPlayerNumber -= 1;
+                }
                 /*if (players.size() == 1) { //1 player left // move
                     System.out.println("Monopoly.Player " + players.get(0).getId() + " won!"); //display winner and exit game
                     //return false;
@@ -436,7 +440,7 @@ public class Game {
 
         int newPosition = currentPlayer.getPosition() % board.getSquares().size();
 
-        if (((newPosition - roll) <= 0) && (!firstRound)) {
+        if (((newPosition - roll) <= board.getGoPosition()) && (!firstRound)) {
             currentPlayer.collect200();
             for (MonopolyInterfaceView view : this.views){
                 view.handlePassedGo();
@@ -454,7 +458,7 @@ public class Game {
             view.handlePlayerState();
         }
 
-        if(getCurrentSquare() instanceof GoToJail){
+        if(newPosition == board.getGoToJailPosition()){
             //System.out.println("Landed on Go To Jail " + getCurrentPlayer().getId());
             this.addCurrentPlayerToJail();
             for (MonopolyInterfaceView view : this.views){
