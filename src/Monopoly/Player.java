@@ -5,6 +5,7 @@ import Monopoly.Squares.Property;
 import Monopoly.Squares.Railroad;
 import Monopoly.Squares.Utility;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -235,6 +236,13 @@ public class Player {
      */
     public void collect200() {
         this.money += 200;
+    }
+
+    public boolean hasAllColours(Property property){
+        if (colourGroupMatch.get(property.getColourGroup()) == property.getColourGroup().getMax()){
+            return true;
+        }
+        return false;
     }
 
 }
