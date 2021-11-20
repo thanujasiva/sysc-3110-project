@@ -95,8 +95,8 @@ public class GameView implements MonopolyInterfaceView {
         diceButton.setBorderPainted(true);
 
         diceButton.setBorder(BorderFactory.createCompoundBorder(
-                BorderFactory.createLineBorder(Color.GRAY, 10),
-                BorderFactory.createLineBorder(Color.DARK_GRAY, 100)));
+                BorderFactory.createLineBorder(Color.GRAY, 2),
+                BorderFactory.createLineBorder(new Color(100,100,100), 100)));
 
         return diceButton;
     }
@@ -146,13 +146,15 @@ public class GameView implements MonopolyInterfaceView {
         Player currentPlayer = game.getCurrentPlayer();
         Square currentSquare = game.getCurrentSquare();
 
+        // display new position before showing any cards
+        //returns current panel
+        pieces.get(currentPlayer).movePiece(boardPanel.getPanel(currentPlayer.getPosition() % game.getBoard().getSquares().size()));
+
         if(currentSquare instanceof OwnableSquare) {
             CardFrame card = new CardFrame((OwnableSquare) currentSquare, currentPlayer, game);
             // do not switch turn until card is handled property
         }
 
-        //returns current panel
-        pieces.get(currentPlayer).movePiece(boardPanel.getPanel(currentPlayer.getPosition() % game.getBoard().getSquares().size()));
     }
 
     /**
@@ -183,8 +185,12 @@ public class GameView implements MonopolyInterfaceView {
      */
     @Override
     public void handleJailEntered(String message) {
-        String title = "Player " + game.getCurrentPlayer().getId() + " Go To Jail";
+        Player currentPlayer = game.getCurrentPlayer();
+        String title = "Player " + currentPlayer.getId() + " Go To Jail";
         JOptionPane.showMessageDialog(null,message,title,JOptionPane.INFORMATION_MESSAGE);
+
+        // update piece position
+        pieces.get(currentPlayer).movePiece(boardPanel.getPanel(currentPlayer.getPosition() % game.getBoard().getSquares().size()));
     }
 
     /**
@@ -194,8 +200,12 @@ public class GameView implements MonopolyInterfaceView {
      */
     @Override
     public void handleJailExited(String message) {
-        String title = "Player " + game.getCurrentPlayer().getId() + " Exit Jail";
+        Player currentPlayer = game.getCurrentPlayer();
+        String title = "Player " + currentPlayer.getId() + " Exit Jail";
         JOptionPane.showMessageDialog(null,message,title,JOptionPane.INFORMATION_MESSAGE);
+
+        // update piece position
+        pieces.get(currentPlayer).movePiece(boardPanel.getPanel(currentPlayer.getPosition() % game.getBoard().getSquares().size()));
     }
 
     /**
