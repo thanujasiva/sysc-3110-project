@@ -14,7 +14,7 @@ public class Game {
     private int currentPlayerNumber;
     private int doubles;
     private Board board;
-    private boolean firstRound;
+
 
     private ArrayList<MonopolyInterfaceView> views;
 
@@ -31,7 +31,6 @@ public class Game {
         this.currentPlayerNumber = 0;
         this.doubles = 0;
         this.board = new Board();
-        this.firstRound = true;
 
         this.views = new ArrayList<>();
     }
@@ -93,7 +92,6 @@ public class Game {
      */
     private void switchTurn(){
         if(currentPlayerNumber+1 == players.size()){
-            firstRound = false;
             this.currentPlayerNumber = 0;
         } else {
             this.currentPlayerNumber += 1;
@@ -253,7 +251,6 @@ public class Game {
                 }
             }
         }
-
 
         return flag3;
     }
@@ -464,26 +461,17 @@ public class Game {
         currentPlayer.changePosition(roll); //move the player
         //currentSquare = board.getSquares().get(currentPlayer.getPosition() % board.getSquares().size()); //new position of the player
         //System.out.println("You landed on " + currentSquare.toString()); //print current box info
-
-        int newPosition = currentPlayer.getPosition() % board.getSquares().size();
-
-        if (((newPosition - roll) <= board.getGoPosition()) && (!firstRound)) {
-            currentPlayer.collect200();
-            for (MonopolyInterfaceView view : this.views){
-                view.handlePassedGo();
-            }
-        }
-
+        handleGo(roll);
         // show property card
         // update views based on dice roll
         // move the players
         for (MonopolyInterfaceView view : this.views){
             view.handleRoll();
         }
-
         for (MonopolyInterfaceView view : this.views){
             view.handlePlayerState();
         }
+        int newPosition = currentPlayer.getPosition() % board.getSquares().size();
 
         if(newPosition == board.getGoToJailPosition()){
             //System.out.println("Landed on Go To Jail " + getCurrentPlayer().getId());
@@ -495,6 +483,25 @@ public class Game {
 
         for (MonopolyInterfaceView view : this.views){
             view.handleEndOfTurn();
+        }
+    }
+
+    /**
+     * @author Sabah
+     * @param roll takes the dice amount
+     * Handles GO, landing or passing position 0
+     */
+    public void handleGo(int roll){
+
+        Player currentPlayer = getCurrentPlayer();
+        int newPosition = currentPlayer.getPosition() % board.getSquares().size();
+
+        if (((newPosition - roll) < board.getGoPosition()))
+        {
+            currentPlayer.collect200();
+            for (MonopolyInterfaceView view : this.views){
+                view.handlePassedGo();
+            }
         }
     }
 

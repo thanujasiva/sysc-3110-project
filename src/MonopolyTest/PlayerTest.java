@@ -114,8 +114,8 @@ public class PlayerTest {
 
     }
     /**
+     * Test the process of collecting rent with utility.
      * @author Sabah
-     * Test for Utility Rent Amount
      */
     @Test
     public void getRentAmountUtility(){
