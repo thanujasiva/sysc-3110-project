@@ -4,21 +4,27 @@ import java.awt.*;
 
 public enum ColourGroups{
 
-    BROWN (new Color(153, 102, 0), 2), GREY(new Color(204, 229, 255), 3), PINK(new Color(247,121,247), 3),
-    ORANGE(new Color(255, 153, 51), 3), RED(Color.RED, 3), YELLOW(Color.YELLOW, 3),
-    GREEN(new Color(0,153,76), 3), BLUE(new Color(0,102,204), 2);
+    BROWN (new Color(153, 102, 0), 2, 50), GREY(new Color(204, 229, 255), 3, 50), PINK(new Color(247,121,247), 3, 100),
+    ORANGE(new Color(255, 153, 51), 3, 100), RED(Color.RED, 3, 150), YELLOW(Color.YELLOW, 3,150),
+    GREEN(new Color(0,153,76), 3, 200), BLUE(new Color(0,102,204), 2, 200);
 
     private final Color colour;
     private final int max;
+    private int housePrice;
 
     /**
      * @author Shrimei
      * @param colour        the colour group
      * @param max           the max amount of the colour set
      */
-    ColourGroups (Color colour, int max){
+    ColourGroups (Color colour, int max, int housePrice){
         this.colour = colour;
         this.max = max;
+        this.housePrice = housePrice;
+    }
+
+    public int getHousePrice() {
+        return housePrice;
     }
 
     /**
@@ -37,4 +43,5 @@ public enum ColourGroups{
     public int getMax() {
         return max;
     }
-}
+
+    }
