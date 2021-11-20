@@ -174,6 +174,7 @@ public class GameView implements MonopolyInterfaceView {
      */
     @Override
     public void handleEndOfTurn() {
+
         // ask if player wants to purchase houses/hotels before switching turn (if they didn't roll doubles)
         gameController.handleSwitchTurn(); // can call here now that Card is a JOptionPane
     }

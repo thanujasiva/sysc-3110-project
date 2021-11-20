@@ -16,6 +16,9 @@ public class Property implements OwnableSquare {
     private final int rentFourHouses;
     private Player owner;
 
+    private int housePrice;
+    private boolean hasHouse;
+
     /**
      * @author Thanuja
      * @param name          name of property
@@ -29,12 +32,25 @@ public class Property implements OwnableSquare {
         this.price = price;
         this.rent = (int) ( price * 0.1); // 10% of property price
         this.rentWithColourSet = this.rent * 2; //20% of property price
-        this.rentOneHouse = 5; //FIXME
-        this.rentTwoHouses = 5; //FIXME
-        this.rentThreeHouses = 5; //FIXME
-        this.rentFourHouses = 5; //FIXME
+        this.rentOneHouse = rent * 5; //FIXME
+        this.rentTwoHouses = rentOneHouse * 3; //FIXME
+        this.rentThreeHouses = rentTwoHouses * 3; //FIXME
+        this.rentFourHouses = (int)(rentThreeHouses * 1.5); //FIXME
         this.colourGroup = colourGroup;
         this.owner = null;
+        this.housePrice = colourGroup.getHousePrice();
+        this.hasHouse = false;
+    }
+
+    /*
+    public void setHasHouse(boolean hasHouse) {
+        this.hasHouse = hasHouse;
+    }
+
+     */
+
+    public boolean canBuyHouseOnProperty(int housesOwned){
+        return housesOwned != 4;
     }
 
     /**

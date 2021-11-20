@@ -230,15 +230,28 @@ public class Game {
     }
 
     /**
+     * @author maisha
+     * */
+    public boolean canBuyHouse(){
+        Player currentPlayer = getCurrentPlayer();
+        Square currentSquare = getCurrentSquare();
+        boolean flag = false;
+
+        if (currentSquare instanceof Property){
+            flag = currentPlayer.hasAllColours((Property) currentSquare);
+        }
+
+        return flag;
+    }
+
+    /**
      * @author Maisha
      * @return true if one player left (winner)
      */
     public boolean isWinner(){
-        if (players.size() == 1) { //1 player left // move
-            //System.out.println("Monopoly.Player " + players.get(0).getId() + " won!"); //display winner and exit game
-            return true;
-        }
-        return false;
+        //1 player left // move
+        //System.out.println("Monopoly.Player " + players.get(0).getId() + " won!"); //display winner and exit game
+        return players.size() == 1;
     }
 
     /**

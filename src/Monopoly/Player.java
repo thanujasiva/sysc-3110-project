@@ -24,6 +24,8 @@ public class Player {
     private boolean skipTurn;
     private int oldPosition;
 
+    private HashMap<Property, Integer> numberOfHouses;
+
     /**
      * @author Sabah
      * @author Shrimei
@@ -40,6 +42,14 @@ public class Player {
         this.colourGroupMatch = new HashMap<>();
         this.skipTurn = false;
         this.oldPosition = 0;
+        this.numberOfHouses = new HashMap<>();
+    }
+
+    public void buyHouseOnProperty(Property property){
+        if (property.canBuyHouseOnProperty(numberOfHouses.get(property))){
+            // colourGroupMatch.merge(((Property) ownableSquare).getColourGroup(), 1, Integer::sum);
+            numberOfHouses.merge(property, 1, Integer::sum);
+        }
     }
 
     public int getRailroadNumber() {
@@ -211,8 +221,7 @@ public class Player {
     public int getRentAmount(OwnableSquare ownableSquare) {
         // null check in case player does not own the property
         if (ownableSquare instanceof Railroad) {
-            int rent = ownableSquare.getRent(railroadNumber);
-            return rent;
+            return ownableSquare.getRent(railroadNumber);
         } else if (ownableSquare instanceof Property) {
             Property property = (Property) ownableSquare;
             if ((colourGroupMatch.get(property.getColourGroup()) != null) && (colourGroupMatch.get(property.getColourGroup()) == property.getColourGroup().getMax())) {
@@ -239,10 +248,7 @@ public class Player {
     }
 
     public boolean hasAllColours(Property property){
-        if (colourGroupMatch.get(property.getColourGroup()) == property.getColourGroup().getMax()){
-            return true;
-        }
-        return false;
+        return colourGroupMatch.get(property.getColourGroup()) == property.getColourGroup().getMax();
     }
 
 }
