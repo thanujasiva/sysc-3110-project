@@ -46,8 +46,7 @@ public class BoardPanel {
         mainPanel = new JPanel();
 
         mainPanel.setSize(new Dimension(boardWidth, boardHeight));
-        Color panelColour = new Color(100,100,100);
-        Color boxColour = Color.LIGHT_GRAY;
+        Color panelColour = BoardColours.BOARD.getColour();
 
         JPanel topBorder = new JPanel();
         topBorder.setBackground(panelColour);
@@ -88,17 +87,14 @@ public class BoardPanel {
             //if square is a property, show colour group
             if (square instanceof Property) {
                 label.setBackground(((Property) square).getColourGroup().getColour());
-                label.setOpaque(true);
             }else if (square instanceof Railroad){
-                label.setForeground(new Color(220,220,220));
-                label.setBackground(Color.BLACK);
-                label.setOpaque(true);
+                label.setForeground(BoardColours.LIGHTTEXT.getColour());
+                label.setBackground(BoardColours.RAILROAD.getColour());
             }else if (square instanceof Utility){
-                label.setForeground(new Color(220,220,220));
-                label.setBackground(Color.DARK_GRAY);
-                label.setOpaque(true);
+                label.setForeground(BoardColours.LIGHTTEXT.getColour());
+                label.setBackground(BoardColours.UTILITY.getColour());
             } else{
-                label.setBackground(boxColour);
+                label.setBackground(BoardColours.BLANKBOX.getColour());
             }
 
             allSquares.put(box, square);

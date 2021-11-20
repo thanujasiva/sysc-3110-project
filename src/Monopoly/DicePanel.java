@@ -45,7 +45,7 @@ public class DicePanel {
 
         dicePanel.add(diceLabel1);
         dicePanel.add(diceLabel2);
-        dicePanel.setBackground(Color.LIGHT_GRAY);
+        dicePanel.setBackground(BoardColours.DICE.getColour());
         diceLabel1.setText(String.valueOf(this.dice1.getDiceNumber()));
         diceLabel2.setText(String.valueOf(dice2.getDiceNumber()));
     }

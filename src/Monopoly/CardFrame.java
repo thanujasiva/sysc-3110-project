@@ -106,8 +106,8 @@ public class CardFrame extends JOptionPane {
         JLabel name = new JLabel(utility.getName(), SwingConstants.CENTER);
         name.setBorder(valueBorder);
         name.setOpaque(true);
-        name.setForeground(Color.WHITE);
-        name.setBackground(Color.DARK_GRAY);
+        name.setForeground(BoardColours.LIGHTTEXT.getColour());
+        name.setBackground(BoardColours.UTILITY.getColour());
 
         JLabel price = new JLabel("Price: ");
         price.setBorder(fieldBorder);
@@ -156,10 +156,10 @@ public class CardFrame extends JOptionPane {
         Border valueBorder = new EmptyBorder(6,3,3,3);
 
         JLabel name = new JLabel(railroad.getName(), SwingConstants.CENTER);
-        name.setForeground(Color.WHITE);
+        name.setForeground(BoardColours.LIGHTTEXT.getColour());
         name.setBorder(valueBorder);
         name.setOpaque(true);
-        name.setBackground(Color.black);
+        name.setBackground(BoardColours.RAILROAD.getColour());
 
         JLabel price = new JLabel("Price: ");
         price.setBorder(fieldBorder);

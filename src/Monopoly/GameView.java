@@ -95,8 +95,8 @@ public class GameView implements MonopolyInterfaceView {
         diceButton.setBorderPainted(true);
 
         diceButton.setBorder(BorderFactory.createCompoundBorder(
-                BorderFactory.createLineBorder(Color.GRAY, 2),
-                BorderFactory.createLineBorder(new Color(100,100,100), 100)));
+                BorderFactory.createLineBorder(BoardColours.BORDER.getColour(), 2),
+                BorderFactory.createLineBorder(BoardColours.BOARD.getColour(), 100)));
 
         return diceButton;
     }
@@ -130,7 +130,7 @@ public class GameView implements MonopolyInterfaceView {
             pieces.put(player, new PieceComponent(player, boardPanel.getPanel(0),frame));
         }
 
-
+        //FIXME - remove this after houses/hotels are working fully
         Player player = game.getCurrentPlayer();
         player.setPosition(1);
         game.purchaseTransaction();
