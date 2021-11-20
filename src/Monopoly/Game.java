@@ -440,7 +440,7 @@ public class Game {
 
         int newPosition = currentPlayer.getPosition() % board.getSquares().size();
 
-        if (((newPosition - roll) <= 0) && (!firstRound)) {
+        if (((newPosition - roll) <= board.getGoPosition()) && (!firstRound)) {
             currentPlayer.collect200();
             for (MonopolyInterfaceView view : this.views){
                 view.handlePassedGo();
@@ -458,7 +458,7 @@ public class Game {
             view.handlePlayerState();
         }
 
-        if(getCurrentSquare() instanceof GoToJail){
+        if(newPosition == board.getGoToJailPosition()){
             //System.out.println("Landed on Go To Jail " + getCurrentPlayer().getId());
             this.addCurrentPlayerToJail();
             for (MonopolyInterfaceView view : this.views){

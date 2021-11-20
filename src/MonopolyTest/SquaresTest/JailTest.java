@@ -1,4 +1,4 @@
-package MonopolyTest;
+package MonopolyTest.SquaresTest;
 
 import Monopoly.Player;
 import Monopoly.Squares.Jail;

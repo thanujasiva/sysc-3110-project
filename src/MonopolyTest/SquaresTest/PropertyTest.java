@@ -1,4 +1,4 @@
-package MonopolyTest;
+package MonopolyTest.SquaresTest;
 
 import static org.junit.Assert.*;
 
