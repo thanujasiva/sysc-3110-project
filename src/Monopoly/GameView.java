@@ -127,7 +127,7 @@ public class GameView implements MonopolyInterfaceView {
         for (int i = 0; i < num; i++) {
             Player player = new Player();
             this.game.addPlayer(player);
-            pieces.put(player, new PieceComponent(player, boardPanel.getPanel(0),frame));
+            pieces.put(player, new PieceComponent(player, boardPanel.getPanel(0),frame)); //FIXME
         }
 
         this.playersPanel.updatePlayers();
