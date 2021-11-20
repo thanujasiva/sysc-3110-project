@@ -236,14 +236,25 @@ public class Game {
         boolean flag3 = false;
 
         flag1 = currentPlayer.hasAllColours(property); //have colour set
-        flag2 = property.canBuyHouseOnProperty(currentPlayer.getNumberOfHouses(property)); //don't already have 4 houses
+        flag2 = property.canBuyHouseOnProperty(currentPlayer.getNumberOfHouses(property),currentPlayer.getNumberOfHotel(property)); //don't already have 4 houses
 
         if (flag1 && flag2){
             flag3 = currentPlayer.buyHouseOnProperty(property);
             for (MonopolyInterfaceView view : this.views){ // update with jail roll
                 view.handlePlayerState();
             }
+        } else if (flag1){
+            boolean flag4 = property.canBuyHotelOnProperty(currentPlayer.getNumberOfHotel(property));
+
+            if (flag4){
+                flag3 = currentPlayer.buyHotelOnProperty(property);
+                for (MonopolyInterfaceView view : this.views){ // update with jail roll
+                    view.handlePlayerState();
+                }
+            }
         }
+
+
         return flag3;
     }
 

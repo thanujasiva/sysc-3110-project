@@ -130,11 +130,13 @@ public class GameView implements MonopolyInterfaceView {
             pieces.put(player, new PieceComponent(player, boardPanel.getPanel(0),frame));
         }
 
-        /*Player player = game.getCurrentPlayer();
+
+        Player player = game.getCurrentPlayer();
         player.setPosition(1);
         game.purchaseTransaction();
         player.setPosition(2);
-        game.purchaseTransaction();*/
+        game.purchaseTransaction();
+
 
         this.playersPanel.updatePlayers();
         this.playerStatePanel.updatePlayer(game.getCurrentPlayer());

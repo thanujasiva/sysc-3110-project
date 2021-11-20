@@ -25,6 +25,8 @@ public class Player {
     private int oldPosition;
 
     private HashMap<Property, Integer> numberOfHouses;
+    private HashMap<Property, Integer> numberOfHotel;
+
 
     /**
      * @author Sabah
@@ -43,6 +45,7 @@ public class Player {
         this.skipTurn = false;
         this.oldPosition = 0;
         this.numberOfHouses = new HashMap<>();
+        this.numberOfHotel = new HashMap<>();
     }
 
     public boolean buyHouseOnProperty(Property property){
@@ -54,8 +57,24 @@ public class Player {
         return false;
     }
 
+    public boolean buyHotelOnProperty(Property property){
+        if (this.money >= property.getHousePrice()) {
+            numberOfHouses.put(property, 0); //empty out number of houses on property
+            //update has hotel
+            numberOfHotel.put(property, 1);
+            //if property.hasHouse then no more buying hotels on property
+            this.money -= property.getHousePrice();
+            return true;
+        }
+        return false;
+    }
+
     public int getNumberOfHouses(Property property) {
         return numberOfHouses.getOrDefault(property, 0);
+    }
+
+    public int getNumberOfHotel(Property property) {
+        return numberOfHotel.getOrDefault(property, 0);
     }
 
     public int getRailroadNumber() {
@@ -230,9 +249,16 @@ public class Player {
         } else if (ownableSquare instanceof Property) {
             Property property = (Property) ownableSquare;
             if ((colourGroupMatch.get(property.getColourGroup()) != null) && (hasAllColours(property))) {
-                return property.getRentWithColourSet();
-            } else {
-                return property.getRent(0); //FIXME // without colour set
+                if (getNumberOfHotel(property)==1){
+                    return property.getRentHotel();
+                } else {
+                    int numHouses = numberOfHouses.get(property);
+                    return property.getRent(numHouses);
+                }
+                //return property.getRentWithColourSet();
+            }
+            else {
+                return property.getRent(); //FIXME // without colour set
             }
         } else if (ownableSquare instanceof Utility) {
             Utility utility = (Utility) ownableSquare;
