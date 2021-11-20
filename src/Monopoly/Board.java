@@ -24,12 +24,12 @@ public class Board {
      */
     private void setProperties(){
 
-        Go GO = new Go("GO");
+        BlankSquare GO = new BlankSquare("GO");
 
         Property Mediterranean = new Property("Mediterranean Avenue", 60, ColourGroups.BROWN);
         Property Baltic = new Property("Baltic Avenue", 60, ColourGroups.BROWN);
 
-        Tax IncomeTax = new Tax("Income Tax");
+        BlankSquare IncomeTax = new BlankSquare("Income Tax");
 
         Railroad ReadingRail = new Railroad("Reading Railroad");
 
@@ -67,7 +67,7 @@ public class Board {
 
         Property Marvin = new Property("Marvin Gardens", 280, ColourGroups.YELLOW);
 
-        GoToJail GotoJail = new GoToJail("Go to Jail");
+        BlankSquare GotoJail = new BlankSquare("Go To Jail");
 
         Property Pacific  = new Property("Pacific Avenue", 300, ColourGroups.GREEN);
         Property NorthCarolina  = new Property("North Carolina Avenue", 300,  ColourGroups.GREEN);
@@ -77,7 +77,7 @@ public class Board {
 
         Property ParkPlace = new Property("Park Place", 350,  ColourGroups.BLUE);
 
-        Tax LuxuryTax = new Tax("Luxury Tax");
+        BlankSquare LuxuryTax = new BlankSquare("Luxury Tax");
 
         Property Boardwalk  = new Property("Boardwalk", 400, ColourGroups.BLUE);
 
@@ -128,12 +128,12 @@ public class Board {
 
 
     /**
-     * Return casted version of go to jail square
+     * Return go to jail position
      * @author Thanuja
-     * @return          GoToJail square
+     * @return          int, position of Go To Jail
      */
-    public GoToJail getGoToJailSquare(){
-        return (GoToJail) squares.get(26);
+    public int getGoToJailPosition(){
+        return 26;
     }
 
     /**
@@ -153,7 +153,12 @@ public class Board {
     public int getJailPosition(){
         return 8;
     }
-    
+
+    /**
+     * Return go position
+     * @author Sabah
+     * @return          int, position of go
+     */
     public int getGoPosition() {
         return 0;
     }
