@@ -71,8 +71,11 @@ public class Railroad implements OwnableSquare {
             return rentTwo;
         } else if (numberOfRailroads == 3){
             return rentThree;
-        } else {
+        } else if (numberOfRailroads == 4) {
             return rentFour;
+        }
+        else {
+            return 0;
         }
     }
 

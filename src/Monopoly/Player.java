@@ -199,12 +199,11 @@ public class Player {
     }
 
     /**
-     * @param ownableSquare the property collecting rent
+     * @param rent the property collecting rent
      *                 Adds collected rent to the owner's account
      * @author Maisha
      */
-    public void collectRent(OwnableSquare ownableSquare) {
-        int rent = this.getRentAmount(ownableSquare);
+    public void collectRent(int rent) {
         this.money += rent;
     }
 
@@ -224,7 +223,7 @@ public class Player {
      * @author Shrimei
      * @author Thanuja
      */
-    public int getRentAmount(OwnableSquare ownableSquare) {
+    public int getRentAmount(OwnableSquare ownableSquare, int roll) {
         // null check in case player does not own the property
         if (ownableSquare instanceof Railroad) {
             return ownableSquare.getRent(railroadNumber);
@@ -232,18 +231,18 @@ public class Player {
             Property property = (Property) ownableSquare;
             if ((colourGroupMatch.get(property.getColourGroup()) != null) && (hasAllColours(property))) {
                 return property.getRentWithColourSet();
-            }else{
+            } else {
                 return property.getRent(0); //FIXME // without colour set
             }
-        } else if (ownableSquare instanceof Utility){
+        } else if (ownableSquare instanceof Utility) {
             Utility utility = (Utility) ownableSquare;
-            if (utilityNumber == 1){
-                return utility.getRent(utilityNumber);
-            }
+            return utility.getRent(roll, utilityNumber);
         }
-        return 0; //FIXME
-        //return ownableSquare.getRent();
+
+        return 0;
     }
+        //return ownableSquare.getRent();
+
 
     /**
      * @author Sabah
