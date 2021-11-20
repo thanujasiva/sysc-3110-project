@@ -236,7 +236,7 @@ public class Game {
         boolean flag3 = false;
 
         flag1 = currentPlayer.hasAllColours(property); //have colour set
-        flag2 = property.canBuyHouseOnProperty(currentPlayer.getNumberOfHouses(property)); //don't already have 4 houses
+        flag2 = property.canBuyHouseOnProperty(currentPlayer.getNumberOfHouses(property),currentPlayer.getNumberOfHotel(property)); //don't already have 4 houses
 
         if (flag1 && flag2){
             flag3 = currentPlayer.buyHouseOnProperty(property);

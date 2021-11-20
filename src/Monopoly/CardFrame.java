@@ -359,13 +359,13 @@ public class CardFrame extends JOptionPane {
      */
     private void handleIsOwner(){
         if(square instanceof Property){
-            int result = JOptionPane.showConfirmDialog(null, mainPanel,  "Do you want to buy a house?", JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE);
+            int result = JOptionPane.showConfirmDialog(null, mainPanel,  "Do you want to buy a house/hotel?", JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE);
 
             if(result == JOptionPane.YES_OPTION){
                 //controller would handle purchasing
                 boolean canPurchase = cardController.purchaseHouse((Property)square);
                 if (!canPurchase){ //if player does not have enough money
-                    JOptionPane.showMessageDialog(null, "You are not able to purchase a house");
+                    JOptionPane.showMessageDialog(null, "You are not able to purchase a house/hotel");
                 } // else, they successfully purchased
             }
         } else {

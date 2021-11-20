@@ -249,8 +249,12 @@ public class Player {
         } else if (ownableSquare instanceof Property) {
             Property property = (Property) ownableSquare;
             if ((colourGroupMatch.get(property.getColourGroup()) != null) && (hasAllColours(property))) {
-                int numHouses = numberOfHouses.get(property);
-                return property.getRent(numHouses);
+                if (getNumberOfHotel(property)==1){
+                    return property.getRentHotel();
+                } else {
+                    int numHouses = numberOfHouses.get(property);
+                    return property.getRent(numHouses);
+                }
                 //return property.getRentWithColourSet();
             }
             else {

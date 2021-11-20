@@ -19,7 +19,7 @@ public class Property implements OwnableSquare {
 
     private int housePrice;
 
-    private boolean hasHouse;
+    private boolean hasHotel;
 
     /**
      * @author Thanuja
@@ -42,7 +42,7 @@ public class Property implements OwnableSquare {
         this.colourGroup = colourGroup;
         this.owner = null;
         this.housePrice = colourGroup.getHousePrice();
-        this.hasHouse = false;
+        this.hasHotel = false;
     }
 
     /*
@@ -56,11 +56,12 @@ public class Property implements OwnableSquare {
         return housePrice;
     }
 
-    public boolean canBuyHouseOnProperty(int housesOwned){
-        return housesOwned != 4;
+    public boolean canBuyHouseOnProperty(int housesOwned, int hotelOwned){
+        return (housesOwned != 4 && hotelOwned == 0);
     }
 
     public boolean canBuyHotelOnProperty(int hotelOwned){
+
         return hotelOwned != 1;
     }
 
@@ -135,7 +136,7 @@ public class Property implements OwnableSquare {
             return rentTwoHouses;
         } else if (numberOfHouses == 3){
             return rentThreeHouses;
-        } else if (numberOfHouses == 4){
+        } else if (numberOfHouses == 4) {
             return rentFourHouses;
         } else {
             return rentWithColourSet;
