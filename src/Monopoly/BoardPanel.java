@@ -1,7 +1,9 @@
 package Monopoly;
 
 import Monopoly.Squares.Property;
+import Monopoly.Squares.Railroad;
 import Monopoly.Squares.Square;
+import Monopoly.Squares.Utility;
 
 import javax.swing.*;
 import java.awt.*;
@@ -44,7 +46,7 @@ public class BoardPanel {
         mainPanel = new JPanel();
 
         mainPanel.setSize(new Dimension(boardWidth, boardHeight));
-        Color panelColour = Color.DARK_GRAY;
+        Color panelColour = new Color(100,100,100);
         Color boxColour = Color.LIGHT_GRAY;
 
         JPanel topBorder = new JPanel();
@@ -86,6 +88,14 @@ public class BoardPanel {
             //if square is a property, show colour group
             if (square instanceof Property) {
                 label.setBackground(((Property) square).getColourGroup().getColour());
+                label.setOpaque(true);
+            }else if (square instanceof Railroad){
+                label.setForeground(new Color(220,220,220));
+                label.setBackground(Color.BLACK);
+                label.setOpaque(true);
+            }else if (square instanceof Utility){
+                label.setForeground(new Color(220,220,220));
+                label.setBackground(Color.DARK_GRAY);
                 label.setOpaque(true);
             } else{
                 label.setBackground(boxColour);
