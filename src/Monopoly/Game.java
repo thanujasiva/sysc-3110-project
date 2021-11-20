@@ -243,7 +243,18 @@ public class Game {
             for (MonopolyInterfaceView view : this.views){ // update with jail roll
                 view.handlePlayerState();
             }
+        } else if (flag1){
+            boolean flag4 = property.canBuyHotelOnProperty(currentPlayer.getNumberOfHotel(property));
+
+            if (flag4){
+                flag3 = currentPlayer.buyHotelOnProperty(property);
+                for (MonopolyInterfaceView view : this.views){ // update with jail roll
+                    view.handlePlayerState();
+                }
+            }
         }
+
+
         return flag3;
     }
 

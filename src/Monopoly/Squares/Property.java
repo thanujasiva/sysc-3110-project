@@ -18,6 +18,7 @@ public class Property implements OwnableSquare {
     private Player owner;
 
     private int housePrice;
+
     private boolean hasHouse;
 
     /**
@@ -58,6 +59,11 @@ public class Property implements OwnableSquare {
     public boolean canBuyHouseOnProperty(int housesOwned){
         return housesOwned != 4;
     }
+
+    public boolean canBuyHotelOnProperty(int hotelOwned){
+        return hotelOwned != 1;
+    }
+
 
     /**
      * @author Maisha
@@ -113,21 +119,27 @@ public class Property implements OwnableSquare {
         return colourGroup;
     }
 
+    public int getRent() {
+        return rent;
+    }
+
     /**
      * @author Thanuja
      * @return          the standard rent rate of the property
      */
     @Override
     public int getRent(int numberOfHouses) { //FIXME
-        return rent;
-    }
-
-    /**
-     * @author Thanuja
-     * @return          the rent rate with a colour set
-     */
-    public int getRentWithColourSet() {
-        return rentWithColourSet;
+        if (numberOfHouses == 1){
+            return rentOneHouse;
+        } else if(numberOfHouses == 2){
+            return rentTwoHouses;
+        } else if (numberOfHouses == 3){
+            return rentThreeHouses;
+        } else if (numberOfHouses == 4){
+            return rentFourHouses;
+        } else {
+            return rentWithColourSet;
+        }
     }
 
     /**

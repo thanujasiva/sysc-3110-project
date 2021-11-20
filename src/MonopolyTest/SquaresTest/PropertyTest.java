@@ -35,7 +35,7 @@ public class PropertyTest {
      */
     @Test
     public void getType() {
-        assertTrue(property instanceof Property);
+        assertNotNull(property);
     }
 
     /**
@@ -53,6 +53,6 @@ public class PropertyTest {
      */
     @Test
     public void getRentWithColourSet() {
-        assertEquals(40, property.getRentWithColourSet());
+        assertEquals(40, property.getRent(0));
     }
 }
