@@ -262,4 +262,6 @@ public class GameTest {
         assertTrue(0 < currentPlayer.getPosition());
         assertTrue(12 >= currentPlayer.getPosition());
     }
+
+    //canBuyHouse
 }

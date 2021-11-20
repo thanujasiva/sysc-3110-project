@@ -15,6 +15,8 @@ public class PlayerTest {
 
     private Player player;
     private Property property;
+    private Property propertyOfSameColour;
+    private Property propertyOfSameColour2;
     private Player owner;
     private Property rentedProperty;
 
@@ -28,6 +30,8 @@ public class PlayerTest {
         owner = new Player();
         property = new Property("Vermont Avenue", 100, ColourGroups.GREY);
         rentedProperty = new Property("St. Charles Place", 140, ColourGroups.PINK);
+        propertyOfSameColour = new Property("Test1", 100, ColourGroups.GREY);
+        propertyOfSameColour2 = new Property("Test2", 100, ColourGroups.GREY);
     }
 
     /**
@@ -126,10 +130,11 @@ public class PlayerTest {
 
     }
 
+    //TODO
+    /*
     /**
      * Test the process of collecting rent with colour set.
      * @author Thanuja
-     */
     @Test
     public void getRentColourSet(){
         // purchase GREY property 3 times to own the colour set
@@ -139,6 +144,7 @@ public class PlayerTest {
 
         assertEquals(20, player.getRentAmount(property, 0)); //20% of 100$ (price of property) plus players money (1500 - 300)
     }
+    */
 
     /**
      * Test the process of paying rent
@@ -163,5 +169,64 @@ public class PlayerTest {
         assertFalse(player.payRent(10));
     }
 
+    // test buy house on property
 
+    /**
+     * Test if buyHouseOnProperty can buy a house successfully
+     * @author Maisha
+     */
+    @Test
+    public void testBuyHouseOnProperty(){
+        assertTrue(player.buyHouseOnProperty(property));
+    }
+
+    // test buy hotel on property
+
+    /**
+     * @author Maisha
+     */
+    @Test
+    public void testBuyHotelOnProperty(){
+        assertTrue(player.buyHotelOnProperty(property));
+    }
+
+    // get number of houses test
+
+    /**
+     * @author Maisha
+     */
+    @Test
+    public void testGetNumberOfHouses(){
+        assertEquals(0,player.getNumberOfHouses(property));
+        player.purchaseSquare(property);
+        player.buyHouseOnProperty(property);
+        assertEquals(1, player.getNumberOfHouses(property));
+    }
+
+    // get number of hotel test
+
+    /**
+     * @author Maisha
+     */
+    @Test
+    public void testGetNumberOfHotel(){
+        assertEquals(0,player.getNumberOfHotel(property));
+        player.purchaseSquare(property);
+        player.buyHotelOnProperty(property);
+        assertEquals(1,player.getNumberOfHotel(property));
+    }
+
+    // test has all colours test
+
+    /**
+     * @author Maisha
+     */
+    @Test
+    public void testHasAllColours(){
+        player.purchaseSquare(property);
+        assertFalse(player.hasAllColours(property));
+        player.purchaseSquare(propertyOfSameColour);
+        player.purchaseSquare(propertyOfSameColour2);
+        assertTrue(player.hasAllColours(property));
+    }
 }

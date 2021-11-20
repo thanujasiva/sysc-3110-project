@@ -55,4 +55,9 @@ public class PropertyTest {
     public void getRentWithColourSet() {
         assertEquals(40, property.getRent(0));
     }
+
+    //test gethouseprice
+    //canBuyHouseOnProperty
+    //canBuyHotelOnProperty
+    //getRentOneHouse etc.
 }
