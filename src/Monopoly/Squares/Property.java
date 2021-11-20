@@ -49,6 +49,10 @@ public class Property implements OwnableSquare {
 
      */
 
+    public int getHousePrice() {
+        return housePrice;
+    }
+
     public boolean canBuyHouseOnProperty(int housesOwned){
         return housesOwned != 4;
     }
@@ -113,7 +117,6 @@ public class Property implements OwnableSquare {
      */
     @Override
     public int getRent(int numberOfHouses) { //FIXME
-
         return rent;
     }
 

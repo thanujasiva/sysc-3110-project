@@ -8,8 +8,9 @@ import javax.swing.event.ListSelectionListener;
 
 public class PlayerStateController implements ListSelectionListener{
 
-    JList <String> ownedSquaresList;
-    Player player;
+    private JList <String> ownedSquaresList;
+    private Player player;
+    private Game game;
 
     /**
      * Create controller
@@ -17,9 +18,10 @@ public class PlayerStateController implements ListSelectionListener{
      * @param ownedSquaresList        JList
      * @param player                the corresponding player
      */
-    public PlayerStateController(JList<String> ownedSquaresList, Player player){
+    public PlayerStateController(JList<String> ownedSquaresList, Player player, Game game){
         this.ownedSquaresList = ownedSquaresList;
         this.player = player;
+        this.game = game;
     }
 
     /**
@@ -32,7 +34,7 @@ public class PlayerStateController implements ListSelectionListener{
         if (ownedSquaresList.getSelectedIndex() >= 0) {
             if (!e.getValueIsAdjusting()) {
                 OwnableSquare selectedOwnedSquare = player.getOwnableSquares().get(ownedSquaresList.getSelectedIndex());
-                new CardFrame(selectedOwnedSquare);
+                new CardFrame(selectedOwnedSquare, player, game);
                 // user can open many cards (and duplicates of those cards)
             }
         }

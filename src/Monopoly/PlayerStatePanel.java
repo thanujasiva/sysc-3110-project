@@ -1,6 +1,7 @@
 package Monopoly;
 
 import Monopoly.Squares.OwnableSquare;
+import Monopoly.Squares.Property;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -17,14 +18,17 @@ public class PlayerStatePanel extends JPanel{
     private JLabel playerMoneyLabel;
     private JList<String> ownedSquaresList;
     private PlayerStateController playerStateController;
+    private Game game;
 
 
     /**
      * Create an empty player state panel
      * @author Thanuja
      */
-    public PlayerStatePanel(){
+    public PlayerStatePanel(Game game){
         super();
+
+        this.game = game;
 
         this.setLayout(new BoxLayout (this, BoxLayout.Y_AXIS));
 
@@ -61,13 +65,18 @@ public class PlayerStatePanel extends JPanel{
         // (re)create list with the names of the ownableSquares the player owns
         DefaultListModel<String> ownedSquaresModel = new DefaultListModel<>();
         for (OwnableSquare ownableSquare : player.getOwnableSquares()){
-            ownedSquaresModel.addElement(ownableSquare.getName());
+            if(ownableSquare instanceof Property){
+                int numHouses = player.getNumberOfHouses((Property)ownableSquare);
+                ownedSquaresModel.addElement(ownableSquare.getName() + ":  " + numHouses);
+            } else{
+                ownedSquaresModel.addElement(ownableSquare.getName());
+            }
         }
         ownedSquaresList.setModel(ownedSquaresModel);
 
         // create an updated controller for the updated list
         ownedSquaresList.removeListSelectionListener(playerStateController);
-        playerStateController = new PlayerStateController(ownedSquaresList, player);
+        playerStateController = new PlayerStateController(ownedSquaresList, player, game);
         ownedSquaresList.addListSelectionListener(playerStateController);
     }
 
