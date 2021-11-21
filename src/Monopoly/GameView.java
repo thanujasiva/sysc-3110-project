@@ -7,6 +7,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class GameView implements MonopolyInterfaceView {
@@ -108,7 +109,29 @@ public class GameView implements MonopolyInterfaceView {
      */
     public Integer handleNumberOfPlayers(){
         Integer[] options = {2,3,4};
-        Integer input = (Integer) JOptionPane.showInputDialog(null,"How many players do you wish to have?","PLAYERS",
+        Integer input = (Integer) JOptionPane.showInputDialog(null,"How many total players do you wish to have?","PLAYERS",
+                JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+        if (input == null) {
+            System.exit(0);
+        }
+        return input;
+    }
+
+
+    /**
+     * Ask for number of AI players
+     * @author Thanuja
+     * @param numTotal      total number of players
+     * @return              number of AI players
+     */
+    private Integer handleNumberOfAIPlayers(int numTotal) {
+        ArrayList<Integer> optionsArrayList = new ArrayList<>();
+        for (int i = 0; i<numTotal; i++){
+            optionsArrayList.add(i);
+        }
+        Integer[] options = optionsArrayList.toArray(new Integer[0]);
+                //optionsArrayList.stream().mapToInt(i->i).toArray(); //(Integer[]) optionsArrayList.toArray();
+        Integer input = (Integer) JOptionPane.showInputDialog(null,"How many AI players do you wish to have?","PLAYERS",
                 JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
         if (input == null) {
             System.exit(0);
@@ -123,9 +146,17 @@ public class GameView implements MonopolyInterfaceView {
      */
     @Override
     public void handleBoardPlayersUpdate() {
-        int num = this.handleNumberOfPlayers();
-        for (int i = 0; i < num; i++) {
+        int numTotal = this.handleNumberOfPlayers();
+        int numAI = this.handleNumberOfAIPlayers(numTotal);
+
+        for (int i = 0; i < numTotal-numAI; i++) {
             Player player = new Player();
+            this.game.addPlayer(player);
+            pieces.put(player, new PieceComponent(player, boardPanel.getPanel(0),frame));
+        }
+
+        for (int i = 0; i < numAI; i++) {
+            PlayerAI player = new PlayerAI();
             this.game.addPlayer(player);
             pieces.put(player, new PieceComponent(player, boardPanel.getPanel(0),frame));
         }
@@ -151,7 +182,6 @@ public class GameView implements MonopolyInterfaceView {
     public void handleRoll() {
         this.dicePanel.updateDiceLabel();
 
-        // FIXME should package as an event
         Player currentPlayer = game.getCurrentPlayer();
         Square currentSquare = game.getCurrentSquare();
 
@@ -173,6 +203,13 @@ public class GameView implements MonopolyInterfaceView {
     @Override
     public void handlePlayerState() {
         Player currentPlayer = game.getCurrentPlayer();
+        if (currentPlayer instanceof PlayerAI){
+            /*try { // FIXME sleep to show the AI state panel
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }*/
+        }
         this.playerStatePanel.updatePlayer(currentPlayer);
         this.playersPanel.updatePlayers();
     }
@@ -196,8 +233,10 @@ public class GameView implements MonopolyInterfaceView {
     @Override
     public void handleJailEntered(String message) {
         Player currentPlayer = game.getCurrentPlayer();
-        String title = "Player " + currentPlayer.getId() + " Go To Jail";
-        JOptionPane.showMessageDialog(null,message,title,JOptionPane.INFORMATION_MESSAGE);
+        if (!(currentPlayer instanceof PlayerAI)) {
+            String title = "Player " + currentPlayer.getId() + " Go To Jail";
+            JOptionPane.showMessageDialog(null, message, title, JOptionPane.INFORMATION_MESSAGE);
+        }
 
         // update piece position
         pieces.get(currentPlayer).movePiece(boardPanel.getPanel(currentPlayer.getPosition() % game.getBoard().getSquares().size()));
@@ -211,8 +250,10 @@ public class GameView implements MonopolyInterfaceView {
     @Override
     public void handleJailExited(String message) {
         Player currentPlayer = game.getCurrentPlayer();
-        String title = "Player " + currentPlayer.getId() + " Exit Jail";
-        JOptionPane.showMessageDialog(null,message,title,JOptionPane.INFORMATION_MESSAGE);
+        if (!(currentPlayer instanceof PlayerAI)) {
+            String title = "Player " + currentPlayer.getId() + " Exit Jail";
+            JOptionPane.showMessageDialog(null, message, title, JOptionPane.INFORMATION_MESSAGE);
+        }
 
         // update piece position
         pieces.get(currentPlayer).movePiece(boardPanel.getPanel(currentPlayer.getPosition() % game.getBoard().getSquares().size()));
@@ -226,7 +267,9 @@ public class GameView implements MonopolyInterfaceView {
      */
     @Override
     public void handleBankruptcy(Player player) {
-        JOptionPane.showMessageDialog(null, "Player "+ player.getId() + " is bankrupt. You cannot play further.");
+        if (!(player instanceof PlayerAI)) {
+            JOptionPane.showMessageDialog(null, "Player " + player.getId() + " is bankrupt. You cannot play further.");
+        }
         pieces.get(player).removePiece();
         pieces.remove(player);
     }
@@ -237,7 +280,9 @@ public class GameView implements MonopolyInterfaceView {
      */
     @Override
     public void handlePassedGo() {
-        JOptionPane.showMessageDialog(null, "You passed GO! Collect $200.");
+        if (!(game.getCurrentPlayer() instanceof PlayerAI)) {
+            JOptionPane.showMessageDialog(null, "You passed GO! Collect $200.");
+        }
     }
 
     /**
@@ -247,8 +292,13 @@ public class GameView implements MonopolyInterfaceView {
      */
     @Override
     public boolean askIfJailExit() {
-        int result = JOptionPane.showConfirmDialog(null, "Pay $50 fee to exit jail?\n(Otherwise try rolling doubles to exit)","Exit Jail Early?",JOptionPane.YES_NO_OPTION);
-        return (result == JOptionPane.YES_OPTION);
+        Player currentPlayer = game.getCurrentPlayer();
+        if (currentPlayer instanceof PlayerAI){
+            return currentPlayer.getMoney() >= 50;
+        }else {
+            int result = JOptionPane.showConfirmDialog(null, "Pay $50 fee to exit jail?\n(Otherwise try rolling doubles to exit)", "Exit Jail Early?", JOptionPane.YES_NO_OPTION);
+            return (result == JOptionPane.YES_OPTION);
+        }
     }
 
     /**
@@ -257,7 +307,7 @@ public class GameView implements MonopolyInterfaceView {
      * @author Maisha
      */
     @Override
-    public void handleWinner() {
+    public void handleWinner() { // show for whoever won
         JOptionPane.showMessageDialog(null, "Congratulations! Player: " + game.getPlayers().get(0).getId() +
                 " has won!");
     }

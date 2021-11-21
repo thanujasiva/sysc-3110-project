@@ -22,7 +22,11 @@ class PieceComponent extends JLabel {
     public PieceComponent(Player player, JPanel startBox, JFrame gameView){
         super("Player " + player.getId());
         this.setOpaque(true);
-        this.setBackground(Color.cyan);
+        if (player instanceof PlayerAI){
+            this.setBackground(Color.pink);
+        }else{
+            this.setBackground(Color.cyan);
+        }
         this.currentBox = startBox;
         startBox.add(this, BorderLayout.SOUTH);
         this.gameView = gameView;
@@ -36,7 +40,7 @@ class PieceComponent extends JLabel {
     public void movePiece(JPanel newBox){
         currentBox.remove(this);
         newBox.add(this, BorderLayout.SOUTH);
-        newBox.repaint(); //FIXME
+        currentBox.repaint(); //FIXME
         currentBox = newBox;
         currentBox.repaint(); //FIXME
         //gameView.repaint();
