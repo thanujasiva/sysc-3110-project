@@ -41,10 +41,7 @@ class PieceComponent extends JLabel {
     }
 
 
-    /**
-     * Clicking the button will move the label from one panel to the other
-     * @author Shrimei
-     */
+    /*
     public static void main(String[] arguments) {
 
         Player player = new Player();
@@ -81,5 +78,5 @@ class PieceComponent extends JLabel {
 
         frame.setVisible(true);
 
-    }
+    }*/
 }

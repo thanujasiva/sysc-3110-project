@@ -90,8 +90,9 @@ public class Utility implements OwnableSquare {
      * Getter for rent with utilities
      */
 
+
     @Override
-    public int getRent(int numberOfUtilities) {
+    public int getRent(int numberOfUtilities) { //FIXME what do we do with this extra method
         if (numberOfUtilities == 1){
             return rent1;
         } else {
