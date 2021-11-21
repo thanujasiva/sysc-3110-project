@@ -17,4 +17,6 @@ public interface MonopolyInterfaceView {
     void handleBankruptcy();
 
     void handlePassedGo();
+
+    boolean askIfJailExit();
 }

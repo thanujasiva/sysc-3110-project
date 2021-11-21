@@ -131,11 +131,11 @@ public class GameView implements MonopolyInterfaceView {
         }
 
         //FIXME - remove this after houses/hotels are working fully
-        Player player = game.getCurrentPlayer();
+        /*Player player = game.getCurrentPlayer();
         player.setPosition(1);
         game.purchaseTransaction();
         player.setPosition(2);
-        game.purchaseTransaction();
+        game.purchaseTransaction();*/
 
 
         this.playersPanel.updatePlayers();
@@ -233,6 +233,17 @@ public class GameView implements MonopolyInterfaceView {
     @Override
     public void handlePassedGo() {
         JOptionPane.showMessageDialog(null, "You passed GO! Collect $200.");
+    }
+
+    /**
+     * Ask player if they want to pay Exit fee now
+     * @author Thanuja
+     * @return      true if they want to pay now, else false
+     */
+    @Override
+    public boolean askIfJailExit() {
+        int result = JOptionPane.showConfirmDialog(null, "Pay $50 exit fee to exit jail?","",JOptionPane.YES_NO_OPTION);
+        return (result == JOptionPane.YES_OPTION);
     }
 
     /**

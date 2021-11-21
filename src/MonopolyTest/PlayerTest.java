@@ -53,6 +53,16 @@ public class PlayerTest {
     }
 
     /**
+     * Test initial skip turn value
+     * @author Thanuja
+     */
+    @Test
+    public void getInitialSkipTurn() {
+        assertFalse(player.isSkipTurn());
+    }
+
+
+    /**
      * Test first move
      * @author Thanuja
      */
