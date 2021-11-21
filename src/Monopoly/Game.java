@@ -2,7 +2,6 @@ package Monopoly;
 
 import Monopoly.Squares.*;
 
-import javax.swing.*;
 import java.util.ArrayList;
 
 public class Game {
@@ -268,11 +267,23 @@ public class Game {
     /**
      * Add current player to jail
      * @author Thanuja
+     * @param roll      the dice roll of the player
      */
-    private void addCurrentPlayerToJail() {
-        // TODO handle if Go amount was just received
-        Jail jail = board.getJailSquare();
+    public void addCurrentPlayerToJail(int roll) {
         Player currentPlayer = getCurrentPlayer();
+        //int roll = dice1.getDiceNumber() + dice2.getDiceNumber(); // roll parameter makes this method easier to test
+        if (canGetGoAmount(roll)) {
+            //System.out.println("return go amount");
+            if (!currentPlayer.payRent(200)) { // return the GO amount
+                removePlayer(currentPlayer); //remove player from game
+                currentPlayerNumber -= 1;
+                //System.out.println("You are bankrupt. You cannot play further.");
+                for (MonopolyInterfaceView view : this.views){
+                    view.handleBankruptcy(); // show the card they landed on, handle purchase/rent, etc
+                }
+            }
+        }
+        Jail jail = board.getJailSquare();
         currentPlayer.setSkipTurn(true);
         currentPlayer.setPosition(board.getJailPosition());
         jail.addToJail(currentPlayer);
@@ -322,7 +333,7 @@ public class Game {
             //System.out.println("Increment doubles for " + getCurrentPlayer().getId());
             if (doubles >= 3) {  // when player rolls doubles more than 3 times
                 //System.out.println("Rolled 3 doubles - Jail " + getCurrentPlayer().getId());
-                this.addCurrentPlayerToJail();
+                this.addCurrentPlayerToJail(dice1.getDiceNumber() + dice2.getDiceNumber());
 
                 for (MonopolyInterfaceView view : this.views){
                     view.handleJailEntered("You rolled 3 doubles! Go to Jail.");
@@ -362,11 +373,28 @@ public class Game {
 
             Jail jail = board.getJailSquare();
 
-            // TODO Paying a $50 fine to the Bank BEFORE throwing the dice for either the first turn or the second turn in Jail.
-            //if (jail.getJailTime(currentPlayer) < 2){
-                // ask if they want to exit (JOptionPane in the View class?)
-                // if yes, currentPlayer.payRent(50); this.removeCurrentPlayerFromJail(); roll dice and move
-            //}
+            // can pay $50 fine to the Bank before throwing the dice for first/second turn in Jail
+            if (jail.getJailTime(currentPlayer) <= 2){
+                boolean wantToPayExitFee = false;
+                for (MonopolyInterfaceView view : this.views){
+                    if (view.askIfJailExit()){ // only 1 view has to say yes
+                        wantToPayExitFee = true;
+                    }
+                }
+
+                if (wantToPayExitFee){
+                    boolean canPayExitFee = currentPlayer.payRent(50);
+                    if (canPayExitFee) {
+                        this.removeCurrentPlayerFromJail();
+                        for (MonopolyInterfaceView view : this.views) {
+                            view.handleJailExited("You paid $50 fine! Exit Jail.");
+                        }
+
+                        handleMove(); // continue with normal turn
+                        return;
+                    } // else, cannot pay exit fee (continue jail round)
+                }
+            }
 
             int roll = dice1.rollDice() + dice2.rollDice();
             // only move player if they can exit jail
@@ -461,29 +489,34 @@ public class Game {
         currentPlayer.changePosition(roll); //move the player
         //currentSquare = board.getSquares().get(currentPlayer.getPosition() % board.getSquares().size()); //new position of the player
         //System.out.println("You landed on " + currentSquare.toString()); //print current box info
-        handleGo(roll);
+        handleIfGo(roll);
         // show property card
         // update views based on dice roll
         // move the players
         for (MonopolyInterfaceView view : this.views){
             view.handleRoll();
         }
-        for (MonopolyInterfaceView view : this.views){
+        for (MonopolyInterfaceView view : this.views) {
             view.handlePlayerState();
         }
-        int newPosition = currentPlayer.getPosition() % board.getSquares().size();
 
-        if(newPosition == board.getGoToJailPosition()){
-            //System.out.println("Landed on Go To Jail " + getCurrentPlayer().getId());
-            this.addCurrentPlayerToJail();
-            for (MonopolyInterfaceView view : this.views){
-                view.handleJailEntered("You landed on Go to Jail!");
-            }
-        }
+        handleIfGoToJail(roll);
 
         for (MonopolyInterfaceView view : this.views){
             view.handleEndOfTurn();
         }
+    }
+
+
+    /**
+     * Check if current player is eligible to receive Go amount based on roll
+     * @author Thanuja
+     * @param roll          the player's roll
+     * @return              true if player can get go amount, false otherwise
+     */
+    private boolean canGetGoAmount(int roll){
+        int newPosition = getCurrentPlayer().getPosition() % board.getSquares().size();
+        return ((newPosition - roll) < board.getGoPosition());
     }
 
     /**
@@ -491,19 +524,35 @@ public class Game {
      * @param roll takes the dice amount
      * Handles GO, landing or passing position 0
      */
-    public void handleGo(int roll){
-
+    public void handleIfGo(int roll){
         Player currentPlayer = getCurrentPlayer();
-        int newPosition = currentPlayer.getPosition() % board.getSquares().size();
 
-        if (((newPosition - roll) < board.getGoPosition()))
-        {
+        if (canGetGoAmount(roll)){
             currentPlayer.collect200();
             for (MonopolyInterfaceView view : this.views){
                 view.handlePassedGo();
             }
         }
     }
+
+    /**
+     * @author Thanuja
+     * @param roll takes the dice amount
+     * Handles landing Go To Jail
+     */
+    public void handleIfGoToJail(int roll){
+        Player currentPlayer = getCurrentPlayer();
+        int newPosition = currentPlayer.getPosition() % board.getSquares().size();
+
+        if(newPosition == board.getGoToJailPosition()){
+            //System.out.println("Landed on Go To Jail " + getCurrentPlayer().getId());
+            this.addCurrentPlayerToJail(roll);
+            for (MonopolyInterfaceView view : this.views){
+                view.handleJailEntered("You landed on Go to Jail!");
+            }
+        }
+    }
+
 
     /**
      * @author Sabah

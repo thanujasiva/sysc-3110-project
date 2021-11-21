@@ -32,7 +32,7 @@ public class GoTest {
 
         player.changePosition(18);
         player.changePosition(16);
-        game.handleGo(16);
+        game.handleIfGo(16);
         //game.handleSwitchTurn();
         assertEquals(1700, player.getMoney());
     }
@@ -46,7 +46,7 @@ public class GoTest {
     public void passingGo(){
         player.changePosition(20);
         player.changePosition(20); // change position twice as new position minus roll is not 0
-        game.handleGo(20);
+        game.handleIfGo(20);
         assertEquals(1700, player.getMoney());
     }
 
@@ -60,10 +60,10 @@ public class GoTest {
 
         player.changePosition(18);
         player.changePosition(16); // change position twice as new position minus roll is not 0
-        game.handleGo(16);
+        game.handleIfGo(16);
 
         player.changePosition(16);
-        game.handleGo(16);
+        game.handleIfGo(16);
         assertEquals(1700, player.getMoney());
     }
 
@@ -76,9 +76,9 @@ public class GoTest {
     public void handleNotPassingGo() {
 
         player.changePosition(8);
-        game.handleGo(8);
+        game.handleIfGo(8);
         player.changePosition(5); // change position twice as new position minus roll is not 0
-        game.handleGo(5);
+        game.handleIfGo(5);
         assertEquals(1500, player.getMoney());
     }
 }
