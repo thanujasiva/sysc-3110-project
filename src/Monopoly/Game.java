@@ -2,7 +2,10 @@ package Monopoly;
 
 import Monopoly.Squares.*;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import javax.swing.Timer;
 
 public class Game {
 
@@ -365,14 +368,16 @@ public class Game {
 
         if (getCurrentPlayer() instanceof PlayerAI){
             // FIXME add a time delay
-            /*try {
-                Thread.sleep(5000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }*/
-            handleRoll();
+            Timer timer = new Timer(2000, new MyTimerActionListener());
+            timer.setRepeats(false);
+            timer.start();
         }
+    }
 
+    class MyTimerActionListener implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            handleMove();
+        }
     }
 
     /**
