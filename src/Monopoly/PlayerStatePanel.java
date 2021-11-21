@@ -65,20 +65,17 @@ public class PlayerStatePanel extends JPanel{
         // (re)create list with the names of the ownableSquares the player owns
         DefaultListModel<String> ownedSquaresModel = new DefaultListModel<>();
         for (OwnableSquare ownableSquare : player.getOwnableSquares()){
-            String label;
+            String label = ownableSquare.getName();
             if(ownableSquare instanceof Property){
                 int numHouses = player.getNumberOfHouses((Property)ownableSquare);
                 int numHotel = player.getNumberOfHotel((Property)ownableSquare);
-                if (numHouses != 0){
-                    ownedSquaresModel.addElement(ownableSquare.getName() + "    HOUSES:  " + numHouses);
+                if (numHouses != 0) {
+                    label = ownableSquare.getName() + "   HOUSES: " + numHouses;
                 } else if (numHotel != 0) {
-                    ownedSquaresModel.addElement(ownableSquare.getName() + "    HOTEL:  " + numHotel);
-                } else {
-                    ownedSquaresModel.addElement(ownableSquare.getName());
+                    label = ownableSquare.getName() + "   HOTEL: " + numHotel;
                 }
-            } else{
-                ownedSquaresModel.addElement(ownableSquare.getName());
             }
+            ownedSquaresModel.addElement(label);
         }
         ownedSquaresList.setModel(ownedSquaresModel);
 

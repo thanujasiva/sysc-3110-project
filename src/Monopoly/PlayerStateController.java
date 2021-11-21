@@ -34,8 +34,7 @@ public class PlayerStateController implements ListSelectionListener{
         if (ownedSquaresList.getSelectedIndex() >= 0) {
             if (!e.getValueIsAdjusting()) {
                 OwnableSquare selectedOwnedSquare = player.getOwnableSquares().get(ownedSquaresList.getSelectedIndex());
-                new CardFrame(selectedOwnedSquare, player, game);
-                // user can open many cards (and duplicates of those cards)
+                new CardFrame(selectedOwnedSquare, game);
             }
         }
     }
