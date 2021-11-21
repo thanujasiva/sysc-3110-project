@@ -37,9 +37,11 @@ public class CardFrame extends JOptionPane {
     }
 
     /**
-     * Called from playerStatePanel, only display property card
+     * Called when player lands on property, show buy/rent options
      * @author Shrimei
-     * @param square that is being displayed
+     * @author Thanuja
+     * @param square  that is being displayed
+     * @param game      the game model
      */
     public CardFrame(OwnableSquare square, Game game){
         super(square.getName());
@@ -54,34 +56,9 @@ public class CardFrame extends JOptionPane {
 
         this.cardController = new CardController(game);
 
-        handleIsOwner();
-    }
-
-
-    /**
-     * Called when player lands on property, show buy/rent options
-     * @author Shrimei
-     * @author Thanuja
-     * @param square  that is being displayed
-     * @param player    the current player
-     * @param game      the game model
-     */
-    public CardFrame(OwnableSquare square, Player player, Game game){
-        super(square.getName());
-        this.setLayout(new BorderLayout());
-        this.setSize(200, 250);
-
-        this.square = square;
-
-        mainPanel = new JPanel(new BorderLayout());
-
-        displayOwnableSquareInfo();
-
-        this.cardController = new CardController(game);
-
         if(square.getOwner() == null) { //no owner, can buy
             handleBuyOption();
-        }else if(square.getOwner().equals(player)){ //player is owner
+        }else if(square.getOwner().equals(game.getCurrentPlayer())){ //current player is owner
             handleIsOwner();
         }else{
             handlePayRent();
@@ -391,7 +368,7 @@ public class CardFrame extends JOptionPane {
 
         //Monopoly.CardFrame card = new Monopoly.CardFrame(WaterWorks, player, game);
         //Monopoly.CardFrame card = new Monopoly.CardFrame(BO, player, game);
-        Monopoly.CardFrame card = new Monopoly.CardFrame(Atlantic, player, game);
+        Monopoly.CardFrame card = new Monopoly.CardFrame(Atlantic, game);
         //Monopoly.CardFrame card2 = new Monopoly.CardFrame(Oriental, player, game);
     }
 }

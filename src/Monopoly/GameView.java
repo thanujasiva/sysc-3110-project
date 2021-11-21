@@ -160,7 +160,7 @@ public class GameView implements MonopolyInterfaceView {
         pieces.get(currentPlayer).movePiece(boardPanel.getPanel(currentPlayer.getPosition() % game.getBoard().getSquares().size()));
 
         if(currentSquare instanceof OwnableSquare) {
-            CardFrame card = new CardFrame((OwnableSquare) currentSquare, currentPlayer, game);
+            new CardFrame((OwnableSquare) currentSquare, game);
             // do not switch turn until card is handled property
         }
 

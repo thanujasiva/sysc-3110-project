@@ -24,15 +24,6 @@ public class BlankSquare implements Square {
 
     /**
      * @author Thanuja
-     * @return the type of square which is 'Monopoly.Squares.BlankSquare'
-     */
-    @Override
-    public String getType() {
-        return "Monopoly.Squares.BlankSquare";
-    }
-
-    /**
-     * @author Thanuja
      * @return A string of the square's attributes
      * Returns the name of the square to display on GUI
      */

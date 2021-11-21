@@ -10,9 +10,9 @@ public class Jail implements Square {
     private String otherName;
     private HashMap<Player, Integer> peopleInJail;
 
-    public Jail(String name, String otherName){
-        this.name = name;
-        this.otherName = otherName;
+    public Jail(){
+        this.name = "Visiting Jail";
+        this.otherName = "In Jail";
         this.peopleInJail = new HashMap<>();
     }
 
@@ -25,10 +25,6 @@ public class Jail implements Square {
         return otherName;
     }
 
-    @Override
-    public String getType() {
-        return "Monopoly.Squares.Jail";
-    }
 
     /**
      * Add player to jail list
