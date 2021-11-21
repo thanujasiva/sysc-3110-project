@@ -16,12 +16,6 @@ public class BoardPanel {
 
     private LinkedHashMap<JPanel, Square> allSquares;
 
-    // FIXME - these could be local variables
-    private final int boardWidth = 600;
-    private final int boardHeight = 600;
-    private final int boxHeight = 50;
-    private final int boxWidth = 50;
-
     /**
      * Create a new monopoly board with a roll button in the center to display the dice
      * @author Maisha
@@ -30,7 +24,11 @@ public class BoardPanel {
      */
     public BoardPanel(Board board){
 
-        //squares on the outer edge of the board
+        final int boardWidth = 600;
+        final int boardHeight = 600;
+        final int boxHeight = 50;
+        final int boxWidth = 50;
+
         allSquares = new LinkedHashMap<>();
 
         mainPanel = new JPanel();
@@ -62,7 +60,6 @@ public class BoardPanel {
         for (int i=0; i<squares.size(); i++){
             JPanel box = new JPanel(new BorderLayout());
             box.setPreferredSize(new Dimension(boxWidth, boxHeight));
-            //box.setLayout(new BoxLayout(box,BoxLayout.X_AXIS)); // this prevents some of the text wrapping
 
             Square square = squares.get(i);
 
@@ -123,10 +120,6 @@ public class BoardPanel {
         mainPanel.add(bottomBorder, BorderLayout.SOUTH);
     }
 
-    public LinkedHashMap<JPanel, Square> getAllSquares() {
-        return allSquares;
-    }
-
     /**
      * Get a certain panel based on the position
      * @author Shrimei
@@ -134,8 +127,7 @@ public class BoardPanel {
      * @return              corresponding JPanel
      */
     public JPanel getPanel(int position){
-        JPanel box = (JPanel) allSquares.keySet().toArray()[position];
-        return box;
+        return (JPanel) allSquares.keySet().toArray()[position];
     }
 
     /**

@@ -10,35 +10,57 @@ public class Jail implements Square {
     private String otherName;
     private HashMap<Player, Integer> peopleInJail;
 
+    /**
+     * Constructor for Jail square
+     * @author Thanuja
+     */
     public Jail(){
         this.name = "Visiting Jail";
         this.otherName = "In Jail";
         this.peopleInJail = new HashMap<>();
     }
 
+    /**
+     * Get name of jail square
+     * @author Thanuja
+     * @return jail name
+     */
     @Override
     public String getName() {
         return name;
     }
 
+    /**
+     * Get name of visiting jail square
+     * @author Thanuja
+     * @return visiting jail name
+     */
     public String getOtherName() {
         return otherName;
     }
 
-
     /**
      * Add player to jail list
      * @author Thanuja
-     * @param player        player to add
+     * @param player player to add
      */
     public void addToJail(Player player){
         peopleInJail.put(player, 1);
     }
 
     /**
+     * Remove player from jail list
+     * @author Thanuja
+     * @param player player to remove
+     */
+    public void removeFromJail(Player player){
+        peopleInJail.remove(player);
+    }
+
+    /**
      * Increase a player's time in jail if they are already in jail
      * @author Thanuja
-     * @param player        player to increase time for
+     * @param player player to increase time for
      */
     public void incrementJailTime(Player player){
         int previousTime = peopleInJail.getOrDefault(player, 0);
@@ -48,19 +70,10 @@ public class Jail implements Square {
     /**
      * Return how long a specific player has been in jail
      * @author Thanuja
-     * @param player        player to check time for
-     * @return              int, time in jail
+     * @param player player to check time for
+     * @return time in jail
      */
     public int getJailTime(Player player){
         return peopleInJail.getOrDefault(player, 0);
-    }
-
-    /**
-     * Remove player from jail list
-     * @author Thanuja
-     * @param player        player to remove
-     */
-    public void removeFromJail(Player player){
-        peopleInJail.remove(player);
     }
 }

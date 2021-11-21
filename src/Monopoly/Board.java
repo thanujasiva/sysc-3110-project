@@ -9,6 +9,7 @@ public class Board {
     private HashMap<Integer, Square> squares;
 
     /**
+     * Constructor for board
      * @author Maisha
      */
     public Board(){
@@ -130,7 +131,7 @@ public class Board {
     /**
      * Return go to jail position
      * @author Thanuja
-     * @return          int, position of Go To Jail
+     * @return  position of Go To Jail
      */
     public int getGoToJailPosition(){
         return 26;
@@ -139,7 +140,7 @@ public class Board {
     /**
      * Return casted version of jail square
      * @author Thanuja
-     * @return          Jail square
+     * @return Jail square
      */
     public Jail getJailSquare(){
         return (Jail) squares.get(8);
@@ -148,7 +149,7 @@ public class Board {
     /**
      * Return jail position
      * @author Thanuja
-     * @return          int, position of jail
+     * @return int, position of jail
      */
     public int getJailPosition(){
         return 8;
@@ -157,7 +158,7 @@ public class Board {
     /**
      * Return go position
      * @author Sabah
-     * @return          int, position of go
+     * @return int, position of go
      */
     public int getGoPosition() {
         return 0;
