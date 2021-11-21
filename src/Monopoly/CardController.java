@@ -32,6 +32,12 @@ public class CardController {
         return game.purchaseTransaction();
     }
 
+    /**
+     * Control purchase house/hotel on property
+     * @author Shrimei
+     * @param property          the property to purchase on
+     * @return                  true if successful, false otherwise
+     */
     public boolean purchaseHouse(Property property){
        return game.canBuyHouse(property); //FIXME
     }
@@ -39,16 +45,16 @@ public class CardController {
     /**
      * Control rent payment
      * @author Thanuja
-     * @return true if player is able to pay rent, else false.
      */
-    public boolean payCardRent(){
-        return game.rentTransaction();
+    public void payCardRent(){
+        game.rentTransaction();
     }
 
+    /*
     /**
      * Control switch turn
      * @author Thanuja
-     */
+
     public void handleSwitchTurn(){
         game.handleSwitchTurn();
     }
@@ -56,8 +62,8 @@ public class CardController {
     /**
      * @author Thanuja
      * @return true if player is winner, else false
-     */
+
     public boolean handlePotentialWinner(){
-        return game.isWinner();
-    }
+        return game.checkIfWinner();
+    }*/
 }

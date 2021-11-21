@@ -275,7 +275,7 @@ public class CardFrame extends JOptionPane {
         JLabel priceVal = new JLabel("$" + property.getPrice());
         priceVal.setBorder(valueBorder);
 
-        JLabel rentVal = new JLabel("$" +property.getRent(1));
+        JLabel rentVal = new JLabel("$" +property.getRent());
         rentVal.setBorder(valueBorder);
 
         JLabel rentWithSetVal = new JLabel("$" + property.getRent(0));
@@ -342,15 +342,7 @@ public class CardFrame extends JOptionPane {
      */
     private void handlePayRent(){
         JOptionPane.showMessageDialog(null, mainPanel /*"You have to pay rent of $"+ property.getOwner().getRentAmount(property)*/, "Pay Rent", JOptionPane.PLAIN_MESSAGE);
-        boolean canPayRent = cardController.payCardRent();
-        if (!canPayRent){ //if player does not have enough money
-            JOptionPane.showMessageDialog(null, "You are bankrupt. You cannot play further.");
-            if (cardController.handlePotentialWinner()){
-                JOptionPane.showMessageDialog(null, "Congratulations! Player: " + cardController.getGame().getPlayers().get(0).getId() +
-                        " has won!");
-                System.exit(0);
-            }
-        } // else, they successfully paid
+        cardController.payCardRent();
     }
 
     /**

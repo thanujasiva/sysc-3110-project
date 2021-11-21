@@ -77,7 +77,7 @@ public class Game {
      * Removes the player and their ownership of their properties so that
      * it is available for other players to buy
      */
-    public void removePlayer(Player player){
+    private void removePlayer(Player player){
         players.remove(player);
         for (Property p: player.getProperties()){
             p.setOwner(null);
@@ -205,17 +205,7 @@ public class Game {
             if (canPayRent) { //pay rent if enough money
                 currentOwnableSquare.getOwner().collectRent(rentAmount);
             } else { //player ran out of money, they are bankrupt
-                //System.out.println("You are bankrupt. You cannot play further."); // move
-                removePlayer(currentPlayer); //remove player from game
-                if (currentPlayerNumber == 0) { // if first player went bankrupt
-                    currentPlayerNumber = players.size() - 1; // set to last player (temporary)
-                }else{
-                    currentPlayerNumber -= 1;
-                }
-                /*if (players.size() == 1) { //1 player left // move
-                    System.out.println("Monopoly.Player " + players.get(0).getId() + " won!"); //display winner and exit game
-                    //return false;
-                }*/
+                currentPlayerBankrupt();
             }
             //return true;
 
@@ -254,13 +244,41 @@ public class Game {
         return flag3;
     }
 
+
+    /**
+     * Handle when current player is bankrupt
+     * @author Thanuja
+     */
+    public void currentPlayerBankrupt(){
+        removePlayer(getCurrentPlayer()); //remove player from game
+        if (currentPlayerNumber == 0) { // if first player went bankrupt
+            currentPlayerNumber = players.size() - 1; // set to last player (temporary)
+        }else{
+            currentPlayerNumber -= 1;
+        }
+        //System.out.println("You are bankrupt. You cannot play further.");
+        for (MonopolyInterfaceView view : this.views){
+            view.handleBankruptcy(); // show they are bankrupt
+        }
+
+        checkIfWinner(); // check if winner exists
+    }
+
     /**
      * @author Maisha
-     * @return true if one player left (winner)
+     * @return false if no winner yet, else true or exit the game
      */
-    public boolean isWinner(){
+    public boolean checkIfWinner(){
         //1 player left // move
         //System.out.println("Monopoly.Player " + players.get(0).getId() + " won!"); //display winner and exit game
+        if (players.size() == 1){
+            for (MonopolyInterfaceView view : views){
+                view.handleWinner();
+            }
+            if (views.size() > 0) { // don't exit if testing
+                System.exit(0);
+            }
+        }
         return players.size() == 1;
     }
 
@@ -275,12 +293,7 @@ public class Game {
         if (canGetGoAmount(roll)) {
             //System.out.println("return go amount");
             if (!currentPlayer.payRent(200)) { // return the GO amount
-                removePlayer(currentPlayer); //remove player from game
-                currentPlayerNumber -= 1;
-                //System.out.println("You are bankrupt. You cannot play further.");
-                for (MonopolyInterfaceView view : this.views){
-                    view.handleBankruptcy(); // show the card they landed on, handle purchase/rent, etc
-                }
+                currentPlayerBankrupt();
             }
         }
         Jail jail = board.getJailSquare();
@@ -333,11 +346,12 @@ public class Game {
             //System.out.println("Increment doubles for " + getCurrentPlayer().getId());
             if (doubles >= 3) {  // when player rolls doubles more than 3 times
                 //System.out.println("Rolled 3 doubles - Jail " + getCurrentPlayer().getId());
-                this.addCurrentPlayerToJail(dice1.getDiceNumber() + dice2.getDiceNumber());
 
                 for (MonopolyInterfaceView view : this.views){
                     view.handleJailEntered("You rolled 3 doubles! Go to Jail.");
                 }
+
+                this.addCurrentPlayerToJail(dice1.getDiceNumber() + dice2.getDiceNumber());
 
                 this.switchTurn(); // switches the turn (in milestone 3 change it to go to jail)
                 doubles = 0;
@@ -374,7 +388,7 @@ public class Game {
             Jail jail = board.getJailSquare();
 
             // can pay $50 fine to the Bank before throwing the dice for first/second turn in Jail
-            if (jail.getJailTime(currentPlayer) <= 2){
+            if ((jail.getJailTime(currentPlayer) <= 2) && (currentPlayer.getMoney() >= 50)){
                 boolean wantToPayExitFee = false;
                 for (MonopolyInterfaceView view : this.views){
                     if (view.askIfJailExit()){ // only 1 view has to say yes
@@ -425,12 +439,7 @@ public class Game {
                         view.handleJailExited("You paid $50 fine! Exit Jail.");
                     }
                 }else{
-                    removePlayer(currentPlayer); //remove player from game
-                    currentPlayerNumber -= 1;
-                    //System.out.println("You are bankrupt. You cannot play further.");
-                    for (MonopolyInterfaceView view : this.views){
-                        view.handleBankruptcy(); // show the card they landed on, handle purchase/rent, etc
-                    }
+                    currentPlayerBankrupt();
                 }
 
             }

@@ -66,7 +66,7 @@ public class GameTest {
         Player testPlayer = new Player();
         game.addPlayer(testPlayer);
         game.addPlayer(new Player());
-        game.removePlayer(testPlayer); // remove first player
+        game.currentPlayerBankrupt(); // remove first player
 
         assertEquals(1, game.getPlayers().size()); // the size is 1 player
         assertEquals(1, game.getPlayers().get(0).getId()); // player 1 now in position 0
