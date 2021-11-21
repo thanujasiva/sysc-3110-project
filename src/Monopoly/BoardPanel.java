@@ -16,12 +16,6 @@ public class BoardPanel {
 
     private LinkedHashMap<JPanel, Square> allSquares;
 
-    // FIXME - these may not be used / could be local variables
-    private ArrayList<JPanel> topSquares;
-    private ArrayList<JPanel> bottomSquares;
-    private ArrayList<JPanel> leftSquares;
-    private ArrayList<JPanel> rightSquares;
-
     // FIXME - these could be local variables
     private final int boardWidth = 600;
     private final int boardHeight = 600;
@@ -38,10 +32,6 @@ public class BoardPanel {
 
         //squares on the outer edge of the board
         allSquares = new LinkedHashMap<>();
-        topSquares = new ArrayList<>();
-        bottomSquares = new ArrayList<>();
-        leftSquares = new ArrayList<>();
-        rightSquares = new ArrayList<>();
 
         mainPanel = new JPanel();
 
@@ -104,28 +94,24 @@ public class BoardPanel {
         //bottom boxes
         for (int i = 0; i < 9; i++){
             JPanel box =  (JPanel) allSquares.keySet().toArray()[8-i];
-            bottomSquares.add(box);
             bottomBorder.add(box);
         }
 
         //left boxes
         for (int i = 0; i < 8; i++){
             JPanel box =  (JPanel) allSquares.keySet().toArray()[16-i];
-            leftSquares.add(box);
             leftBorder.add(box);
         }
 
         //top boxes
         for (int i = 0; i < 9; i++){
             JPanel box =  (JPanel) allSquares.keySet().toArray()[17+i];
-            topSquares.add(box);
             topBorder.add(box);
         }
 
         //right boxes
         for (int i = 0; i < 8; i++){
             JPanel box =  (JPanel) allSquares.keySet().toArray()[26+i];
-            rightSquares.add(box);
             rightBorder.add(box);
         }
 
