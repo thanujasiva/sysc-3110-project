@@ -19,4 +19,6 @@ public interface MonopolyInterfaceView {
     void handlePassedGo();
 
     boolean askIfJailExit();
+
+    void handleWinner();
 }

@@ -136,6 +136,7 @@ public class GameView implements MonopolyInterfaceView {
         game.purchaseTransaction();
         player.setPosition(2);
         game.purchaseTransaction();*/
+        //game.getPlayers().get(num-1).payRent(1500);
 
 
         this.playersPanel.updatePlayers();
@@ -220,6 +221,7 @@ public class GameView implements MonopolyInterfaceView {
     /**
      * Handle a bankruptcy
      * @author Thanuja
+     * @author Maisha
      */
     @Override
     public void handleBankruptcy() {
@@ -242,8 +244,19 @@ public class GameView implements MonopolyInterfaceView {
      */
     @Override
     public boolean askIfJailExit() {
-        int result = JOptionPane.showConfirmDialog(null, "Pay $50 exit fee to exit jail?","",JOptionPane.YES_NO_OPTION);
+        int result = JOptionPane.showConfirmDialog(null, "Pay $50 exit fee to exit jail?\nWill otherwise have to try rolling doubles to exit.","Exit Jail Early?",JOptionPane.YES_NO_OPTION);
         return (result == JOptionPane.YES_OPTION);
+    }
+
+    /**
+     * Handle when a player wins and the game is over.
+     * @author Thanuja
+     * @author Maisha
+     */
+    @Override
+    public void handleWinner() {
+        JOptionPane.showMessageDialog(null, "Congratulations! Player: " + game.getPlayers().get(0).getId() +
+                " has won!");
     }
 
     /**
