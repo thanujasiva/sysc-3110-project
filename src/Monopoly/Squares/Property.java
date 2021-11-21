@@ -16,13 +16,10 @@ public class Property implements OwnableSquare {
     private final int rentFourHouses;
     private final int rentHotel;
     private Player owner;
-
     private int housePrice;
 
-    private boolean hasHotel;
-
     /**
-     * @author Thanuja
+     * @author Thanuja, Maisha
      * @param name          name of property
      * @param price         price of property
      * @param colourGroup   colour group of property
@@ -42,34 +39,42 @@ public class Property implements OwnableSquare {
         this.colourGroup = colourGroup;
         this.owner = null;
         this.housePrice = colourGroup.getHousePrice();
-        this.hasHotel = false;
     }
 
-    /*
-    public void setHasHouse(boolean hasHouse) {
-        this.hasHouse = hasHouse;
-    }
-
+    /**
+     * Get the price to buy a house
+     * @return house price
      */
-
     public int getHousePrice() {
         return housePrice;
     }
 
+    /**
+     * Returns true if there are less than 4 houses on the property and no hotels
+     * @author Maisha
+     * @param housesOwned number of houses on property
+     * @param hotelOwned number of hotels on propery
+     * @return whether house can be bought
+     */
     public boolean canBuyHouseOnProperty(int housesOwned, int hotelOwned){
         return (housesOwned != 4 && hotelOwned == 0);
     }
 
+    /**
+     * Returns true if the property doesn't already have a hotel
+     * @author Maisha
+     * @param hotelOwned number of hotels on property
+     * @return whether hotel can be bought
+     */
     public boolean canBuyHotelOnProperty(int hotelOwned){
-
         return hotelOwned != 1;
     }
 
 
     /**
+     * Sets the owner of the property once it is bought
      * @author Maisha
      * @param player    the new owner.
-     * Sets the owner of the property once it is bought
      */
     @Override
     public void setOwner(Player player){
@@ -77,6 +82,7 @@ public class Property implements OwnableSquare {
     }
 
     /**
+     * Get property owner
      * @author Maisha
      * @return owner
      */
@@ -86,8 +92,9 @@ public class Property implements OwnableSquare {
     }
 
     /**
+     * Get property name
      * @author Thanuja
-     * @return          the name of property
+     * @return name of property
      */
     @Override
     public String getName() {
@@ -95,17 +102,9 @@ public class Property implements OwnableSquare {
     }
 
     /**
+     * Get price to buy property
      * @author Thanuja
-     * @return          the type of box which is 'property'
-     */
-    @Override
-    public String getType() {
-        return "Monopoly.Squares.Property";
-    }
-
-    /**
-     * @author Thanuja
-     * @return          the price of property
+     * @return price of property
      */
     @Override
     public int getPrice() {
@@ -113,20 +112,27 @@ public class Property implements OwnableSquare {
     }
 
     /**
+     * Get Colour group that property belongs to
      * @author Thanuja
-     * @return          the colour group that the property belongs to
+     * @return colour group
      */
     public ColourGroups getColourGroup() {
         return colourGroup;
     }
 
+    /**
+     * Get basic rent for property (no colour set or houses)
+     * @author Shrimei
+     * @return standard rent
+     */
     public int getRent() {
         return rent;
     }
 
     /**
+     * Get rent for a property depending on how many houses are on it
      * @author Thanuja
-     * @return          the standard rent rate of the property
+     * @return rent for the number of houses owned
      */
     @Override
     public int getRent(int numberOfHouses) { //FIXME
@@ -144,37 +150,10 @@ public class Property implements OwnableSquare {
     }
 
     /**
+     * Get the rent for property with a hotel
      * @author Shrimei
-     * @author Thanuja
-     * @return          the string of the property's attributes
-     * Prints out a string of the property's attributes
+     * @return rent with 1 hotel
      */
-    @Override
-    public String toString() {
-        return "Monopoly.Squares.Property: " +
-                "price=" + price +
-                ", name='" + name + '\'' +
-                ", colourGroup='" + colourGroup.getColour() + '\'' +
-                ", rent=" + rent +
-                ", rentWithColourSet=" + rentWithColourSet;
-    }
-
-    public int getRentOneHouse() {
-        return rentOneHouse;
-    }
-
-    public int getRentTwoHouses() {
-        return rentTwoHouses;
-    }
-
-    public int getRentThreeHouses() {
-        return rentThreeHouses;
-    }
-
-    public int getRentFourHouses() {
-        return rentFourHouses;
-    }
-
     public int getRentHotel() {
         return rentHotel;
     }

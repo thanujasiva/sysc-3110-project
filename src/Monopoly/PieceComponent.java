@@ -22,7 +22,7 @@ class PieceComponent extends JLabel {
     public PieceComponent(Player player, JPanel startBox, JFrame gameView){
         super("Player " + player.getId());
         this.setOpaque(true);
-        this.setBackground(Color.PINK);
+        this.setBackground(Color.cyan);
         this.currentBox = startBox;
         startBox.add(this, BorderLayout.SOUTH);
         this.gameView = gameView;
@@ -36,56 +36,18 @@ class PieceComponent extends JLabel {
     public void movePiece(JPanel newBox){
         currentBox.remove(this);
         newBox.add(this, BorderLayout.SOUTH);
+        newBox.repaint(); //FIXME
         currentBox = newBox;
-        gameView.repaint();
+        currentBox.repaint(); //FIXME
+        //gameView.repaint();
     }
 
     /**
-     * Remove piece when bankrupt
+     * Remove piece when player is bankrupt
      * @author Shrimei
      */
     public void removePiece(){
         currentBox.remove(this);
         gameView.repaint();
     }
-
-
-    /*
-    public static void main(String[] arguments) {
-
-        Player player = new Player();
-
-        JFrame frame = new JFrame("JFrame Color Example");
-        frame.setSize(300,200);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.getContentPane().setLayout(new BoxLayout(frame.getContentPane(),BoxLayout.X_AXIS));
-
-        JPanel box1 = new JPanel();
-        box1.setOpaque(true);
-        box1.setBackground(Color.YELLOW);
-
-        JPanel box2 = new JPanel();
-        box2.setOpaque(true);
-        box2.setBackground(Color.DARK_GRAY);
-
-        PieceComponent piece = new PieceComponent(player, box1, frame);
-
-        JButton button1 = new JButton();
-        JButton button2 = new JButton();
-
-        button1.addActionListener(e -> piece.movePiece(box2));
-
-        button2.addActionListener(e-> piece.movePiece(box1));
-
-        JLabel label = new JLabel("sdasd");
-
-        box1.add(label);
-        frame.add(box1);
-        frame.add(box2);
-        frame.add(button1);
-        frame.add(button2);
-
-        frame.setVisible(true);
-
-    }*/
 }

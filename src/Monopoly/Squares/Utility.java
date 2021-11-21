@@ -11,11 +11,10 @@ public class Utility implements OwnableSquare {
     private int rent2;
 
     /**
-     * @author Sabah
-     * @param name
      * Constructor for Utility
+     * @author Sabah
+     * @param name of utility
      */
-
     public Utility(String name){
         this.name = name;
         this.price = 150;
@@ -24,13 +23,12 @@ public class Utility implements OwnableSquare {
     }
 
     /**
+     * Get rent for the utility. If 1 owned, rent is 4 * roll, if 2 owned, rent is 10 * roll
      * @author Sabah
      * @param roll total rolled amount
      * @param utilityNumber number of utilities owned
-     * @return rent in int
-     * Getter for the utility rent method
+     * @return rent
      */
-
     public int getRent(int roll, int utilityNumber) {
         if (utilityNumber == 1) {
             return roll * rent1;
@@ -41,31 +39,19 @@ public class Utility implements OwnableSquare {
     }
 
     /**
+     * Getter for name of the square
      * @author Sabah
      * @return name
-     * Getter for name of the square
      */
-
     @Override
     public String getName() {
         return name;
     }
 
     /**
+     * Setter for the owner of the utility
      * @author Sabah
-     * @return Type
-     * Getter for type of square
-     */
-
-    @Override
-    public String getType() {
-        return "Monopoly.Squares.Utility";
-    }
-
-    /**
-     * @author Sabah
-     * @param player
-     * Setter for the owner of the utlity
+     * @param player that bought property
      */
     @Override
     public void setOwner(Player player) {
@@ -73,39 +59,30 @@ public class Utility implements OwnableSquare {
     }
 
     /**
+     * Get owner of utility
      * @author Shrimei
      * @return owner of utility
-     * Get owner of utility
      */
-
     @Override
     public Player getOwner() {
         return owner;
     }
 
     /**
-     * @author Sabah
-     * @param numberOfUtilities owned by a player
-     * @return rent
-     * Getter for rent with utilities
+     * Empty implementation of getRent method from Ownable interface
+     * @author Sabah, Shrimei
+     * @param numberOfUtilities owned by player
+     * @return 0
      */
-
-
     @Override
     public int getRent(int numberOfUtilities) { //FIXME what do we do with this extra method
-        if (numberOfUtilities == 1){
-            return rent1;
-        } else {
-            return rent2;
-        }
+        return 0;
     }
 
-
-
     /**
+     * Getter for the price to buy a utility
      * @author Shrimei
-     * @return price to buy utility
-     * Getter for the price of utility
+     * @return price of utility
      */
     @Override
     public int getPrice() {
