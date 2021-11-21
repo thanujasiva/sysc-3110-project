@@ -203,13 +203,6 @@ public class GameView implements MonopolyInterfaceView {
     @Override
     public void handlePlayerState() {
         Player currentPlayer = game.getCurrentPlayer();
-        if (currentPlayer instanceof PlayerAI){
-            /*try { // FIXME sleep to show the AI state panel
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }*/
-        }
         this.playerStatePanel.updatePlayer(currentPlayer);
         this.playersPanel.updatePlayers();
     }

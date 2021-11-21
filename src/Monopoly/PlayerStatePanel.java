@@ -59,7 +59,11 @@ public class PlayerStatePanel extends JPanel{
      * Update panel to display new player's information
      */
     public void updatePlayer(Player player){
-        this.playerNameLabel.setText("Current Player: " + player.getId());
+        if(player instanceof PlayerAI){
+            this.playerNameLabel.setText("Current AI Player: " + player.getId());
+        } else {
+            this.playerNameLabel.setText("Current Player: " + player.getId());
+        }
         this.playerMoneyLabel.setText("Money: $" + player.getMoney());
 
         // (re)create list with the names of the ownableSquares the player owns

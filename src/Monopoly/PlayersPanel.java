@@ -47,7 +47,11 @@ public class PlayersPanel {
             if (player.isSkipTurn() && (currentSquare instanceof Jail)){
                 positionName = ((Jail)currentSquare).getOtherName();
             }
-            this.playersListModel.addElement("Player: "+ player.getId() + " Position: " + positionName);
+            if(player instanceof PlayerAI){
+                this.playersListModel.addElement("AI Player: "+ player.getId() + "      Position: " + positionName);
+            } else {
+                this.playersListModel.addElement("Player: "+ player.getId() + "      Position: " + positionName);
+            }
         }
     }
 
