@@ -363,6 +363,16 @@ public class Game {
             view.handlePlayerState();
         }
 
+        if (getCurrentPlayer() instanceof PlayerAI){
+            // FIXME add a time delay
+            /*try {
+                Thread.sleep(5000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }*/
+            handleRoll();
+        }
+
     }
 
     /**

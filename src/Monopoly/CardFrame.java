@@ -15,9 +15,10 @@ import java.awt.Color;
  */
 public class CardFrame extends JOptionPane {
 
-    private Square square;
+    private OwnableSquare square;
     private CardController cardController;
     private JPanel mainPanel;
+    private Player player;
 
 
     /**
@@ -49,6 +50,7 @@ public class CardFrame extends JOptionPane {
         this.setSize(200, 250);
 
         this.square = square;
+        this.player = game.getCurrentPlayer();
 
         mainPanel = new JPanel(new BorderLayout());
 
@@ -301,15 +303,21 @@ public class CardFrame extends JOptionPane {
      * @author Thanuja
      */
     private void handleBuyOption(){
-        int result = JOptionPane.showConfirmDialog(null, mainPanel,"Purchase square?",JOptionPane.YES_NO_OPTION,JOptionPane.PLAIN_MESSAGE);
+        if (player instanceof PlayerAI){
+            if (square.getPrice() <= player.getMoney()){ // buy property if player has enough money
+                cardController.purchaseCard();
+            }
+        }else {
+            int result = JOptionPane.showConfirmDialog(null, mainPanel, "Purchase square?", JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE);
 
-        if(result == JOptionPane.YES_OPTION){
-            //controller would handle purchasing
-            boolean canPurchase = cardController.purchaseCard();
-            if (!canPurchase){ //if player does not have enough money
-                JOptionPane.showMessageDialog(null, "You do not have enough money to purchase the property");
-            } // else, they successfully purchased
-        }//else, player says no, do nothing
+            if (result == JOptionPane.YES_OPTION) {
+                //controller would handle purchasing
+                boolean canPurchase = cardController.purchaseCard();
+                if (!canPurchase) { //if player does not have enough money
+                    JOptionPane.showMessageDialog(null, "You do not have enough money to purchase the property");
+                } // else, they successfully purchased
+            }//else, player says no, do nothing
+        }
     }
 
     /**
@@ -318,7 +326,9 @@ public class CardFrame extends JOptionPane {
      * @author Maisha
      */
     private void handlePayRent(){
-        JOptionPane.showMessageDialog(null, mainPanel /*"You have to pay rent of $"+ property.getOwner().getRentAmount(property)*/, "Pay Rent", JOptionPane.PLAIN_MESSAGE);
+        if(!(player instanceof PlayerAI)){
+            JOptionPane.showMessageDialog(null, mainPanel /*"You have to pay rent of $"+ property.getOwner().getRentAmount(property)*/, "Pay Rent", JOptionPane.PLAIN_MESSAGE);
+        }
         cardController.payCardRent();
     }
 
@@ -328,17 +338,23 @@ public class CardFrame extends JOptionPane {
      */
     private void handleIsOwner(){
         if(square instanceof Property){
-            int result = JOptionPane.showConfirmDialog(null, mainPanel,  "Do you want to buy a house/hotel?", JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE);
+            if (player instanceof PlayerAI){ // AI player only buys houses/hotel if they land on their property again
+                cardController.purchaseHouse((Property)square);
+            }else {
+                int result = JOptionPane.showConfirmDialog(null, mainPanel, "Do you want to buy a house/hotel?", JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE);
 
-            if(result == JOptionPane.YES_OPTION){
-                //controller would handle purchasing
-                boolean canPurchase = cardController.purchaseHouse((Property)square);
-                if (!canPurchase){ //if player does not have enough money
-                    JOptionPane.showMessageDialog(null, "You are not able to purchase a house/hotel");
-                } // else, they successfully purchased
+                if (result == JOptionPane.YES_OPTION) {
+                    //controller would handle purchasing
+                    boolean canPurchase = cardController.purchaseHouse((Property) square);
+                    if (!canPurchase) { //if player does not have enough money
+                        JOptionPane.showMessageDialog(null, "You are not able to purchase a house/hotel");
+                    } // else, they successfully purchased
+                }
             }
         } else {
-            JOptionPane.showMessageDialog(null, mainPanel, "You own this property", JOptionPane.PLAIN_MESSAGE);
+            if (!(player instanceof PlayerAI)) {
+                JOptionPane.showMessageDialog(null, mainPanel, "You own this property", JOptionPane.PLAIN_MESSAGE);
+            }
         }
 
     }
