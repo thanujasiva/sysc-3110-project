@@ -8,15 +8,13 @@ public enum BoardColours {
     DICE(Color.LIGHT_GRAY), BLANKBOX(Color.LIGHT_GRAY), LIGHTTEXT(new Color(220,220,220)), BORDER(Color.GRAY);
 
     private final Color colour;
-    //private final Color textColour;
 
     /**
      * @author Thanuja
-     * @param colour        the colour value
+     * @param colour the colour value
      */
     BoardColours (Color colour){
         this.colour = colour;
-        //this.textColour = textColour;
     }
 
     /**

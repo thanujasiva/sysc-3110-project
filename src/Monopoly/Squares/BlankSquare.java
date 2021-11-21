@@ -14,6 +14,7 @@ public class BlankSquare implements Square {
     }
 
     /**
+     * Get name of square
      * @author Thanuja
      * @return the name of the square
      */
@@ -22,14 +23,4 @@ public class BlankSquare implements Square {
         return name;
     }
 
-    /**
-     * @author Thanuja
-     * @return A string of the square's attributes
-     * Returns the name of the square to display on GUI
-     */
-    @Override
-    public String toString() {
-        return "Monopoly.Squares.BlankSquare: " +
-                "name='" + name + '\'';
-    }
 }
