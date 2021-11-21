@@ -30,15 +30,6 @@ public class PropertyTest {
     }
 
     /**
-     * Test that type is a property type
-     * @author Thanuja
-     */
-    @Test
-    public void getType() {
-        assertNotNull(property);
-    }
-
-    /**
      * Test that rent is 10% of price
      * @author Thanuja
      */
