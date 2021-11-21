@@ -40,6 +40,15 @@ class PieceComponent extends JLabel {
         gameView.repaint();
     }
 
+    /**
+     * Remove piece when bankrupt
+     * @author Shrimei
+     */
+    public void removePiece(){
+        currentBox.remove(this);
+        gameView.repaint();
+    }
+
 
     /*
     public static void main(String[] arguments) {

@@ -21,7 +21,7 @@ public class GameView implements MonopolyInterfaceView {
 
     private JFrame frame;
 
-    private HashMap<Player, PieceComponent> pieces; //FIXME remove piece from board when player is bankrupt
+    private HashMap<Player, PieceComponent> pieces;
 
     /**
      * Create an overall game view
@@ -222,10 +222,13 @@ public class GameView implements MonopolyInterfaceView {
      * Handle a bankruptcy
      * @author Thanuja
      * @author Maisha
+     * @param player
      */
     @Override
-    public void handleBankruptcy() {
-        JOptionPane.showMessageDialog(null, "You are bankrupt. You cannot play further.");
+    public void handleBankruptcy(Player player) {
+        JOptionPane.showMessageDialog(null, "Player "+ player.getId() + " is bankrupt. You cannot play further.");
+        pieces.get(player).removePiece();
+        pieces.remove(player);
     }
 
     /**
