@@ -129,15 +129,17 @@ public class PlayerTest {
     }
     /**
      * Test the process of collecting rent with utility.
-     * @author Sabah
+     * @author Sabah, Shrimei
      */
     @Test
-    public void getRentAmountUtility(){
-        Utility utility= new Utility("Water Works");
-        assertEquals(0, player.getRentAmount(utility, 10));
-        player.purchaseSquare(utility);
-        assertEquals(40, player.getRentAmount(utility, 10));
-
+    public void getRentAmountUtility(){ //FIXME why is this in playerTest?
+        Utility waterWorks= new Utility("Water Works");
+        Utility electricCompany= new Utility("Electric Company");
+        assertEquals(0, player.getRentAmount(waterWorks, 10));
+        player.purchaseSquare(waterWorks);
+        assertEquals(40, player.getRentAmount(waterWorks, 10));
+        player.purchaseSquare(electricCompany);
+        assertEquals(100, player.getRentAmount(electricCompany, 10));
     }
 
     //TODO
@@ -219,7 +221,7 @@ public class PlayerTest {
      * @author Maisha
      */
     @Test
-    public void testGetNumberOfHotel(){
+    public void testGetNumberOfHotel(){ //FIXME should check that they have already bought 4 houses
         assertEquals(0,player.getNumberOfHotel(property));
         player.purchaseSquare(property);
         player.buyHotelOnProperty(property);
