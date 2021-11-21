@@ -222,7 +222,7 @@ public class GameView implements MonopolyInterfaceView {
      * Handle a bankruptcy
      * @author Thanuja
      * @author Maisha
-     * @param player
+     * @param player       player who is bankrupt
      */
     @Override
     public void handleBankruptcy(Player player) {
@@ -247,7 +247,7 @@ public class GameView implements MonopolyInterfaceView {
      */
     @Override
     public boolean askIfJailExit() {
-        int result = JOptionPane.showConfirmDialog(null, "Pay $50 exit fee to exit jail?\nWill otherwise have to try rolling doubles to exit.","Exit Jail Early?",JOptionPane.YES_NO_OPTION);
+        int result = JOptionPane.showConfirmDialog(null, "Pay $50 fee to exit jail?\n(Otherwise try rolling doubles to exit)","Exit Jail Early?",JOptionPane.YES_NO_OPTION);
         return (result == JOptionPane.YES_OPTION);
     }
 
