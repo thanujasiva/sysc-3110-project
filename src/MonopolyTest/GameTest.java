@@ -245,7 +245,6 @@ public class GameTest {
         //game.handleSwitchTurn();
         //game.handleSkipTurn();
         ///assertEquals(0, game.getCurrentPlayerNumber()); // player 0 can now go again
-
     }
 
     /**
@@ -263,6 +262,10 @@ public class GameTest {
         assertTrue(12 >= currentPlayer.getPosition());
     }
 
+    /**
+     * Test whether player can buy houses/hotels
+     * @author Shrimei
+     */
     @Test
     public void testCanBuyHouse(){
         game.addPlayer(new Player());

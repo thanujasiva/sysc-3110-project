@@ -60,7 +60,4 @@ public class UtilityTest {
         int roll = 6;
         assertEquals(60, utility.getRent(roll, numUtilities));
     }
-
-
-
 }
