@@ -162,11 +162,11 @@ public class GameView implements MonopolyInterfaceView {
         }
 
         //FIXME - remove this after houses/hotels are working fully
-        /*Player player = game.getCurrentPlayer();
+        Player player = game.getCurrentPlayer();
         player.setPosition(1);
         game.purchaseTransaction();
         player.setPosition(2);
-        game.purchaseTransaction();*/
+        game.purchaseTransaction();
         //game.getPlayers().get(num-1).payRent(1500);
 
 

@@ -17,6 +17,8 @@ public class Property implements OwnableSquare {
     private final int rentHotel;
     private Player owner;
     private int housePrice;
+    //private boolean hasHouse;
+    private int numOfHousesOnProperty;
 
     /**
      * @author Thanuja, Maisha
@@ -39,6 +41,16 @@ public class Property implements OwnableSquare {
         this.colourGroup = colourGroup;
         this.owner = null;
         this.housePrice = colourGroup.getHousePrice();
+        //this.hasHouse = false;
+        this.numOfHousesOnProperty = 0;
+    }
+
+    public int getNumOfHousesOnProperty(){
+        return numOfHousesOnProperty;
+    }
+
+    public void addNumOfHousesOnProperty(){
+        numOfHousesOnProperty += 1;
     }
 
     /**

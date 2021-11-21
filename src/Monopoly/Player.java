@@ -27,6 +27,8 @@ public class Player {
     private HashMap<Property, Integer> numberOfHouses;
     private HashMap<Property, Integer> numberOfHotel;
 
+    private HashMap<ColourGroups, Property> propertyOwnedInColourGroup;
+
 
     /**
      * @author Sabah
@@ -46,6 +48,7 @@ public class Player {
         this.oldPosition = 0;
         this.numberOfHouses = new HashMap<>();
         this.numberOfHotel = new HashMap<>();
+        this.propertyOwnedInColourGroup = new HashMap<>();
     }
 
     /**
@@ -58,6 +61,7 @@ public class Player {
         if (this.money >= property.getHousePrice()) {
             numberOfHouses.merge(property, 1, Integer::sum);
             this.money -= property.getHousePrice();
+            property.addNumOfHousesOnProperty();
             return true;
         }
         return false;
@@ -205,11 +209,13 @@ public class Player {
             ownableSquares.add(ownableSquare);
             if (ownableSquare instanceof Property) {
                 colourGroupMatch.merge(((Property) ownableSquare).getColourGroup(), 1, Integer::sum);
+                propertyOwnedInColourGroup.put(((Property) ownableSquare).getColourGroup(), (Property)ownableSquare);
             } else if (ownableSquare instanceof Railroad) {
                 railroadNumber += 1;
             } else if (ownableSquare instanceof Utility) {
                 utilityNumber += 1;
             }
+
             return true;
         } else {
             return false;
@@ -301,4 +307,7 @@ public class Player {
         return colourGroupMatch.getOrDefault(property.getColourGroup(), 0) == property.getColourGroup().getMax();
     }
 
+    public HashMap<ColourGroups, Property> getPropertyOwnedInColourGroup() {
+        return propertyOwnedInColourGroup;
+    }
 }

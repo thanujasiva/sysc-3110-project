@@ -225,6 +225,23 @@ public class Game {
         flag1 = currentPlayer.hasAllColours(property); //have colour set
         flag2 = property.canBuyHouseOnProperty(currentPlayer.getNumberOfHouses(property),currentPlayer.getNumberOfHotel(property)); //don't already have 4 houses
 
+        boolean flag5 = true;
+        int housesOnProperty = 0;
+        ColourGroups colourGroups = property.getColourGroup(); //colour group of property
+        for (ColourGroups colour : currentPlayer.getPropertyOwnedInColourGroup().keySet()){ //iterate through hashmap
+            if (colour == colourGroups){
+                Property property1 = currentPlayer.getPropertyOwnedInColourGroup().get(colour);
+                housesOnProperty =+ property1.getNumOfHousesOnProperty(); //the number of houses on property
+                if (housesOnProperty != 1){
+                    flag5 = false;
+                }
+            }
+        }
+
+        if (flag5 == false){
+            System.out.println("cant buy house on this property choose another one");
+        }
+
         if (flag1 && flag2){
             flag3 = currentPlayer.buyHouseOnProperty(property);
             for (MonopolyInterfaceView view : this.views){ // update with jail roll
