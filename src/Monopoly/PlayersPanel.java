@@ -50,7 +50,7 @@ public class PlayersPanel {
             if(player instanceof PlayerAI){
                 this.playersListModel.addElement("AI Player: "+ player.getId() + "      Position: " + positionName);
             } else {
-                this.playersListModel.addElement("Player: "+ player.getId() + "      Position: " + positionName);
+                this.playersListModel.addElement("     Player: "+ player.getId() + "      Position: " + positionName);
             }
         }
     }
