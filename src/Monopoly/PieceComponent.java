@@ -22,7 +22,7 @@ class PieceComponent extends JLabel {
     public PieceComponent(Player player, JPanel startBox, JFrame gameView){
         super("Player " + player.getId());
         this.setOpaque(true);
-        this.setBackground(Color.PINK);
+        this.setBackground(Color.cyan);
         this.currentBox = startBox;
         startBox.add(this, BorderLayout.SOUTH);
         this.gameView = gameView;

@@ -93,11 +93,7 @@ public class Utility implements OwnableSquare {
 
     @Override
     public int getRent(int numberOfUtilities) { //FIXME what do we do with this extra method
-        if (numberOfUtilities == 1){
-            return rent1;
-        } else {
-            return rent2;
-        }
+        return 0;
     }
 
 
