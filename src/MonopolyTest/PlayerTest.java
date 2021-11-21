@@ -195,7 +195,7 @@ public class PlayerTest {
      */
     @Test
     public void testBuyHotelOnProperty(){
-        assertTrue(player.buyHotelOnProperty(property)); //FIXME should be testing in game, canBuyHouse method?
+        assertTrue(player.buyHotelOnProperty(property));
     }
 
     /**

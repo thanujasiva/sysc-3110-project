@@ -290,7 +290,7 @@ public class Player {
                 if (getNumberOfHotel(property)==1){
                     return property.getRentHotel();
                 } else {
-                    int numHouses = numberOfHouses.get(property);
+                    int numHouses = numberOfHouses.getOrDefault(property, 0);
                     return property.getRent(numHouses);
                 }
                 //return property.getRentWithColourSet();
@@ -317,7 +317,7 @@ public class Player {
     }
 
     public boolean hasAllColours(Property property){
-        return colourGroupMatch.get(property.getColourGroup()) == property.getColourGroup().getMax();
+        return colourGroupMatch.getOrDefault(property.getColourGroup(), 0) == property.getColourGroup().getMax();
     }
 
 }

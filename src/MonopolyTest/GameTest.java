@@ -265,7 +265,7 @@ public class GameTest {
 
     @Test
     public void testCanBuyHouse(){
-        game.addPlayer(new Player()); //FIXME are we able to move this to the @bfeore
+        game.addPlayer(new Player());
         game.addPlayer(new Player());
 
         //Grey colour group
@@ -273,7 +273,7 @@ public class GameTest {
         Property Vermont = new Property("Vermont Avenue", 100, ColourGroups.GREY);
         Property Connecticut = new Property("Connecticut Avenue", 120, ColourGroups.GREY);
 
-        //assertFalse(game.canBuyHouse(Oriental)); //FIXME error because hashmap is empty, cannot do get(), should we add null check
+        assertFalse(game.canBuyHouse(Oriental));
         game.getCurrentPlayer().purchaseSquare(Oriental);
         assertFalse(game.canBuyHouse(Oriental));
         game.getCurrentPlayer().purchaseSquare(Vermont);
@@ -290,6 +290,5 @@ public class GameTest {
         assertFalse(game.canBuyHouse(Oriental)); //already have 4 houses, 1 hotel
         assertEquals(0, game.getCurrentPlayer().getNumberOfHouses(Oriental)); //clear houses to 0
         assertEquals(1, game.getCurrentPlayer().getNumberOfHotel(Oriental));
-
     }
 }
