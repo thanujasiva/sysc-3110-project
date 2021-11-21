@@ -132,7 +132,7 @@ public class PlayerTest {
      * @author Sabah, Shrimei
      */
     @Test
-    public void getRentAmountUtility(){ //FIXME why is this in playerTest?
+    public void getRentAmountUtility(){
         Utility waterWorks= new Utility("Water Works");
         Utility electricCompany= new Utility("Electric Company");
         assertEquals(0, player.getRentAmount(waterWorks, 10));
@@ -181,8 +181,6 @@ public class PlayerTest {
         assertFalse(player.payRent(10));
     }
 
-    // test buy house on property
-
     /**
      * Test if buyHouseOnProperty can buy a house successfully
      * @author Maisha
@@ -192,17 +190,13 @@ public class PlayerTest {
         assertTrue(player.buyHouseOnProperty(property));
     }
 
-    // test buy hotel on property
-
     /**
      * @author Maisha
      */
     @Test
     public void testBuyHotelOnProperty(){
-        assertTrue(player.buyHotelOnProperty(property));
+        assertTrue(player.buyHotelOnProperty(property)); //FIXME should be testing in game, canBuyHouse method?
     }
-
-    // get number of houses test
 
     /**
      * @author Maisha
@@ -214,8 +208,6 @@ public class PlayerTest {
         player.buyHouseOnProperty(property);
         assertEquals(1, player.getNumberOfHouses(property));
     }
-
-    // get number of hotel test
 
     /**
      * @author Maisha

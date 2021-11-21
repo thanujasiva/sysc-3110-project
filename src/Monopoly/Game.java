@@ -226,7 +226,7 @@ public class Game {
     /**
      * @author maisha
      * */
-    public boolean canBuyHouse(Property property){
+    public boolean canBuyHouse(Property property){ //FIXME could we have this return a String so that a meaningful message is displayed when purchase not successful
         Player currentPlayer = getCurrentPlayer();
 
         boolean flag1, flag2;
