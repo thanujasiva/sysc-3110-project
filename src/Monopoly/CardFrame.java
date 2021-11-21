@@ -281,16 +281,16 @@ public class CardFrame extends JOptionPane {
         JLabel rentWithSetVal = new JLabel("$" + property.getRent(0));
         rentWithSetVal.setBorder(valueBorder);
 
-        JLabel rentOneHouseVal = new JLabel("$" + property.getRentOneHouse());
+        JLabel rentOneHouseVal = new JLabel("$" + property.getRent(1));
         rentOneHouseVal.setBorder(valueBorder);
 
-        JLabel rentTwoHousesVal = new JLabel("$" + property.getRentTwoHouses());
+        JLabel rentTwoHousesVal = new JLabel("$" + property.getRent(2));
         rentTwoHousesVal.setBorder(valueBorder);
 
-        JLabel rentThreeHousesVal = new JLabel("$" + property.getRentThreeHouses());
+        JLabel rentThreeHousesVal = new JLabel("$" + property.getRent(3));
         rentThreeHousesVal.setBorder(valueBorder);
 
-        JLabel rentFourHousesVal = new JLabel("$" + property.getRentFourHouses());
+        JLabel rentFourHousesVal = new JLabel("$" + property.getRent(4));
         rentFourHousesVal.setBorder(valueBorder);
 
         JLabel rentHotelVal = new JLabel("$" + property.getRentHotel());

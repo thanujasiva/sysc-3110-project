@@ -12,11 +12,10 @@ public class Railroad implements OwnableSquare {
     private int rentThree;
     private int rentFour;
 
-
     /**
-     * Create a railroad
+     * Constructor for railroad
      * @author Thanuja
-     * @param name      name of railroad
+     * @param name  name of railroad
      */
     public Railroad(String name){
         this.name = name;
@@ -28,16 +27,21 @@ public class Railroad implements OwnableSquare {
         this.owner = null;
     }
 
+    /**
+     * Get name of railroad
+     * @author Shrimei
+     * @return name
+     */
     @Override
     public String getName() {
         return name;
     }
 
-    @Override
-    public String getType() {
-        return "Monopoly.Squares.Railroad";
-    }
-
+    /**
+     * Set the owner of railroad when it is purchased
+     * @author Shrimei
+     * @param player that bought railroad
+     */
     @Override
     public void setOwner(Player player) {
         this.owner = player;
@@ -53,17 +57,22 @@ public class Railroad implements OwnableSquare {
         return owner;
     }
 
-
     /**
-     * get price of railroad
+     * Get price of railroad
      * @author Shrimei
-     * @return price to buy
+     * @return price to buy railroad
      */
     @Override
     public int getPrice() {
         return price;
     }
 
+    /**
+     * Get rent according to numbe rof railroads owned by the player
+     * @author Maisha
+     * @param numberOfRailroads owned
+     * @return rent
+     */
     public int getRent(int numberOfRailroads){
         if (numberOfRailroads == 1){
             return rentOne;
@@ -73,13 +82,15 @@ public class Railroad implements OwnableSquare {
             return rentThree;
         } else if (numberOfRailroads == 4) {
             return rentFour;
-        }
-        else {
+        }else {
             return 0;
         }
     }
 
-    //FIXME
+    /**
+     * Get rent if one railroad is owned
+     * @return rent
+     */
     public int getRentTwo() {
         return rentTwo;
     }
@@ -93,6 +104,6 @@ public class Railroad implements OwnableSquare {
     }
 
     public int getRentOne() {
-        return rentOne;  //FIXME
+        return rentOne;
     }
 }

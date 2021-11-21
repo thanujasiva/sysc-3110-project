@@ -193,25 +193,6 @@ public class Player {
     }
 
     /**
-     * @param box the box the player is currently on
-     *            Outputs the player's position, money and ownableSquares
-     * @author Shrimei
-     * @author Thanuja
-     */
-    public void printCurrentState(String box) {
-        System.out.println("Monopoly.Player " + id);
-        System.out.println("Position: " + box);
-        System.out.println("Money: $" + money);
-        if (this.ownableSquares.size() > 0) {
-            System.out.println("Current ownable squares you own: ");
-            for (OwnableSquare property : this.ownableSquares) {
-                System.out.println(property.toString());
-            }
-        }
-    }
-
-
-    /**
      * @param ownableSquare the ownableSquare being purchased
      * @return returns true if player is able to purchase, else false.
      * @author Maisha
