@@ -14,7 +14,7 @@ public interface MonopolyInterfaceView {
 
     void handleJailExited(String message);
 
-    void handleBankruptcy();
+    void handleBankruptcy(Player player);
 
     void handlePassedGo();
 

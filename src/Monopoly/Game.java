@@ -250,15 +250,16 @@ public class Game {
      * @author Thanuja
      */
     public void currentPlayerBankrupt(){
+        for (MonopolyInterfaceView view : this.views){
+            view.handleBankruptcy(getCurrentPlayer()); // show they are bankrupt
+        }
         removePlayer(getCurrentPlayer()); //remove player from game
+        //System.out.println("You are bankrupt. You cannot play further.");
+
         if (currentPlayerNumber == 0) { // if first player went bankrupt
             currentPlayerNumber = players.size() - 1; // set to last player (temporary)
         }else{
             currentPlayerNumber -= 1;
-        }
-        //System.out.println("You are bankrupt. You cannot play further.");
-        for (MonopolyInterfaceView view : this.views){
-            view.handleBankruptcy(); // show they are bankrupt
         }
 
         checkIfWinner(); // check if winner exists
