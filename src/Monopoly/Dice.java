@@ -7,18 +7,18 @@ public class Dice {
     private int diceNumber;
 
     /**
+     * Dice Constructor
      * @author Sabah
-     * Monopoly.Dice Constructor
      */
     public Dice (){
         this.diceNumber=0;
     }
 
     /**
+     * Outputs an integer between 1 and 6
      * @author Maisha
      * @author Sabah
      * @return dice number that was rolled, int
-     * Outputs an integer between 1 and 6
      */
     public int rollDice(){
         Random rn = new Random();
