@@ -58,20 +58,21 @@ public class CardFrame extends JOptionPane {
      */
     private void displayOwnableSquareInfo(){
         if(square instanceof Property){
-            displayPropertyInfo((Property)square);
+            displayPropertyInfo();
         } else if(square instanceof Railroad){
-            displayRailroadInfo((Railroad)square);
+            displayRailroadInfo();
         } else if(square instanceof Utility){
-            displayUtilityInfo((Utility)square);
+            displayUtilityInfo();
         }
     }
 
     /**
      * Display Utility info (name, price, rent) on card
      * @author Shrimei
-     * @param utility to be displayed
      */
-    private void displayUtilityInfo(Utility utility) {
+    private void displayUtilityInfo() {
+        Utility utility = (Utility) square;
+
         JPanel fieldPanel = new JPanel();
         JPanel valuePanel = new JPanel();
 
@@ -119,9 +120,10 @@ public class CardFrame extends JOptionPane {
     /**
      * Display railroad info (name, price, rent) on card
      * @author Shrimei
-     * @param railroad to be displayed
      */
-    private void displayRailroadInfo(Railroad railroad) {
+    private void displayRailroadInfo() {
+        Railroad railroad = (Railroad) square;
+
         JPanel fieldPanel = new JPanel();
         JPanel valuePanel = new JPanel();
 
@@ -181,9 +183,10 @@ public class CardFrame extends JOptionPane {
     /**
      * Display the property info (price, name, colour, rent, houses) on a frame
      * @author Shrimei
-     * @param property that is being displayed
      */
-    private void displayPropertyInfo(Property property) {
+    private void displayPropertyInfo() {
+        Property property = (Property) square;
+
         JPanel fieldPanel = new JPanel();
         JPanel valuePanel = new JPanel();
 
