@@ -39,7 +39,7 @@ public class CardController {
      * @return                  true if successful, false otherwise
      */
     public boolean purchaseHouse(Property property){
-       return game.canBuyHouse(property); //FIXME
+       return game.canBuyHouse(property); //FIXME why is the fixme here?
     }
 
     /**
@@ -51,17 +51,9 @@ public class CardController {
     }
 
     /*
-    /**
-     * Control switch turn
-     * @author Thanuja
-
     public void handleSwitchTurn(){
         game.handleSwitchTurn();
     }
-
-    /**
-     * @author Thanuja
-     * @return true if player is winner, else false
 
     public boolean handlePotentialWinner(){
         return game.checkIfWinner();

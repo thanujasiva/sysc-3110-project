@@ -19,6 +19,7 @@ public class BoardPanel {
      * Create a new monopoly board with a roll button in the center to display the dice
      * @author Maisha
      * @author Thanuja
+     * @author Shrimei
      * @param board     the board of the BoardPanel
      */
     public BoardPanel(Board board){
