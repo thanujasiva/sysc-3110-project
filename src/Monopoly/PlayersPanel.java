@@ -44,7 +44,7 @@ public class PlayersPanel {
         for (Player player : game.getPlayers()){
             Square currentSquare = game.getBoard().getSquares().get(player.getPosition() % game.getBoard().getSquares().size());
             String positionName = currentSquare.getName();
-            if (player.isSkipTurn() && (currentSquare instanceof Jail)){
+            if (player.isJailTurn() && (currentSquare instanceof Jail)){
                 positionName = ((Jail)currentSquare).getOtherName();
             }
             if(player instanceof PlayerAI){

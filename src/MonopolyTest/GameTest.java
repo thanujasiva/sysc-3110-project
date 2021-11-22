@@ -188,7 +188,7 @@ public class GameTest {
 
         game.getDice1().rollDice(); // roll only 1 dice, to guarantee no doubles
         game.handleSwitchTurn();
-        game.handleSkipTurn();
+        game.handleJailTurn();
         assertEquals(1, game.getCurrentPlayerNumber()); // new current player is 1
     }
 
@@ -203,11 +203,11 @@ public class GameTest {
 
         // do not roll dice, to mimic a double
         game.handleSwitchTurn();
-        game.handleSkipTurn();
+        game.handleJailTurn();
         assertEquals(0, game.getCurrentPlayerNumber()); // new current player still 0 (first double)
 
         game.handleSwitchTurn();
-        game.handleSkipTurn();
+        game.handleJailTurn();
         assertEquals(0, game.getCurrentPlayerNumber()); // new current player still 0 (second double)
     }
 
@@ -222,16 +222,16 @@ public class GameTest {
 
         // do not roll dice, to mimic a double (both dice are initialized as 0)
         game.handleSwitchTurn();
-        game.handleSkipTurn();
+        game.handleJailTurn();
         game.handleSwitchTurn();
-        game.handleSkipTurn();
+        game.handleJailTurn();
         assertEquals(0, game.getCurrentPlayerNumber()); // new current player still 0 after two doubles
 
         game.handleSwitchTurn(); // third double
-        game.handleSkipTurn();
+        game.handleJailTurn();
         assertEquals(1, game.getCurrentPlayerNumber()); // new current player is 1
 
-        assertTrue(game.getPlayers().get(0).isSkipTurn());
+        assertTrue(game.getPlayers().get(0).isJailTurn());
 
         //part of skip turn logic is handled at the beginning of handleMove - created public handleSkipTurn() to test
 
@@ -239,7 +239,7 @@ public class GameTest {
         game.handleSwitchTurn();
         //game.handleSkipTurn(); // player 0 could exit jail here
         assertEquals(0, game.getCurrentPlayerNumber()); // becomes player 0 again, who is in jail
-        assertTrue(game.getCurrentPlayer().isSkipTurn());
+        assertTrue(game.getCurrentPlayer().isJailTurn());
 
         // is different with Jail handling
         //game.handleSwitchTurn();

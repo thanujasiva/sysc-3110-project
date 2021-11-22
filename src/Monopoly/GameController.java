@@ -18,7 +18,7 @@ public class GameController implements ActionListener {
     }
 
     /**
-     * Handle button pressed
+     * Handle roll button pressed
      * @author Maisha
      * @author Thanuja
      * @param e     action event (button pressed)
