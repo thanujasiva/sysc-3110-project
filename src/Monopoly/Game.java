@@ -11,33 +11,30 @@ public class Game {
 
     private Dice dice1;
     private Dice dice2;
-    //private HashMap<Integer, Monopoly.Squares.Square> squares; //integer represents the place of the box on the board
     private ArrayList<Player> players;
     private int currentPlayerNumber;
     private int doubles;
     private Board board;
-
 
     private ArrayList<MonopolyInterfaceView> views;
 
     /**
      * @author Sabah
      * @author Shrimei
-     * Creates a Monopoly board and adds 2 players (minimum)
+     * Creates a Monopoly board
      */
     public Game(){
         this.dice1= new Dice();
         this.dice2= new Dice();
-        //this.squares = new HashMap<>();
         this.players = new ArrayList<>();
         this.currentPlayerNumber = 0;
         this.doubles = 0;
         this.board = new Board();
-
         this.views = new ArrayList<>();
     }
 
     /**
+     * Return the board
      * @author Maisha
      * @return Monopoly.Board
      */
@@ -66,7 +63,7 @@ public class Game {
      * @author Sabah
      * @author Shrimei
      * @param newPlayer to be added
-     * Adds a player and gives them an ID
+     * Adds a player and gives them a unique ID
      */
     public void addPlayer(Player newPlayer) {
         int length = players.size();
@@ -100,8 +97,6 @@ public class Game {
         }
     }
 
-
-
     /**
      * @author Thanuja
      * @return dice 1
@@ -118,8 +113,8 @@ public class Game {
         return dice2;
     }
 
-
     /**
+     * Get the current player
      * @author Shrimei
      * @return current player
      */
@@ -138,22 +133,7 @@ public class Game {
         boolean canPurchase = false;
         Player currentPlayer = getCurrentPlayer();
         Square currentSquare =  getCurrentSquare();
-        /*
-        if(currentSquare instanceof Property) {
-            Property currentProperty = (Property) currentSquare;
-            canPurchase = currentPlayer.purchaseProperty(currentProperty);
-            if (canPurchase){
-                currentProperty.setOwner(currentPlayer);
-            }
-        }
-        if(currentSquare instanceof Railroad) {
-            Railroad currentRailroad = (Railroad) currentSquare;
-            canPurchase = currentPlayer.purchaseRailroad(currentRailroad);
-            if (canPurchase){
-                currentRailroad.setOwner(currentPlayer);
-            }
-        }
-        */
+
         if (currentSquare instanceof OwnableSquare){
             OwnableSquare ownableSquare = (OwnableSquare) currentSquare;
             canPurchase = currentPlayer.purchaseSquare(ownableSquare);
@@ -179,27 +159,6 @@ public class Game {
         Player currentPlayer = getCurrentPlayer();
         Square currentSquare =  getCurrentSquare();
 
-        /*
-        if ((currentSquare instanceof Property) && ((Property)currentSquare).getOwner() != null) {
-            Property currentProperty = (Property) currentSquare;
-            int rentAmount = currentProperty.getOwner().getRentAmount(currentProperty);
-
-            canPayRent = currentPlayer.payRent(rentAmount);
-            if (canPayRent) { //pay rent if enough money
-                currentProperty.getOwner().collectRent(currentProperty);
-            } else { //player ran out of money, they are bankrupt
-                //System.out.println("You are bankrupt. You cannot play further."); // move
-                removePlayer(currentPlayer); //remove player from game
-                currentPlayerNumber -= 1;
-                /*if (players.size() == 1) { //1 player left // move
-                    System.out.println("Monopoly.Player " + players.get(0).getId() + " won!"); //display winner and exit game
-                    //return false;
-                }
-            }
-            //return true;
-
-        } */
-
         if ((currentSquare instanceof OwnableSquare) && ((OwnableSquare)currentSquare).getOwner() != null) {
             OwnableSquare currentOwnableSquare = (OwnableSquare) currentSquare;
             int rentAmount = currentOwnableSquare.getOwner().getRentAmount(currentOwnableSquare, dice1.getDiceNumber()+dice2.getDiceNumber());
@@ -211,12 +170,12 @@ public class Game {
                 currentPlayerBankrupt();
             }
             //return true;
-
         }
         return canPayRent;
     }
 
     /**
+     * Handle buy house transaction, return true if player successfully buys house
      * @author maisha
      * */
     public boolean canBuyHouse(Property property){ //FIXME could we have this return a String so that a meaningful message is displayed when purchase not successful
@@ -230,23 +189,21 @@ public class Game {
 
         if (flag1 && flag2){
             flag3 = currentPlayer.buyHouseOnProperty(property);
-            for (MonopolyInterfaceView view : this.views){ // update with jail roll
+            for (MonopolyInterfaceView view : this.views){
                 view.handlePlayerState();
             }
         } else if (flag1){
-            boolean flag4 = property.canBuyHotelOnProperty(currentPlayer.getNumberOfHotel(property));
+            boolean flag4 = property.canBuyHotelOnProperty(currentPlayer.getNumberOfHotel(property)); //don't already have hotel
 
             if (flag4){
                 flag3 = currentPlayer.buyHotelOnProperty(property);
-                for (MonopolyInterfaceView view : this.views){ // update with jail roll
+                for (MonopolyInterfaceView view : this.views){
                     view.handlePlayerState();
                 }
             }
         }
-
         return flag3;
     }
-
 
     /**
      * Handle when current player is bankrupt
@@ -257,30 +214,28 @@ public class Game {
             view.handleBankruptcy(getCurrentPlayer()); // show they are bankrupt
         }
         removePlayer(getCurrentPlayer()); //remove player from game
-        //System.out.println("You are bankrupt. You cannot play further.");
 
         if (currentPlayerNumber == 0) { // if first player went bankrupt
             currentPlayerNumber = players.size() - 1; // set to last player (temporary)
         }else{
             currentPlayerNumber -= 1;
         }
-
-        checkIfWinner(); // check if winner exists
+        checkIfWinner(); //check if winner exists, only 1 player left
     }
 
     /**
+     * Check if only 1 player left (winner)
      * @author Maisha
      * @return false if no winner yet, else true or exit the game
      */
     public boolean checkIfWinner(){
-        //1 player left // move
-        //System.out.println("Monopoly.Player " + players.get(0).getId() + " won!"); //display winner and exit game
+        //check if 1 player left
         if (players.size() == 1){
             for (MonopolyInterfaceView view : views){
                 view.handleWinner();
             }
             if (views.size() > 0) { // don't exit if testing
-                System.exit(0);
+                System.exit(0); //exit game
             }
         }
         return players.size() == 1;
@@ -295,7 +250,6 @@ public class Game {
         Player currentPlayer = getCurrentPlayer();
         //int roll = dice1.getDiceNumber() + dice2.getDiceNumber(); // roll parameter makes this method easier to test
         if (canGetGoAmount(roll)) {
-            //System.out.println("return go amount");
             if (!currentPlayer.payRent(200)) { // return the GO amount
                 currentPlayerBankrupt();
             }
@@ -367,13 +321,16 @@ public class Game {
         }
 
         if (getCurrentPlayer() instanceof PlayerAI){
-            // FIXME add a time delay
             Timer timer = new Timer(2000, new MyTimerActionListener());
             timer.setRepeats(false);
             timer.start();
         }
     }
 
+    /**
+     * Call handleMove on AI Player after 2 seconds of displaying their state
+     * @author Shrimei
+     */
     class MyTimerActionListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             handleMove();
@@ -473,10 +430,7 @@ public class Game {
             for (MonopolyInterfaceView view : this.views){ // update with player change after switch turn
                 view.handlePlayerState();
             }
-
         }
-
-
     }
 
     /**
@@ -545,9 +499,9 @@ public class Game {
     }
 
     /**
+     * Handles GO, landing or passing position 0, player collects $200
      * @author Sabah
      * @param roll takes the dice amount
-     * Handles GO, landing or passing position 0
      */
     public void handleIfGo(int roll){
         Player currentPlayer = getCurrentPlayer();
@@ -561,9 +515,9 @@ public class Game {
     }
 
     /**
+     * Handles landing Go To Jail, displays message to player
      * @author Thanuja
      * @param roll takes the dice amount
-     * Handles landing Go To Jail
      */
     public void handleIfGoToJail(int roll){
         Player currentPlayer = getCurrentPlayer();
@@ -578,35 +532,33 @@ public class Game {
         }
     }
 
-
     /**
+     * Getter for the list of players
      * @author Sabah
      * @return players
-     * getter for the array list of players
      */
     public ArrayList<Player> getPlayers() {
         return players;
     }
 
     /**
+     * Getter for the current player number
      * @author Sabah
      * @return players
-     * getter for the current player number
+     *
      */
     public int getCurrentPlayerNumber() { // returns int, do we need to change?
         return currentPlayerNumber;
     }
 
     /**
+     * Get position (square) of the current player
      * @author Shrimei
      * @return square of the current player
      */
     public Square getCurrentSquare() {
         return board.getSquares().get(getCurrentPlayer().getPosition() % board.getSquares().size());
     }
-
-
-
 
     /*
     /**

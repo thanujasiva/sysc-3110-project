@@ -16,6 +16,7 @@ public enum ColourGroups{
      * @author Shrimei
      * @param colour        the colour group
      * @param max           the max amount of the colour set
+     * @param housePrice    price to buy 1 house/hotel
      */
     ColourGroups (Color colour, int max, int housePrice){
         this.colour = colour;
@@ -23,6 +24,10 @@ public enum ColourGroups{
         this.housePrice = housePrice;
     }
 
+    /**
+     * @author Maisha
+     * @return housePrice
+     */
     public int getHousePrice() {
         return housePrice;
     }

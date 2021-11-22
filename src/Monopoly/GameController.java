@@ -7,7 +7,6 @@ public class GameController implements ActionListener {
 
     private Game game; // model
 
-
     /**
      * Create game controller
      * @author Maisha

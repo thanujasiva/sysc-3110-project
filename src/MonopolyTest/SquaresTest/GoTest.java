@@ -41,7 +41,6 @@ public class GoTest {
      * Set up a test for passing the "GO" Square
      * @author Sabah
      */
-
     @Test
     public void passingGo(){
         player.changePosition(20);
@@ -54,10 +53,8 @@ public class GoTest {
      * Set up a test for landing AND passing "GO" Square
      * @author Sabah
      */
-
     @Test
     public void landingGoAndPassingGo(){
-
         player.changePosition(18);
         player.changePosition(16); // change position twice as new position minus roll is not 0
         game.handleIfGo(16);
@@ -71,10 +68,8 @@ public class GoTest {
      * Set up a test for Not Passing GO
      * @author Sabah
      */
-
     @Test
     public void handleNotPassingGo() {
-
         player.changePosition(8);
         game.handleIfGo(8);
         player.changePosition(5); // change position twice as new position minus roll is not 0

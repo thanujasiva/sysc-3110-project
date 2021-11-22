@@ -2,7 +2,7 @@ package Monopoly.Squares;
 
 import Monopoly.Player;
 
-public class Utility implements OwnableSquare {
+public class Utility extends OwnableSquare {
 
     private String name;
     private Player owner;
@@ -46,26 +46,6 @@ public class Utility implements OwnableSquare {
     @Override
     public String getName() {
         return name;
-    }
-
-    /**
-     * Setter for the owner of the utility
-     * @author Sabah
-     * @param player that bought property
-     */
-    @Override
-    public void setOwner(Player player) {
-        this.owner = player;
-    }
-
-    /**
-     * Get owner of utility
-     * @author Shrimei
-     * @return owner of utility
-     */
-    @Override
-    public Player getOwner() {
-        return owner;
     }
 
     /**

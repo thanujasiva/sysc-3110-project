@@ -24,7 +24,6 @@ public class JailTest {
         // to test game jail
         this.game = new Game();
 
-
         this.jail = game.getBoard().getJailSquare(); //this.jail = new Jail("Visiting Jail", "In Jail");
         this.player = new Player();
         this.playerAlreadyInJail = new Player();
@@ -34,7 +33,6 @@ public class JailTest {
         game.addPlayer(player); // player 0
         //game.addPlayer(playerAlreadyInJail); // player 1
     }
-
 
     /**
      * Test jail time of player not in jail.
@@ -102,7 +100,6 @@ public class JailTest {
         assertEquals(1, jail.getJailTime(player));
     }
 
-
     /**
      * Test for rolling 3 doubles to land in jail
      * @author Thanuja
@@ -118,7 +115,6 @@ public class JailTest {
         assertEquals(8, player.getPosition());
         assertEquals(1, jail.getJailTime(player));
     }
-
 
     /**
      * Test for entering jail on same roll GO was received
@@ -136,7 +132,6 @@ public class JailTest {
 
         assertEquals(1500, player.getMoney());
     }
-
 
     /**
      * Test for entering jail on same roll GO was received, and becomes bankrupt

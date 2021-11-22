@@ -2,7 +2,7 @@ package Monopoly.Squares;
 
 import Monopoly.Player;
 
-public class Railroad implements OwnableSquare {
+public class Railroad extends OwnableSquare {
 
     private String name;
     private int price;
@@ -18,6 +18,7 @@ public class Railroad implements OwnableSquare {
      * @param name  name of railroad
      */
     public Railroad(String name){
+        super();
         this.name = name;
         this.price = 200;
         this.rentOne = 25;
@@ -35,26 +36,6 @@ public class Railroad implements OwnableSquare {
     @Override
     public String getName() {
         return name;
-    }
-
-    /**
-     * Set the owner of railroad when it is purchased
-     * @author Shrimei
-     * @param player that bought railroad
-     */
-    @Override
-    public void setOwner(Player player) {
-        this.owner = player;
-    }
-
-    /**
-     * Get owner of railroad
-     * @author Shrimei
-     * @return owner
-     */
-    @Override
-    public Player getOwner() {
-        return owner;
     }
 
     /**

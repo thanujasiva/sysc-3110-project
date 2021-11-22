@@ -50,7 +50,6 @@ public class PlayerStatePanel extends JPanel{
         ownedSquaresList = new JList<>();
         ownedSquaresList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         this.add(new JScrollPane(ownedSquaresList));
-
     }
 
     /**

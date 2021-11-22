@@ -89,7 +89,7 @@ public class GameView implements MonopolyInterfaceView {
         this.dicePanel = new DicePanel(dice1, dice2);
 
         // create dice button and add game controller to it
-        JButton diceButton = new JButton();
+        this.diceButton = new JButton();
         diceButton.addActionListener(gameController); //on click, call game controller
 
         //dicePanel displays roll value on button
@@ -119,7 +119,6 @@ public class GameView implements MonopolyInterfaceView {
         return input;
     }
 
-
     /**
      * Ask for number of AI players
      * @author Thanuja
@@ -133,7 +132,7 @@ public class GameView implements MonopolyInterfaceView {
         }
         Integer[] options = optionsArrayList.toArray(new Integer[0]);
                 //optionsArrayList.stream().mapToInt(i->i).toArray(); //(Integer[]) optionsArrayList.toArray();
-        Integer input = (Integer) JOptionPane.showInputDialog(null,"How many AI players do you wish to have?","PLAYERS",
+        Integer input = (Integer) JOptionPane.showInputDialog(null,"How many AI players do you wish to have?","AI PLAYERS",
                 JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
         if (input == null) {
             System.exit(0);
@@ -142,9 +141,10 @@ public class GameView implements MonopolyInterfaceView {
     }
 
     /**
-     * Called when game is started, add selected number of players and display on panel
+     * Called when a game is started, add selected number of players and display on panel
      * @author Maisha
      * @author Thanuja
+     * @author Shrimei
      */
     @Override
     public void handleBoardPlayersUpdate() {
@@ -163,7 +163,7 @@ public class GameView implements MonopolyInterfaceView {
             pieces.put(player, new PieceComponent(player, boardPanel.getPanel(0)));
         }
 
-        //FIXME - remove this after houses/hotels are working fully
+        //FIXME - colour group test to buy houses/hotels
         /*Player player = game.getCurrentPlayer();
         player.setPosition(1);
         game.purchaseTransaction();
@@ -171,18 +171,16 @@ public class GameView implements MonopolyInterfaceView {
         game.purchaseTransaction();*/
         //game.getPlayers().get(num-1).payRent(1500);
 
-
         this.playersPanel.updatePlayers();
         this.playerStatePanel.updatePlayer();
     }
 
     /**
-     * Move the current player's piece
+     * Move the current player's piece during their turn
      * @author Shrimei
      */
     private void moveCurrentPiece(){
         Player currentPlayer = game.getCurrentPlayer();
-        //returns current panel
         pieces.get(currentPlayer).movePiece(boardPanel.getPanel(currentPlayer.getPosition() % game.getBoard().getSquares().size()));
     }
 
@@ -203,7 +201,6 @@ public class GameView implements MonopolyInterfaceView {
             new CardFrame((OwnableSquare) currentSquare, game);
             // do not switch turn until card is handled property
         }
-
     }
 
     /**
@@ -224,13 +221,12 @@ public class GameView implements MonopolyInterfaceView {
      */
     @Override
     public void handleEndOfTurn() {
-
         // ask if player wants to purchase houses/hotels before switching turn (if they didn't roll doubles)
         gameController.handleSwitchTurn(); // can call here now that Card is a JOptionPane
     }
 
     /**
-     * Handle when current player enters jail
+     * Handle when current player enters jail, display message
      * @author Thanuja
      * @param message   reason for entering
      */
@@ -241,13 +237,12 @@ public class GameView implements MonopolyInterfaceView {
             String title = "Player " + currentPlayer.getId() + " Go To Jail";
             JOptionPane.showMessageDialog(null, message, title, JOptionPane.INFORMATION_MESSAGE);
         }
-
         // update piece position
         moveCurrentPiece();
     }
 
     /**
-     * Handle when current player exits jail
+     * Handle when current player exits jail, display message
      * @author Thanuja
      * @param message reason for exiting
      */
@@ -258,7 +253,6 @@ public class GameView implements MonopolyInterfaceView {
             String title = "Player " + currentPlayer.getId() + " Exit Jail";
             JOptionPane.showMessageDialog(null, message, title, JOptionPane.INFORMATION_MESSAGE);
         }
-
         // update piece position
         moveCurrentPiece();
     }
@@ -279,7 +273,7 @@ public class GameView implements MonopolyInterfaceView {
     }
 
     /**
-     * Handle when player passes Go
+     * Handle when player passes Go, display message
      * @author Sabah
      */
     @Override
@@ -290,7 +284,7 @@ public class GameView implements MonopolyInterfaceView {
     }
 
     /**
-     * Ask player if they want to pay Exit fee now
+     * Ask player if they want to pay jail exit fee ($50) now
      * @author Thanuja
      * @return      true if they want to pay now, else false
      */
@@ -306,12 +300,12 @@ public class GameView implements MonopolyInterfaceView {
     }
 
     /**
-     * Handle when a player wins and the game is over.
+     * Handle when a player wins and the game is over, show message
      * @author Thanuja
      * @author Maisha
      */
     @Override
-    public void handleWinner() { // show for whoever won
+    public void handleWinner() {
         JOptionPane.showMessageDialog(null, "Congratulations! Player: " + game.getPlayers().get(0).getId() +
                 " has won!");
     }

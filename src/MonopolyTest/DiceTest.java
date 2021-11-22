@@ -19,7 +19,7 @@ public class DiceTest {
     }
 
     /**
-     * Tests what the initial dice number is.
+     * Tests that the initial dice number is 0
      * @author Maisha
      */
     @Test

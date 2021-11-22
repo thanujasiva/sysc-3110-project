@@ -53,7 +53,7 @@ public class DicePanel {
      * @author Sabah
      * Updates the dice labels on the board according to the roll
      */
-    public void updateDiceLabel(){ // Controller calls (refer to MVC)
+    public void updateDiceLabel(){
         diceLabel1.setText(String.valueOf(dice1.getDiceNumber()));
         diceLabel2.setText(String.valueOf(dice2.getDiceNumber()));
     }

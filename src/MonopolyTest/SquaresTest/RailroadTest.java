@@ -29,7 +29,7 @@ public class RailroadTest {
     }
 
     /**
-     * Test railroad printed price
+     * Test railroad buy price
      * @author Thanuja
      */
     @Test

@@ -3,13 +3,13 @@ package Monopoly;
 import javax.swing.*;
 import java.awt.*;
 
-/**Create a piece corresponding ot a player
- * Class is not being used
+/**
+ * Create a piece on board corresponding to a player
  * @author Shrimei
  */
 class PieceComponent extends JLabel {
 
-    JPanel currentBox;
+    private JPanel currentBox;
 
     /**
      * Initialize a label(piece) to represent a player. Player starts at "GO"
