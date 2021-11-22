@@ -65,7 +65,6 @@ Added the option for buying Houses and Hotels when all the properties of a singl
 Improvements for future Milestones:
  
 * Implement tax boxes.
-* Make AI player that learns from previous turns.
 * AI players will have more random decisions instead of buying every property they can afford.
 * Tests for AI.
 * Making sure that player cannot buy houses on a property until all properties of the same colour group acquires at least one house.
