@@ -1,7 +1,6 @@
 package Monopoly.Squares;
 
 import Monopoly.ColourGroups;
-import Monopoly.Player;
 
 public class Property extends OwnableSquare {
 
@@ -15,7 +14,6 @@ public class Property extends OwnableSquare {
     private final int rentThreeHouses;
     private final int rentFourHouses;
     private final int rentHotel;
-    private Player owner;
     private int housePrice;
 
     /**
@@ -27,6 +25,7 @@ public class Property extends OwnableSquare {
      * price and the rent with colour set is 20%
      */
     public Property(String name, int price, ColourGroups colourGroup){
+        super();
         this.name = name;
         this.price = price;
         this.rent = (int) ( price * 0.1); // 10% of property price
@@ -37,7 +36,6 @@ public class Property extends OwnableSquare {
         this.rentFourHouses = (int)(rentThreeHouses * 1.5);
         this.rentHotel = (int)(rentFourHouses * 1.3);
         this.colourGroup = colourGroup;
-        this.owner = null;
         this.housePrice = colourGroup.getHousePrice();
     }
 
@@ -114,7 +112,7 @@ public class Property extends OwnableSquare {
      * @return rent for the number of houses owned
      */
     @Override
-    public int getRent(int numberOfHouses) { //FIXME
+    public int getRent(int numberOfHouses) {
         if (numberOfHouses == 1){
             return rentOneHouse;
         } else if(numberOfHouses == 2){

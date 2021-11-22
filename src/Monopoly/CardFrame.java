@@ -156,10 +156,10 @@ public class CardFrame extends JOptionPane {
         fieldPanel.add(rentFour);
 
         JLabel priceVal = new JLabel("$" + railroad.getPrice());
-        JLabel rentOneVal = new JLabel("$" + railroad.getRentOne());
-        JLabel rentTwoVal = new JLabel("$" + railroad.getRentTwo());
-        JLabel rentThreeVal = new JLabel("$" + railroad.getRentThree());
-        JLabel rentFourVal = new JLabel("$" + railroad.getRentFour());
+        JLabel rentOneVal = new JLabel("$" + railroad.getRent(1));
+        JLabel rentTwoVal = new JLabel("$" + railroad.getRent(2));
+        JLabel rentThreeVal = new JLabel("$" + railroad.getRent(3));
+        JLabel rentFourVal = new JLabel("$" + railroad.getRent(4));
 
         priceVal.setBorder(valueBorder);
         rentOneVal.setBorder(valueBorder);

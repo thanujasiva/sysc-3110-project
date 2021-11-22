@@ -1,14 +1,11 @@
 package Monopoly.Squares;
 
-import Monopoly.Player;
-
 public class Utility extends OwnableSquare {
 
     private String name;
-    private Player owner;
     private int price;
-    private int rent1;
-    private int rent2;
+    private int rentOne;
+    private int rentTwo;
 
     /**
      * Constructor for Utility
@@ -16,10 +13,11 @@ public class Utility extends OwnableSquare {
      * @param name of utility
      */
     public Utility(String name){
+        super();
         this.name = name;
         this.price = 150;
-        this.rent1 = 4;
-        this.rent2 = 10;
+        this.rentOne = 4;
+        this.rentTwo = 10;
     }
 
     /**
@@ -31,9 +29,9 @@ public class Utility extends OwnableSquare {
      */
     public int getRent(int roll, int utilityNumber) {
         if (utilityNumber == 1) {
-            return roll * rent1;
+            return roll * rentOne;
         } else if (utilityNumber == 2) {
-            return roll * rent2;
+            return roll * rentTwo;
         }
         return 0;
     }
@@ -49,7 +47,7 @@ public class Utility extends OwnableSquare {
     }
 
     /**
-     * Empty implementation of getRent method from Ownable interface
+     * Empty implementation of getRent method from Ownable abstract class
      * @author Sabah, Shrimei
      * @param numberOfUtilities owned by player
      * @return 0
