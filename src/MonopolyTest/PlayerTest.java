@@ -58,7 +58,7 @@ public class PlayerTest {
      */
     @Test
     public void getInitialSkipTurn() {
-        assertFalse(player.isSkipTurn());
+        assertFalse(player.isJailTurn());
     }
 
     /**

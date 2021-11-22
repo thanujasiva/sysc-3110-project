@@ -255,7 +255,7 @@ public class Game {
             }
         }
         Jail jail = board.getJailSquare();
-        currentPlayer.setSkipTurn(true);
+        currentPlayer.setJailTurn(true);
         currentPlayer.setPosition(board.getJailPosition());
         jail.addToJail(currentPlayer);
 
@@ -270,7 +270,7 @@ public class Game {
         Jail jail = board.getJailSquare();
         Player currentPlayer = getCurrentPlayer();
         jail.removeFromJail(currentPlayer);
-        currentPlayer.setSkipTurn(false);
+        currentPlayer.setJailTurn(false);
 
         this.doubles = -1; // even if player rolled doubles to exit, they cannot roll again (handled in handleSwitchTurn)
     }
@@ -342,8 +342,8 @@ public class Game {
      * @author Thanuja
      */
     public void handleRoll() {
-        if (getCurrentPlayer().isSkipTurn()){
-            handleSkipTurn();  // handle when a player is in jail
+        if (getCurrentPlayer().isJailTurn()){
+            handleJailTurn();  // handle when a player is in jail
         }else{
             handleMove(); // handle a normal roll
         }
@@ -354,9 +354,9 @@ public class Game {
      * @author Sabah
      * @author Thanuja
      */
-    public void handleSkipTurn(){
+    public void handleJailTurn(){
         Player currentPlayer = getCurrentPlayer();
-        if (currentPlayer.isSkipTurn()){
+        if (currentPlayer.isJailTurn()){
 
             Jail jail = board.getJailSquare();
 
@@ -417,7 +417,7 @@ public class Game {
 
             }
 
-            if (!currentPlayer.isSkipTurn()){ // if they exited jail
+            if (!currentPlayer.isJailTurn()){ // if they exited jail
                 for (MonopolyInterfaceView view : this.views){
                     view.handleRoll(); // show the card they landed on, handle purchase/rent, etc
                 }
@@ -452,22 +452,14 @@ public class Game {
             view.handlePlayerState();
         }
 
-        //Scanner sc = new Scanner(System.in);
-
         //handleSkipTurn();
         //don't want rest to occur if player was in jail
 
-        //System.out.println("\n===============================================");
         Player currentPlayer = getCurrentPlayer(); // only get actual current player after skip turn was checked
-        //Square currentSquare =  board.getSquares().get(currentPlayer.getPosition() % board.getSquares().size());
-        //currentPlayer.printCurrentState(currentSquare.getName());
 
-        // changed to 2 dice rolls
         int roll = dice1.rollDice() + dice2.rollDice();
-        //System.out.println("Amount rolled is " + roll1 + ", " + roll2);
         currentPlayer.changePosition(roll); //move the player
-        //currentSquare = board.getSquares().get(currentPlayer.getPosition() % board.getSquares().size()); //new position of the player
-        //System.out.println("You landed on " + currentSquare.toString()); //print current box info
+
         handleIfGo(roll);
         // show property card
         // update views based on dice roll
@@ -475,6 +467,7 @@ public class Game {
         for (MonopolyInterfaceView view : this.views){
             view.handleRoll();
         }
+
         for (MonopolyInterfaceView view : this.views) {
             view.handlePlayerState();
         }

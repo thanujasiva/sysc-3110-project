@@ -20,7 +20,7 @@ public class Player {
     private HashMap<ColourGroups, Integer> colourGroupMatch;
     private int id;
     private int position;
-    private boolean skipTurn;
+    private boolean jailTurn;
 
     private HashMap<Property, Integer> numberOfHouses;
     private HashMap<Property, Integer> numberOfHotel;
@@ -39,7 +39,7 @@ public class Player {
         this.utilityNumber = 0;
         this.ownableSquares = new ArrayList<>();
         this.colourGroupMatch = new HashMap<>();
-        this.skipTurn = false;
+        this.jailTurn = false;
         this.numberOfHouses = new HashMap<>();
         this.numberOfHotel = new HashMap<>();
     }
@@ -112,17 +112,17 @@ public class Player {
      * @author Sabah
      * @return              returns if turn should be skipped true or false
      */
-    public boolean isSkipTurn() {
-        return skipTurn;
+    public boolean isJailTurn() {
+        return jailTurn;
     }
 
     /**
      * Set whether turn should be skipped
      * @author Sabah
-     * @param skipTurn          the turn being checked
+     * @param jailTurn          the turn being checked
      */
-    public void setSkipTurn(boolean skipTurn) {
-        this.skipTurn = skipTurn;
+    public void setJailTurn(boolean jailTurn) {
+        this.jailTurn = jailTurn;
     }
 
     /**

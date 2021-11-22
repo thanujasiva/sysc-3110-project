@@ -95,7 +95,7 @@ public class JailTest {
         player.changePosition(26);
         game.handleIfGoToJail(26);
 
-        assertTrue(player.isSkipTurn());
+        assertTrue(player.isJailTurn());
         assertEquals(8, player.getPosition());
         assertEquals(1, jail.getJailTime(player));
     }
@@ -111,7 +111,7 @@ public class JailTest {
         game.handleSwitchTurn();
         game.handleSwitchTurn();
 
-        assertTrue(player.isSkipTurn());
+        assertTrue(player.isJailTurn());
         assertEquals(8, player.getPosition());
         assertEquals(1, jail.getJailTime(player));
     }

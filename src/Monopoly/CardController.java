@@ -31,7 +31,7 @@ public class CardController {
      * @return                  true if successful, false otherwise
      */
     public boolean purchaseHouse(Property property){
-       return game.canBuyHouse(property); //FIXME why is the fixme here?
+       return game.canBuyHouse(property);
     }
 
     /**
