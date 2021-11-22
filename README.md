@@ -34,39 +34,48 @@
 20. In case any player wins, a window pops up congratulating the winner. 
 
 
-## Milestone 2 Changes:
+## Milestone 3 Changes:
 
-Implemented a GUI based version of the Monopoly game following the MVC format.
-Created test classes for each Model to ensure functionality.
+Added pieces for all the players to show movement on the board.
+Added AI players and their implementations.
+Implemented other ownable squares (Jail, GO, Utilities, Railroads)
+Added the option for buying Houses and Hotels when all the properties of a single colour set are owned.
 
 
 ## Known Issues:
 
-1. Current players can press the dice button without closing the property pop-up, resulting in them rolling again. Therefore, the limitation is the current player must close the CardFrame before rolling again.
-2. The two panels on the right side of the GUI (PlayerStatePanel and PlayersPanel) change their sizes automatically after every few roll calls. This should not occur.
-3. Don’t skip to the next player right away, player might want to buy houses after rolling. (Milestone 3)
-4. PieceComponent not yet implemented. The player pieces do not show up on the board yet. For now, PlayersPanel on the top right of the GUI displays the position of each player. 
-5. From the current player's list of properties, the player can have multiple cards open at once, even duplicates of the same card.
-6. Reduce coupling between the components of the MVC. Reduce the workload of CardFrame, should just display the property information.
-7. Reduce responsibility of player. Move rent methods to game class so that player can just act as a model.
+
+1. The two panels on the right side of the GUI (PlayerStatePanel and PlayersPanel) change their sizes automatically after every few roll calls. This should not occur.
+2. Utility has an empty implementation of getRent(int).
+3. Player should only be able to buy second house after all other properties of colour group have at least 1 house
+4. Board cuts off property squares at top and bottom
+5. The board shows only one (the most recent) player when both players land on the same property square.
+6. There is code repetition in CardFrame when displaying card info.
+7. All view classes should extend JFrame or JPanel (some classes contain a mainPanel or mainFrame, is not consistent).
+8. Have AI functionality (checks for if they want to buy ownable squares/houses) in PlayerAI and not in view.
+
 
 ## Remaining Deliverables:
 
-Milestone 3: Additional features (jail, "Go", railroad, utility) and "AI" players. 
+* Implement tax boxes
+* Milestone 4: Save/load features and customizable games.
+* Make dicePanel include the diceButton
 
-Milestone 4: Save/load features and customizable games.
 
 ## Roadmap Ahead:
 
 Improvements for future Milestones:
-
-* ColourGroup of properties needs to be displayed on bottom right panel so that the player does not have to manually view the properties they have, to check if they own a colour group. 
-* Add pop-up for when player gets a colour group.
-* Need to add a Monopoly title on the centre of the Board.
-* 3 doubles will send a player to jail (Milestone 3)
-* BoardPanel will take a Board object directly instead of a Game object.
+ 
+* Make AI player that learns from previous turns
+* AI players will have more random decisions instead of buying every property they can afford
+* Tests for AI
+* Making sure that player cannot buy houses on a property until all properties of the same colour group acquires at least one house
+* More descriptive messages for not being able to buy house/hotel
+* Make dicePanel include the diceButton
+* Add a Monopoly logo on the centre of the Board.
 
 ## Contributors:
+
 * Thanuja Sivaananthan
 * Shrimei Chock
 * Sabah Samwatin
