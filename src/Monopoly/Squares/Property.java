@@ -112,7 +112,7 @@ public class Property extends OwnableSquare {
      * @return rent for the number of houses owned
      */
     @Override
-    public int getRent(int numberOfHouses) { //FIXME
+    public int getRent(int numberOfHouses) {
         if (numberOfHouses == 1){
             return rentOneHouse;
         } else if(numberOfHouses == 2){

@@ -64,23 +64,4 @@ public class Railroad extends OwnableSquare {
         }
     }
 
-    /**
-     * Get rent if one railroad is owned
-     * @return rent
-     */
-    public int getRentTwo() {
-        return rentTwo;
-    }
-
-    public int getRentThree() {
-        return rentThree;
-    }
-
-    public int getRentFour() {
-        return rentFour;
-    }
-
-    public int getRentOne() {
-        return rentOne;
-    }
 }
