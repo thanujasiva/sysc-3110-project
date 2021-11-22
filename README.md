@@ -4,20 +4,35 @@
 
 1. Download and execute jar file onto any IDE.
 2. Run the game from GameView.main()
-3. When the game opens, first choose how many players you wish to play with from the drop down menu. 
+3. The game first asks for how many players the user wants to play with, followed by a window which asks for the number of AI players the user wants to play with.
     * If you fail to choose (i.e. hit cancel or close the JOptionPane) the game will terminate.
 4. After choosing the number of players, all players will be initialized on position GO, as shown on the top right panel of the GUI.
 5. Click the dice button on the centre of the board to roll and start the game.
-6. Your position will move automatically, and the square you land on will prompt the property card frame to pop up.
-7. If the player lands on a utility or railroad (shown as light gray on the board), nothing will happen during their turn.
-8. When the player closes the property card, they will be given the option to purchase the property. The player must close the pop up to change turns.
-10. If a player chooses to purchase, the property will be added onto their list of owned properties on the bottom right panel, which also displays their money. The price paid for the property will be subtracted from their money.
-12. Player can click on their individual properties from the bottom right panel to check the property information.
-13. If the current player lands on another player's property, they have to pay rent. The player is notified via a pop up message. 
-      * After the pop up message is closed, the rent transaction will occur, and the money will be subtracted from their account and added to the owner's account.
-14. A player is automatically removed from the game if the player does not have enough money to pay rent.
-      * When a player goes bankrupt and is removed from the game, all their properties become available to purchase again.
-16. The game continues until the player closes out of the game, or when there is only one player left on the board.
+6. Your player will move automatically on the board as shown by the player pieces.
+   * The manual players are shown with the colour CYAN 
+   * The AI players are shown with PINK.
+7. From the second round, any player that passes GO (the starting position) collects $200.
+8. The square the pieces land on will prompt the property card frame to pop up.
+9. The card prompts the user to purchase if they land on an Ownable Square.                                                                                            * The manual players have to press the ‘YES’ button if they want to buy and the ‘NO’ button for not buying.
+10. If the player lands on a light grey tax box, the Game does not do anything for now.
+11. If a player chooses to purchase an ownable square (property/railroad/utilities), the owned square gets added to their list of properties on the bottom right panel and the price amount gets deducted from their total money.
+12. The bottom right panel also shows the current player/AI player number along with the up to date money they have.
+13. Manual players can click on their individual properties from the bottom right panel to check the property information and buy houses/hotels on them.
+14. When a manual player owns all the properties of a colour set (for example, all properties of the green colour), they can buy houses on any of the properties of the colour set.
+15. If the current player lands on another player's property, they have to pay rent. 
+   * The rent for each property is displayed on each property card.
+   * The rent increases as the player buys more houses or hotels.
+   * The rent for utility is based on the dice rolled amount of the player who lands on it.
+   * The rent for railroad increases with the number of railroad owned by a player.
+16. When any player lands on an owned property, the property card appears to let the player know they have to pay the rent. 
+   * After the ‘OK’ button is pressed on the card, the rent transaction will occur, and the money will be subtracted from their account and added to the owner's account.
+17. Rolling doubles thrice or landing on the ‘Go to Jail’ square will send any player to Jail
+   * For exiting jail, a manual player gets the option to pay a $50 fine or roll doubles in the first two rounds of staying in jail. If it is their third round, and they still do not roll doubles, they must pay a $50 fine to exit jail.
+18. A player goes bankrupt and is automatically removed from the game if the player does not have enough money to pay the rent or the jail exit fee.
+   * When a player goes bankrupt and is removed from the game, all their properties become available to purchase again.
+19. The game ends when there is only one player left on the board or when a manual player closes out of the game.
+20. In case any player wins, a window pops up congratulating the winner. 
+
 
 ## Milestone 2 Changes:
 
