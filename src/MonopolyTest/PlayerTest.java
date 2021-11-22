@@ -152,19 +152,44 @@ public class PlayerTest {
         player.purchaseSquare(property);
         player.purchaseSquare(property);
 
-        assertEquals(20, player.getRentAmount(property, 0)); //20% of 100$ (price of property)
+        assertEquals(20, player.getRentAmount(property, 10)); //20% of 100$ (price of property)
     }
 
-    //rent with no colourset (basic)
     /**
      * Test process of collecting basic rent (no colour set)
+     * @author Shrimei
      */
     @Test
     public void getRentStandard(){
-
+        player.purchaseSquare(property);
+        assertEquals(10, player.getRentAmount(property, 10));
     }
-    //rent with houses
-    //rent with hotel
+
+    /**
+     * Test process of collecting rent with houses and hotels
+     * @author Shrimei
+     */
+    @Test
+    public void getRentHousesHotels(){
+        player.purchaseSquare(property);
+        player.purchaseSquare(property);
+        player.purchaseSquare(property); //get colour set
+
+        player.buyHouseOnProperty(property); //1 house
+        assertEquals(50, player.getRentAmount(property, 10));
+
+        player.buyHouseOnProperty(property); //2 houses
+        assertEquals(150, player.getRentAmount(property, 10));
+
+        player.buyHouseOnProperty(property); //3 houses
+        assertEquals(300, player.getRentAmount(property, 10));
+
+        player.buyHouseOnProperty(property); //4 houses
+        assertEquals(450, player.getRentAmount(property, 10));
+
+        player.buyHotelOnProperty(property); //1 hotel
+        assertEquals(585, player.getRentAmount(property, 10));
+    }
 
     /**
      * Test the process of paying rent
@@ -184,8 +209,6 @@ public class PlayerTest {
         for (int i = 0; i < 15; i++){
             player.purchaseSquare(property);
         }
-        //owner.purchaseSquare(rentedProperty);
-        //assertFalse(player.payRent(owner.getRentAmount(rentedProperty))); // no longer have to call methods on property
         assertFalse(player.payRent(10));
     }
 
@@ -199,6 +222,7 @@ public class PlayerTest {
     }
 
     /**
+     * Test if buyHotelOnProperty can buy a hotel successfully
      * @author Maisha
      */
     @Test
@@ -207,6 +231,7 @@ public class PlayerTest {
     }
 
     /**
+     * Test if number of houses is updated correctly
      * @author Maisha
      */
     @Test
@@ -218,19 +243,19 @@ public class PlayerTest {
     }
 
     /**
+     * Test if number of hotels is updated correctly
      * @author Maisha
      */
     @Test
-    public void testGetNumberOfHotel(){ //FIXME should check that they have already bought 4 houses
+    public void testGetNumberOfHotel(){
         assertEquals(0,player.getNumberOfHotel(property));
         player.purchaseSquare(property);
         player.buyHotelOnProperty(property);
         assertEquals(1,player.getNumberOfHotel(property));
     }
 
-    // test has all colours test
-
     /**
+     * Test if colour group is being updated
      * @author Maisha
      */
     @Test

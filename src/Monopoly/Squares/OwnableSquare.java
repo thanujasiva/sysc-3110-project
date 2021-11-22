@@ -16,6 +16,7 @@ public abstract class OwnableSquare implements Square{
     public Player getOwner(){
         return owner;
     }
+
     public abstract int getRent(int number);
     public abstract int getPrice();
 }
