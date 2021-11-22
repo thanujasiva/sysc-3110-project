@@ -79,8 +79,8 @@ public class Game {
      */
     private void removePlayer(Player player){
         players.remove(player);
-        for (Property p: player.getProperties()){
-            p.setOwner(null);
+        for (OwnableSquare ownableSquare: player.getOwnableSquares()){
+            ownableSquare.setOwner(null);
         }
         doubles = -1; // in case the player removed just rolled doubles
     }

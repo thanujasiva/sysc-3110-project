@@ -11,7 +11,6 @@ import java.util.HashMap;
 public class Player {
 
     private int money;
-    private ArrayList<Property> properties;
     private int railroadNumber;
     private int utilityNumber;
 
@@ -34,7 +33,6 @@ public class Player {
     public Player() {
         this.money = 1500;
         this.position = 0;
-        this.properties = new ArrayList<>();
         this.railroadNumber = 0;
         this.utilityNumber = 0;
         this.ownableSquares = new ArrayList<>();
@@ -170,15 +168,6 @@ public class Player {
      */
     public void setPosition(int position) {
         this.position = position;
-    }
-
-    /**
-     * Get list of properties owned
-     * @author Sabah
-     * @return the list of properties owned by the player
-     */
-    public ArrayList<Property> getProperties() {
-        return properties;
     }
 
     /**
