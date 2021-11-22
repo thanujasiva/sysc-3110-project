@@ -12,7 +12,7 @@ public class Board {
      */
     public Board(){
         this.squares = new HashMap<>();
-        this.setProperties();
+        this.setSquares();
     }
 
     /**
@@ -21,7 +21,7 @@ public class Board {
      * @author Thanuja
      * Sets the properties with their descriptions
      */
-    private void setProperties(){
+    private void setSquares(){
 
         BlankSquare GO = new BlankSquare("GO");
 
