@@ -24,6 +24,8 @@ public class GameView implements MonopolyInterfaceView {
 
     private HashMap<Player, PieceComponent> pieces;
 
+    private JButton diceButton;
+
     /**
      * Create an overall game view
      * @author Maisha
@@ -51,7 +53,7 @@ public class GameView implements MonopolyInterfaceView {
 
         boardPanel = new BoardPanel(game.getBoard());
         JPanel boardPanel = this.boardPanel.getMainPanel();
-        JButton diceButton = dicePanelSetup();
+        this.diceButton = dicePanelSetup();
         boardPanel.add(diceButton, BorderLayout.CENTER);
 
         JPanel playerPanel = new JPanel();
@@ -152,13 +154,13 @@ public class GameView implements MonopolyInterfaceView {
         for (int i = 0; i < numTotal-numAI; i++) {
             Player player = new Player();
             this.game.addPlayer(player);
-            pieces.put(player, new PieceComponent(player, boardPanel.getPanel(0),frame));
+            pieces.put(player, new PieceComponent(player, boardPanel.getPanel(0)));
         }
 
         for (int i = 0; i < numAI; i++) {
             PlayerAI player = new PlayerAI();
             this.game.addPlayer(player);
-            pieces.put(player, new PieceComponent(player, boardPanel.getPanel(0),frame));
+            pieces.put(player, new PieceComponent(player, boardPanel.getPanel(0)));
         }
 
         //FIXME - remove this after houses/hotels are working fully
@@ -171,7 +173,17 @@ public class GameView implements MonopolyInterfaceView {
 
 
         this.playersPanel.updatePlayers();
-        this.playerStatePanel.updatePlayer(game.getCurrentPlayer());
+        this.playerStatePanel.updatePlayer();
+    }
+
+    /**
+     * Move the current player's piece
+     * @author Shrimei
+     */
+    private void moveCurrentPiece(){
+        Player currentPlayer = game.getCurrentPlayer();
+        //returns current panel
+        pieces.get(currentPlayer).movePiece(boardPanel.getPanel(currentPlayer.getPosition() % game.getBoard().getSquares().size()));
     }
 
     /**
@@ -182,12 +194,10 @@ public class GameView implements MonopolyInterfaceView {
     public void handleRoll() {
         this.dicePanel.updateDiceLabel();
 
-        Player currentPlayer = game.getCurrentPlayer();
         Square currentSquare = game.getCurrentSquare();
 
         // display new position before showing any cards
-        //returns current panel
-        pieces.get(currentPlayer).movePiece(boardPanel.getPanel(currentPlayer.getPosition() % game.getBoard().getSquares().size()));
+        moveCurrentPiece();
 
         if(currentSquare instanceof OwnableSquare) {
             new CardFrame((OwnableSquare) currentSquare, game);
@@ -202,8 +212,9 @@ public class GameView implements MonopolyInterfaceView {
      */
     @Override
     public void handlePlayerState() {
-        Player currentPlayer = game.getCurrentPlayer();
-        this.playerStatePanel.updatePlayer(currentPlayer);
+        boolean isPlayerAI = game.getCurrentPlayer() instanceof PlayerAI;
+        this.diceButton.setEnabled(!isPlayerAI); // disable button during AI turn
+        this.playerStatePanel.updatePlayer();
         this.playersPanel.updatePlayers();
     }
 
@@ -232,7 +243,7 @@ public class GameView implements MonopolyInterfaceView {
         }
 
         // update piece position
-        pieces.get(currentPlayer).movePiece(boardPanel.getPanel(currentPlayer.getPosition() % game.getBoard().getSquares().size()));
+        moveCurrentPiece();
     }
 
     /**
@@ -249,7 +260,7 @@ public class GameView implements MonopolyInterfaceView {
         }
 
         // update piece position
-        pieces.get(currentPlayer).movePiece(boardPanel.getPanel(currentPlayer.getPosition() % game.getBoard().getSquares().size()));
+        moveCurrentPiece();
     }
 
     /**

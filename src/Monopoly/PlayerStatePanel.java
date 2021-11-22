@@ -54,11 +54,11 @@ public class PlayerStatePanel extends JPanel{
     }
 
     /**
-     * @author Thanuja
-     * @param player    player to update to
      * Update panel to display new player's information
+     * @author Thanuja
      */
-    public void updatePlayer(Player player){
+    public void updatePlayer(){
+        Player player = game.getCurrentPlayer();
         if(player instanceof PlayerAI){
             this.playerNameLabel.setText("Current AI Player: " + player.getId());
         } else {
@@ -85,7 +85,7 @@ public class PlayerStatePanel extends JPanel{
 
         // create an updated controller for the updated list
         ownedSquaresList.removeListSelectionListener(playerStateController);
-        playerStateController = new PlayerStateController(ownedSquaresList, player, game);
+        playerStateController = new PlayerStateController(ownedSquaresList, game);
         ownedSquaresList.addListSelectionListener(playerStateController);
     }
 
