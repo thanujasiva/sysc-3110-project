@@ -16,14 +16,6 @@ public class CardController {
     }
 
     /**
-     * @author Maisha
-     * @return  game
-     */
-    public Game getGame() {
-        return game;
-    }
-
-    /**
      * Control purchase card
      * @author Thanuja
      * @return true if player is able to purchase property, else false.
@@ -50,12 +42,4 @@ public class CardController {
         game.rentTransaction();
     }
 
-    /*
-    public void handleSwitchTurn(){
-        game.handleSwitchTurn();
-    }
-
-    public boolean handlePotentialWinner(){
-        return game.checkIfWinner();
-    }*/
 }
