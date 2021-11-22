@@ -45,6 +45,7 @@ public class Player {
     }
 
     /**
+     * Buy a house on the property if player has enough money
      * @author Maisha
      * @author Shrimei
      * @param property      the property the house is being bought on
@@ -60,6 +61,7 @@ public class Player {
     }
 
     /**
+     * Buy hotel on property if player has enough money. Clear out number of houses.
      * @author Maisha
      * @param property  the property being checked
      * @return          returns if hotel can be bought on property
@@ -77,6 +79,7 @@ public class Player {
     }
 
     /**
+     * Get number of houses on property
      * @author Shrimei
      * @param property      the property being checked
      * @return              the number of properties existing on property
@@ -86,6 +89,7 @@ public class Player {
     }
 
     /**
+     * Get number of hotels on property
      * @author Maisha
      * @param property      the property being checked
      * @return              the number of hotels bought on the property
@@ -95,14 +99,7 @@ public class Player {
     }
 
     /**
-     * @author Maisha
-     * @return              the number of railroad
-     */
-    public int getRailroadNumber() {
-        return railroadNumber;
-    }
-
-    /**
+     * Get list of squares owned by player
      * @author Maisha
      * @return          returns all the squares owned
      */
@@ -111,6 +108,7 @@ public class Player {
     }
 
     /**
+     * True if turn should be skipped
      * @author Sabah
      * @return              returns if turn should be skipped true or false
      */
@@ -119,6 +117,7 @@ public class Player {
     }
 
     /**
+     * Set whether turn should be skipped
      * @author Sabah
      * @param skipTurn          the turn being checked
      */
@@ -136,6 +135,7 @@ public class Player {
     }
 
     /**
+     * Get player ID
      * @author Shrimei
      * @return the player's id
      */
@@ -144,6 +144,7 @@ public class Player {
     }
 
     /**
+     * Get amount of money that player has
      * @author Thanuja
      * @return amount of money player has
      */
@@ -172,6 +173,7 @@ public class Player {
     }
 
     /**
+     * Get list of properties owned
      * @author Sabah
      * @return the list of properties owned by the player
      */
@@ -180,6 +182,7 @@ public class Player {
     }
 
     /**
+     * Get current position of player
      * @author Shrimei
      * @return the current position of the player
      */
@@ -188,11 +191,11 @@ public class Player {
     }
 
     /**
+     * Return true if square was purchased successfully (enough money)
      * @author Maisha
      * @author Shrimei
      * @param ownableSquare     the ownableSquare being purchased
      * @return                  returns true if player is able to purchase, else false.
-     *
      */
     public boolean purchaseSquare(OwnableSquare ownableSquare) {
         int cost = ownableSquare.getPrice();
@@ -218,7 +221,7 @@ public class Player {
      * @author Shrimei
      * @author Thanuja
      * @param rent          the rent amount to pay
-     * @return              returns true if player is able to pay rent, else false.
+     * @return true if player is able to pay rent, else false.
      */
     public boolean payRent(int rent) {
         if (this.money >= rent) {
@@ -239,12 +242,12 @@ public class Player {
     }
 
     /**
-     * Decides the appropriate rent amount to pay based on if the player owns the colour set
+     * Decides the appropriate rent amount to pay
      * @author Shrimei
      * @author Thanuja
      * @author Maisha
-     * @param ownableSquare     the property receiving rent
-     * @return                  the rent amount
+     * @param ownableSquare     the square receiving rent
+     * @return the rent amount
      */
     public int getRentAmount(OwnableSquare ownableSquare, int roll) {
         if (ownableSquare instanceof Railroad) {
@@ -259,13 +262,12 @@ public class Player {
                     return property.getRent(numHouses);
                 }
             } else {
-                return property.getRent();
+                return property.getRent(); //no colour set
             }
         } else if (ownableSquare instanceof Utility) {
             Utility utility = (Utility) ownableSquare;
             return utility.getRent(roll, utilityNumber);
         }
-
         return 0;
     }
 

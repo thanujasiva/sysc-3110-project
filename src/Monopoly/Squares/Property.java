@@ -3,7 +3,7 @@ package Monopoly.Squares;
 import Monopoly.ColourGroups;
 import Monopoly.Player;
 
-public class Property implements OwnableSquare {
+public class Property extends OwnableSquare {
 
     private final int price;
     private final String name;
@@ -68,27 +68,6 @@ public class Property implements OwnableSquare {
      */
     public boolean canBuyHotelOnProperty(int hotelOwned){
         return hotelOwned != 1;
-    }
-
-
-    /**
-     * Sets the owner of the property once it is bought
-     * @author Maisha
-     * @param player    the new owner.
-     */
-    @Override
-    public void setOwner(Player player){
-        this.owner = player;
-    }
-
-    /**
-     * Get property owner
-     * @author Maisha
-     * @return owner
-     */
-    @Override
-    public Player getOwner() {
-        return owner;
     }
 
     /**

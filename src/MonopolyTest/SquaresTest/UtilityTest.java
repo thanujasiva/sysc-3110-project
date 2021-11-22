@@ -30,7 +30,7 @@ public class UtilityTest {
 
 
     /**
-     * Test utility printed price
+     * Test utility buy price
      * @author Thanuja
      */
     @Test

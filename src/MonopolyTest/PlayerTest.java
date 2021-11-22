@@ -61,7 +61,6 @@ public class PlayerTest {
         assertFalse(player.isSkipTurn());
     }
 
-
     /**
      * Test first move
      * @author Thanuja
@@ -142,11 +141,10 @@ public class PlayerTest {
         assertEquals(100, player.getRentAmount(electricCompany, 10));
     }
 
-    //TODO
-    /*
     /**
      * Test the process of collecting rent with colour set.
      * @author Thanuja
+     **/
     @Test
     public void getRentColourSet(){
         // purchase GREY property 3 times to own the colour set
@@ -154,9 +152,19 @@ public class PlayerTest {
         player.purchaseSquare(property);
         player.purchaseSquare(property);
 
-        assertEquals(20, player.getRentAmount(property, 0)); //20% of 100$ (price of property) plus players money (1500 - 300)
+        assertEquals(20, player.getRentAmount(property, 0)); //20% of 100$ (price of property)
     }
-    */
+
+    //rent with no colourset (basic)
+    /**
+     * Test process of collecting basic rent (no colour set)
+     */
+    @Test
+    public void getRentStandard(){
+
+    }
+    //rent with houses
+    //rent with hotel
 
     /**
      * Test the process of paying rent

@@ -89,7 +89,7 @@ public class GameView implements MonopolyInterfaceView {
         this.dicePanel = new DicePanel(dice1, dice2);
 
         // create dice button and add game controller to it
-        JButton diceButton = new JButton();
+        this.diceButton = new JButton();
         diceButton.addActionListener(gameController); //on click, call game controller
 
         //dicePanel displays roll value on button
