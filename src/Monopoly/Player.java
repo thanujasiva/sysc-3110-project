@@ -5,7 +5,6 @@ import Monopoly.Squares.Property;
 import Monopoly.Squares.Railroad;
 import Monopoly.Squares.Utility;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -22,17 +21,15 @@ public class Player {
     private int id;
     private int position;
     private boolean skipTurn;
-    private int oldPosition;
 
     private HashMap<Property, Integer> numberOfHouses;
     private HashMap<Property, Integer> numberOfHotel;
-
 
     /**
      * @author Sabah
      * @author Shrimei
      * @author Maisha
-     * Each player begins with $1500 and starts on GO
+     * Each player begins with $1500 and starts on position 0
      */
     public Player() {
         this.money = 1500;
@@ -43,7 +40,6 @@ public class Player {
         this.ownableSquares = new ArrayList<>();
         this.colourGroupMatch = new HashMap<>();
         this.skipTurn = false;
-        this.oldPosition = 0;
         this.numberOfHouses = new HashMap<>();
         this.numberOfHotel = new HashMap<>();
     }
@@ -131,35 +127,35 @@ public class Player {
     }
 
     /**
-     * @param id the player's id
-     *           An ID is given to each new player when they join the game
+     * An ID is given to each new player when they join the game
      * @author Sabah
+     * @param id the player's id
      */
     public void setId(int id) {
         this.id = id;
     }
 
     /**
-     * @return the player's id
      * @author Shrimei
+     * @return the player's id
      */
     public int getId() {
         return id;
     }
 
     /**
-     * @return amount of money player has
      * @author Thanuja
+     * @return amount of money player has
      */
     public int getMoney() {
         return money;
     }
 
     /**
-     * @param roll the dice roll number
-     * @return the new position of the player
      * Moves the player a certain number of boxes based on the roll
      * @author Shrimei
+     * @param roll the dice roll number
+     * @return the new position of the player
      */
     public int changePosition(int roll) {
         this.position += roll;
@@ -168,35 +164,35 @@ public class Player {
 
     /**
      * Set a players position
-     *
-     * @param position position number to set
      * @author Thanuja
+     * @param position position number to set
      */
     public void setPosition(int position) {
         this.position = position;
     }
 
     /**
-     * @return the list of properties owned by the player
      * @author Sabah
+     * @return the list of properties owned by the player
      */
     public ArrayList<Property> getProperties() {
         return properties;
     }
 
     /**
-     * @return the current position of the player
      * @author Shrimei
+     * @return the current position of the player
      */
     public int getPosition() {
         return position;
     }
 
     /**
-     * @param ownableSquare the ownableSquare being purchased
-     * @return returns true if player is able to purchase, else false.
      * @author Maisha
      * @author Shrimei
+     * @param ownableSquare     the ownableSquare being purchased
+     * @return                  returns true if player is able to purchase, else false.
+     *
      */
     public boolean purchaseSquare(OwnableSquare ownableSquare) {
         int cost = ownableSquare.getPrice();
@@ -217,16 +213,14 @@ public class Player {
     }
 
     /**
-     * @param rent the rent amount to pay
-     * @return returns true if player is able to pay rent, else false.
      * If the user has enough money to pay rent, it is deducted from their account.
-     * Otherwise, the player is bankrupt
      * @author Maisha
      * @author Shrimei
      * @author Thanuja
+     * @param rent          the rent amount to pay
+     * @return              returns true if player is able to pay rent, else false.
      */
     public boolean payRent(int rent) {
-        //int rent = property.getOwner().getRentAmount(property);
         if (this.money >= rent) {
             this.money -= rent;
             return true;
@@ -236,48 +230,36 @@ public class Player {
     }
 
     /**
-     * @param rent the property collecting rent
-     *                 Adds collected rent to the owner's account
+     * Adds collected rent to the owner's account
      * @author Maisha
+     * @param rent      the property collecting rent
      */
     public void collectRent(int rent) {
         this.money += rent;
     }
 
-
-    /*
-    public void collectRailroadRent(Railroad railroad){
-        int rent = railroad.getRent(railroads.size());
-        this.money += rent;
-    }
-    */
-
-
     /**
-     * @param ownableSquare  the property receiving rent
-     * @return the rent amount
      * Decides the appropriate rent amount to pay based on if the player owns the colour set
      * @author Shrimei
      * @author Thanuja
      * @author Maisha
+     * @param ownableSquare     the property receiving rent
+     * @return                  the rent amount
      */
     public int getRentAmount(OwnableSquare ownableSquare, int roll) {
-        // null check in case player does not own the property
         if (ownableSquare instanceof Railroad) {
             return ownableSquare.getRent(railroadNumber);
         } else if (ownableSquare instanceof Property) {
             Property property = (Property) ownableSquare;
-            if ((colourGroupMatch.get(property.getColourGroup()) != null) && (hasAllColours(property))) {
+            if (hasAllColours(property)) {
                 if (getNumberOfHotel(property)==1){
                     return property.getRentHotel();
                 } else {
                     int numHouses = numberOfHouses.getOrDefault(property, 0);
                     return property.getRent(numHouses);
                 }
-                //return property.getRentWithColourSet();
-            }
-            else {
-                return property.getRent(); //FIXME // without colour set
+            } else {
+                return property.getRent();
             }
         } else if (ownableSquare instanceof Utility) {
             Utility utility = (Utility) ownableSquare;
@@ -286,8 +268,6 @@ public class Player {
 
         return 0;
     }
-        //return ownableSquare.getRent();
-
 
     /**
      * @author Sabah
@@ -297,6 +277,13 @@ public class Player {
         this.money += 200;
     }
 
+    /**
+     * Check if player owns all properties in colour group
+     * @author Maisha
+     * @author Shrimei
+     * @param property      property to check
+     * @return              true if colour set is owned, false otherwise
+     */
     public boolean hasAllColours(Property property){
         return colourGroupMatch.getOrDefault(property.getColourGroup(), 0) == property.getColourGroup().getMax();
     }

@@ -1,11 +1,9 @@
 package Monopoly;
 
 import Monopoly.Squares.*;
-
 import java.util.HashMap;
 
 public class Board {
-    public Object getGoPosition;
     private HashMap<Integer, Square> squares;
 
     /**
