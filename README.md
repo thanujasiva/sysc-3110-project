@@ -14,7 +14,7 @@
 7. Any player that passes GO (the starting position) collects $200.
 8. The square on which the pieces land on will prompt the card frame to pop up.
 9. The card prompts the user to purchase if they land on an Ownable Square.                                                                                             
-   * The manual players have to press the ‘YES’ button if they want to buy and the ‘NO’ button for not buying.
+   * The manual players have to press the `YES` button if they want to buy and the `NO` button for not buying.
    
 10. If the player lands on a light grey tax box, the Game does not do anything for now.
 11. If a player chooses to purchase an ownable square (property/railroad/utilities), the owned square gets added to their list of properties on the bottom right panel and the price amount gets deducted from their total money.
@@ -22,12 +22,12 @@
 13. Manual players can click on their individual properties from the bottom right panel to check the property information and buy houses/hotels on them.
 14. When a manual player owns all the properties of a colour set (for example, all properties of the green colour), they can buy houses on any of the properties of the colour set. The player can buy multiple houses during one turn. The player must make any House/Hotel purchases before they roll the dice.
 15. If the current player lands on another player's square, the property card appears to let the player know they have to pay the rent.
-   * After the ‘OK’ button is pressed on the card, the rent transaction will occur, and the money will be subtracted from their account and added to the owner's  account.
+   * After the `OK` button is pressed on the card, the rent transaction will occur, and the money will be subtracted from their account and added to the owner's  account.
    * The rent for each property is displayed on each property card.
    * The rent for property increases as the player buys more houses or hotels.
    * The rent for utility is based on the dice rolled amount of the player who lands on it.
    * The rent for railroad increases with the number of railroads owned by a player.
-16. Rolling doubles thrice or landing on the ‘Go to Jail’ square will send any player to Jail
+16. Rolling doubles thrice or landing on the `Go to Jail` square will send any player to Jail
    * For exiting jail, a manual player gets the option to pay a $50 fine or roll doubles in the first two rounds of staying in jail. If it is their third round, and they still do not roll doubles, they must pay a $50 fine to exit jail.
 17. A player goes bankrupt and is automatically removed from the game if the player does not have enough money to pay the rent or the jail exit fee.
    * When a player goes bankrupt and is removed from the game, all their properties become available to purchase again.
