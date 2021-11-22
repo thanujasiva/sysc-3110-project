@@ -20,7 +20,7 @@
 11. If a player chooses to purchase an ownable square (property/railroad/utilities), the owned square gets added to their list of properties on the bottom right panel and the price amount gets deducted from their total money.
 12. The bottom right panel also shows the current player/AI player number along with the up to date money they have.
 13. Manual players can click on their individual properties from the bottom right panel to check the property information and buy houses/hotels on them.
-14. When a manual player owns all the properties of a colour set (for example, all properties of the green colour), they can buy houses on any of the properties of the colour set. The player can buy multiple houses during one turn.
+14. When a manual player owns all the properties of a colour set (for example, all properties of the green colour), they can buy houses on any of the properties of the colour set. The player can buy multiple houses during one turn. The player must make any House/Hotel purchases before they roll the dice.
 15. If the current player lands on another player's square, the property card appears to let the player know they have to pay the rent.
    * After the ‘OK’ button is pressed on the card, the rent transaction will occur, and the money will be subtracted from their account and added to the owner's  account.
    * The rent for each property is displayed on each property card.
@@ -71,7 +71,6 @@ Improvements for future Milestones:
 * More descriptive messages for not being able to buy house/hotel.
 * Make dicePanel include the diceButton.
 * Add a Monopoly logo on the centre of the Board.
-* Make dicePanel include the diceButton.
 
 ## Contributors:
 
