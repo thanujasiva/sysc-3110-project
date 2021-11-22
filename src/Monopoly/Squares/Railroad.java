@@ -1,12 +1,9 @@
 package Monopoly.Squares;
 
-import Monopoly.Player;
-
 public class Railroad extends OwnableSquare {
 
     private String name;
     private int price;
-    private Player owner;
     private int rentOne;
     private int rentTwo;
     private int rentThree;
@@ -25,7 +22,6 @@ public class Railroad extends OwnableSquare {
         this.rentTwo = 50;
         this.rentThree = 100;
         this.rentFour = 200;
-        this.owner = null;
     }
 
     /**

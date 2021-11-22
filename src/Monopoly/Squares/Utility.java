@@ -1,11 +1,8 @@
 package Monopoly.Squares;
 
-import Monopoly.Player;
-
 public class Utility extends OwnableSquare {
 
     private String name;
-    private Player owner;
     private int price;
     private int rent1;
     private int rent2;
@@ -16,6 +13,7 @@ public class Utility extends OwnableSquare {
      * @param name of utility
      */
     public Utility(String name){
+        super();
         this.name = name;
         this.price = 150;
         this.rent1 = 4;
