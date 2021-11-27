@@ -7,7 +7,8 @@ import java.awt.*;
 
 public class DicePanel {
 
-    private JPanel dicePanel;
+    private JButton diceButton;
+    //private JPanel dicePanel;
     private JLabel diceLabel1;
     private JLabel diceLabel2;
     private Dice dice1;
@@ -25,7 +26,7 @@ public class DicePanel {
         this.dice1 = dice1;
         this.dice2 = dice2;
 
-        dicePanel = new JPanel();
+        JPanel dicePanel = new JPanel();
         dicePanel.setLayout(new BoxLayout(dicePanel,BoxLayout.X_AXIS));
         diceLabel1 = new JLabel();
         diceLabel2 = new JLabel();
@@ -48,6 +49,18 @@ public class DicePanel {
         dicePanel.setBackground(BoardColours.DICE.getColour());
         diceLabel1.setText(String.valueOf(this.dice1.getDiceNumber()));
         diceLabel2.setText(String.valueOf(dice2.getDiceNumber()));
+
+        this.diceButton = new JButton();
+        //diceButton.addActionListener(gameController); //add controller in GameView
+
+        //dicePanel displays roll value on button
+        this.diceButton.add(dicePanel);
+        this.diceButton.setBorderPainted(true);
+
+        this.diceButton.setBorder(BorderFactory.createCompoundBorder(
+                BorderFactory.createLineBorder(BoardColours.BORDER.getColour(), 2),
+                BorderFactory.createLineBorder(BoardColours.BOARD.getColour(), 100)));
+
     }
     /**
      * @author Sabah
@@ -59,12 +72,12 @@ public class DicePanel {
     }
 
     /**
-     * @author Sabah
-     * @return  dicePanel
-     * Getter for dicePanel
+     * Getter for diceButton
+     * @author Thanuja
+     * @return      JButton, the dice button
      */
-    public JPanel getDicePanel() {
-        return dicePanel;
+    public JButton getDiceButton() {
+        return diceButton;
     }
 
     /*
