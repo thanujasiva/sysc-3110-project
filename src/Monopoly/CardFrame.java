@@ -57,22 +57,6 @@ public class CardFrame extends JOptionPane {
      * @author Thanuja
      */
     private void displayOwnableSquareInfo(){
-        if(square instanceof Property){
-            displayPropertyInfo();
-        } else if(square instanceof Railroad){
-            displayRailroadInfo();
-        } else if(square instanceof Utility){
-            displayUtilityInfo();
-        }
-    }
-
-    /**
-     * Display Utility info (name, price, rent) on card
-     * @author Shrimei
-     */
-    private void displayUtilityInfo() {
-        Utility utility = (Utility) square;
-
         JPanel fieldPanel = new JPanel();
         JPanel valuePanel = new JPanel();
 
@@ -82,35 +66,21 @@ public class CardFrame extends JOptionPane {
         Border fieldBorder = new EmptyBorder(6,3,3,3);
         Border valueBorder = new EmptyBorder(6,3,3,3);
 
-        JLabel name = new JLabel(utility.getName(), SwingConstants.CENTER);
+        fieldPanel.setBorder(fieldBorder);
+        valuePanel.setBorder(valueBorder);
+
+        JLabel name = new JLabel(square.getName(), SwingConstants.CENTER);
         name.setBorder(valueBorder);
         name.setOpaque(true);
-        name.setForeground(BoardColours.LIGHTTEXT.getColour());
-        name.setBackground(BoardColours.UTILITY.getColour());
 
-        JLabel price = new JLabel("Price: ");
-        JLabel rentOne = new JLabel("1 Utility Owned");
-        JLabel rentTwo = new JLabel("2 Utilities Owned");
-
-        price.setBorder(fieldBorder);
-        rentOne.setBorder(fieldBorder);
-        rentTwo.setBorder(fieldBorder);
-
-        fieldPanel.add(price);
-        fieldPanel.add(rentOne);
-        fieldPanel.add(rentTwo);
-
-        JLabel priceVal = new JLabel("$" + utility.getPrice());
-        JLabel rentOneVal = new JLabel("4 X roll");
-        JLabel rentTwoVal = new JLabel("10 X roll");
-
-        priceVal.setBorder(valueBorder);
-        rentOneVal.setBorder(valueBorder);
-        rentTwoVal.setBorder(valueBorder);
-
-        valuePanel.add(priceVal);
-        valuePanel.add(rentOneVal);
-        valuePanel.add(rentTwoVal);
+        // tell the corresponding OwnableSquare method to: fill the field and value panels, use the borders, and format the name label
+        if(square instanceof Property){
+            displayPropertyInfo(fieldPanel, valuePanel, fieldBorder, valueBorder, name);
+        } else if(square instanceof Railroad){
+            displayRailroadInfo(fieldPanel, valuePanel, fieldBorder, valueBorder, name);
+        } else if(square instanceof Utility){
+            displayUtilityInfo(fieldPanel, valuePanel, fieldBorder, valueBorder, name);
+        }
 
         mainPanel.add(name, BorderLayout.NORTH);
         mainPanel.add(fieldPanel, BorderLayout.WEST);
@@ -118,25 +88,47 @@ public class CardFrame extends JOptionPane {
     }
 
     /**
+     * Display Utility info (name, price, rent) on card
+     * @author Shrimei
+     */
+    private void displayUtilityInfo(JPanel fieldPanel, JPanel valuePanel, Border fieldBorder, Border valueBorder, JLabel name) {
+        Utility utility = (Utility) square;
+
+        name.setForeground(BoardColours.LIGHTTEXT.getColour());
+        name.setBackground(BoardColours.UTILITY.getColour());
+
+        JLabel price = new JLabel("Price: ");
+        JLabel rentOne = new JLabel("1 Utility Owned");
+        JLabel rentTwo = new JLabel("2 Utilities Owned");
+
+        JLabel[] labels = {price, rentOne, rentTwo};
+
+        for (JLabel label : labels){
+            label.setBorder(fieldBorder);
+            fieldPanel.add(label);
+        }
+
+        JLabel priceVal = new JLabel("$" + utility.getPrice());
+        JLabel rentOneVal = new JLabel("4 X roll");
+        JLabel rentTwoVal = new JLabel("10 X roll");
+
+        JLabel[] values = {priceVal, rentOneVal, rentTwoVal};
+
+        for (JLabel value : values){
+            value.setBorder(valueBorder);
+            valuePanel.add(value);
+        }
+
+    }
+
+    /**
      * Display railroad info (name, price, rent) on card
      * @author Shrimei
      */
-    private void displayRailroadInfo() {
+    private void displayRailroadInfo(JPanel fieldPanel, JPanel valuePanel, Border fieldBorder, Border valueBorder, JLabel name) {
         Railroad railroad = (Railroad) square;
 
-        JPanel fieldPanel = new JPanel();
-        JPanel valuePanel = new JPanel();
-
-        fieldPanel.setLayout(new BoxLayout(fieldPanel,BoxLayout.Y_AXIS));
-        valuePanel.setLayout(new BoxLayout(valuePanel,BoxLayout.Y_AXIS));
-
-        Border fieldBorder = new EmptyBorder(6,3,3,3);
-        Border valueBorder = new EmptyBorder(6,3,3,3);
-
-        JLabel name = new JLabel(railroad.getName(), SwingConstants.CENTER);
         name.setForeground(BoardColours.LIGHTTEXT.getColour());
-        name.setBorder(valueBorder);
-        name.setOpaque(true);
         name.setBackground(BoardColours.RAILROAD.getColour());
 
         JLabel price = new JLabel("Price: ");
@@ -145,17 +137,12 @@ public class CardFrame extends JOptionPane {
         JLabel rentThree = new JLabel("3 Railroads Owned: ");
         JLabel rentFour = new JLabel("4 Railroads Owned: ");
 
-        price.setBorder(fieldBorder);
-        rentOne.setBorder(fieldBorder);
-        rentTwo.setBorder(fieldBorder);
-        rentThree.setBorder(fieldBorder);
-        rentFour.setBorder(fieldBorder);
+        JLabel[] labels = {price, rentOne, rentTwo, rentThree, rentFour};
 
-        fieldPanel.add(price);
-        fieldPanel.add(rentOne);
-        fieldPanel.add(rentTwo);
-        fieldPanel.add(rentThree);
-        fieldPanel.add(rentFour);
+        for (JLabel label : labels){
+            label.setBorder(fieldBorder);
+            fieldPanel.add(label);
+        }
 
         JLabel priceVal = new JLabel("$" + railroad.getPrice());
         JLabel rentOneVal = new JLabel("$" + railroad.getRent(1));
@@ -163,44 +150,23 @@ public class CardFrame extends JOptionPane {
         JLabel rentThreeVal = new JLabel("$" + railroad.getRent(3));
         JLabel rentFourVal = new JLabel("$" + railroad.getRent(4));
 
-        priceVal.setBorder(valueBorder);
-        rentOneVal.setBorder(valueBorder);
-        rentTwoVal.setBorder(valueBorder);
-        rentThreeVal.setBorder(valueBorder);
-        rentFourVal.setBorder(valueBorder);
+        JLabel[] values = {priceVal, rentOneVal, rentTwoVal, rentThreeVal, rentFourVal};
 
-        valuePanel.add(priceVal);
-        valuePanel.add(rentOneVal);
-        valuePanel.add(rentTwoVal);
-        valuePanel.add(rentThreeVal);
-        valuePanel.add(rentFourVal);
+        for (JLabel value : values){
+            value.setBorder(valueBorder);
+            valuePanel.add(value);
+        }
 
-        mainPanel.add(name, BorderLayout.NORTH);
-        mainPanel.add(fieldPanel, BorderLayout.WEST);
-        mainPanel.add(valuePanel, BorderLayout.EAST);
     }
 
     /**
      * Display the property info (price, name, colour, rent, houses) on a frame
      * @author Shrimei
      */
-    private void displayPropertyInfo() {
+    private void displayPropertyInfo(JPanel fieldPanel, JPanel valuePanel, Border fieldBorder, Border valueBorder, JLabel name) {
         Property property = (Property) square;
 
-        JPanel fieldPanel = new JPanel();
-        JPanel valuePanel = new JPanel();
-
-        fieldPanel.setLayout(new BoxLayout(fieldPanel,BoxLayout.Y_AXIS));
-        valuePanel.setLayout(new BoxLayout(valuePanel,BoxLayout.Y_AXIS));
-
-        Border fieldBorder = new EmptyBorder(6,3,3,3);
-        Border valueBorder = new EmptyBorder(6,3,3,3);
-
         Color colour = property.getColourGroup().getColour();
-
-        JLabel name = new JLabel(property.getName(), SwingConstants.CENTER);
-        name.setBorder(valueBorder);
-        name.setOpaque(true);
         name.setBackground(colour);
 
         JLabel price = new JLabel("Price: ");
@@ -214,27 +180,12 @@ public class CardFrame extends JOptionPane {
         JLabel houseCost = new JLabel("House cost: ");
         JLabel hotelCost = new JLabel("Hotel cost: ");
 
-        price.setBorder(fieldBorder);
-        rent.setBorder(fieldBorder);
-        rentWithSet.setBorder(fieldBorder);
-        rentOneHouse.setBorder(fieldBorder);
-        rentTwoHouses.setBorder(fieldBorder);
-        rentThreeHouses.setBorder(fieldBorder);
-        rentFourHouses.setBorder(fieldBorder);
-        rentHotel.setBorder(fieldBorder);
-        houseCost.setBorder(fieldBorder);
-        hotelCost.setBorder(fieldBorder);
+        JLabel[] labels = {price, rent, rentWithSet, rentOneHouse, rentTwoHouses, rentThreeHouses, rentFourHouses, rentHotel, houseCost, hotelCost};
 
-        fieldPanel.add(price);
-        fieldPanel.add(rent);
-        fieldPanel.add(rentWithSet);
-        fieldPanel.add(rentOneHouse);
-        fieldPanel.add(rentTwoHouses);
-        fieldPanel.add(rentThreeHouses);
-        fieldPanel.add(rentFourHouses);
-        fieldPanel.add(rentHotel);
-        fieldPanel.add(houseCost);
-        fieldPanel.add(hotelCost);
+        for (JLabel label : labels){
+            label.setBorder(fieldBorder);
+            fieldPanel.add(label);
+        }
 
         JLabel priceVal = new JLabel("$" + property.getPrice());
         JLabel rentVal = new JLabel("$" +property.getRent());
@@ -247,31 +198,12 @@ public class CardFrame extends JOptionPane {
         JLabel houseCostVal= new JLabel("$" + property.getHousePrice());
         JLabel hotelCostVal= new JLabel("$" + property.getHousePrice());
 
-        priceVal.setBorder(valueBorder);
-        rentVal.setBorder(valueBorder);
-        rentWithSetVal.setBorder(valueBorder);
-        rentOneHouseVal.setBorder(valueBorder);
-        rentTwoHousesVal.setBorder(valueBorder);
-        rentThreeHousesVal.setBorder(valueBorder);
-        rentFourHousesVal.setBorder(valueBorder);
-        rentHotelVal.setBorder(valueBorder);
-        houseCostVal.setBorder(valueBorder);
-        hotelCostVal.setBorder(valueBorder);
+        JLabel[] values = {priceVal, rentVal, rentWithSetVal, rentOneHouseVal, rentTwoHousesVal, rentThreeHousesVal, rentFourHousesVal, rentHotelVal, houseCostVal, hotelCostVal};
 
-        valuePanel.add(priceVal);
-        valuePanel.add(rentVal);
-        valuePanel.add(rentWithSetVal);
-        valuePanel.add(rentOneHouseVal);
-        valuePanel.add(rentTwoHousesVal);
-        valuePanel.add(rentThreeHousesVal);
-        valuePanel.add(rentFourHousesVal);
-        valuePanel.add(rentHotelVal);
-        valuePanel.add(houseCostVal);
-        valuePanel.add(hotelCostVal);
-
-        mainPanel.add(name, BorderLayout.NORTH);
-        mainPanel.add(fieldPanel, BorderLayout.WEST);
-        mainPanel.add(valuePanel, BorderLayout.EAST);
+        for (JLabel value : values){
+            value.setBorder(valueBorder);
+            valuePanel.add(value);
+        }
     }
 
     /**
