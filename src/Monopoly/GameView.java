@@ -24,8 +24,6 @@ public class GameView implements MonopolyInterfaceView {
 
     private HashMap<Player, PieceComponent> pieces;
 
-    private JButton diceButton;
-
     /**
      * Create an overall game view
      * @author Maisha
@@ -53,7 +51,10 @@ public class GameView implements MonopolyInterfaceView {
 
         boardPanel = new BoardPanel(game.getBoard());
         JPanel boardPanel = this.boardPanel.getMainPanel();
-        this.diceButton = dicePanelSetup();
+
+        this.dicePanel = new DicePanel(game.getDice1(), game.getDice2());
+        JButton diceButton = dicePanel.getDiceButton();
+        diceButton.addActionListener(gameController);
         boardPanel.add(diceButton, BorderLayout.CENTER);
 
         JPanel playerPanel = new JPanel();
@@ -74,36 +75,6 @@ public class GameView implements MonopolyInterfaceView {
 
     }
 
-
-    /**
-     * Set up a dice panel
-     * @author Maisha
-     * @author Thanuja
-     * @return          the JButton that displays the dice panel
-     */
-    private JButton dicePanelSetup(){
-        //get dice from game
-        Dice dice1 = game.getDice1();
-        Dice dice2 = game.getDice2();
-
-        this.dicePanel = new DicePanel(dice1, dice2);
-
-        // create dice button and add game controller to it
-        this.diceButton = new JButton();
-        diceButton.addActionListener(gameController); //on click, call game controller
-
-        //dicePanel displays roll value on button
-        JPanel dicePanel = this.dicePanel.getDicePanel();
-        diceButton.add(dicePanel);
-        diceButton.setBorderPainted(true);
-
-        diceButton.setBorder(BorderFactory.createCompoundBorder(
-                BorderFactory.createLineBorder(BoardColours.BORDER.getColour(), 2),
-                BorderFactory.createLineBorder(BoardColours.BOARD.getColour(), 100)));
-
-        return diceButton;
-    }
-
     /**
      * Gets the initial number of players
      * @author Maisha
@@ -111,7 +82,7 @@ public class GameView implements MonopolyInterfaceView {
      */
     public Integer handleNumberOfPlayers(){
         Integer[] options = {2,3,4};
-        Integer input = (Integer) JOptionPane.showInputDialog(null,"How many total players do you wish to have?","PLAYERS",
+        Integer input = (Integer) JOptionPane.showInputDialog(frame,"How many total players do you wish to have?","PLAYERS",
                 JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
         if (input == null) {
             System.exit(0);
@@ -132,7 +103,7 @@ public class GameView implements MonopolyInterfaceView {
         }
         Integer[] options = optionsArrayList.toArray(new Integer[0]);
                 //optionsArrayList.stream().mapToInt(i->i).toArray(); //(Integer[]) optionsArrayList.toArray();
-        Integer input = (Integer) JOptionPane.showInputDialog(null,"How many AI players do you wish to have?","AI PLAYERS",
+        Integer input = (Integer) JOptionPane.showInputDialog(frame,"How many AI players do you wish to have?","AI PLAYERS",
                 JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
         if (input == null) {
             System.exit(0);
@@ -210,7 +181,7 @@ public class GameView implements MonopolyInterfaceView {
     @Override
     public void handlePlayerState() {
         boolean isPlayerAI = game.getCurrentPlayer() instanceof PlayerAI;
-        this.diceButton.setEnabled(!isPlayerAI); // disable button during AI turn
+        this.dicePanel.getDiceButton().setEnabled(!isPlayerAI); // disable button during AI turn
         this.playerStatePanel.updatePlayer();
         this.playersPanel.updatePlayers();
     }
@@ -235,7 +206,7 @@ public class GameView implements MonopolyInterfaceView {
         Player currentPlayer = game.getCurrentPlayer();
         if (!(currentPlayer instanceof PlayerAI)) {
             String title = "Player " + currentPlayer.getId() + " Go To Jail";
-            JOptionPane.showMessageDialog(null, message, title, JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(frame, message, title, JOptionPane.INFORMATION_MESSAGE);
         }
         // update piece position
         moveCurrentPiece();
@@ -251,7 +222,7 @@ public class GameView implements MonopolyInterfaceView {
         Player currentPlayer = game.getCurrentPlayer();
         if (!(currentPlayer instanceof PlayerAI)) {
             String title = "Player " + currentPlayer.getId() + " Exit Jail";
-            JOptionPane.showMessageDialog(null, message, title, JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(frame, message, title, JOptionPane.INFORMATION_MESSAGE);
         }
         // update piece position
         moveCurrentPiece();
@@ -266,7 +237,7 @@ public class GameView implements MonopolyInterfaceView {
     @Override
     public void handleBankruptcy(Player player) {
         if (!(player instanceof PlayerAI)) {
-            JOptionPane.showMessageDialog(null, "Player " + player.getId() + " is bankrupt. You cannot play further.");
+            JOptionPane.showMessageDialog(frame, "Player " + player.getId() + " is bankrupt. You cannot play further.");
         }
         pieces.get(player).removePiece();
         pieces.remove(player);
@@ -279,7 +250,7 @@ public class GameView implements MonopolyInterfaceView {
     @Override
     public void handlePassedGo() {
         if (!(game.getCurrentPlayer() instanceof PlayerAI)) {
-            JOptionPane.showMessageDialog(null, "You passed GO! Collect $200.");
+            JOptionPane.showMessageDialog(frame, "You passed GO! Collect $200.");
         }
     }
 
@@ -294,7 +265,7 @@ public class GameView implements MonopolyInterfaceView {
         if (currentPlayer instanceof PlayerAI){
             return currentPlayer.getMoney() >= 50;
         }else {
-            int result = JOptionPane.showConfirmDialog(null, "Pay $50 fee to exit jail?\n(Otherwise try rolling doubles to exit)", "Exit Jail Early?", JOptionPane.YES_NO_OPTION);
+            int result = JOptionPane.showConfirmDialog(frame, "Pay $50 fee to exit jail?\n(Otherwise try rolling doubles to exit)", "Exit Jail Early?", JOptionPane.YES_NO_OPTION);
             return (result == JOptionPane.YES_OPTION);
         }
     }
@@ -306,7 +277,7 @@ public class GameView implements MonopolyInterfaceView {
      */
     @Override
     public void handleWinner() {
-        JOptionPane.showMessageDialog(null, "Congratulations! Player: " + game.getPlayers().get(0).getId() +
+        JOptionPane.showMessageDialog(frame, "Congratulations! Player: " + game.getPlayers().get(0).getId() +
                 " has won!");
     }
 
