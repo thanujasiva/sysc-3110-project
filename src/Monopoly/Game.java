@@ -342,10 +342,62 @@ public class Game {
      * @author Thanuja
      */
     public void handleRoll() {
-        if (getCurrentPlayer().isJailTurn()){
-            handleJailTurn();  // handle when a player is in jail
+        if (getCurrentPlayer().isJailTurn() && !exitJailBeforeRoll()) {
+            handleJailTurn();  // handle when a player is still in jail
         }else{
             handleMove(); // handle a normal roll
+        }
+    }
+
+    /**
+     * Check if current player can and wants to exit jail early
+     * @author Thanuja
+     * @return          true if exited jail early, false otherwise
+     */
+    private boolean exitJailBeforeRoll(){
+        boolean exitedEarly = false;
+        Player currentPlayer = getCurrentPlayer();
+        Jail jail = board.getJailSquare();
+        // can pay $50 fine to the Bank before throwing the dice for first/second turn in Jail
+        if ((jail.getJailTime(currentPlayer) <= 2) && (currentPlayer.getMoney() >= 50)){
+            boolean wantToPayExitFee = false;
+            for (MonopolyInterfaceView view : this.views){
+                if (view.askIfJailExit()){ // only 1 view has to say yes
+                    wantToPayExitFee = true;
+                }
+            }
+
+            if (wantToPayExitFee){
+                boolean canPayExitFee = currentPlayer.payRent(50);
+                if (canPayExitFee) {
+                    this.removeCurrentPlayerFromJail();
+                    for (MonopolyInterfaceView view : this.views) {
+                        view.handleJailExited("You paid $50 fine! Exit Jail.");
+                    }
+
+                    exitedEarly = true;
+                } // else, cannot pay exit fee (continue jail round)
+            }
+        }
+        return exitedEarly;
+    }
+
+    /**
+     * Handle when current player exits jail after rolling the dice
+     * @author Thanuja
+     * @param roll          the roll the current player rolled
+     * @param message       the reason for exiting jail
+     */
+    private void exitJailAfterRoll(int roll, String message){
+        Player currentPlayer = getCurrentPlayer();
+        this.removeCurrentPlayerFromJail();
+        currentPlayer.changePosition(roll);
+        for (MonopolyInterfaceView view : this.views) {
+            view.handleJailExited(message);
+        }
+        // cannot call Game.handleMove() because player already rolled the dice, so call view.handleRoll() instead
+        for (MonopolyInterfaceView view : this.views){
+            view.handleRoll(); // update player position, show the card they landed on, handle purchase/rent, etc
         }
     }
 
@@ -354,34 +406,11 @@ public class Game {
      * @author Sabah
      * @author Thanuja
      */
-    public void handleJailTurn(){
+    private void handleJailTurn(){
         Player currentPlayer = getCurrentPlayer();
         if (currentPlayer.isJailTurn()){
 
             Jail jail = board.getJailSquare();
-
-            // can pay $50 fine to the Bank before throwing the dice for first/second turn in Jail
-            if ((jail.getJailTime(currentPlayer) <= 2) && (currentPlayer.getMoney() >= 50)){
-                boolean wantToPayExitFee = false;
-                for (MonopolyInterfaceView view : this.views){
-                    if (view.askIfJailExit()){ // only 1 view has to say yes
-                        wantToPayExitFee = true;
-                    }
-                }
-
-                if (wantToPayExitFee){
-                    boolean canPayExitFee = currentPlayer.payRent(50);
-                    if (canPayExitFee) {
-                        this.removeCurrentPlayerFromJail();
-                        for (MonopolyInterfaceView view : this.views) {
-                            view.handleJailExited("You paid $50 fine! Exit Jail.");
-                        }
-
-                        handleMove(); // continue with normal turn
-                        return;
-                    } // else, cannot pay exit fee (continue jail round)
-                }
-            }
 
             int roll = dice1.rollDice() + dice2.rollDice();
             // only move player if they can exit jail
@@ -391,13 +420,8 @@ public class Game {
 
             if (dice1.getDiceNumber() == dice2.getDiceNumber()) {
                 //System.out.println("Rolled doubles - exit jail " + currentPlayer.getId());
-                this.removeCurrentPlayerFromJail();
-                currentPlayer.changePosition(roll);
-                for (MonopolyInterfaceView view : this.views){
-                    view.handleJailExited("You rolled doubles! Exit Jail.");
-                }
+                exitJailAfterRoll(roll, "You rolled doubles! Exit Jail.");
             } else {
-                // increment time in jail
                 jail.incrementJailTime(currentPlayer);
                 //System.out.println("increment jail time to " + jail.getJailTime(currentPlayer) + " for player " + currentPlayer.getId());
             }
@@ -406,20 +430,9 @@ public class Game {
                 //System.out.println("Can leave jail after paying $50 " + getCurrentPlayer().getId()); // Message Dialog?
                 boolean canPayExitFee = currentPlayer.payRent(50);
                 if (canPayExitFee) {
-                    this.removeCurrentPlayerFromJail();
-                    currentPlayer.changePosition(roll);
-                    for (MonopolyInterfaceView view : this.views) {
-                        view.handleJailExited("You paid $50 fine! Exit Jail.");
-                    }
+                    exitJailAfterRoll(roll, "You paid $50 fine! Exit Jail.");
                 }else{
                     currentPlayerBankrupt();
-                }
-
-            }
-
-            if (!currentPlayer.isJailTurn()){ // if they exited jail
-                for (MonopolyInterfaceView view : this.views){
-                    view.handleRoll(); // show the card they landed on, handle purchase/rent, etc
                 }
             }
 
@@ -427,7 +440,7 @@ public class Game {
                 view.handleEndOfTurn();
             }
 
-            for (MonopolyInterfaceView view : this.views){ // update with player change after switch turn
+            for (MonopolyInterfaceView view : this.views){ // update with player change after end of turn
                 view.handlePlayerState();
             }
         }
