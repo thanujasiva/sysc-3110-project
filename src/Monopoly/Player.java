@@ -5,10 +5,11 @@ import Monopoly.Squares.Property;
 import Monopoly.Squares.Railroad;
 import Monopoly.Squares.Utility;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Player {
+public class Player implements Serializable {
 
     private int money;
     private int railroadNumber;

@@ -1,6 +1,7 @@
 package Monopoly;
 
 import java.awt.*;
+// enums are automatically Serializable
 
 public enum ColourGroups{
 
