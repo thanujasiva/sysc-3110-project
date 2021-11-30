@@ -1,5 +1,7 @@
 package Monopoly.Squares;
 
-public interface Square {
+import java.io.Serializable;
+
+public interface Square extends Serializable {
     String getName();
 }

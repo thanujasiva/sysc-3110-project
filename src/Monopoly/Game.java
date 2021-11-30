@@ -4,6 +4,7 @@ import Monopoly.Squares.*;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.*;
 import java.util.ArrayList;
 import javax.swing.Timer;
 
@@ -564,6 +565,95 @@ public class Game {
      */
     public Square getCurrentSquare() {
         return board.getSquares().get(getCurrentPlayer().getPosition() % board.getSquares().size());
+    }
+
+
+
+    /**
+     * Import the Game's players and board from a serialized file
+     * @author Thanuja
+     * @param fileName      filename to import from
+     * @return              true if successful, false if exception occurs
+     */
+    public boolean importGame(String fileName) {
+        try {
+            FileInputStream fileInputStream = new FileInputStream(fileName + ".ser");
+            ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
+
+            Object object;
+
+            object = objectInputStream.readObject();
+            this.currentPlayerNumber = (int) object;
+
+            object = objectInputStream.readObject();
+            this.doubles = (int) object;
+
+            object = objectInputStream.readObject();
+            if(object instanceof Board){
+                this.board = (Board) object;
+            }
+
+            while ((object = objectInputStream.readObject()) != null && (object instanceof Player)) {
+                Player player = (Player) object;
+                this.addPlayer(player);
+            }
+
+            fileInputStream.close();
+            objectInputStream.close();
+
+            return true;
+        } catch (ClassNotFoundException | IOException e) {
+            return false;
+        }
+    }
+
+    /**
+     * Save game for each of the views
+     * @author Thanuja
+     */
+    public void saveGame(){
+        for (MonopolyInterfaceView view : this.views){
+            String fileName = view.getFilenameToSaveGame("ser");
+            if (fileName != null) {
+                boolean savedSuccesfully = saveGame(fileName);
+                view.handleGameSaving(savedSuccesfully, fileName + ".ser");
+            }
+        }
+    }
+
+    /**
+     * Save the Game's players and board to a serialized file
+     * @author Thanuja
+     * @param fileName      filename to save as
+     * @return              true if successful, false if exception occurs
+     */
+    public boolean saveGame(String fileName){
+        try {
+            // use ObjectOutputStream for object serialization
+            FileOutputStream fileOutputStream = new FileOutputStream(fileName + ".ser");
+            ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
+
+            // may not need to save the dice
+
+            objectOutputStream.writeObject(currentPlayerNumber);
+            objectOutputStream.flush();
+            objectOutputStream.writeObject(doubles);
+            objectOutputStream.flush();
+
+            objectOutputStream.writeObject(this.board);
+            objectOutputStream.flush();
+
+            for (Object player : this.players) {
+                objectOutputStream.writeObject(player);
+                objectOutputStream.flush();
+            }
+            fileOutputStream.close();
+            objectOutputStream.close();
+
+            return true;
+        } catch (IOException ioException) {
+            return false;
+        }
     }
 
     /*

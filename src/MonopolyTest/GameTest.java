@@ -2,6 +2,8 @@ package MonopolyTest;
 
 import Monopoly.ColourGroups;
 import Monopoly.Game;
+import Monopoly.PlayerAI;
+import Monopoly.Squares.OwnableSquare;
 import Monopoly.Squares.Property;
 import Monopoly.Player;
 
@@ -288,4 +290,147 @@ public class GameTest {
         assertEquals(0, game.getCurrentPlayer().getNumberOfHouses(Oriental)); //clear houses to 0
         assertEquals(1, game.getCurrentPlayer().getNumberOfHotel(Oriental));
     }
+
+    /**
+     * Test serialization of primitive values of Player
+     * @author Thanuja
+     */
+    @Test
+    public void testSaveAndImportGamePlayersPrimitiveValues() {
+        Player player1 = new Player();
+        player1.payRent(500);
+        player1.setPosition(15);
+        this.game.addPlayer(player1);
+
+        Player player2 = new PlayerAI();
+        player2.setJailTurn(true);
+        this.game.addPlayer(player2);
+
+        this.game.saveGame("test-serialization-file");
+
+        Game importedGame = new Game();
+        importedGame.importGame("test-serialization-file");
+
+        // assert both games have 2 players
+        assertEquals(2, this.game.getPlayers().size());
+        assertEquals(2, importedGame.getPlayers().size());
+
+        // assert some of the integer/boolean values
+        assertEquals(this.game.getPlayers().get(0).getMoney(), importedGame.getPlayers().get(0).getMoney());
+        assertEquals(this.game.getPlayers().get(0).getPosition(), importedGame.getPlayers().get(0).getPosition());
+        assertEquals(this.game.getPlayers().get(1).isJailTurn(), importedGame.getPlayers().get(1).isJailTurn());
+
+        // assert player 2 is AI for both games
+        assertTrue(this.game.getPlayers().get(1) instanceof PlayerAI);
+        assertTrue(importedGame.getPlayers().get(1) instanceof PlayerAI);
+    }
+
+
+    /**
+     * Test serialization of a Player's purchase transaction of an OwnableSquare
+     * @author Thanuja
+     */
+    @Test
+    public void testSaveAndImportGameColourSetAndHouse() {
+        Player player1 = new Player();
+        this.game.addPlayer(player1);
+
+        //colour group test
+        player1.setPosition(1);
+        game.purchaseTransaction();
+        player1.setPosition(2);
+        game.purchaseTransaction();
+        game.canBuyHouse((Property) this.game.getCurrentSquare()); // house on property 2
+
+        this.game.saveGame("test-serialization-file");
+
+        Game importedGame = new Game();
+        importedGame.importGame("test-serialization-file");
+
+        // assert player still owns 2 squares
+        assertEquals(2, this.game.getPlayers().get(0).getOwnableSquares().size());
+        assertEquals(2, importedGame.getPlayers().get(0).getOwnableSquares().size());
+
+        // assert rent with colour group is used for colour set
+        assertEquals(12, this.game.getPlayers().get(0).getRentAmount((OwnableSquare) this.game.getBoard().getSquares().get(1), 0));
+        assertEquals(12, importedGame.getPlayers().get(0).getRentAmount((OwnableSquare) importedGame.getBoard().getSquares().get(1),0));
+
+        // assert rent with 1 house is used for colour set
+        assertEquals(30, this.game.getPlayers().get(0).getRentAmount((OwnableSquare) this.game.getBoard().getSquares().get(2), 0));
+        assertEquals(30, importedGame.getPlayers().get(0).getRentAmount((OwnableSquare) importedGame.getBoard().getSquares().get(2),0));
+ }
+
+
+    /**
+     * Test serialization of Player in Jail
+     * @author Thanuja
+     */
+    @Test
+    public void testSaveAndImportGamePlayerInJail() {
+        Player player1 = new Player();
+        this.game.addPlayer(player1);
+
+        this.game.addCurrentPlayerToJail(5); // arbitrary roll number
+
+        this.game.saveGame("test-serialization-file");
+
+        Game importedGame = new Game();
+        importedGame.importGame("test-serialization-file");
+
+        assertEquals(1, this.game.getBoard().getJailSquare().getJailTime(this.game.getPlayers().get(0)));
+        assertEquals(1, importedGame.getBoard().getJailSquare().getJailTime(importedGame.getPlayers().get(0)));
+
+    }
+
+    /**
+     * Test serialization of current player number
+     * @author Thanuja
+     */
+    @Test
+    public void testSaveAndImportCurrentPlayerNumber(){
+        Player player1 = new Player();
+        Player player2 = new Player();
+
+        this.game.addPlayer(player1);
+        this.game.addPlayer(player2);
+
+        this.game.getDice1().rollDice(); // roll only 1 dice, to guarantee no doubles
+        this.game.handleSwitchTurn();
+
+        this.game.saveGame("test-serialization-file");
+
+        Game importedGame = new Game();
+        importedGame.importGame("test-serialization-file");
+
+        assertEquals(1, this.game.getCurrentPlayerNumber());
+        assertEquals(1, importedGame.getCurrentPlayerNumber());
+    }
+
+    /**
+     * Test serialization of doubles
+     * @author Thanuja
+     */
+    @Test
+    public void testSaveAndImportDoubles(){
+        Player player1 = new Player();
+        Player player2 = new Player();
+
+        this.game.addPlayer(player1);
+        this.game.addPlayer(player2);
+
+        // do not roll dice, to guarantee doubles
+        this.game.handleSwitchTurn(); // will remain player 0
+        this.game.handleSwitchTurn(); // will remain player 0
+
+        this.game.saveGame("test-serialization-file");
+
+        Game importedGame = new Game();
+        importedGame.importGame("test-serialization-file");
+
+        importedGame.handleSwitchTurn();
+
+        // now, imported game should have player 0 in jail
+        assertTrue(importedGame.getPlayers().get(0).isJailTurn());
+    }
+
 }
