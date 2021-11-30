@@ -27,6 +27,7 @@ public class GameView implements MonopolyInterfaceView {
     /**
      * Create an overall game view
      * @author Maisha
+     * @author Thanuja
      */
     public GameView(){
         frame = new JFrame("Monopoly Game");
@@ -66,6 +67,14 @@ public class GameView implements MonopolyInterfaceView {
         playerPanel.add(playersPanel.getPlayersPanel());
         playerPanel.add(playerStatePanel);
 
+        JMenuItem saveGame = new JMenuItem("Save");
+        SaveGameController saveGameController = new SaveGameController(game);
+        saveGame.addActionListener(saveGameController);
+
+        JMenuBar gameMenuBar = new JMenuBar();
+        gameMenuBar.add(saveGame);
+
+        mainPanel.add(gameMenuBar, BorderLayout.NORTH);
         mainPanel.add(boardPanel, BorderLayout.WEST);
         mainPanel.add(playerPanel, BorderLayout.EAST);
 
@@ -279,6 +288,34 @@ public class GameView implements MonopolyInterfaceView {
     public void handleWinner() {
         JOptionPane.showMessageDialog(frame, "Congratulations! Player: " + game.getPlayers().get(0).getId() +
                 " has won!");
+    }
+
+    /**
+     * Get the filename to save as
+     * @author Thanuja
+     * @param extension     the extension of the file
+     * @return              the filename
+     */
+    @Override
+    public String getFilenameToSaveGame(String extension) {
+        // FIXME - may want to improve file name choosing option (ex. through file explorer)
+        String fileName = JOptionPane.showInputDialog(frame, "Enter filename to save the game as (will have ." + extension + " extension):");
+        return fileName;
+    }
+
+    /**
+     * Show message after file is saved
+     * @author Thanuja
+     * @param savedSuccesfully  if the file saved successfully
+     * @param fileName          the name the file saved as
+     */
+    @Override
+    public void handleGameSaving(boolean savedSuccesfully, String fileName) {
+        if (savedSuccesfully) {
+            JOptionPane.showMessageDialog(frame, "Saved the game as " + fileName, "Alert", JOptionPane.INFORMATION_MESSAGE);
+        }else{
+            JOptionPane.showMessageDialog(frame, "Failed to save the game", "Error",JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     /**

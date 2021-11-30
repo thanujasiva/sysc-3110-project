@@ -595,6 +595,20 @@ public class Game {
     }
 
     /**
+     * Save game for each of the views
+     * @author Thanuja
+     */
+    public void saveGame(){
+        for (MonopolyInterfaceView view : this.views){
+            String fileName = view.getFilenameToSaveGame("ser");
+            if (fileName != null) {
+                boolean savedSuccesfully = saveGame(fileName);
+                view.handleGameSaving(savedSuccesfully, fileName + ".ser");
+            }
+        }
+    }
+
+    /**
      * Save the Game's players and board to a serialized file
      * @author Thanuja
      * @param fileName      filename to save as
