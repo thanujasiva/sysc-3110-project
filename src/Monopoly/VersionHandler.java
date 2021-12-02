@@ -14,9 +14,12 @@ public class VersionHandler extends DefaultHandler {
     private String name;
     private int price;
     private ColourGroups colour;
-
+    private HashMap<Integer, Square> squares;
     private int count = 0;
-    private HashMap<Integer, Square> squares = new HashMap<>();
+
+    public VersionHandler(){
+         squares = new HashMap<>();
+    }
 
     public HashMap<Integer, Square> updateSquares(){
         return squares;
@@ -25,40 +28,46 @@ public class VersionHandler extends DefaultHandler {
     @Override
     public void startElement(String uri, String localName, String qName, Attributes a) {
         switch (qName) {
-            case "name" -> isName = true;
-            case "price" -> isPrice = true;
-            case "ColourGroups" -> isColour = true;
+            case "name":
+                isName = true;
+                break;
+            case "price":
+                isPrice = true;
+                break;
+            case "ColourGroups":
+                isColour = true;
+                break;
         }
     }
 
     @Override
     public void endElement(String uri, String localName, String qName) {
         switch (qName) {
-            case "BlankSquare" -> {
+            case "BlankSquare":
                 BlankSquare blankSquare = new BlankSquare(name);
                 this.squares.put(count, blankSquare);
                 count += 1;
-            }
-            case "Property" -> {
+                break;
+            case "Property":
                 Property property = new Property(name, price, colour);
                 this.squares.put(count, property);
                 count += 1;
-            }
-            case "Utility" -> {
+                break;
+            case "Utility":
                 Utility utility = new Utility(name);
                 this.squares.put(count, utility);
                 count += 1;
-            }
-            case "Railroad" -> {
+                break;
+            case "Railroad":
                 Railroad railroad = new Railroad(name);
                 this.squares.put(count, railroad);
                 count += 1;
-            }
-            case "Jail" -> {
+                break;
+            case "Jail":
                 Jail jail = new Jail();
                 this.squares.put(count, jail);
                 count += 1;
-            }
+                break;
         }
     }
 
