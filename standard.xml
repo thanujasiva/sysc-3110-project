@@ -1,0 +1,55 @@
+<?xml version='1.0' encoding='UTF-8'?>
+    <Board>
+        <versionName>default version</versionName>
+        <squares>
+            <BlankSquare> <name>GO</name></BlankSquare>  
+            <Property>
+                <name>Mediterranean Avenue</name>
+                <price>50</price>
+                <colour>BROWN</colour>
+            </Property>
+            <Property>
+                <name>Baltic Avenue</name>
+                <price>50</price>
+                <colour>BROWN</colour>
+            </Property>
+            <BlankSquare> <name>Income Tax</name></BlankSquare>
+            <Railroad><name>Reading Railroad</name></Railroad>
+            <Utility><name>Electric Company</name></Utility>
+            <Jail></Jail>
+            <BlankSquare> <name>GO</name></BlankSquare>
+            <Property>
+                <name>Mediterranean Avenue</name>
+                <price>50</price>
+                <colour>BROWN</colour>
+            </Property>
+            <Property>
+                <name>Baltic Avenue</name>
+                <price>50</price>
+                <colour>BROWN</colour>
+            </Property>
+            <BlankSquare> <name>Income Tax</name></BlankSquare>
+            <Railroad><name>Reading Railroad</name></Railroad>
+            <Utility><name>Electric Company</name></Utility>
+            <Jail></Jail>
+            <BlankSquare> <name>Income Tax</name></BlankSquare>
+            <Railroad><name>Reading Railroad</name></Railroad>
+            <Utility><name>Electric Company</name></Utility>
+            <Jail></Jail>
+            <BlankSquare> <name>Income Tax</name></BlankSquare>
+            <Railroad><name>Reading Railroad</name></Railroad>
+            <Utility><name>Electric Company</name></Utility>
+            <Jail></Jail>
+            <BlankSquare> <name>Income Tax</name></BlankSquare>
+            <Railroad><name>Reading Railroad</name></Railroad>
+            <Utility><name>Electric Company</name></Utility>
+            <Jail></Jail>
+            <BlankSquare> <name>Income Tax</name></BlankSquare>
+            <Railroad><name>Reading Railroad</name></Railroad>
+            <Utility><name>Electric Company</name></Utility>
+            <Jail></Jail>
+            <Utility><name>Electric Company</name></Utility>
+            <Jail></Jail>
+            <Utility><name>Electric Company</name></Utility>
+        </squares>
+    </Board>

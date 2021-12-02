@@ -12,7 +12,7 @@ import java.util.LinkedHashMap;
 
 public class BoardPanel {
     private JPanel mainPanel;
-
+    private Component[] arr; //FIXME
     private LinkedHashMap<JPanel, Square> allSquares;
 
     /**
@@ -92,6 +92,7 @@ public class BoardPanel {
         for (int i = 0; i < 9; i++){
             JPanel box =  (JPanel) allSquares.keySet().toArray()[8-i];
             bottomBorder.add(box);
+
         }
 
         //left boxes
@@ -105,11 +106,12 @@ public class BoardPanel {
             JPanel box =  (JPanel) allSquares.keySet().toArray()[17+i];
             topBorder.add(box);
         }
-
+        arr = topBorder.getComponents(); //FIXME
         //right boxes
         for (int i = 0; i < 8; i++){
             JPanel box =  (JPanel) allSquares.keySet().toArray()[26+i];
             rightBorder.add(box);
+            arr = rightBorder.getComponents(); //FIXME
         }
 
         mainPanel.setLayout(new BorderLayout());

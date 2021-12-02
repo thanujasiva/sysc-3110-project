@@ -32,7 +32,7 @@ public class Game {
         this.players = new ArrayList<>();
         this.currentPlayerNumber = 0;
         this.doubles = 0;
-        this.board = new Board(); //FIXME create board according to version chosen
+        //this.board = new Board(); //FIXME create board according to version chosen
         this.views = new ArrayList<>();
     }
 

@@ -32,7 +32,7 @@ public class GameView implements MonopolyInterfaceView {
      * @author Maisha
      * @author Thanuja
      */
-    public GameView(){
+    public GameView() throws ParserConfigurationException, IOException, SAXException {
         frame = new JFrame("Monopoly Game");
         this.game = new Game();
         this.gameController = new GameController(game);
@@ -57,7 +57,9 @@ public class GameView implements MonopolyInterfaceView {
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new BorderLayout());
 
-        boardPanel = new BoardPanel(game.getBoard());
+        this.getBoardVersion();
+
+        boardPanel = new BoardPanel(game.getBoard()); //FIXME
         JPanel boardPanel = this.boardPanel.getMainPanel();
 
         this.dicePanel = new DicePanel(game.getDice1(), game.getDice2());
@@ -142,7 +144,7 @@ public class GameView implements MonopolyInterfaceView {
      */
     @Override
     public void handleBoardPlayersUpdate() throws ParserConfigurationException, IOException, SAXException {
-        this.getBoardVersion();
+
         int numTotal = this.handleNumberOfPlayers();
         int numAI = this.handleNumberOfAIPlayers(numTotal);
 
@@ -338,7 +340,7 @@ public class GameView implements MonopolyInterfaceView {
      * @author Maisha
      * @param args      arguments
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ParserConfigurationException, IOException, SAXException {
         GameView gameView = new GameView();
     }
 
