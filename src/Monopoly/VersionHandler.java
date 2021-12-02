@@ -21,10 +21,22 @@ public class VersionHandler extends DefaultHandler {
          squares = new HashMap<>();
     }
 
+    /**
+     * Return the list of squares
+     * @return squares hashmap
+     */
     public HashMap<Integer, Square> updateSquares(){
         return squares;
     }
 
+    /**
+     * Check which attribute is being populated
+     * @author Shrimei
+     * @param uri
+     * @param localName
+     * @param qName
+     * @param a
+     */
     @Override
     public void startElement(String uri, String localName, String qName, Attributes a) {
         switch (qName) {
@@ -40,6 +52,13 @@ public class VersionHandler extends DefaultHandler {
         }
     }
 
+    /**
+     * Create the appropriate square
+     * @author Shrimei
+     * @param uri
+     * @param localName
+     * @param qName
+     */
     @Override
     public void endElement(String uri, String localName, String qName) {
         switch (qName) {
@@ -71,6 +90,13 @@ public class VersionHandler extends DefaultHandler {
         }
     }
 
+    /**
+     * Get attributes within each element
+     * @author Shrimei
+     * @param ch
+     * @param start
+     * @param length
+     */
     @Override
     public void characters(char[] ch, int start, int length) {
         if (isName) {
