@@ -57,7 +57,7 @@ public class GameView implements MonopolyInterfaceView {
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new BorderLayout());
 
-        this.getBoardVersion();
+        this.getBoardVersion(); //set board before creating board panel
 
         boardPanel = new BoardPanel(game.getBoard());
         JPanel boardPanel = this.boardPanel.getMainPanel();
@@ -108,6 +108,13 @@ public class GameView implements MonopolyInterfaceView {
         return input;
     }
 
+    /**
+     * Get the version of the board from player
+     * @author Shrimei
+     * @throws ParserConfigurationException
+     * @throws IOException
+     * @throws SAXException
+     */
     public void getBoardVersion() throws ParserConfigurationException, IOException, SAXException {
         String[] versions = {"Standard", "Sample"};
         String input = (String) JOptionPane.showInputDialog(frame,"What version of monopoly would you like to play?","VERSION",
