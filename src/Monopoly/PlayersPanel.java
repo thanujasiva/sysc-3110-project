@@ -29,6 +29,7 @@ public class PlayersPanel {
         // create empty list model and add to PlayerStatePanel
         this.playersListModel  = new DefaultListModel<>();
         JList <String> playerList = new JList<>(playersListModel);
+        playerList.setFixedCellWidth(300);
         playerList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         playersPanel.add(new JScrollPane(playerList));
     }
