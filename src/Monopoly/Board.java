@@ -1,7 +1,15 @@
 package Monopoly;
 
 import Monopoly.Squares.*;
+import org.xml.sax.Attributes;
+import org.xml.sax.SAXException;
+import org.xml.sax.helpers.DefaultHandler;
 
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.parsers.SAXParser;
+import javax.xml.parsers.SAXParserFactory;
+import java.io.File;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.HashMap;
 
@@ -15,6 +23,11 @@ public class Board implements Serializable {
     public Board(){
         this.squares = new HashMap<>();
         this.setSquares();
+    }
+
+    public Board(String version) throws ParserConfigurationException, IOException, SAXException { //FIXME
+        super();
+        this.importFromXMLFile(version);
     }
 
     /**
@@ -127,7 +140,6 @@ public class Board implements Serializable {
         return squares;
     }
 
-
     /**
      * Return go to jail position
      * @author Thanuja
@@ -162,6 +174,47 @@ public class Board implements Serializable {
      */
     public int getGoPosition() {
         return 0;
+    }
+
+    public void importFromXMLFile(String filename) throws ParserConfigurationException, SAXException, IOException {
+        File file = new File(filename);
+        SAXParserFactory spf = SAXParserFactory.newInstance();
+        SAXParser s = spf.newSAXParser();
+
+        DefaultHandler dh = new DefaultHandler(){
+            Boolean isName = false;
+            String name;
+
+            private HashMap<Integer, Square> squares = new HashMap<>();
+            int count = 0;
+
+            public void startDocument(){
+                Board board = new Board();
+            }
+
+            public void startElement(String uri, String localName, String qName, Attributes a){
+                switch(qName){
+                    case "name":
+                        isName=true;
+                }
+            }
+
+            public void endElement(String uri, String localName, String qName){
+                if(qName.equals("BlankSquare")){
+                    BlankSquare blankSquare = new BlankSquare(name);
+                    this.squares.put(count,blankSquare);
+                    count += 1;
+                }
+            }
+
+            public void characters(char[] ch, int start, int length){
+                if(isName){
+                    name = new String (ch, start, length);
+                    isName=false;
+                }
+            }
+        };
+        s.parse(file, dh);
     }
 
 }
