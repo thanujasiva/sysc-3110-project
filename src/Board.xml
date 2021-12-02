@@ -29,7 +29,7 @@
         </Property>
         <Property>
             <name>Connecticut Avenue</name>
-            <price>100</price>
+            <price>120</price>
             <ColourGroups>ColourGroups.GREY</ColourGroups>
         </Property>
         <Jail></Jail>
