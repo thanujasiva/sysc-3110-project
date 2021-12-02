@@ -2,7 +2,6 @@ package Monopoly;
 
 import Monopoly.Squares.*;
 import org.xml.sax.SAXException;
-import org.xml.sax.helpers.DefaultHandler;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
@@ -12,7 +11,7 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.HashMap;
 
-public class Board extends DefaultHandler implements Serializable {
+public class Board implements Serializable {
     private HashMap<Integer, Square> squares;
 
     /**
