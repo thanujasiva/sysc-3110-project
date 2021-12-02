@@ -6,12 +6,12 @@
             <Property>
                 <name>Mediterranean Avenue</name>
                 <price>50</price>
-                <colour>BROWN</colour>
+                <ColourGroups>BROWN</ColourGroups>
             </Property>
             <Property>
                 <name>Baltic Avenue</name>
                 <price>50</price>
-                <colour>BROWN</colour>
+                <ColourGroups>BROWN</ColourGroups>
             </Property>
             <BlankSquare> <name>Income Tax</name></BlankSquare>
             <Railroad><name>Reading Railroad</name></Railroad>
@@ -21,12 +21,12 @@
             <Property>
                 <name>Mediterranean Avenue</name>
                 <price>50</price>
-                <colour>BROWN</colour>
+                <ColourGroups>BROWN</ColourGroups>
             </Property>
             <Property>
                 <name>Baltic Avenue</name>
                 <price>50</price>
-                <colour>BROWN</colour>
+                <ColourGroups>BROWN</ColourGroups>
             </Property>
             <BlankSquare> <name>Income Tax</name></BlankSquare>
             <Railroad><name>Reading Railroad</name></Railroad>

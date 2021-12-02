@@ -16,34 +16,17 @@ public class Board extends DefaultHandler implements Serializable {
     private HashMap<Integer, Square> squares;
 
     /**
-     * Constructor for board
-     * @author Maisha
-     */
-    /*
-    public Board(){
-        this.squares = new HashMap<>();
-        this.setSquares(); //replace with import from XML
-    }*/
-
-    /**
      * Build board according to specified version
      * @author Shrimei
-     * @param version
+     * @param version of board
      * @throws ParserConfigurationException
      * @throws IOException
      * @throws SAXException
      */
-    public Board(String version) throws ParserConfigurationException, IOException, SAXException { //FIXME
-        super();
+    public Board(String version) throws ParserConfigurationException, IOException, SAXException {
         this.importFromXMLFile(version);
     }
 
-    /**
-     * @author Shrimei
-     * @author Sabah
-     * @author Thanuja
-     * Sets the properties with their descriptions
-     */
     /*
     private void setSquares(){
 
