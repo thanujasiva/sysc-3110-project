@@ -1,8 +1,13 @@
 package Monopoly;
 
+import org.xml.sax.SAXException;
+
+import javax.xml.parsers.ParserConfigurationException;
+import java.io.IOException;
+
 public interface MonopolyInterfaceView {
 
-    void handleBoardPlayersUpdate();
+    void handleBoardPlayersUpdate() throws ParserConfigurationException, IOException, SAXException;
 
     void handleRoll();
 

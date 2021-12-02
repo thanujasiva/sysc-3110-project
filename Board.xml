@@ -1,15 +1,18 @@
 <Board>
     <versionName>default version</versionName>
     <Squares>
+        <BlankSquare>
+            <name>GO</name>
+        </BlankSquare>
         <Property>
             <name>Mediterranean Avenue</name>
             <price>60</price>
-            <ColourGroups>ColourGroups.BROWN</ColourGroups>
+            <ColourGroups>BROWN</ColourGroups>
         </Property>
         <Property>
             <name>Baltic Avenue</name>
             <price>60</price>
-            <ColourGroups>ColourGroups.BROWN</ColourGroups>
+            <ColourGroups>BROWN</ColourGroups>
         </Property>
         <BlankSquare>
             <name>Income Tax</name>
@@ -20,23 +23,23 @@
         <Property>
             <name>Oriental Avenue</name>
             <price>100</price>
-            <ColourGroups>ColourGroups.GREY</ColourGroups>
+            <ColourGroups>GREY</ColourGroups>
         </Property>
         <Property>
             <name>Vermont Avenue</name>
             <price>100</price>
-            <ColourGroups>ColourGroups.GREY</ColourGroups>
+            <ColourGroups>GREY</ColourGroups>
         </Property>
         <Property>
             <name>Connecticut Avenue</name>
             <price>120</price>
-            <ColourGroups>ColourGroups.GREY</ColourGroups>
+            <ColourGroups>GREY</ColourGroups>
         </Property>
         <Jail></Jail>
         <Property>
             <name>St. Charles Place</name>
             <price>140</price>
-            <ColourGroups>ColourGroups.PINK</ColourGroups>
+            <ColourGroups>PINK</ColourGroups>
         </Property>
         <Utility>
             <name>Electric Company</name>
@@ -44,12 +47,12 @@
         <Property>
             <name>States Avenue</name>
             <price>140</price>
-            <ColourGroups>ColourGroups.PINK</ColourGroups>
+            <ColourGroups>PINK</ColourGroups>
         </Property>
         <Property>
             <name>Virginia Avenue</name>
             <price>160</price>
-            <ColourGroups>ColourGroups.PINK</ColourGroups>
+            <ColourGroups>PINK</ColourGroups>
         </Property>
         <Railroad>
             <name>Pennsylvania Railroad</name>
@@ -57,17 +60,17 @@
         <Property>
             <name>St. James Place</name>
             <price>180</price>
-            <ColourGroups>ColourGroups.ORANGE</ColourGroups>
+            <ColourGroups>ORANGE</ColourGroups>
         </Property>
         <Property>
             <name>Tennessee Avenue</name>
             <price>180</price>
-            <ColourGroups>ColourGroups.ORANGE</ColourGroups>
+            <ColourGroups>ORANGE</ColourGroups>
         </Property>
         <Property>
             <name>New York Avenue</name>
             <price>200</price>
-            <ColourGroups>ColourGroups.ORANGE</ColourGroups>
+            <ColourGroups>ORANGE</ColourGroups>
         </Property>
         <BlankSquare>
             <name>Free Parking</name>
@@ -75,17 +78,17 @@
         <Property>
             <name>Kentucky Avenue</name>
             <price>220</price>
-            <ColourGroups>ColourGroups.RED</ColourGroups>
+            <ColourGroups>RED</ColourGroups>
         </Property>
         <Property>
             <name>Indiana Avenue</name>
             <price>220</price>
-            <ColourGroups>ColourGroups.RED</ColourGroups>
+            <ColourGroups>RED</ColourGroups>
         </Property>
         <Property>
             <name>Illinois Avenue</name>
             <price>240</price>
-            <ColourGroups>ColourGroups.RED</ColourGroups>
+            <ColourGroups>RED</ColourGroups>
         </Property>
         <Railroad>
             <name>B. and O. Railroad</name> <!--fix back to &-->
@@ -93,12 +96,12 @@
         <Property>
             <name>Atlantic Avenue</name>
             <price>260</price>
-            <ColourGroups>ColourGroups.YELLOW</ColourGroups>
+            <ColourGroups>YELLOW</ColourGroups>
         </Property>
         <Property>
             <name>Ventnor Avenue</name>
             <price>260</price>
-            <ColourGroups>ColourGroups.YELLOW</ColourGroups>
+            <ColourGroups>YELLOW</ColourGroups>
         </Property>
         <Utility>
             <name>Water Works</name>
@@ -106,7 +109,7 @@
         <Property>
             <name>Marvin Gardens</name>
             <price>280</price>
-            <ColourGroups>ColourGroups.YELLOW</ColourGroups>
+            <ColourGroups>YELLOW</ColourGroups>
         </Property>
         <BlankSquare>
             <name>Go to Jail</name>
@@ -114,17 +117,17 @@
         <Property>
             <name>Pacific Avenue</name>
             <price>300</price>
-            <ColourGroups>ColourGroups.GREEN</ColourGroups>
+            <ColourGroups>GREEN</ColourGroups>
         </Property>
         <Property>
             <name>North Carolina Avenue</name>
             <price>300</price>
-            <ColourGroups>ColourGroups.GREEN</ColourGroups>
+            <ColourGroups>GREEN</ColourGroups>
         </Property>
         <Property>
             <name>Pennsylvania Avenue</name>
             <price>320</price>
-            <ColourGroups>ColourGroups.GREEN</ColourGroups>
+            <ColourGroups>GREEN</ColourGroups>
         </Property>
         <Railroad>
             <name>Short Line Railroad</name>
@@ -132,7 +135,7 @@
         <Property>
             <name>Park Place</name>
             <price>350</price>
-            <ColourGroups>ColourGroups.BLUE</ColourGroups>
+            <ColourGroups>BLUE</ColourGroups>
         </Property>
         <BlankSquare>
             <name>Luxury Tax</name>
@@ -140,7 +143,7 @@
         <Property>
             <name>Boardwalk</name>
             <price>400</price>
-            <ColourGroups>ColourGroups.BLUE</ColourGroups>
+            <ColourGroups>BLUE</ColourGroups>
         </Property>
     </Squares>
 </Board>

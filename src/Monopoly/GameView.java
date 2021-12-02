@@ -2,11 +2,14 @@ package Monopoly;
 
 import Monopoly.Squares.OwnableSquare;
 import Monopoly.Squares.Square;
+import org.xml.sax.SAXException;
 
 import javax.swing.*;
+import javax.xml.parsers.ParserConfigurationException;
 import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -29,7 +32,7 @@ public class GameView implements MonopolyInterfaceView {
      * @author Maisha
      * @author Thanuja
      */
-    public GameView(){
+    public GameView() throws ParserConfigurationException, IOException, SAXException {
         frame = new JFrame("Monopoly Game");
         this.game = new Game();
         this.gameController = new GameController(game);
@@ -41,7 +44,11 @@ public class GameView implements MonopolyInterfaceView {
 
         frame.addWindowListener(new WindowAdapter() {  //defining a class inside another class
             public void windowOpened(WindowEvent e) {
-                handleBoardPlayersUpdate();
+                try {
+                    handleBoardPlayersUpdate();
+                } catch (ParserConfigurationException | IOException | SAXException ex) {
+                    ex.printStackTrace();
+                }
             }
         });
 
@@ -49,6 +56,8 @@ public class GameView implements MonopolyInterfaceView {
 
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new BorderLayout());
+
+        this.getBoardVersion();
 
         boardPanel = new BoardPanel(game.getBoard());
         JPanel boardPanel = this.boardPanel.getMainPanel();
@@ -99,6 +108,13 @@ public class GameView implements MonopolyInterfaceView {
         return input;
     }
 
+    public void getBoardVersion() throws ParserConfigurationException, IOException, SAXException {
+        String[] versions = {"Board", "standard"};
+        String input = (String) JOptionPane.showInputDialog(frame,"What version of monopoly would you like to play?","VERSION",
+                JOptionPane.QUESTION_MESSAGE, null, versions, versions[0]);
+        game.setBoardVersion(input+ ".xml");
+    }
+
     /**
      * Ask for number of AI players
      * @author Thanuja
@@ -127,7 +143,8 @@ public class GameView implements MonopolyInterfaceView {
      * @author Shrimei
      */
     @Override
-    public void handleBoardPlayersUpdate() {
+    public void handleBoardPlayersUpdate() throws ParserConfigurationException, IOException, SAXException {
+
         int numTotal = this.handleNumberOfPlayers();
         int numAI = this.handleNumberOfAIPlayers(numTotal);
 
@@ -323,7 +340,7 @@ public class GameView implements MonopolyInterfaceView {
      * @author Maisha
      * @param args      arguments
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ParserConfigurationException, IOException, SAXException {
         GameView gameView = new GameView();
     }
 

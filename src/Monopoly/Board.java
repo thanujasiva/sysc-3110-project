@@ -1,28 +1,33 @@
 package Monopoly;
 
 import Monopoly.Squares.*;
+import org.xml.sax.SAXException;
+import org.xml.sax.helpers.DefaultHandler;
 
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.parsers.SAXParser;
+import javax.xml.parsers.SAXParserFactory;
+import java.io.File;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.HashMap;
 
-public class Board implements Serializable {
+public class Board extends DefaultHandler implements Serializable {
     private HashMap<Integer, Square> squares;
 
     /**
-     * Constructor for board
-     * @author Maisha
+     * Build board according to specified version
+     * @author Shrimei
+     * @param version of board
+     * @throws ParserConfigurationException
+     * @throws IOException
+     * @throws SAXException
      */
-    public Board(){
-        this.squares = new HashMap<>();
-        this.setSquares();
+    public Board(String version) throws ParserConfigurationException, IOException, SAXException {
+        this.importFromXMLFile(version);
     }
 
-    /**
-     * @author Shrimei
-     * @author Sabah
-     * @author Thanuja
-     * Sets the properties with their descriptions
-     */
+    /*
     private void setSquares(){
 
         BlankSquare GO = new BlankSquare("GO");
@@ -59,7 +64,7 @@ public class Board implements Serializable {
         Property Indiana  = new Property("Indiana Avenue", 220, ColourGroups.RED);
         Property Illinois  = new Property("Illinois Avenue", 240, ColourGroups.RED);
 
-        Railroad BO = new Railroad("B. and O. Railroad"); //Change back to &?
+        Railroad BO = new Railroad("B. and O. Railroad");
 
         Property Atlantic  = new Property("Atlantic Avenue", 260, ColourGroups.YELLOW);
         Property Ventnor  = new Property("Ventnor Avenue", 260, ColourGroups.YELLOW);
@@ -116,7 +121,7 @@ public class Board implements Serializable {
         this.squares.put(31,ParkPlace);
         this.squares.put(32,LuxuryTax);
         this.squares.put(33,Boardwalk);
-    }
+    }*/
 
     /**
      * Return the list of squares on the board
@@ -126,7 +131,6 @@ public class Board implements Serializable {
     public HashMap<Integer, Square> getSquares() {
         return squares;
     }
-
 
     /**
      * Return go to jail position
@@ -162,6 +166,16 @@ public class Board implements Serializable {
      */
     public int getGoPosition() {
         return 0;
+    }
+
+    public void importFromXMLFile(String filename) throws ParserConfigurationException, SAXException, IOException {
+        File file = new File(filename);
+        SAXParserFactory spf = SAXParserFactory.newInstance();
+        SAXParser s = spf.newSAXParser();
+
+        VersionHandler vh = new VersionHandler();
+        s.parse(file, vh);
+        this.squares = vh.updateSquares();
     }
 
 }

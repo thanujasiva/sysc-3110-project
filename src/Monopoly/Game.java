@@ -1,12 +1,14 @@
 package Monopoly;
 
 import Monopoly.Squares.*;
+import org.xml.sax.SAXException;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
 import java.util.ArrayList;
 import javax.swing.Timer;
+import javax.xml.parsers.ParserConfigurationException;
 
 public class Game {
 
@@ -30,8 +32,12 @@ public class Game {
         this.players = new ArrayList<>();
         this.currentPlayerNumber = 0;
         this.doubles = 0;
-        this.board = new Board();
+        //this.board = new Board(); //FIXME create board according to version chosen
         this.views = new ArrayList<>();
+    }
+
+    public void setBoardVersion(String version) throws ParserConfigurationException, IOException, SAXException {
+        this.board = new Board(version);
     }
 
     /**
@@ -614,7 +620,7 @@ public class Game {
     public void saveGame(){
         for (MonopolyInterfaceView view : this.views){
             String fileName = view.getFilenameToSaveGame("ser");
-            if ((fileName != null) && !fileName.equals("")) {
+            if ((fileName != null)&& !fileName.equals("")) {
                 boolean savedSuccesfully = saveGame(fileName);
                 view.handleGameSaving(savedSuccesfully, fileName + ".ser");
             }
