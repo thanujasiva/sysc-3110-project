@@ -59,7 +59,7 @@ public class Board implements Serializable {
         Property Indiana  = new Property("Indiana Avenue", 220, ColourGroups.RED);
         Property Illinois  = new Property("Illinois Avenue", 240, ColourGroups.RED);
 
-        Railroad BO = new Railroad("B. & O. Railroad");
+        Railroad BO = new Railroad("B. and O. Railroad"); //Change back to &?
 
         Property Atlantic  = new Property("Atlantic Avenue", 260, ColourGroups.YELLOW);
         Property Ventnor  = new Property("Ventnor Avenue", 260, ColourGroups.YELLOW);
