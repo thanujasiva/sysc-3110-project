@@ -6,7 +6,7 @@
             <name>GO</name>
         </BlankSquare>
         <Property>
-            <name>Mediterranean Avenue</name>
+            <name>States Avenue</name>
             <price>60</price>
             <ColourGroups>BROWN</ColourGroups>
         </Property>
@@ -46,7 +46,7 @@
             <name>Electric Company</name>
         </Utility>
         <Property>
-            <name>States Avenue</name>
+            <name>Illinois Avenue</name>
             <price>140</price>
             <ColourGroups>PINK</ColourGroups>
         </Property>
@@ -77,7 +77,7 @@
             <name>Free Parking</name>
         </BlankSquare>
         <Property>
-            <name>Kentucky Avenue</name>
+            <name>Ventnor Avenue</name>
             <price>220</price>
             <ColourGroups>RED</ColourGroups>
         </Property>
@@ -87,7 +87,7 @@
             <ColourGroups>RED</ColourGroups>
         </Property>
         <Property>
-            <name>Illinois Avenue</name>
+            <name>Mediterranean Avenue</name>
             <price>240</price>
             <ColourGroups>RED</ColourGroups>
         </Property>
@@ -95,12 +95,12 @@
             <name>B. and O. Railroad</name> <!--fix back to &-->
         </Railroad>
         <Property>
-            <name>Atlantic Avenue</name>
+            <name>Pacific Avenue</name>
             <price>260</price>
             <ColourGroups>YELLOW</ColourGroups>
         </Property>
         <Property>
-            <name>Ventnor Avenue</name>
+            <name>Kentucky Avenue</name>
             <price>260</price>
             <ColourGroups>YELLOW</ColourGroups>
         </Property>
@@ -108,7 +108,7 @@
             <name>Water Works</name>
         </Utility>
         <Property>
-            <name>Marvin Gardens</name>
+            <name>Boardwalk</name>
             <price>280</price>
             <ColourGroups>YELLOW</ColourGroups>
         </Property>
@@ -116,7 +116,7 @@
             <name>Go to Jail</name>
         </BlankSquare>
         <Property>
-            <name>Pacific Avenue</name>
+            <name>Atlantic Avenue</name>
             <price>300</price>
             <ColourGroups>GREEN</ColourGroups>
         </Property>
@@ -142,10 +142,9 @@
             <name>Luxury Tax</name>
         </BlankSquare>
         <Property>
-            <name>Boardwalk</name>
+            <name>Marvin Gardens</name>
             <price>400</price>
             <ColourGroups>BLUE</ColourGroups>
         </Property>
     </Squares>
 </Board>
-
