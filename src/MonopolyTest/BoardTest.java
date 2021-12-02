@@ -17,7 +17,7 @@ public class BoardTest {
      */
     @Before
     public void setUp() {
-        board = new Board();
+        //board = new Board();
     }
 
     /**

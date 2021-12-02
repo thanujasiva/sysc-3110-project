@@ -19,11 +19,20 @@ public class Board extends DefaultHandler implements Serializable {
      * Constructor for board
      * @author Maisha
      */
+    /*
     public Board(){
         this.squares = new HashMap<>();
         this.setSquares(); //replace with import from XML
-    }
+    }*/
 
+    /**
+     * Build board according to specified version
+     * @author Shrimei
+     * @param version
+     * @throws ParserConfigurationException
+     * @throws IOException
+     * @throws SAXException
+     */
     public Board(String version) throws ParserConfigurationException, IOException, SAXException { //FIXME
         super();
         this.importFromXMLFile(version);
@@ -35,6 +44,7 @@ public class Board extends DefaultHandler implements Serializable {
      * @author Thanuja
      * Sets the properties with their descriptions
      */
+    /*
     private void setSquares(){
 
         BlankSquare GO = new BlankSquare("GO");
@@ -128,7 +138,7 @@ public class Board extends DefaultHandler implements Serializable {
         this.squares.put(31,ParkPlace);
         this.squares.put(32,LuxuryTax);
         this.squares.put(33,Boardwalk);
-    }
+    }*/
 
     /**
      * Return the list of squares on the board
