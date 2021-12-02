@@ -5,6 +5,7 @@ import Monopoly.Squares.Property;
 import Monopoly.Squares.Railroad;
 import Monopoly.Squares.Utility;
 
+import java.awt.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -67,7 +68,7 @@ public class Player implements Serializable {
      */
     public boolean buyHotelOnProperty(Property property){
         if (this.money >= property.getHousePrice()) {
-            numberOfHouses.put(property, 0); //empty out number of houses on property
+            //numberOfHouses.put(property, 0); //empty out number of houses on property
             //update has hotel
             numberOfHotel.put(property, 1);
             //if property.hasHouse then no more buying hotels on property
@@ -278,6 +279,27 @@ public class Player implements Serializable {
      */
     public boolean hasAllColours(Property property){
         return colourGroupMatch.getOrDefault(property.getColourGroup(), 0) == property.getColourGroup().getMax();
+    }
+
+    /**
+     * @author Maisha
+     * @param property      the property being checked
+     * @return              true if every property has equal amount of houses on it
+     */
+    public boolean hasEqualHouseOnEveryProperty(Property property){
+        int count = 0;
+        Color propertyColour = property.getColourGroup().getColour();
+        if (hasAllColours(property)){
+            for (OwnableSquare os : this.ownableSquares){
+                if (os instanceof Property){
+                    Property p = (Property)os;
+                    if (p.getColourGroup().getColour().equals(propertyColour) && getNumberOfHouses(p)>=getNumberOfHouses(property)){
+                        count += 1;
+                    }
+                }
+            }
+        }
+        return count == property.getColourGroup().getMax();
     }
 
 }

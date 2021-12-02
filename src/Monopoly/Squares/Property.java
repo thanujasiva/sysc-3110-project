@@ -39,6 +39,7 @@ public class Property extends OwnableSquare {
         this.housePrice = colourGroup.getHousePrice();
     }
 
+
     /**
      * Get the price to buy a house
      * @return house price

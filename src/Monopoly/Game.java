@@ -188,18 +188,20 @@ public class Game {
     public boolean canBuyHouse(Property property){ //FIXME could we have this return a String so that a meaningful message is displayed when purchase not successful
         Player currentPlayer = getCurrentPlayer();
 
-        boolean flag1, flag2;
+        boolean flag1, flag2, flag5;
         boolean flag3 = false;
 
         flag1 = currentPlayer.hasAllColours(property); //have colour set
         flag2 = property.canBuyHouseOnProperty(currentPlayer.getNumberOfHouses(property),currentPlayer.getNumberOfHotel(property)); //don't already have 4 houses
+        flag5 = currentPlayer.hasEqualHouseOnEveryProperty(property);
 
-        if (flag1 && flag2){
+
+        if (flag1 && flag2 && flag5){
             flag3 = currentPlayer.buyHouseOnProperty(property);
             for (MonopolyInterfaceView view : this.views){
                 view.handlePlayerState();
             }
-        } else if (flag1){
+        } else if (flag1 && flag5){
             boolean flag4 = property.canBuyHotelOnProperty(currentPlayer.getNumberOfHotel(property)); //don't already have hotel
 
             if (flag4){

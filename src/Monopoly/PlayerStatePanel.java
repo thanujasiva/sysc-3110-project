@@ -73,10 +73,10 @@ public class PlayerStatePanel extends JPanel{
             if(ownableSquare instanceof Property){
                 int numHouses = player.getNumberOfHouses((Property)ownableSquare);
                 int numHotel = player.getNumberOfHotel((Property)ownableSquare);
-                if (numHouses != 0) {
-                    label = ownableSquare.getName() + "   HOUSES: " + numHouses;
-                } else if (numHotel != 0) {
+                if (numHotel != 0) {
                     label = ownableSquare.getName() + "   HOTEL: " + numHotel;
+                } else if (numHouses != 0) {
+                    label = ownableSquare.getName() + "   HOUSES: " + numHouses;
                 }
             }
             ownedSquaresModel.addElement(label);
