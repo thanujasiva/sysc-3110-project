@@ -620,7 +620,7 @@ public class Game {
     public void saveGame(){
         for (MonopolyInterfaceView view : this.views){
             String fileName = view.getFilenameToSaveGame("ser");
-            if (fileName != null) {
+            if ((fileName != null)&& !fileName.equals("")) {
                 boolean savedSuccesfully = saveGame(fileName);
                 view.handleGameSaving(savedSuccesfully, fileName + ".ser");
             }

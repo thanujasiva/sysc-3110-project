@@ -39,7 +39,7 @@ public class GameView implements MonopolyInterfaceView {
 
         this.game.addView(this);
 
-        frame.setPreferredSize(new Dimension(950, 590));
+        frame.setPreferredSize(new Dimension(950, 600));
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         frame.addWindowListener(new WindowAdapter() {  //defining a class inside another class
