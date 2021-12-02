@@ -49,6 +49,7 @@ public class PlayerStatePanel extends JPanel{
         // create empty JList and add to PlayerStatePanel
         ownedSquaresList = new JList<>();
         ownedSquaresList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        ownedSquaresList.setFixedCellWidth(300);
         this.add(new JScrollPane(ownedSquaresList));
     }
 
