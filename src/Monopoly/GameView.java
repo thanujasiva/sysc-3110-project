@@ -116,7 +116,7 @@ public class GameView implements MonopolyInterfaceView {
      * @throws SAXException
      */
     public void getBoardVersion() throws ParserConfigurationException, IOException, SAXException {
-        String[] versions = {"Standard", "Sample"};
+        String[] versions = {"Standard", "Sample", "Sample 2"};
         String input = (String) JOptionPane.showInputDialog(frame,"What version of monopoly would you like to play?","VERSION",
                 JOptionPane.QUESTION_MESSAGE, null, versions, versions[0]);
         game.setBoardVersion(input+ ".xml");
