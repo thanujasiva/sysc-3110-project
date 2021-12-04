@@ -18,6 +18,9 @@ public class VersionHandler extends DefaultHandler {
     private HashMap<Integer, Square> squares;
     private int count;
     private String currency;
+    private int jailPosition;
+    private int goPosition;
+    private int goToJailPosition;
 
     public VersionHandler(){
         squares = new HashMap<>();
@@ -26,6 +29,11 @@ public class VersionHandler extends DefaultHandler {
         isColour = false;
         isCurrency = false;
         count = 0;
+
+        // default values if board does not have them
+        jailPosition = 8;
+        goPosition = 0;
+        goToJailPosition = -1;
     }
 
     /**
@@ -98,6 +106,7 @@ public class VersionHandler extends DefaultHandler {
             case "Jail":
                 Jail jail = new Jail();
                 this.squares.put(count, jail);
+                this.jailPosition = count;
                 count += 1;
                 break;
         }
@@ -114,6 +123,11 @@ public class VersionHandler extends DefaultHandler {
     public void characters(char[] ch, int start, int length) {
         if (isName) {
             name = new String(ch, start, length);
+            if (name.equals("GO")){
+                goPosition = count;
+            }else if (name.equals("Go to Jail")){
+                goToJailPosition = count;
+            }
             isName = false;
         } else if (isPrice) {
             price = Integer.parseInt(new String(ch, start, length));
@@ -127,5 +141,32 @@ public class VersionHandler extends DefaultHandler {
            currency = new String(ch, start, length);
            isCurrency = false;
         }
+    }
+
+    /**
+     * Return jail position
+     * @author Thanuja
+     * @return int, position of jail
+     */
+    public int getJailPosition() {
+        return jailPosition;
+    }
+
+    /**
+     * Return go position
+     * @author Sabah
+     * @return int, position of go
+     */
+    public int getGoPosition() {
+        return goPosition;
+    }
+
+    /**
+     * Return go to jail position
+     * @author Thanuja
+     * @return int, position of go to jail
+     */
+    public int getGoToJailPosition() {
+        return goToJailPosition;
     }
 }
