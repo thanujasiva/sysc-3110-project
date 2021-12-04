@@ -1,8 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <Board>
-    <versionName>default version</versionName>
-    <initialMoney>$1500</initialMoney>
-    <currency>@</currency>
+    <versionName>International</versionName>
+    <currency>€</currency>
     <squares>
         <BlankSquare> <name>GO</name></BlankSquare>
         <Property>

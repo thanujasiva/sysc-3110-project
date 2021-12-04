@@ -33,7 +33,7 @@ public class GameView implements MonopolyInterfaceView {
      * @author Thanuja
      */
     public GameView() throws ParserConfigurationException, IOException, SAXException {
-        frame = new JFrame("Monopoly Game");
+        frame = new JFrame();
         this.game = new Game();
         this.gameController = new GameController(game);
 
@@ -43,6 +43,7 @@ public class GameView implements MonopolyInterfaceView {
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         if (game.loadGame()){
+            frame.setTitle(game.getBoard().getVersion() + " Monopoly Game");
             frame.addWindowListener(new WindowAdapter() {  //defining a class inside another class
                 public void windowOpened(WindowEvent e) {
                     initializePieces();
@@ -60,6 +61,7 @@ public class GameView implements MonopolyInterfaceView {
                 }
             });
             this.getBoardVersion(); //set board before creating board panel
+            frame.setTitle(game.getBoard().getVersion() + " Monopoly Game");
         }
 
         this.pieces = new HashMap<>();
