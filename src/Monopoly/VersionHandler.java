@@ -69,10 +69,10 @@ public class VersionHandler extends DefaultHandler {
     /**
      * Check which attribute is being populated
      * @author Shrimei
-     * @param uri
-     * @param localName
-     * @param qName
-     * @param a
+     * @param uri namespace URI
+     * @param localName local name string
+     * @param qName XML 1.0 qualified name
+     * @param a attributes attached to element
      */
     @Override
     public void startElement(String uri, String localName, String qName, Attributes a) {
@@ -98,9 +98,9 @@ public class VersionHandler extends DefaultHandler {
     /**
      * Create the appropriate square
      * @author Shrimei
-     * @param uri
-     * @param localName
-     * @param qName
+     * @param uri namespace URI
+     * @param localName local name string
+     * @param qName XML 1.0 qualified name
      */
     @Override
     public void endElement(String uri, String localName, String qName) {
@@ -138,9 +138,9 @@ public class VersionHandler extends DefaultHandler {
      * Get attributes within each element
      * @author Shrimei
      * @author Thanuja
-     * @param ch
-     * @param start
-     * @param length
+     * @param ch array of characters
+     * @param start starting index
+     * @param length size of array
      */
     @Override
     public void characters(char[] ch, int start, int length) {
