@@ -12,12 +12,14 @@ public class VersionHandler extends DefaultHandler {
     private Boolean isPrice;
     private Boolean isColour;
     private Boolean isCurrency;
+    private Boolean isVersion;
     private String name;
     private int price;
     private ColourGroups colour;
     private HashMap<Integer, Square> squares;
     private int count;
     private String currency;
+    private String version;
     private int jailPosition;
     private int goPosition;
     private int goToJailPosition;
@@ -28,6 +30,7 @@ public class VersionHandler extends DefaultHandler {
         isPrice = false;
         isColour = false;
         isCurrency = false;
+        isVersion = false;
         count = 0;
 
         // default values if board does not have them
@@ -38,14 +41,29 @@ public class VersionHandler extends DefaultHandler {
 
     /**
      * Return the list of squares
+     * @author Shrimei
      * @return squares hashmap
      */
     public HashMap<Integer, Square> updateSquares(){
         return squares;
     }
 
+    /**
+     * Return currency symbol
+     * @author Shrimei
+     * @return currency
+     */
     public String getCurrency() {
         return currency;
+    }
+
+    /**
+     * Return version name
+     * @author Shrimei
+     * @return version name
+     */
+    public String getVersion() {
+        return version;
     }
 
     /**
@@ -70,6 +88,10 @@ public class VersionHandler extends DefaultHandler {
                 break;
             case "currency":
                 isCurrency = true;
+                break;
+            case "versionName":
+                isVersion = true;
+                break;
         }
     }
 
@@ -115,6 +137,7 @@ public class VersionHandler extends DefaultHandler {
     /**
      * Get attributes within each element
      * @author Shrimei
+     * @author Thanuja
      * @param ch
      * @param start
      * @param length
@@ -138,8 +161,11 @@ public class VersionHandler extends DefaultHandler {
             Color.getColor(new String(ch, start, length));
             isColour = false;
         } else if (isCurrency){
-           currency = new String(ch, start, length);
-           isCurrency = false;
+            currency = new String(ch, start, length);
+            isCurrency = false;
+        } else if(isVersion){
+            version = new String(ch, start, length);
+            isVersion = false;
         }
     }
 

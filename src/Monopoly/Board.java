@@ -14,6 +14,7 @@ import java.util.HashMap;
 public class Board implements Serializable {
     private HashMap<Integer, Square> squares;
     private String currency;
+    private String version;
     private int JAIL_POSITION;
     private int GO_POSITION;
     private int GO_TO_JAIL_POSITION;
@@ -181,6 +182,16 @@ public class Board implements Serializable {
     }
 
     /**
+     * Return version name
+     * @author Shrimei
+     * @return version
+     */
+    public String getVersion() {
+
+        return version;
+    }
+
+    /**
      * Import the given version of monopoly from an XML file and update the board accordingly
      * @author Shrimei
      * @param filename of version to import
@@ -197,6 +208,8 @@ public class Board implements Serializable {
         s.parse(file, vh);
         this.squares = vh.updateSquares();
         this.currency = vh.getCurrency();
+        this.version = vh.getVersion();
+        System.out.println(version);
         this.JAIL_POSITION = vh.getJailPosition();
         this.GO_POSITION = vh.getGoPosition();
         this.GO_TO_JAIL_POSITION = vh.getGoToJailPosition();
