@@ -1,13 +1,6 @@
 package Monopoly;
 
-import org.xml.sax.SAXException;
-
-import javax.xml.parsers.ParserConfigurationException;
-import java.io.IOException;
-
 public interface MonopolyInterfaceView {
-
-    void handleBoardPlayersUpdate() throws ParserConfigurationException, IOException, SAXException;
 
     void handleRoll();
 
@@ -27,7 +20,11 @@ public interface MonopolyInterfaceView {
 
     void handleWinner();
 
-    String getFilenameToSaveGame(String extension);
+    String getFilenameOfGame();
 
     void handleGameSaving(boolean savedSuccesfully, String fileName);
+
+    boolean askIfLoadPreviousGame();
+
+    void handleGameLoadFailure(String fileName);
 }

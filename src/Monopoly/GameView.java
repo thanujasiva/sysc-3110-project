@@ -42,31 +42,42 @@ public class GameView implements MonopolyInterfaceView {
         frame.setPreferredSize(new Dimension(950, 600));
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
-        frame.addWindowListener(new WindowAdapter() {  //defining a class inside another class
-            public void windowOpened(WindowEvent e) {
-                try {
-                    handleBoardPlayersUpdate();
-                } catch (ParserConfigurationException | IOException | SAXException ex) {
-                    ex.printStackTrace();
+        if (game.loadGame()){
+            frame.addWindowListener(new WindowAdapter() {  //defining a class inside another class
+                public void windowOpened(WindowEvent e) {
+                    initializePieces();
                 }
-            }
-        });
+            });
+        }else {
+            frame.addWindowListener(new WindowAdapter() {  //defining a class inside another class
+                public void windowOpened(WindowEvent e) {
+                    try {
+                        initializePlayers();
+                        initializePieces();
+                    } catch (ParserConfigurationException | IOException | SAXException ex) {
+                        ex.printStackTrace();
+                    }
+                }
+            });
+            this.getBoardVersion(); //set board before creating board panel
+        }
 
         this.pieces = new HashMap<>();
 
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new BorderLayout());
 
-        this.getBoardVersion(); //set board before creating board panel
-
+        // create board panel
         boardPanel = new BoardPanel(game.getBoard());
         JPanel boardPanel = this.boardPanel.getMainPanel();
 
+        // add dice button inside board panel
         this.dicePanel = new DicePanel(game.getDice1(), game.getDice2());
         JButton diceButton = dicePanel.getDiceButton();
         diceButton.addActionListener(gameController);
         boardPanel.add(diceButton, BorderLayout.CENTER);
 
+        // player panels
         JPanel playerPanel = new JPanel();
         playerPanel.setLayout(new BoxLayout(playerPanel, BoxLayout.Y_AXIS));
 
@@ -76,6 +87,7 @@ public class GameView implements MonopolyInterfaceView {
         playerPanel.add(playersPanel.getPlayersPanel());
         playerPanel.add(playerStatePanel);
 
+        // menu bar
         JMenuItem saveGame = new JMenuItem("Save");
         SaveGameController saveGameController = new SaveGameController(game);
         saveGame.addActionListener(saveGameController);
@@ -83,6 +95,7 @@ public class GameView implements MonopolyInterfaceView {
         JMenuBar gameMenuBar = new JMenuBar();
         gameMenuBar.add(saveGame);
 
+        // add final panels to the main panel
         mainPanel.add(gameMenuBar, BorderLayout.NORTH);
         mainPanel.add(boardPanel, BorderLayout.WEST);
         mainPanel.add(playerPanel, BorderLayout.EAST);
@@ -144,13 +157,12 @@ public class GameView implements MonopolyInterfaceView {
     }
 
     /**
-     * Called when a game is started, add selected number of players and display on panel
+     * Called when a game is started, add selected number of players
      * @author Maisha
      * @author Thanuja
      * @author Shrimei
      */
-    @Override
-    public void handleBoardPlayersUpdate() throws ParserConfigurationException, IOException, SAXException {
+    public void initializePlayers() throws ParserConfigurationException, IOException, SAXException {
 
         int numTotal = this.handleNumberOfPlayers();
         int numAI = this.handleNumberOfAIPlayers(numTotal);
@@ -158,13 +170,11 @@ public class GameView implements MonopolyInterfaceView {
         for (int i = 0; i < numTotal-numAI; i++) {
             Player player = new Player();
             this.game.addPlayer(player);
-            pieces.put(player, new PieceComponent(player, boardPanel.getPanel(0)));
         }
 
         for (int i = 0; i < numAI; i++) {
             PlayerAI player = new PlayerAI();
             this.game.addPlayer(player);
-            pieces.put(player, new PieceComponent(player, boardPanel.getPanel(0)));
         }
 
         //FIXME - colour group test to buy houses/hotels
@@ -174,6 +184,22 @@ public class GameView implements MonopolyInterfaceView {
         player.setPosition(2);
         game.purchaseTransaction();*/
         //game.getPlayers().get(num-1).payRent(1500);
+
+    }
+
+    /**
+     * Called when a game is started, create pieces and update player panels
+     * @author Maisha
+     * @author Thanuja
+     * @author Shrimei
+     */
+    public void initializePieces(){
+        for (Player player : this.game.getPlayers()){
+            // get position (in case game was loaded)
+            int position = player.getPosition() % game.getBoard().getSquares().size();
+            PieceComponent pieceComponent = new PieceComponent(player, boardPanel.getPanel(position));
+            pieces.put(player, pieceComponent);
+        }
 
         this.playersPanel.updatePlayers();
         this.playerStatePanel.updatePlayer();
@@ -315,16 +341,25 @@ public class GameView implements MonopolyInterfaceView {
     }
 
     /**
-     * Get the filename to save as
+     * Ask if a previous version of the game is to be loaded
      * @author Thanuja
-     * @param extension     the extension of the file
+     * @return  true if want to load previous game, false otherwise
+     */
+    @Override
+    public boolean askIfLoadPreviousGame() {
+        int result = JOptionPane.showConfirmDialog(frame, "Do you want to reload a previous game?");
+        return result == JOptionPane.YES_OPTION;
+    }
+
+    /**
+     * Get the filename to save/load
+     * @author Thanuja
      * @return              the filename
      */
     @Override
-    public String getFilenameToSaveGame(String extension) {
+    public String getFilenameOfGame() {
         // FIXME - may want to improve file name choosing option (ex. through file explorer)
-        String fileName = JOptionPane.showInputDialog(frame, "Enter filename to save the game as (will have ." + extension + " extension):");
-        return fileName;
+        return JOptionPane.showInputDialog(frame, "Enter filename of the game (without extension):");
     }
 
     /**
@@ -340,6 +375,15 @@ public class GameView implements MonopolyInterfaceView {
         }else{
             JOptionPane.showMessageDialog(frame, "Failed to save the game", "Error",JOptionPane.ERROR_MESSAGE);
         }
+    }
+
+    /**
+     * Handle load game failure
+     * @param fileName     the file that was attempted to load
+     */
+    @Override
+    public void handleGameLoadFailure(String fileName) {
+        JOptionPane.showMessageDialog(frame, "Unable to load " + fileName, "Error",JOptionPane.ERROR_MESSAGE);
     }
 
     /**

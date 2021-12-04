@@ -309,7 +309,7 @@ public class GameTest {
         this.game.saveGame("test-serialization-file");
 
         Game importedGame = new Game();
-        importedGame.importGame("test-serialization-file");
+        importedGame.loadGame("test-serialization-file");
 
         // assert both games have 2 players
         assertEquals(2, this.game.getPlayers().size());
@@ -345,7 +345,7 @@ public class GameTest {
         this.game.saveGame("test-serialization-file");
 
         Game importedGame = new Game();
-        importedGame.importGame("test-serialization-file");
+        importedGame.loadGame("test-serialization-file");
 
         // assert player still owns 2 squares
         assertEquals(2, this.game.getPlayers().get(0).getOwnableSquares().size());
@@ -375,7 +375,7 @@ public class GameTest {
         this.game.saveGame("test-serialization-file");
 
         Game importedGame = new Game();
-        importedGame.importGame("test-serialization-file");
+        importedGame.loadGame("test-serialization-file");
 
         assertEquals(1, this.game.getBoard().getJailSquare().getJailTime(this.game.getPlayers().get(0)));
         assertEquals(1, importedGame.getBoard().getJailSquare().getJailTime(importedGame.getPlayers().get(0)));
@@ -400,7 +400,7 @@ public class GameTest {
         this.game.saveGame("test-serialization-file");
 
         Game importedGame = new Game();
-        importedGame.importGame("test-serialization-file");
+        importedGame.loadGame("test-serialization-file");
 
         assertEquals(1, this.game.getCurrentPlayerNumber());
         assertEquals(1, importedGame.getCurrentPlayerNumber());
@@ -425,7 +425,7 @@ public class GameTest {
         this.game.saveGame("test-serialization-file");
 
         Game importedGame = new Game();
-        importedGame.importGame("test-serialization-file");
+        importedGame.loadGame("test-serialization-file");
 
         importedGame.handleSwitchTurn();
 
