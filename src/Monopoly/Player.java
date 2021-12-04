@@ -30,7 +30,7 @@ public class Player implements Serializable {
      * @author Sabah
      * @author Shrimei
      * @author Maisha
-     * Each player begins with $1500 and starts on position 0
+     * Each player begins with 1500 dollars and starts on position 0
      */
     public Player() {
         this.money = 1500;
@@ -264,7 +264,7 @@ public class Player implements Serializable {
 
     /**
      * @author Sabah
-     * Add $200 to the current player, when passing or landing on go.
+     * Add 200 dollars to the current player, when passing or landing on go.
      */
     public void collect200() {
         this.money += 200;

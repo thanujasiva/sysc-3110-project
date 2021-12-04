@@ -305,14 +305,11 @@ public class Game {
      */
     public void handleSwitchTurn(){
         if (cannotReRoll()){
-            //System.out.println("reset to 0");
             this.switchTurn(); // if 2 or more players remaining
             doubles = 0;
         }else {
             doubles += 1;
-            //System.out.println("Increment doubles for " + getCurrentPlayer().getId());
             if (doubles >= 3) {  // when player rolls doubles more than 3 times
-                //System.out.println("Rolled 3 doubles - Jail " + getCurrentPlayer().getId());
 
                 for (MonopolyInterfaceView view : this.views){
                     view.handleJailEntered("You rolled 3 doubles! Go to Jail.");
@@ -367,7 +364,7 @@ public class Game {
         boolean exitedEarly = false;
         Player currentPlayer = getCurrentPlayer();
         Jail jail = board.getJailSquare();
-        // can pay $50 fine to the Bank before throwing the dice for first/second turn in Jail
+        // can pay 50 dollar fine to the Bank before throwing the dice for first/second turn in Jail
         if ((jail.getJailTime(currentPlayer) <= 2) && (currentPlayer.getMoney() >= 50)){
             boolean wantToPayExitFee = false;
             for (MonopolyInterfaceView view : this.views){
@@ -381,7 +378,7 @@ public class Game {
                 if (canPayExitFee) {
                     this.removeCurrentPlayerFromJail();
                     for (MonopolyInterfaceView view : this.views) {
-                        view.handleJailExited("You paid $50 fine! Exit Jail.");
+                        view.handleJailExited("You paid " + board.getCurrency() + "50 fine! Exit Jail.");
                     }
 
                     exitedEarly = true;
@@ -428,18 +425,15 @@ public class Game {
             }
 
             if (dice1.getDiceNumber() == dice2.getDiceNumber()) {
-                //System.out.println("Rolled doubles - exit jail " + currentPlayer.getId());
                 exitJailAfterRoll(roll, "You rolled doubles! Exit Jail.");
             } else {
                 jail.incrementJailTime(currentPlayer);
-                //System.out.println("increment jail time to " + jail.getJailTime(currentPlayer) + " for player " + currentPlayer.getId());
             }
 
             if (jail.getJailTime(currentPlayer) > 3) { // end of third round in jail and still in jail
-                //System.out.println("Can leave jail after paying $50 " + getCurrentPlayer().getId()); // Message Dialog?
                 boolean canPayExitFee = currentPlayer.payRent(50);
                 if (canPayExitFee) {
-                    exitJailAfterRoll(roll, "You paid $50 fine! Exit Jail.");
+                    exitJailAfterRoll(roll, "You paid " + board.getCurrency() + "50 fine! Exit Jail.");
                 }else{
                     currentPlayerBankrupt();
                 }
@@ -514,7 +508,7 @@ public class Game {
     }
 
     /**
-     * Handles GO, landing or passing position 0, player collects $200
+     * Handles GO, landing or passing position 0, player collects 200 dollars
      * @author Sabah
      * @param roll takes the dice amount
      */
@@ -539,7 +533,6 @@ public class Game {
         int newPosition = currentPlayer.getPosition() % board.getSquares().size();
 
         if(newPosition == board.getGoToJailPosition()){
-            //System.out.println("Landed on Go To Jail " + getCurrentPlayer().getId());
             this.addCurrentPlayerToJail(roll);
             for (MonopolyInterfaceView view : this.views){
                 view.handleJailEntered("You landed on Go to Jail!");
