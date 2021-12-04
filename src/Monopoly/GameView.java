@@ -314,12 +314,12 @@ public class GameView implements MonopolyInterfaceView {
     @Override
     public void handlePassedGo() {
         if (!(game.getCurrentPlayer() instanceof PlayerAI)) {
-            JOptionPane.showMessageDialog(frame, "You passed GO! Collect $200.");
+            JOptionPane.showMessageDialog(frame, "You passed GO! Collect " + game.getBoard().getCurrency() + "200.");
         }
     }
 
     /**
-     * Ask player if they want to pay jail exit fee ($50) now
+     * Ask player if they want to pay jail exit fee (50 dollars) now
      * @author Thanuja
      * @return      true if they want to pay now, else false
      */
@@ -329,7 +329,7 @@ public class GameView implements MonopolyInterfaceView {
         if (currentPlayer instanceof PlayerAI){
             return currentPlayer.getMoney() >= 50;
         }else {
-            int result = JOptionPane.showConfirmDialog(frame, "Pay $50 fee to exit jail?\n(Otherwise try rolling doubles to exit)", "Exit Jail Early?", JOptionPane.YES_NO_OPTION);
+            int result = JOptionPane.showConfirmDialog(frame, "Pay " + game.getBoard().getCurrency() + "50 fee to exit jail?\n(Otherwise try rolling doubles to exit)", "Exit Jail Early?", JOptionPane.YES_NO_OPTION);
             return (result == JOptionPane.YES_OPTION);
         }
     }
