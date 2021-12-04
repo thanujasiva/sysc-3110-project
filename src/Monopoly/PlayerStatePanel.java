@@ -64,7 +64,7 @@ public class PlayerStatePanel extends JPanel{
         } else {
             this.playerNameLabel.setText("Current Player: " + player.getId());
         }
-        this.playerMoneyLabel.setText("Money: $" + player.getMoney());
+        this.playerMoneyLabel.setText("Money: " + game.getBoard().getCurrency() +player.getMoney());
 
         // (re)create list with the names of the ownableSquares the player owns
         DefaultListModel<String> ownedSquaresModel = new DefaultListModel<>();
