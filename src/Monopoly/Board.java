@@ -14,6 +14,9 @@ import java.util.HashMap;
 public class Board implements Serializable {
     private HashMap<Integer, Square> squares;
     private String currency;
+    private int JAIL_POSITION;
+    private int GO_POSITION;
+    private int GO_TO_JAIL_POSITION;
 
     /**
      * Build board according to specified version
@@ -138,7 +141,7 @@ public class Board implements Serializable {
      * @return  position of Go To Jail
      */
     public int getGoToJailPosition(){
-        return 26;
+        return GO_TO_JAIL_POSITION;
     }
 
     /**
@@ -147,7 +150,7 @@ public class Board implements Serializable {
      * @return Jail square
      */
     public Jail getJailSquare(){
-        return (Jail) squares.get(8);
+        return (Jail) squares.get(JAIL_POSITION);
     }
 
     /**
@@ -156,7 +159,7 @@ public class Board implements Serializable {
      * @return int, position of jail
      */
     public int getJailPosition(){
-        return 8;
+        return JAIL_POSITION;
     }
 
     /**
@@ -165,7 +168,7 @@ public class Board implements Serializable {
      * @return int, position of go
      */
     public int getGoPosition() {
-        return 0;
+        return GO_POSITION;
     }
 
     /**
@@ -194,6 +197,9 @@ public class Board implements Serializable {
         s.parse(file, vh);
         this.squares = vh.updateSquares();
         this.currency = vh.getCurrency();
+        this.JAIL_POSITION = vh.getJailPosition();
+        this.GO_POSITION = vh.getGoPosition();
+        this.GO_TO_JAIL_POSITION = vh.getGoToJailPosition();
     }
 
 }
