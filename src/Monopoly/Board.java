@@ -13,6 +13,7 @@ import java.util.HashMap;
 
 public class Board implements Serializable {
     private HashMap<Integer, Square> squares;
+    private String currency;
 
     /**
      * Build board according to specified version
@@ -167,6 +168,23 @@ public class Board implements Serializable {
         return 0;
     }
 
+    /**
+     * Return the currency symbol
+     * @author Shrimei
+     * @return currency symbol
+     */
+    public String getCurrency() {
+        return currency;
+    }
+
+    /**
+     * Import the given version of monopoly from an XML file and update the board accordingly
+     * @author Shrimei
+     * @param filename of version to import
+     * @throws ParserConfigurationException
+     * @throws SAXException
+     * @throws IOException
+     */
     public void importFromXMLFile(String filename) throws ParserConfigurationException, SAXException, IOException {
         File file = new File(filename);
         SAXParserFactory spf = SAXParserFactory.newInstance();
@@ -175,6 +193,7 @@ public class Board implements Serializable {
         VersionHandler vh = new VersionHandler();
         s.parse(file, vh);
         this.squares = vh.updateSquares();
+        this.currency = vh.getCurrency();
     }
 
 }

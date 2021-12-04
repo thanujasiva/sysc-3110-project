@@ -2,7 +2,7 @@
 <Board>
     <versionName>default version</versionName>
     <initialMoney>$1500</initialMoney>
-    <currency>$</currency>
+    <currency>@</currency>
     <squares>
         <BlankSquare> <name>GO</name></BlankSquare>
         <Property>

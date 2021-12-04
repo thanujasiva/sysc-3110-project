@@ -8,17 +8,24 @@ import java.awt.*;
 import java.util.HashMap;
 
 public class VersionHandler extends DefaultHandler {
-    private Boolean isName = false;
-    private Boolean isPrice = false;
-    private Boolean isColour = false;
+    private Boolean isName;
+    private Boolean isPrice;
+    private Boolean isColour;
+    private Boolean isCurrency;
     private String name;
     private int price;
     private ColourGroups colour;
     private HashMap<Integer, Square> squares;
-    private int count = 0;
+    private int count;
+    private String currency;
 
     public VersionHandler(){
-         squares = new HashMap<>();
+        squares = new HashMap<>();
+        isName = false;
+        isPrice = false;
+        isColour = false;
+        isCurrency = false;
+        count = 0;
     }
 
     /**
@@ -27,6 +34,10 @@ public class VersionHandler extends DefaultHandler {
      */
     public HashMap<Integer, Square> updateSquares(){
         return squares;
+    }
+
+    public String getCurrency() {
+        return currency;
     }
 
     /**
@@ -49,6 +60,8 @@ public class VersionHandler extends DefaultHandler {
             case "ColourGroups":
                 isColour = true;
                 break;
+            case "currency":
+                isCurrency = true;
         }
     }
 
@@ -110,6 +123,9 @@ public class VersionHandler extends DefaultHandler {
             colour =  ColourGroups.valueOf(value);
             Color.getColor(new String(ch, start, length));
             isColour = false;
+        } else if (isCurrency){
+           currency = new String(ch, start, length);
+           isCurrency = false;
         }
     }
 }
