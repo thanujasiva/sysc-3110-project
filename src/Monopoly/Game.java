@@ -575,15 +575,35 @@ public class Game {
         return board.getSquares().get(getCurrentPlayer().getPosition() % board.getSquares().size());
     }
 
+    /**
+     * Load a previous game
+     * @author Thanuja
+     * @return          true if loaded successfully, false otherwise
+     */
+    public boolean loadGame(){
+        boolean loadedSuccessfully = false;
+        for (MonopolyInterfaceView view : this.views){
+            if (view.askIfLoadPreviousGame()) {
+                String fileName = view.getFilenameOfGame();
+                if ((fileName != null) && (!fileName.equals(""))) {
+                    loadedSuccessfully = loadGame(fileName);
+                    if (!loadedSuccessfully){
+                        view.handleGameLoadFailure( fileName + ".ser");
+                    }
+                }
+            }
+        }
+        return loadedSuccessfully;
+    }
 
 
     /**
      * Import the Game's players and board from a serialized file
      * @author Thanuja
-     * @param fileName      filename to import from
+     * @param fileName      filename to import from (without extension)
      * @return              true if successful, false if exception occurs
      */
-    public boolean importGame(String fileName) {
+    public boolean loadGame(String fileName) {
         try {
             FileInputStream fileInputStream = new FileInputStream(fileName + ".ser");
             ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
@@ -621,7 +641,7 @@ public class Game {
      */
     public void saveGame(){
         for (MonopolyInterfaceView view : this.views){
-            String fileName = view.getFilenameToSaveGame("ser");
+            String fileName = view.getFilenameOfGame();
             if ((fileName != null)&& !fileName.equals("")) {
                 boolean savedSuccesfully = saveGame(fileName);
                 view.handleGameSaving(savedSuccesfully, fileName + ".ser");
@@ -632,7 +652,7 @@ public class Game {
     /**
      * Save the Game's players and board to a serialized file
      * @author Thanuja
-     * @param fileName      filename to save as
+     * @param fileName      filename to save as (without extension)
      * @return              true if successful, false if exception occurs
      */
     public boolean saveGame(String fileName){
@@ -655,6 +675,10 @@ public class Game {
                 objectOutputStream.writeObject(player);
                 objectOutputStream.flush();
             }
+
+            objectOutputStream.writeObject("end of file"); // to allow reloading without errors
+            objectOutputStream.flush();
+
             fileOutputStream.close();
             objectOutputStream.close();
 
