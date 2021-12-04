@@ -132,6 +132,9 @@ public class GameView implements MonopolyInterfaceView {
         String[] versions = {"Standard", "Sample", "Sample 2"};
         String input = (String) JOptionPane.showInputDialog(frame,"What version of monopoly would you like to play?","VERSION",
                 JOptionPane.QUESTION_MESSAGE, null, versions, versions[0]);
+        if (input == null) {
+            System.exit(0);
+        }
         game.setBoardVersion(input+ ".xml");
     }
 

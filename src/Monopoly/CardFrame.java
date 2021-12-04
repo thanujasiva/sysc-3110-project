@@ -19,6 +19,7 @@ public class CardFrame extends JOptionPane {
     private CardController cardController;
     private JPanel mainPanel;
     private Player player;
+    private String currency;
 
     /**
      * Called when player lands on ownable square, show buy/rent options
@@ -34,6 +35,7 @@ public class CardFrame extends JOptionPane {
 
         this.square = square;
         this.player = game.getCurrentPlayer();
+        this.currency = game.getBoard().getCurrency();
 
         mainPanel = new JPanel(new BorderLayout());
 
@@ -108,7 +110,7 @@ public class CardFrame extends JOptionPane {
             fieldPanel.add(label);
         }
 
-        JLabel priceVal = new JLabel("$" + utility.getPrice());
+        JLabel priceVal = new JLabel(currency + utility.getPrice());
         JLabel rentOneVal = new JLabel("4 X roll");
         JLabel rentTwoVal = new JLabel("10 X roll");
 
@@ -144,11 +146,11 @@ public class CardFrame extends JOptionPane {
             fieldPanel.add(label);
         }
 
-        JLabel priceVal = new JLabel("$" + railroad.getPrice());
-        JLabel rentOneVal = new JLabel("$" + railroad.getRent(1));
-        JLabel rentTwoVal = new JLabel("$" + railroad.getRent(2));
-        JLabel rentThreeVal = new JLabel("$" + railroad.getRent(3));
-        JLabel rentFourVal = new JLabel("$" + railroad.getRent(4));
+        JLabel priceVal = new JLabel(currency + railroad.getPrice());
+        JLabel rentOneVal = new JLabel(currency + railroad.getRent(1));
+        JLabel rentTwoVal = new JLabel(currency + railroad.getRent(2));
+        JLabel rentThreeVal = new JLabel(currency + railroad.getRent(3));
+        JLabel rentFourVal = new JLabel(currency + railroad.getRent(4));
 
         JLabel[] values = {priceVal, rentOneVal, rentTwoVal, rentThreeVal, rentFourVal};
 
@@ -187,16 +189,16 @@ public class CardFrame extends JOptionPane {
             fieldPanel.add(label);
         }
 
-        JLabel priceVal = new JLabel("$" + property.getPrice());
-        JLabel rentVal = new JLabel("$" +property.getRent());
-        JLabel rentWithSetVal = new JLabel("$" + property.getRent(0));
-        JLabel rentOneHouseVal = new JLabel("$" + property.getRent(1));
-        JLabel rentTwoHousesVal = new JLabel("$" + property.getRent(2));
-        JLabel rentThreeHousesVal = new JLabel("$" + property.getRent(3));
-        JLabel rentFourHousesVal = new JLabel("$" + property.getRent(4));
-        JLabel rentHotelVal = new JLabel("$" + property.getRentHotel());
-        JLabel houseCostVal= new JLabel("$" + property.getHousePrice());
-        JLabel hotelCostVal= new JLabel("$" + property.getHousePrice());
+        JLabel priceVal = new JLabel(currency + property.getPrice());
+        JLabel rentVal = new JLabel(currency +property.getRent());
+        JLabel rentWithSetVal = new JLabel(currency + property.getRent(0));
+        JLabel rentOneHouseVal = new JLabel(currency + property.getRent(1));
+        JLabel rentTwoHousesVal = new JLabel(currency + property.getRent(2));
+        JLabel rentThreeHousesVal = new JLabel(currency + property.getRent(3));
+        JLabel rentFourHousesVal = new JLabel(currency + property.getRent(4));
+        JLabel rentHotelVal = new JLabel(currency + property.getRentHotel());
+        JLabel houseCostVal= new JLabel(currency + property.getHousePrice());
+        JLabel hotelCostVal= new JLabel(currency + property.getHousePrice());
 
         JLabel[] values = {priceVal, rentVal, rentWithSetVal, rentOneHouseVal, rentTwoHousesVal, rentThreeHousesVal, rentFourHousesVal, rentHotelVal, houseCostVal, hotelCostVal};
 
