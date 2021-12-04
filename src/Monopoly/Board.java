@@ -209,7 +209,6 @@ public class Board implements Serializable {
         this.squares = vh.updateSquares();
         this.currency = vh.getCurrency();
         this.version = vh.getVersion();
-        System.out.println(version);
         this.JAIL_POSITION = vh.getJailPosition();
         this.GO_POSITION = vh.getGoPosition();
         this.GO_TO_JAIL_POSITION = vh.getGoToJailPosition();
