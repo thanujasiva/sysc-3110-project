@@ -252,7 +252,7 @@ public class CardFrame extends JOptionPane {
             if (player instanceof PlayerAI){ // AI player only buys houses/hotel if they land on their property again
                 cardController.purchaseHouse((Property)square);
             }else {
-                int result = JOptionPane.showConfirmDialog(null, mainPanel, "Do you want to buy a house/hotel?", JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE);
+                int result = JOptionPane.showConfirmDialog(null, mainPanel, "Purchase a house/hotel?", JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE);
 
                 if (result == JOptionPane.YES_OPTION) {
                     boolean canPurchase = cardController.purchaseHouse((Property) square);
