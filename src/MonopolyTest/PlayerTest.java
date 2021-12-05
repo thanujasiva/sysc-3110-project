@@ -267,5 +267,24 @@ public class PlayerTest {
         assertTrue(player.hasAllColours(property));
     }
 
-    //test hasEqualHousesOnAllProperties
+    /**
+     * Test if player has equal number of houses on all properties of the same colour group
+     * @author Maisha
+     */
+    @Test
+    public void testHasEqualHouseOnEveryProperty(){
+        //buy all the squares of one colour group
+        player.purchaseSquare(property);
+        player.purchaseSquare(propertyOfSameColour);
+        player.purchaseSquare(propertyOfSameColour2);
+
+        //buy a house on one property
+        player.buyHouseOnProperty(property);
+        assertFalse(player.hasEqualHouseOnEveryProperty(property));
+
+        //buy a house on all properties
+        player.buyHouseOnProperty(propertyOfSameColour);
+        player.buyHouseOnProperty(propertyOfSameColour2);
+        assertTrue(player.hasEqualHouseOnEveryProperty(property));
+    }
 }

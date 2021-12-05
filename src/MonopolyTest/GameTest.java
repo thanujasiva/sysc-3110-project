@@ -266,6 +266,7 @@ public class GameTest {
     /**
      * Test whether player can buy houses/hotels
      * @author Shrimei
+     * @author Maisha
      */
     @Test
     public void testCanBuyHouse(){
