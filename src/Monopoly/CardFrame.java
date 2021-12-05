@@ -236,10 +236,11 @@ public class CardFrame extends JOptionPane {
      * @author Maisha
      */
     private void handlePayRent(){
-        int rent = cardController.payCardRent();
+        int rent = cardController.getRentAmount();
         if(!(player instanceof PlayerAI)){
             JOptionPane.showMessageDialog(null, mainPanel , "Pay "+ currency + rent + " in rent", JOptionPane.PLAIN_MESSAGE);
         }
+        cardController.payCardRent();
     }
 
     /**
