@@ -151,6 +151,22 @@ public class Game {
         return canPurchase;
     }
 
+
+    /**
+     * Get current square's rent amount
+     * @author Thanuja
+     * @return int, rent amount, 0 if no rent amount for the current square
+     */
+    public int getCurrentRentAmount(){
+        int rent = 0;
+        Square currentSquare =  getCurrentSquare();
+        if ((currentSquare instanceof OwnableSquare) && ((OwnableSquare)currentSquare).getOwner() != null) {
+            OwnableSquare currentOwnableSquare = (OwnableSquare) currentSquare;
+            rent = currentOwnableSquare.getOwner().getRentAmount(currentOwnableSquare, dice1.getDiceNumber() + dice2.getDiceNumber());
+        }
+        return rent;
+    }
+
     /**
      * Handle rent transaction
      * Remove player if they become bankrupt.
@@ -161,15 +177,13 @@ public class Game {
      * @author Thanuja
      * @return true if current player is able to pay rent on current property, else false.
      */
-    public int rentTransaction(){
-        boolean canPayRent;
+    public boolean rentTransaction(){
+        boolean canPayRent = false;
         Player currentPlayer = getCurrentPlayer();
-        Square currentSquare =  getCurrentSquare();
-        int rentAmount = 0;
 
-        if ((currentSquare instanceof OwnableSquare) && ((OwnableSquare)currentSquare).getOwner() != null) {
-            OwnableSquare currentOwnableSquare = (OwnableSquare) currentSquare;
-            rentAmount = currentOwnableSquare.getOwner().getRentAmount(currentOwnableSquare, dice1.getDiceNumber()+dice2.getDiceNumber());
+        int rentAmount = getCurrentRentAmount();
+        if (rentAmount > 0) { // if there is a rent amount on the current square
+            OwnableSquare currentOwnableSquare = (OwnableSquare) getCurrentSquare();
 
             canPayRent = currentPlayer.payRent(rentAmount);
             if (canPayRent) { //pay rent if enough money
@@ -178,7 +192,7 @@ public class Game {
                 currentPlayerBankrupt();
             }
         }
-        return rentAmount;
+        return canPayRent;
     }
 
     /**

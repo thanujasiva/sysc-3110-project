@@ -37,10 +37,17 @@ public class CardController {
     /**
      * Control rent payment
      * @author Thanuja
-     * @return rent amount
      */
-    public int payCardRent(){
-        return game.rentTransaction();
+    public void payCardRent(){
+        game.rentTransaction();
     }
 
+    /**
+     * Get rent amount
+     * @author Thanuja
+     * @return rent amount
+     */
+    public int getRentAmount() {
+        return game.getCurrentRentAmount();
+    }
 }
