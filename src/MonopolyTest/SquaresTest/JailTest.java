@@ -5,6 +5,10 @@ import Monopoly.Player;
 import Monopoly.Squares.Jail;
 import org.junit.Before;
 import org.junit.Test;
+import org.xml.sax.SAXException;
+
+import javax.xml.parsers.ParserConfigurationException;
+import java.io.IOException;
 
 import static org.junit.Assert.*;
 
@@ -20,9 +24,10 @@ public class JailTest {
      * @author Thanuja
      */
     @Before
-    public void setUp() {
+    public void setUp() throws ParserConfigurationException, IOException, SAXException {
         // to test game jail
         this.game = new Game();
+        this.game.setBoardVersion("Standard.xml");
 
         this.jail = game.getBoard().getJailSquare(); //this.jail = new Jail("Visiting Jail", "In Jail");
         this.player = new Player();
