@@ -266,4 +266,6 @@ public class PlayerTest {
         player.purchaseSquare(propertyOfSameColour2);
         assertTrue(player.hasAllColours(property));
     }
+
+    //test hasEqualHousesOnAllProperties
 }
