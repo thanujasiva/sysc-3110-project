@@ -161,14 +161,15 @@ public class Game {
      * @author Thanuja
      * @return true if current player is able to pay rent on current property, else false.
      */
-    public boolean rentTransaction(){
-        boolean canPayRent = false;
+    public int rentTransaction(){
+        boolean canPayRent;
         Player currentPlayer = getCurrentPlayer();
         Square currentSquare =  getCurrentSquare();
+        int rentAmount = 0;
 
         if ((currentSquare instanceof OwnableSquare) && ((OwnableSquare)currentSquare).getOwner() != null) {
             OwnableSquare currentOwnableSquare = (OwnableSquare) currentSquare;
-            int rentAmount = currentOwnableSquare.getOwner().getRentAmount(currentOwnableSquare, dice1.getDiceNumber()+dice2.getDiceNumber());
+            rentAmount = currentOwnableSquare.getOwner().getRentAmount(currentOwnableSquare, dice1.getDiceNumber()+dice2.getDiceNumber());
 
             canPayRent = currentPlayer.payRent(rentAmount);
             if (canPayRent) { //pay rent if enough money
@@ -176,9 +177,8 @@ public class Game {
             } else { //player ran out of money, they are bankrupt
                 currentPlayerBankrupt();
             }
-            //return true;
         }
-        return canPayRent;
+        return rentAmount;
     }
 
     /**
