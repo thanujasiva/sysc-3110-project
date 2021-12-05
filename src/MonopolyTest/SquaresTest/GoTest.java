@@ -4,6 +4,10 @@ import Monopoly.Game;
 import Monopoly.Player;
 import org.junit.Before;
 import org.junit.Test;
+import org.xml.sax.SAXException;
+
+import javax.xml.parsers.ParserConfigurationException;
+import java.io.IOException;
 
 import static org.junit.Assert.*;
 
@@ -17,8 +21,9 @@ public class GoTest {
      * @author Sabah
      */
     @Before
-    public void setUp() {
+    public void setUp() throws ParserConfigurationException, IOException, SAXException {
         this.game = new Game();
+        this.game.setBoardVersion("Standard.xml");
         this.player = new Player();
         this.game.addPlayer(player);
     }
