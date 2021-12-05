@@ -325,11 +325,10 @@ public class Game {
             doubles += 1;
             if (doubles >= 3) {  // when player rolls doubles more than 3 times
 
+                this.addCurrentPlayerToJail(dice1.getDiceNumber() + dice2.getDiceNumber());
                 for (MonopolyInterfaceView view : this.views){
                     view.handleJailEntered("You rolled 3 doubles! Go to Jail.");
                 }
-
-                this.addCurrentPlayerToJail(dice1.getDiceNumber() + dice2.getDiceNumber());
 
                 this.switchTurn(); // switches the turn (in milestone 3 change it to go to jail)
                 doubles = 0;
