@@ -283,17 +283,33 @@ public class GameTest {
         game.getCurrentPlayer().purchaseSquare(Vermont);
         game.getCurrentPlayer().purchaseSquare(Connecticut); //have colour set
 
-        for(int i = 0 ; i<4; i++){
+        //buy houses on all properties
+        game.canBuyHouse(Oriental);
+        game.canBuyHouse(Vermont);
+        game.canBuyHouse(Connecticut);
+
+        //make sure one house exists on all properties
+        assertEquals(1, game.getCurrentPlayer().getNumberOfHouses(Oriental));
+        assertEquals(1, game.getCurrentPlayer().getNumberOfHouses(Vermont));
+        assertEquals(1, game.getCurrentPlayer().getNumberOfHouses(Connecticut));
+
+        //buy houses so all properties have four houses
+        for(int i = 0 ; i<3; i++){
             game.canBuyHouse(Oriental);
-            //game.canBuyHouse(Vermont);
-            //game.canBuyHouse(Connecticut);
+            game.canBuyHouse(Vermont);
+            game.canBuyHouse(Connecticut);
         }
 
+        //all properties should have four houses now
         assertEquals(4, game.getCurrentPlayer().getNumberOfHouses(Oriental));
+        assertEquals(4, game.getCurrentPlayer().getNumberOfHouses(Vermont));
+        assertEquals(4, game.getCurrentPlayer().getNumberOfHouses(Connecticut));
+
         game.canBuyHouse(Oriental); //buy hotel
         assertFalse(game.canBuyHouse(Oriental)); //already have 4 houses, 1 hotel
-        assertEquals(0, game.getCurrentPlayer().getNumberOfHouses(Oriental)); //clear houses to 0
+        //assertEquals(0, game.getCurrentPlayer().getNumberOfHouses(Oriental)); //clear houses to 0
         assertEquals(1, game.getCurrentPlayer().getNumberOfHotel(Oriental));
+
     }
 
     /**
