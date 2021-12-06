@@ -15,7 +15,7 @@
 8. The user should click the dice button on the centre of the board to roll and start the game.
 9. The player moves automatically on the board as shown by the player pieces.
    - The manual players are shown with the colour CYAN.
-   - The AI players are shown with PINK.
+   - The AI players are shown with PINK and move on their own. The roll button will be disabled during and AI players' turn.
 10. Any player that passes GO (the starting position) collects $200.
 11. The square on which the pieces land on will prompt the card frame to pop up.
 12. The card prompts the user to purchase if they land on an Ownable Square.                                                  
