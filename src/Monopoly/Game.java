@@ -35,6 +35,14 @@ public class Game {
         this.views = new ArrayList<>();
     }
 
+    /**
+     * Set board version
+     * @author Shrimei
+     * @param version                       name of file
+     * @throws ParserConfigurationException ParserConfigurationException
+     * @throws IOException                  IOException
+     * @throws SAXException                 SAXException
+     */
     public void setBoardVersion(String version) throws ParserConfigurationException, IOException, SAXException {
         this.board = new Board(version);
     }

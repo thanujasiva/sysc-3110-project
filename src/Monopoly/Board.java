@@ -23,9 +23,9 @@ public class Board implements Serializable {
      * Build board according to specified version
      * @author Shrimei
      * @param version of board
-     * @throws ParserConfigurationException
-     * @throws IOException
-     * @throws SAXException
+     * @throws ParserConfigurationException ParserConfigurationException
+     * @throws IOException                  IOException
+     * @throws SAXException                 SAXException
      */
     public Board(String version) throws ParserConfigurationException, IOException, SAXException {
         this.importFromXMLFile(version);
@@ -99,9 +99,9 @@ public class Board implements Serializable {
      * Import the given version of monopoly from an XML file and update the board accordingly
      * @author Shrimei
      * @param filename of version to import
-     * @throws ParserConfigurationException
-     * @throws SAXException
-     * @throws IOException
+     * @throws ParserConfigurationException ParserConfigurationException
+     * @throws IOException                  IOException
+     * @throws SAXException                 SAXException
      */
     public void importFromXMLFile(String filename) throws ParserConfigurationException, SAXException, IOException {
         File file = new File(filename);
