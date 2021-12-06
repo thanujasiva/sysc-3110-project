@@ -34,8 +34,8 @@
    - The rent for railroad increases with the number of railroads owned by a player.
 20. Rolling doubles thrice or landing on the `Go to Jail` square will send any player to Jail.
   - For exiting jail, a manual player gets the option to pay a $50 fine or roll doubles in the first two rounds of staying in jail. If it is their third round, and they still do not roll doubles, they must pay a $50 fine to exit jail.
-21. If the user wants to `Save` the game and resume playing it later, at any point in the game, they can choose the Save option available from the menu bar of the Board Frame.
-    - Clicking on Save prompts the user the input a name for the game to be saved.
+21. If the user wants to `Save` the game and resume playing it later, at any point in the game, they can choose the `Save` option available from the menu bar of the Board Frame.
+    - Clicking on `Save` prompts the user the input a name for the game to be saved.
     - The user can resume playing it by typing the same name whenever they want.
 22. A player goes bankrupt and is automatically removed from the game if the player does not have enough money to pay the rent or the jail exit fee.
     - When a player goes bankrupt and is removed from the game, all their properties become available to purchase again.
