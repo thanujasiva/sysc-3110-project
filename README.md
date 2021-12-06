@@ -43,7 +43,7 @@
 23. In case any player wins, a window pops up congratulating the winner.
 
 
-## Milestone 3 Changes:
+## Milestone 4 Changes:
 
 Added pieces for all the players to show movement on the board.
 Added AI players and their implementations.
@@ -53,15 +53,11 @@ Added the option for buying Houses and Hotels when all the properties of a singl
 
 ## Known Issues:
 
-
-1. The two panels on the right side of the GUI (PlayerStatePanel and PlayersPanel) change their sizes automatically after every few roll calls. This should not occur.
-2. Utility has an empty implementation of getRent(int).
-3. Player should only be able to buy second house after all other properties of colour group have at least 1 house.
-4. Board cuts off property squares at top and bottom.
-5. The board shows only one (the most recent) player when both players land on the same property square.
-6. There is code repetition in CardFrame when displaying card info.
-7. All view classes should extend JFrame or JPanel (some classes contain a mainPanel or mainFrame, and others extend a JPanel or JFrame which is not consistent).
-8. Have AI functionality (checks for if they want to buy ownable squares/houses) in PlayerAI and not in view.
+1. Utility has an empty implementation of getRent(int).
+2. Board cuts off property squares at top and bottom.
+3. The board shows only one (the most recent) player when both players land on the same property square.
+4. All view classes should extend JFrame or JPanel (some classes contain a mainPanel or mainFrame, and others extend a JPanel or JFrame which is not consistent).
+5. Have AI functionality (checks for if they want to buy ownable squares/houses) in PlayerAI and not in view.
 
 
 ## Contributors:
