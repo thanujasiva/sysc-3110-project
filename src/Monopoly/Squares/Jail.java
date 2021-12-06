@@ -8,7 +8,7 @@ public class Jail implements Square {
 
     private String name;
     private String otherName;
-    private HashMap<Player, Integer> peopleInJail;
+    private HashMap<Player, Integer> playersInJail;
 
     /**
      * Constructor for Jail square
@@ -17,7 +17,7 @@ public class Jail implements Square {
     public Jail(){
         this.name = "Visiting Jail";
         this.otherName = "In Jail";
-        this.peopleInJail = new HashMap<>();
+        this.playersInJail = new HashMap<>();
     }
 
     /**
@@ -45,7 +45,7 @@ public class Jail implements Square {
      * @param player player to add
      */
     public void addToJail(Player player){
-        peopleInJail.put(player, 1);
+        playersInJail.put(player, 1);
     }
 
     /**
@@ -54,7 +54,7 @@ public class Jail implements Square {
      * @param player player to remove
      */
     public void removeFromJail(Player player){
-        peopleInJail.remove(player);
+        playersInJail.remove(player);
     }
 
     /**
@@ -63,8 +63,8 @@ public class Jail implements Square {
      * @param player player to increase time for
      */
     public void incrementJailTime(Player player){
-        int previousTime = peopleInJail.getOrDefault(player, 0);
-        peopleInJail.replace(player, previousTime + 1); // replace key's entry only if currently mapped to some value
+        int previousTime = playersInJail.getOrDefault(player, 0);
+        playersInJail.replace(player, previousTime + 1); // replace key's entry only if currently mapped to some value
     }
 
     /**
@@ -74,6 +74,6 @@ public class Jail implements Square {
      * @return time in jail
      */
     public int getJailTime(Player player){
-        return peopleInJail.getOrDefault(player, 0);
+        return playersInJail.getOrDefault(player, 0);
     }
 }

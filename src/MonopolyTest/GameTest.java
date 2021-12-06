@@ -278,16 +278,16 @@ public class GameTest {
         Property Vermont = new Property("Vermont Avenue", 100, ColourGroups.GREY);
         Property Connecticut = new Property("Connecticut Avenue", 120, ColourGroups.GREY);
 
-        assertFalse(game.canBuyHouse(Oriental));
+        assertFalse(game.buyHouseHotel(Oriental));
         game.getCurrentPlayer().purchaseSquare(Oriental);
-        assertFalse(game.canBuyHouse(Oriental));
+        assertFalse(game.buyHouseHotel(Oriental));
         game.getCurrentPlayer().purchaseSquare(Vermont);
         game.getCurrentPlayer().purchaseSquare(Connecticut); //have colour set
 
         //buy houses on all properties
-        game.canBuyHouse(Oriental);
-        game.canBuyHouse(Vermont);
-        game.canBuyHouse(Connecticut);
+        game.buyHouseHotel(Oriental);
+        game.buyHouseHotel(Vermont);
+        game.buyHouseHotel(Connecticut);
 
         //make sure one house exists on all properties
         assertEquals(1, game.getCurrentPlayer().getNumberOfHouses(Oriental));
@@ -296,9 +296,9 @@ public class GameTest {
 
         //buy houses so all properties have four houses
         for(int i = 0 ; i<3; i++){
-            game.canBuyHouse(Oriental);
-            game.canBuyHouse(Vermont);
-            game.canBuyHouse(Connecticut);
+            game.buyHouseHotel(Oriental);
+            game.buyHouseHotel(Vermont);
+            game.buyHouseHotel(Connecticut);
         }
 
         //all properties should have four houses now
@@ -306,8 +306,8 @@ public class GameTest {
         assertEquals(4, game.getCurrentPlayer().getNumberOfHouses(Vermont));
         assertEquals(4, game.getCurrentPlayer().getNumberOfHouses(Connecticut));
 
-        game.canBuyHouse(Oriental); //buy hotel
-        assertFalse(game.canBuyHouse(Oriental)); //already have 4 houses, 1 hotel
+        game.buyHouseHotel(Oriental); //buy hotel
+        assertFalse(game.buyHouseHotel(Oriental)); //already have 4 houses, 1 hotel
         //assertEquals(0, game.getCurrentPlayer().getNumberOfHouses(Oriental)); //clear houses to 0
         assertEquals(1, game.getCurrentPlayer().getNumberOfHotel(Oriental));
 
@@ -362,7 +362,7 @@ public class GameTest {
         game.purchaseTransaction();
         player1.setPosition(2);
         game.purchaseTransaction();
-        game.canBuyHouse((Property) this.game.getCurrentSquare()); // house on property 2
+        game.buyHouseHotel((Property) this.game.getCurrentSquare()); // house on property 2
 
         this.game.saveGame("test-serialization-file");
 
