@@ -32,7 +32,6 @@ public class Game {
         this.players = new ArrayList<>();
         this.currentPlayerNumber = 0;
         this.doubles = 0;
-        //this.board = new Board(); //FIXME create board according to version chosen
         this.views = new ArrayList<>();
     }
 
@@ -199,7 +198,7 @@ public class Game {
      * Handle buy house transaction, return true if player successfully buys house
      * @author maisha
      * */
-    public boolean buyHouseHotel(Property property){ //FIXME could we have this return a String so that a meaningful message is displayed when purchase not successful
+    public boolean buyHouseHotel(Property property){
         Player currentPlayer = getCurrentPlayer();
 
         boolean flag1, flag2, flag5;
@@ -692,43 +691,6 @@ public class Game {
             return false;
         }
     }
-
-    /*
-    /**
-     * @author Sabah
-     * @author Thanuja
-     * @param args      main method.
-     * Allows user to choose number of players and start the game
-    public static void main(String[] args) {
-        System.out.println("Welcome to the game of Monopoly!"); //welcome message
-        Scanner sc = new Scanner(System.in);
-        int command = -1;
-
-        Game game = new Game();
-
-        while(command > 4 || command < 2) { //number of player should be between 2-4
-
-            System.out.println("How many players?");
-            command = sc.nextInt();
-
-            if (command == 3) {
-                game.addPlayer(new Player()); //start with 2 players so just add 1
-            } else if (command == 4) {
-                game.addPlayer(new Player());
-                game.addPlayer(new Player());
-            } else if(command > 4 || command < 2){
-                System.out.println("Must have 2-4 players"); //allow user to re-enter number of player if not within limits
-            }
-        }
-
-        while(true) {
-            int x = game.handleMove(); //start the game
-            if (x == 1){
-                break;
-            }
-        }
-    }*/
-
 
 }
 

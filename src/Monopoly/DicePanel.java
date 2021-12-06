@@ -80,29 +80,4 @@ public class DicePanel {
         return diceButton;
     }
 
-    /*
-    public static void main(String[] args) {
-
-        Dice dice = new Dice();
-
-        DicePanel dicePanel = new DicePanel(dice, dice);
-        JFrame testFrame = new JFrame("Test frame for Monopoly.Dice View: ");
-        testFrame.add(dicePanel.getDicePanel());
-
-        testFrame.setSize(300,400);
-        testFrame.setVisible(true);
-        testFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-
-        Scanner sc = new Scanner(System.in);
-        
-        for(int x = 0; x<10; x++){
-            System.out.println("Type anything to roll! ");
-            sc.nextLine();
-            int roll = dice.rollDice();
-            dicePanel.updateDiceLabel();
-            System.out.println(roll);
-        }
-    }
-
-     */
 }
