@@ -199,7 +199,7 @@ public class Game {
      * Handle buy house transaction, return true if player successfully buys house
      * @author maisha
      * */
-    public boolean canBuyHouse(Property property){ //FIXME could we have this return a String so that a meaningful message is displayed when purchase not successful
+    public boolean buyHouseHotel(Property property){ //FIXME could we have this return a String so that a meaningful message is displayed when purchase not successful
         Player currentPlayer = getCurrentPlayer();
 
         boolean flag1, flag2, flag5;
@@ -305,10 +305,9 @@ public class Game {
      * @return boolean      true if they can reroll, false otherwise
      */
     private boolean cannotReRoll(){
-        // currentPlayerNumber<0 - if current player went bankrupt in a way that currentPlayerNumber is now out of range
         // dice1.getDiceNumber() != dice2.getDiceNumber() - did not roll doubles
         // doubles < 0 - if player just went bankrupt or if player just entered/exited jail
-        return ((currentPlayerNumber<0) || (dice1.getDiceNumber() != dice2.getDiceNumber()) || (doubles < 0));
+        return ((dice1.getDiceNumber() != dice2.getDiceNumber()) || (doubles < 0));
     }
 
     /**
