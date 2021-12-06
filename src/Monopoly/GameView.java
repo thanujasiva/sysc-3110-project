@@ -132,7 +132,7 @@ public class GameView implements MonopolyInterfaceView {
      */
     public void getBoardVersion() throws ParserConfigurationException, IOException, SAXException {
         String[] versions = {"Standard", "International", "Shuffled"};
-        String input = (String) JOptionPane.showInputDialog(frame,"What version of monopoly would you like to play?","VERSION",
+        String input = (String) JOptionPane.showInputDialog(frame,"What version of monopoly would you like to play?","Choose a version",
                 JOptionPane.QUESTION_MESSAGE, null, versions, versions[0]);
         if (input == null) {
             System.exit(0);
