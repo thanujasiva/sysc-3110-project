@@ -18,28 +18,28 @@
    - The AI players are shown with PINK and move on their own. The roll button will be disabled during and AI players' turn.
 9. Any player that passes `GO` (the starting position) collects $200.
 10. If the player lands on an ownable square (property/railroad/utilities) the corresponding card frame will pop up.                                                  
-    - The manual players have to press the `YES` button if they want to buy and the `NO` button for not buying.
-12. If the player lands on a light grey tax box, the Game does not do anything.
-13. If a player chooses to purchase an ownable square, the owned square gets added to their list of properties on the bottom right panel and the price amount gets deducted from their total money.
-14. The bottom right panel also shows the current player number along with the up to date money they have.
-15. Manual players can click on their individual properties from the bottom right panel to check the property information or to buy houses/hotels on them.
-16. When a manual player owns all the properties of a colour set (for example, all properties of the green colour), they can buy houses on any of the properties of the colour set. 
+   - The manual players have to press the `YES` button if they want to buy and the `NO` button for not buying.
+11. If the player lands on a light grey tax box, the Game does not do anything.
+12. If a player chooses to purchase an ownable square, the owned square gets added to their list of properties on the bottom right panel and the price amount gets deducted from their total money.
+13. The bottom right panel also shows the current player number along with the up to date money they have.
+14. Manual players can click on their individual properties from the bottom right panel to check the property information or to buy houses/hotels on them.
+15. When a manual player owns all the properties of a colour set (for example, all properties of the green colour), they can buy houses on any of the properties of the colour set. 
     - Manual players must have equal number of houses on each property of the colour set, in order to buy the next house/hotel. This follows the 'Even Build' rule.
-18. If the current player lands on another player's square, the corresponding card pops up showing the rent amount being paid on the top bar of the card frame.
+16. If the current player lands on another player's square, the corresponding card pops up showing the rent amount being paid on the top bar of the card frame.
     - After the `OK` button is pressed, the rent transaction will occur, and the money will be subtracted from their account and added to the owner's account.
     - The rent for each property is displayed it's property card.
     - The rent for the property increases as the player buys more houses or hotels.
     - The rent for utility is based on the dice rolled amount of the player who lands on it.
     - The rent for railroad increases with the number of railroads owned by a player.
-19. Rolling doubles thrice or landing on the `Go to Jail` square will send the player to Jail.
-    - For exiting jail, a manual player gets the option to pay a $50 fine or roll doubles in the first two rounds of staying in jail. If it is their third round, and they still do not roll doubles, they must pay a $50 fine to exit jail.
-20. If the user wants to save the game and resume playing it later, at any point in the game, they can choose the `Save` option available from the menu bar of the window.
+17. Rolling doubles thrice or landing on the `Go to Jail` square will send the player to Jail.
+  - For exiting jail, a manual player gets the option to pay a $50 fine or roll doubles in the first two rounds of staying in jail. If it is their third round, and they still do not roll doubles, they must pay a $50 fine to exit jail.
+18. If the user wants to save the game and resume playing it later, at any point in the game, they can choose the `Save` option available from the menu bar of the window.
     - Clicking on `Save` prompts the user to input a filename where the game will be saved.
     - The user can resume the saved game by re-running the program and choosing to load a game at the begining.
-21. A player goes bankrupt and is automatically removed from the game if the player does not have enough money to pay the rent or the jail exit fee.
+19. A player goes bankrupt and is automatically removed from the game if the player does not have enough money to pay the rent or the jail exit fee.
     - When a player is removed from the game, all their properties become available to purchase again.
-22. The game ends when there is only one player left on the board or when a user closes out of the game.
-23. When a player wins, a window pops up congratulating the winner.
+20. The game ends when there is only one player left on the board or when a user closes out of the game.
+21. When a player wins, a window pops up congratulating the winner.
 
 
 ## Milestone 4 Changes:
