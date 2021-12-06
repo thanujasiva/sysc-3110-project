@@ -44,10 +44,23 @@
 
 ## Milestone 4 Changes:
 
-Added pieces for all the players to show movement on the board.
-Added AI players and their implementations.
-Implemented other ownable squares (Jail, GO, Utilities, Railroads).
-Added the option for buying Houses and Hotels when all the properties of a single colour set are owned.
+Added save/load features.
+    - The user can now save a game at any point in the game.
+    - At the beginning, the user can load the saved game instead of starting a new one.
+
+Hardcoded different versions of Monopoly in XML format.
+    - User can choose from 3 versions:
+        - Standard version is the standard monopoly board.
+        - Shuffled version is the standard board but the squares are all shuffled.
+        - International version is a European board with `£` currency.
+
+Updated house feature so that manual players must have an equal number of houses on each property, of the same colour set, before proceeding to buy the next house/hotel (follows ‘Even Build’).
+
+The handleJailTurn method in Game has been separated into three smaller methods to address the feedback.
+
+New corresponding tests have been added.
+
+Amount of rent to be paid now appears on the title of the Card Frame.
 
 
 ## Known Issues:
