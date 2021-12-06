@@ -31,6 +31,9 @@ public class GameView implements MonopolyInterfaceView {
      * Create an overall game view
      * @author Maisha
      * @author Thanuja
+     * @throws ParserConfigurationException ParserConfigurationException
+     * @throws IOException                  IOException
+     * @throws SAXException                 SAXException
      */
     public GameView() throws ParserConfigurationException, IOException, SAXException {
         frame = new JFrame();
@@ -52,12 +55,8 @@ public class GameView implements MonopolyInterfaceView {
         }else {
             frame.addWindowListener(new WindowAdapter() {  //defining a class inside another class
                 public void windowOpened(WindowEvent e) {
-                    try {
-                        initializePlayers();
-                        initializePieces();
-                    } catch (ParserConfigurationException | IOException | SAXException ex) {
-                        ex.printStackTrace();
-                    }
+                    initializePlayers();
+                    initializePieces();
                 }
             });
             this.getBoardVersion(); //set board before creating board panel
@@ -126,9 +125,9 @@ public class GameView implements MonopolyInterfaceView {
     /**
      * Get the version of the board from player
      * @author Shrimei
-     * @throws ParserConfigurationException
-     * @throws IOException
-     * @throws SAXException
+     * @throws ParserConfigurationException ParserConfigurationException
+     * @throws IOException                  IOException
+     * @throws SAXException                 SAXException
      */
     public void getBoardVersion() throws ParserConfigurationException, IOException, SAXException {
         String[] versions = {"Standard", "International", "Shuffled"};
@@ -167,7 +166,7 @@ public class GameView implements MonopolyInterfaceView {
      * @author Thanuja
      * @author Shrimei
      */
-    public void initializePlayers() throws ParserConfigurationException, IOException, SAXException {
+    public void initializePlayers() {
 
         int numTotal = this.handleNumberOfPlayers();
         int numAI = this.handleNumberOfAIPlayers(numTotal);
@@ -181,14 +180,6 @@ public class GameView implements MonopolyInterfaceView {
             PlayerAI player = new PlayerAI();
             this.game.addPlayer(player);
         }
-
-        //FIXME - colour group test to buy houses/hotels
-        /*Player player = game.getCurrentPlayer();
-        player.setPosition(1);
-        game.purchaseTransaction();
-        player.setPosition(2);
-        game.purchaseTransaction();*/
-        //game.getPlayers().get(num-1).payRent(1500);
 
     }
 
@@ -394,6 +385,9 @@ public class GameView implements MonopolyInterfaceView {
      * Call main method to run the game
      * @author Maisha
      * @param args      arguments
+     * @throws ParserConfigurationException ParserConfigurationException
+     * @throws IOException                  IOException
+     * @throws SAXException                 SAXException
      */
     public static void main(String[] args) throws ParserConfigurationException, IOException, SAXException {
         GameView gameView = new GameView();
