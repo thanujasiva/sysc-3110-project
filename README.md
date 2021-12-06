@@ -18,7 +18,7 @@
    - The AI players are shown with PINK and move on their own. The roll button will be disabled during and AI players' turn.
 9. Any player that passes `GO` (the starting position) collects $200.
 10. If the player lands on an ownable square (property/railroad/utilities) the corresponding card frame will pop up.                                                  
-    -  The manual players have to press the `YES` button if they want to buy and the `NO` button for not buying.
+   - The manual players have to press the `YES` button if they want to buy and the `NO` button for not buying.
 12. If the player lands on a light grey tax box, the Game does not do anything.
 13. If a player chooses to purchase an ownable square, the owned square gets added to their list of properties on the bottom right panel and the price amount gets deducted from their total money.
 14. The bottom right panel also shows the current player number along with the up to date money they have.
@@ -32,7 +32,7 @@
     - The rent for utility is based on the dice rolled amount of the player who lands on it.
     - The rent for railroad increases with the number of railroads owned by a player.
 19. Rolling doubles thrice or landing on the `Go to Jail` square will send the player to Jail.
-    - For exiting jail, a manual player gets the option to pay a $50 fine or roll doubles in the first two rounds of staying in jail. If it is their third round, and they still do not roll doubles, they must pay a $50 fine to exit jail.
+  - For exiting jail, a manual player gets the option to pay a $50 fine or roll doubles in the first two rounds of staying in jail. If it is their third round, and they still do not roll doubles, they must pay a $50 fine to exit jail.
 20. If the user wants to save the game and resume playing it later, at any point in the game, they can choose the `Save` option available from the menu bar of the window.
     - Clicking on `Save` prompts the user to input a filename where the game will be saved.
     - The user can resume the saved game by re-running the program and choosing to load a game at the begining.
@@ -44,23 +44,23 @@
 
 ## Milestone 4 Changes:
 
-Added save/load features.
+* Added save/load features.
     - The user can now save a game at any point in the game.
     - At the beginning, the user can load the saved game instead of starting a new one.
 
-Hardcoded different versions of Monopoly in XML format.
+* Hardcoded different versions of Monopoly in XML format.
     - User can choose from 3 versions:
         - Standard version is the standard monopoly board.
         - Shuffled version is the standard board but the squares are all shuffled.
         - International version is a European board with `£` currency.
 
-Updated house feature so that manual players must have an equal number of houses on each property, of the same colour set, before proceeding to buy the next house/hotel (follows ‘Even Build’).
+* Updated house feature so that manual players must have an equal number of houses on each property, of the same colour set, before proceeding to buy the next house/hotel (follows ‘Even Build’).
 
-The handleJailTurn method in Game has been separated into three smaller methods to address the feedback.
+* The handleJailTurn method in Game has been separated into three smaller methods to address the feedback.
 
-New corresponding tests have been added.
+* New corresponding tests have been added.
 
-Amount of rent to be paid now appears on the title of the Card Frame.
+* Amount of rent to be paid now appears on the title of the Card Frame.
 
 
 ## Known Issues:
