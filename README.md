@@ -26,11 +26,11 @@
 16. When a manual player owns all the properties of a colour set (for example, all properties of the green colour), they can buy houses on any of the properties of the colour set. 
     - Manual players must have equal number of houses on each property of the colour set, in order to buy the next house/hotel. This follows the 'Even Build' rule.
 18. If the current player lands on another player's square, the corresponding card pops up showing the rent amount being paid on the top bar of the card frame.
-   - After the `OK` button is pressed, the rent transaction will occur, and the money will be subtracted from their account and added to the owner's account.
-   - The rent for each property is displayed it's property card.
-   - The rent for the property increases as the player buys more houses or hotels.
-   - The rent for utility is based on the dice rolled amount of the player who lands on it.
-   - The rent for railroad increases with the number of railroads owned by a player.
+    - After the `OK` button is pressed, the rent transaction will occur, and the money will be subtracted from their account and added to the owner's account.
+    - The rent for each property is displayed it's property card.
+    - The rent for the property increases as the player buys more houses or hotels.
+    - The rent for utility is based on the dice rolled amount of the player who lands on it.
+    - The rent for railroad increases with the number of railroads owned by a player.
 19. Rolling doubles thrice or landing on the `Go to Jail` square will send the player to Jail.
   - For exiting jail, a manual player gets the option to pay a $50 fine or roll doubles in the first two rounds of staying in jail. If it is their third round, and they still do not roll doubles, they must pay a $50 fine to exit jail.
 20. If the user wants to save the game and resume playing it later, at any point in the game, they can choose the `Save` option available from the menu bar of the window.
