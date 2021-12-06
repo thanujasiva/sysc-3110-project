@@ -2,7 +2,7 @@
 
 ## Installation and Usage:
 
-1. Download and execute jar file onto any IDE. The XML files (Standard.xml, International.xml, Shuffled.xml) should be in the same project folder as the jar).
+1. Download and execute jar file onto any IDE. The XML files (Standard.xml, International.xml, Shuffled.xml) should be in the same project folder as the jar.
 2. Run the game from GameView.main()
 3. The game first starts with a pop up window asking if the user wants to reload a previous game. 
     - If user presses `YES` an Input window comes up asking to input the filename of the game that was saved.
