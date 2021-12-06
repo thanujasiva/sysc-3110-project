@@ -63,20 +63,4 @@ public class PlayersPanel {
      */
     public JPanel getPlayersPanel() {return playersPanel;}
 
-    /*
-    public static void main(String[] args) {
-
-        Game game = new Game();
-        
-        PlayersPanel playersPanel = new PlayersPanel(game);
-        JFrame testFrame = new JFrame("Test frame for Players View: ");
-        testFrame.add(playersPanel.getPlayersPanel());
-
-        testFrame.setSize(200,200);
-        testFrame.setVisible(true);
-        testFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-
-    }
-
-     */
 }

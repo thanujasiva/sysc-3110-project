@@ -89,49 +89,4 @@ public class PlayerStatePanel extends JPanel{
         ownedSquaresList.addListSelectionListener(playerStateController);
     }
 
-
-    /*public static void main(String[] args) {
-        JFrame playerStateFrame = new JFrame("Test Frame");
-        // only have EXIT_ON_CLOSE in this test method, should not close the actual game
-        playerStateFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-
-        Property Baltic = new Property("Baltic Avenue", 60, ColourGroups.BROWN);
-        Property Oriental = new Property("Oriental Avenue", 100, ColourGroups.GREY);
-        Property Illinois  = new Property("Illinois Avenue", 240, ColourGroups.RED);
-        Property Atlantic  = new Property("Atlantic Avenue", 260, ColourGroups.YELLOW);
-
-        // testing with putting the first player
-        Player player1 = new Player();
-        player1.setId(0);
-        player1.purchaseProperty(Baltic);
-
-        PlayerStatePanel playerStatePanel1 = new PlayerStatePanel(player1);
-
-        playerStateFrame.setSize(250, 350); // gives a good size to the frame
-        playerStateFrame.add(playerStatePanel1);
-        playerStateFrame.setVisible(true);
-
-        // testing a change in who the current player is
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Type anything to change the player");
-        sc.nextLine();
-
-
-        // testing with putting a second player
-        Player player2 = new Player();
-        player2.setId(1);
-        player2.purchaseProperty(Oriental);
-        player2.purchaseProperty(Illinois);
-        player2.purchaseProperty(Atlantic);
-
-        // when it's the next players turn, then call
-        playerStatePanel1.updatePlayer(player2);
-
-        playerStateFrame.invalidate();
-        playerStateFrame.validate();
-        playerStateFrame.repaint();
-
-    }*/
-
-
 }

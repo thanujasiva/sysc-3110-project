@@ -270,32 +270,4 @@ public class CardFrame extends JOptionPane {
 
     }
 
-    /*
-    public static void main(String[] args) {
-        Game game = new Game();
-        Player player = new Player();
-        player.setId(0);
-        System.out.println(player.getMoney());
-
-        JFrame frame = new JFrame("Card display");
-        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-
-        Property Atlantic  = new Property("Atlantic Avenue", 260, ColourGroups.YELLOW);
-        //player.purchaseProperty(Atlantic);
-
-        Property Oriental = new Property("Oriental Avenue", 100, ColourGroups.GREY);
-        //player.purchaseProperty(Oriental);
-
-        Railroad BO = new Railroad("B. & O. Railroad");
-
-        Utility WaterWorks = new Utility("Water Works");
-
-        //player.setPosition(22);
-        //player.setPosition(5);
-
-        //Monopoly.CardFrame card = new Monopoly.CardFrame(WaterWorks, player, game);
-        //Monopoly.CardFrame card = new Monopoly.CardFrame(BO, player, game);
-        Monopoly.CardFrame card = new Monopoly.CardFrame(Atlantic, game);
-        //Monopoly.CardFrame card2 = new Monopoly.CardFrame(Oriental, player, game);
-    }*/
 }

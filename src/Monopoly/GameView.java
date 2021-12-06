@@ -363,7 +363,6 @@ public class GameView implements MonopolyInterfaceView {
      */
     @Override
     public String getFilenameOfGame() {
-        // FIXME - may want to improve file name choosing option (ex. through file explorer)
         return JOptionPane.showInputDialog(frame, "Enter filename of the game (without extension):");
     }
 
