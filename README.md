@@ -5,11 +5,11 @@
 1. Download and execute jar file onto any IDE.
 2. Run the game from GameView.main()
 3. The game first starts with a pop up window asking if the user wants to reload a previous game. 
-    - If user presses `YES` an Input window comes up asking to input the name of the game that was saved.
+    - If user presses `YES` an input window pops up asking to enter the name of the game that was saved.
     - If user presses `CANCEL` or `NO` the 'Choose Version' window pops up.
 4. The 'Choose Version' window prompts the user to select a version of the Monopoly from a drop down menu.
     - User can choose from `Standard`, `Shuffled` and `International` options.
-5. After selecting the version the game then asks for how many total players the user wants to play with, followed by a window which asks for the number of AI players the user wants.
+5. After selecting the version, the game then asks for how many total players the user wants to play with, followed by a window which asks for the number of AI players the user wants.
    - If the user fails to choose (i.e. hits cancel or closes the JOptionPane) the game will terminate.
 7. After choosing the number of players, all players will start on position GO of the board.
 8. The user should click the dice button on the centre of the board to roll and start the game.
