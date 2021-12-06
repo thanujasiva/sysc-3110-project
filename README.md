@@ -18,7 +18,7 @@
    - The AI players are shown with PINK and move on their own. The roll button will be disabled during and AI players' turn.
 9. Any player that passes `GO` (the starting position) collects $200.
 10. If the player lands on an ownable square (property/railroad/utilities) the corresponding card frame will pop up.                                                  
-   - The manual players have to press the `YES` button if they want to buy and the `NO` button for not buying.
+    - The manual players have to press the `YES` button if they want to buy and the `NO` button for not buying.
 12. If the player lands on a light grey tax box, the Game does not do anything.
 13. If a player chooses to purchase an ownable square, the owned square gets added to their list of properties on the bottom right panel and the price amount gets deducted from their total money.
 14. The bottom right panel also shows the current player number along with the up to date money they have.
