@@ -5,11 +5,11 @@
 1. Download and execute jar file onto any IDE.
 2. Run the game from GameView.main()
 3. The game first starts with a pop up window asking if the user wants to reload a previous game. 
-    - If user presses `YES` an input window pops up asking to enter the name of the game that was saved.
+    - If user presses `YES` an Input window comes up asking to input the name of the game that was saved.
     - If user presses `CANCEL` or `NO` the 'Choose Version' window pops up.
 4. The 'Choose Version' window prompts the user to select a version of the Monopoly from a drop down menu.
     - User can choose from `Standard`, `Shuffled` and `International` options.
-5. After selecting the version, the game then asks for how many total players the user wants to play with, followed by a window which asks for the number of AI players the user wants.
+5. After selecting the version the game then asks for how many total players the user wants to play with, followed by a window which asks for the number of AI players the user wants.
    - If the user fails to choose (i.e. hits cancel or closes the JOptionPane) the game will terminate.
 7. After choosing the number of players, all players will start on position GO of the board.
 8. The user should click the dice button on the centre of the board to roll and start the game.
@@ -34,10 +34,13 @@
    - The rent for railroad increases with the number of railroads owned by a player.
 20. Rolling doubles thrice or landing on the `Go to Jail` square will send any player to Jail.
   - For exiting jail, a manual player gets the option to pay a $50 fine or roll doubles in the first two rounds of staying in jail. If it is their third round, and they still do not roll doubles, they must pay a $50 fine to exit jail.
-21. A player goes bankrupt and is automatically removed from the game if the player does not have enough money to pay the rent or the jail exit fee.
-  - When a player goes bankrupt and is removed from the game, all their properties become available to purchase again.
-22. The game ends when there is only one player left on the board or when a user closes out of the game.
-23. In case any player wins, a window pops up congratulating the winner. 
+21. If the user wants to `Save` the game and resume playing it later, at any point in the game, they can choose the Save option available from the menu bar of the Board Frame.
+    - Clicking on Save prompts the user the input a name for the game to be saved.
+    - The user can resume playing it by typing the same name whenever they want.
+22. A player goes bankrupt and is automatically removed from the game if the player does not have enough money to pay the rent or the jail exit fee.
+    - When a player goes bankrupt and is removed from the game, all their properties become available to purchase again.
+23. The game ends when there is only one player left on the board or when a user closes out of the game.
+24. In case any player wins, a window pops up congratulating the winner.
 
 
 ## Milestone 3 Changes:
@@ -60,22 +63,6 @@ Added the option for buying Houses and Hotels when all the properties of a singl
 7. All view classes should extend JFrame or JPanel (some classes contain a mainPanel or mainFrame, and others extend a JPanel or JFrame which is not consistent).
 8. Have AI functionality (checks for if they want to buy ownable squares/houses) in PlayerAI and not in view.
 
-
-## Remaining Deliverables:
-
-* Milestone 4: Save/load features and customizable games.
-
-## Roadmap Ahead:
-
-Improvements for future Milestones:
- 
-* Implement tax boxes.
-* AI players will have more random decisions instead of buying every property they can afford.
-* Tests for AI.
-* Making sure that player cannot buy houses on a property until all properties of the same colour group acquires at least one house.
-* More descriptive messages for not being able to buy house/hotel.
-* Make dicePanel include the diceButton.
-* Add a Monopoly logo on the centre of the Board.
 
 ## Contributors:
 
