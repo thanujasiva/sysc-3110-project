@@ -32,7 +32,7 @@
     - The rent for utility is based on the dice rolled amount of the player who lands on it.
     - The rent for railroad increases with the number of railroads owned by a player.
 19. Rolling doubles thrice or landing on the `Go to Jail` square will send the player to Jail.
-  - For exiting jail, a manual player gets the option to pay a $50 fine or roll doubles in the first two rounds of staying in jail. If it is their third round, and they still do not roll doubles, they must pay a $50 fine to exit jail.
+    - For exiting jail, a manual player gets the option to pay a $50 fine or roll doubles in the first two rounds of staying in jail. If it is their third round, and they still do not roll doubles, they must pay a $50 fine to exit jail.
 20. If the user wants to save the game and resume playing it later, at any point in the game, they can choose the `Save` option available from the menu bar of the window.
     - Clicking on `Save` prompts the user to input a filename where the game will be saved.
     - The user can resume the saved game by re-running the program and choosing to load a game at the begining.
